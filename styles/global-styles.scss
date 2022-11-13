@@ -1,0 +1,80 @@
+:root {
+  /* Color styles */
+  --color-text--100: hsl(0 0% 0%);
+  --color-text--200: hsl(210 2.2% 17.6%);
+  --color-text--300: hsl(0 0% 26.7%);
+  --color-text--400: hsl(0 0% 40%);
+  --color-text--600: hsl(0 0% 52.2%);
+  --color-text--700: hsl(0 0% 60%);
+  --color-text--800: hsl(0 0% 70.2%);
+
+  --color-grey--100: hsl(0 0% 96.9%);
+  --color-grey--200: hsl(0 0% 94.1%);
+  --color-grey--300: hsl(0 0% 90.2%);
+
+  --color-background--100: hsl(0 0% 100%);
+
+  --color-blue--200: hsl(212 54.3% 42.9%);
+  --color-blue--400: hsl(212 76% 55%);
+  --color-blue--500: hsl(212 84% 63.3%);
+  --color-blue--800: hsl(214 88.9% 96.5%);
+
+  --color-red--200: hsl(0 43.2% 53.7%);
+  --color-red--500: hsl(0 64% 68.4%);
+  --color-red--800: hsl(0 100% 97.1%);
+
+  /* Text-size styles */
+  --fz-title-1-bold: 32px;
+
+  --fz-title-2-medium: 24px;
+  --fz-title-2-semi-bold: 24px;
+
+  --fz-headline-medium: 16px;
+  --fz-headline-semi-bold: 16px;
+
+  --fz-text-regular: 15px;
+  --fz-text-medium: 15px;
+
+  --fz-subhead-medium: 14px;
+
+  --fz-large-title-1-bold: 64px;
+
+  --fz-large-title-2-bold: 36px;
+  --fz-large-title-2-semi-bold: 36px;
+
+  --fz-large-title-3-semi-bold: 24px;
+
+  --fz-large-headline-medium: 20px;
+
+  /* Height styles */
+  --height-button-s: 28px;
+  --height-button-m: 34px;
+  --height-button-l: 48px;
+
+  /* Effect styles */
+  --window-shade: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 15px;
+  background-color: var(--color-background--100);
+  color: var(--color-text--100);
+}
+
+input,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+}
