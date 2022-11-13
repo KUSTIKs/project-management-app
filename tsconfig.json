@@ -19,6 +19,7 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
       "@project-management-app/components": ["components/components.ts"],
       "@project-management-app/widgets": ["widgets/widgets.ts"],

@@ -8,7 +8,7 @@ type Props = {
 
 const Layout: FC<Props> = ({ children }) => {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
