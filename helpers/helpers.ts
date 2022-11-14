@@ -1,0 +1,3 @@
+export { getLanguageFromLocale } from './get-language-from-locale/get-language-from-locale';
+export { changeLocale } from './change-locale/change-locale';
+export { getCssVarFromAppColorName } from './get-css-var-from-app-color-name/get-css-var-from-app-color-name';

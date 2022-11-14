@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import {
   cloneElement,
@@ -9,9 +11,9 @@ import {
   useState,
 } from 'react';
 
-import classes from './dropdown.module.scss';
+import { Option } from '@project-management-app/types';
 
-type Option = string | { name: string; value: string };
+import classes from './dropdown.module.scss';
 
 type Props = {
   trigger: ReactElement;
@@ -23,10 +25,10 @@ type Props = {
 
 const Dropdown: FC<Props> = ({
   options,
-  direction,
-  alignment,
   handleChange,
   trigger,
+  direction = 'down',
+  alignment = 'start',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -41,6 +43,7 @@ const Dropdown: FC<Props> = ({
 
   const handleOptionClick = (value: string) => {
     handleChange(value);
+    closeDropdown();
   };
 
   const handleOuterClick = useCallback((e: MouseEvent) => {

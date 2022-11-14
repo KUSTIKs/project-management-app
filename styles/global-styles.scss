@@ -61,6 +61,8 @@
   --height-header: 60px;
 
   --width-container-m: 1200px;
+  --width-container-s: 600px;
+  --width-container-xs: 400px;
 
   /* Effect styles */
   --window-shade: 0px 0px 20px rgba(0, 0, 0, 0.1);
@@ -89,4 +91,8 @@ select {
 
 button {
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }

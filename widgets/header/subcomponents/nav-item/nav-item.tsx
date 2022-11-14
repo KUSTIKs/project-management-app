@@ -1,16 +1,18 @@
-import { FC, ReactNode } from 'react';
-import Link, { LinkProps } from 'next/link';
+import { ComponentProps, FC, ReactNode } from 'react';
+import Link from 'next/link';
 
 import { Button } from '@project-management-app/components';
 
-type Props = LinkProps & {
+type Props = {
+  href: string;
   children: ReactNode;
+  variant?: ComponentProps<typeof Button>['variant'];
 };
 
-const NavItem: FC<Props> = ({ children, ...linkProps }) => {
+const NavItem: FC<Props> = ({ children, variant = 'text', href }) => {
   return (
-    <Link {...linkProps}>
-      <Button variant="text" size="s">
+    <Link href={href}>
+      <Button variant={variant} size="s">
         {children}
       </Button>
     </Link>

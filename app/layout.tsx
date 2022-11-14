@@ -1,5 +1,7 @@
 import { ReactNode, FC } from 'react';
 
+import { Header } from '@project-management-app/widgets';
+
 import '../styles/global-styles.scss';
 
 type Props = {
@@ -9,7 +11,10 @@ type Props = {
 const Layout: FC<Props> = ({ children }) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header isAuthorized={false} />
+        {children}
+      </body>
     </html>
   );
 };
