@@ -48,7 +48,7 @@ const Dropdown: FC<Props> = ({
 
   const handleOuterClick = useCallback((e: MouseEvent) => {
     if (!(e.target instanceof HTMLElement)) return;
-    const isOuterClick = e.target.contains(wrapperRef.current);
+    const isOuterClick = !wrapperRef.current?.contains(e.target);
 
     if (isOuterClick) {
       closeDropdown();

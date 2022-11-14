@@ -7,6 +7,10 @@
   transition: background-color 200ms ease;
   border: none;
   border-radius: 5px;
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
 }
 
 .button_size_s {
@@ -25,21 +29,21 @@
 .button_variant_contained {
   background-color: var(--color-blue--500);
   color: var(--color-background--100);
-  &:hover {
+  &:not(:disabled):hover {
     background-color: var(--color-blue--400);
   }
 }
 .button_variant_ghost {
   background-color: var(--color-grey--100);
   color: var(--color-text--300);
-  &:hover {
+  &:not(:disabled):hover {
     background-color: var(--color-grey--300);
   }
 }
 .button_variant_text {
   background-color: var(--color-background--100);
   color: var(--color-text--300);
-  &:hover {
+  &:not(:disabled):hover {
     background-color: var(--color-grey--200);
   }
 }

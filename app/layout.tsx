@@ -12,7 +12,7 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <Header isAuthorized={false} />
+        <Header isAuthorized={true} />
         {children}
         <Footer />
       </body>

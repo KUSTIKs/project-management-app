@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  max-width: var(--width-container-s);
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 5vh;
+}
+
+.form {
+  display: grid;
+  gap: 20px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 200px;
+}
