@@ -1,0 +1,109 @@
+.outerWrapper {
+  display: grid;
+  gap: 4px;
+}
+
+.outerWrapper_variant_filled {
+  &.outerWrapper_isError .inputWrapper:not(:focus-within) {
+    background-color: var(--color-red--800);
+    box-shadow: 0 0 0 1px var(--color-red--700);
+  }
+  .inputWrapper {
+    background-color: var(--color-grey--100);
+    box-shadow: 0 0 0 1px var(--color-grey--200);
+  }
+}
+.outerWrapper_variant_unfilled {
+  .inputWrapper {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.outerWrapper_isError {
+  .label {
+    color: var(--color-red--200);
+  }
+  .inputWrapper:focus-within {
+    box-shadow: 0 0 0 2px var(--color-red--500),
+      0 0 0 4px var(--color-red--500-a15);
+  }
+}
+
+.inputWrapper {
+  width: 100%;
+  display: flex;
+  position: relative;
+  border-radius: 5px;
+  .input:not(:placeholder-shown) ~ .label,
+  .textareaWrapper:not(:has(:placeholder-shown)) ~ .label,
+  &:focus-within .label {
+    top: 8px;
+    transform: none;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  &:focus-within {
+    background-color: var(--color-background--100);
+    box-shadow: 0 0 0 2px var(--color-blue--500),
+      0 0 0 4px var(--color-blue--500-a15);
+  }
+}
+
+.growingBlock,
+.textarea,
+.input {
+  width: 0;
+  flex: 1;
+  min-height: var(--height-input-m);
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  transition: 200ms ease;
+  padding: 22px 15px 8px;
+  &::placeholder {
+    color: transparent;
+  }
+}
+
+.textarea,
+.growingBlock {
+  width: 100%;
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.textarea {
+  resize: none;
+}
+
+.growingBlock {
+  white-space: pre-wrap;
+  visibility: hidden;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.textareaWrapper {
+  flex: 1;
+  display: grid;
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--color-text--700);
+  font-weight: 500;
+  transition: 200ms ease;
+  pointer-events: none;
+}
+
+.errorMessage {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-red--200);
+  margin-left: 5px;
+}

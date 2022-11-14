@@ -1,3 +1,5 @@
+@import '../assets/fonts/Gilroy/stylesheet.css';
+
 :root {
   /* Color styles */
   --color-text--100: hsl(0 0% 0%);
@@ -17,10 +19,13 @@
   --color-blue--200: hsl(212 54.3% 42.9%);
   --color-blue--400: hsl(212 76% 55%);
   --color-blue--500: hsl(212 84% 63.3%);
+  --color-blue--500-a15: hsl(212 84% 63.3% / 15%);
   --color-blue--800: hsl(214 88.9% 96.5%);
 
   --color-red--200: hsl(0 43.2% 53.7%);
   --color-red--500: hsl(0 64% 68.4%);
+  --color-red--500-a15: hsl(0 64% 68.4% / 15%);
+  --color-red--700: hsl(0 100% 94%);
   --color-red--800: hsl(0 100% 97.1%);
 
   /* Text-size styles */
@@ -51,6 +56,8 @@
   --height-button-m: 34px;
   --height-button-l: 48px;
 
+  --height-input-m: 48px;
+
   /* Effect styles */
   --window-shade: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
@@ -68,6 +75,7 @@ body {
   color: var(--color-text--100);
 }
 
+textarea,
 input,
 button,
 select {

@@ -16,6 +16,7 @@ settings:
     node: true
 
 rules:
+  react/display-name: off
   import/no-unresolved: error
   import/order:
     - error
