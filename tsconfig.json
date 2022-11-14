@@ -22,8 +22,7 @@
     "baseUrl": ".",
     "paths": {
       "@project-management-app/components": ["components/components.ts"],
-      "@project-management-app/widgets": ["widgets/widgets.ts"],
-      "@project-management-app/styles": ["styles/styles.ts"]
+      "@project-management-app/widgets": ["widgets/widgets.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

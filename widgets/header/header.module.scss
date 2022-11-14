@@ -1,0 +1,31 @@
+.header {
+  width: 100%;
+  background-color: var(--color-background--100);
+  border-bottom: 2px solid var(--color-grey--100);
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 15px;
+  margin: 0 auto;
+  max-width: var(--width-container-m);
+  min-height: var(--height-header);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.group {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.separator {
+  width: 1px;
+  height: 80%;
+  background-color: var(--color-grey--200);
+}

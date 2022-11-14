@@ -41,8 +41,6 @@ const TextInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
       inputAttrs.onInput?.(e);
     };
 
-    console.log(JSON.stringify(value));
-
     return (
       <div
         className={classNames(classes.outerWrapper, {

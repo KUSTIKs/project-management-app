@@ -1,0 +1,70 @@
+.wrapper {
+  position: relative;
+  width: max-content;
+}
+
+.optionList {
+  position: absolute;
+  list-style: none;
+  padding: 3px;
+  border-radius: 3px;
+  width: 100%;
+  min-width: 200px;
+  max-height: 300px;
+  display: grid;
+  border: 2px solid var(--color-grey--100);
+  background-color: var(--color-background--100);
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-grey--300);
+    border-radius: 20px;
+  }
+}
+
+.optionList_direction_up {
+  bottom: 100%;
+  transform: translateY(-5px);
+}
+.optionList_direction_down {
+  top: 100%;
+  transform: translateY(5px);
+}
+.optionList_direction_up,
+.optionList_direction_down {
+  &.optionList_alignment_start {
+    left: 0;
+  }
+  &.optionList_alignment_end {
+    right: 0;
+  }
+}
+.optionList_direction_left {
+  right: 100%;
+  transform: translateX(-5px);
+}
+.optionList_direction_right {
+  left: 100%;
+  transform: translateX(5px);
+}
+.optionList_direction_left,
+.optionList_direction_right {
+  &.optionList_alignment_start {
+    top: 0;
+  }
+  &.optionList_alignment_end {
+    bottom: 0;
+  }
+}
+
+.option {
+  border-radius: 3px;
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-grey--100);
+  }
+}
