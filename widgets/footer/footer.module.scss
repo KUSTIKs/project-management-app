@@ -1,0 +1,32 @@
+.footer {
+  width: 100%;
+  margin-top: 80px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--width-container-m);
+  margin: 0 auto;
+  border-top: 2px solid var(--color-grey--100);
+  min-height: var(--footer-header);
+  padding: 10px 15px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.group {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.rsSchoolLogo {
+  opacity: 0.8;
+  will-change: opacity;
+  transition: opacity 200ms ease;
+  &:hover {
+    opacity: 0.6;
+  }
+}
