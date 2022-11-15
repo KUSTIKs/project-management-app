@@ -1,4 +1,4 @@
-import { ElementType, FC, ReactNode } from 'react';
+import { CSSProperties, ElementType, FC, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { AppColorName } from '@project-management-app/types';
@@ -14,6 +14,7 @@ type Props = {
   variant: TypographyVariant;
   weight?: string | number;
   colorName?: AppColorName;
+  style?: CSSProperties;
 };
 
 const Typography: FC<Props> = ({
@@ -21,13 +22,14 @@ const Typography: FC<Props> = ({
   children,
   variant,
   colorName,
+  style,
   as: Component = getDefaultComponent(variant),
 }) => {
   const color = colorName && getCssVarFromAppColorName(colorName);
 
   return (
     <Component
-      style={{ fontWeight: weight, color }}
+      style={{ fontWeight: weight, color, ...style }}
       className={classNames({
         [classes.typography_variant_largeTitle1]: variant === 'largeTitle1',
         [classes.typography_variant_largeTitle2]: variant === 'largeTitle2',

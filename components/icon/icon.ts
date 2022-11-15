@@ -4,6 +4,7 @@ import {
   RiArrowDropDownLine,
   RiGithubFill,
   RiAddLine,
+  RiLinkedinFill,
 } from 'react-icons/ri';
 
 const Icon = {
@@ -12,6 +13,7 @@ const Icon = {
   ArrowDropDownLine: RiArrowDropDownLine,
   GithubFill: RiGithubFill,
   AddLine: RiAddLine,
+  LinkedinFill: RiLinkedinFill,
 } as const;
 
 export { Icon };

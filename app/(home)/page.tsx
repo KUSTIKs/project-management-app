@@ -1,12 +1,18 @@
 import { FC } from 'react';
 
-import classes from './home.module.scss';
+import { Separator } from './components/components';
+import { Advantages, Hero, Technologies, OurTeam } from './sections/sections';
 
 const Home: FC = () => {
   return (
-    <div className={classes.container}>
-      <h1>HomePage</h1>
-    </div>
+    <>
+      <Hero />
+      <Advantages />
+      <Separator />
+      <Technologies />
+      <Separator />
+      <OurTeam />
+    </>
   );
 };
 

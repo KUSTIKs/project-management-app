@@ -2,6 +2,8 @@
   width: 100%;
   background-color: var(--color-background--100);
   border-bottom: 2px solid var(--color-grey--100);
+  position: sticky;
+  top: 0;
 }
 
 .container {
