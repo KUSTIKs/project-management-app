@@ -11,13 +11,18 @@ const Technologies: FC = () => {
   return (
     <section className={classes.container}>
       <div className={classes.topInfo}>
-        <Typography
-          variant="largeTitle2"
-          weight={700}
-          style={{ maxWidth: 500 }}
-        >
-          Build with the most reliable technologies
-        </Typography>
+        <div>
+          <Typography
+            variant="largeTitle2"
+            weight={700}
+            style={{ marginBottom: 5 }}
+          >
+            Technologies
+          </Typography>
+          <Typography variant="largeHeadline" weight={500} colorName="text/600">
+            Build with the most reliable technologies
+          </Typography>
+        </div>
         <Image src="/books.png" alt="books" height={90} width={150} />
       </div>
       <div className={classes.technologiesWrapper}>

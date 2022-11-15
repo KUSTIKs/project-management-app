@@ -98,3 +98,8 @@ button {
 a {
   text-decoration: none;
 }
+
+::selection {
+  background-color: var(--color-blue--200);
+  color: var(--color-background--100);
+}

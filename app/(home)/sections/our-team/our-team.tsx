@@ -8,7 +8,7 @@ import classes from './our-team.module.scss';
 
 const OurTeam: FC = () => {
   return (
-    <div className={classes.container}>
+    <section className={classes.container}>
       <Typography variant="largeTitle2" weight={700}>
         Our Team
       </Typography>
@@ -90,7 +90,7 @@ const OurTeam: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
