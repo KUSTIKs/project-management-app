@@ -1,7 +1,6 @@
 import { ComponentProps, FC, ReactNode } from 'react';
-import Link from 'next/link';
 
-import { Button } from '@project-management-app/components';
+import { AppLink, Button } from '@project-management-app/components';
 
 type Props = {
   href: string;
@@ -11,11 +10,11 @@ type Props = {
 
 const NavItem: FC<Props> = ({ children, variant = 'text', href }) => {
   return (
-    <Link href={href}>
+    <AppLink href={href}>
       <Button variant={variant} size="s">
         {children}
       </Button>
-    </Link>
+    </AppLink>
   );
 };
 

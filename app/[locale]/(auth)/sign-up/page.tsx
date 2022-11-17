@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import Link from 'next/link';
 
 import {
+  AppLink,
   Button,
   TextInput,
   Typography,
@@ -25,7 +25,7 @@ const SignUpPage: FC = () => {
       </form>
       <Typography variant="text" weight={500}>
         Have an account ?{' '}
-        <Link href="/log-in">
+        <AppLink href="/log-in">
           <Typography
             variant="text"
             weight={600}
@@ -34,7 +34,7 @@ const SignUpPage: FC = () => {
           >
             Log in
           </Typography>
-        </Link>
+        </AppLink>
       </Typography>
     </div>
   );

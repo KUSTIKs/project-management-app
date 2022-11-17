@@ -1,8 +1,12 @@
 import { FC } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 
-import { Button, Icon, Typography } from '@project-management-app/components';
+import {
+  AppLink,
+  Button,
+  Icon,
+  Typography,
+} from '@project-management-app/components';
 
 import classes from './hero.module.scss';
 
@@ -17,14 +21,14 @@ const Hero: FC = () => {
           Finally, a simple tool for process and project management
         </Typography>
         <div className={classes.buttonGroup}>
-          <Link href="/sign-up">
+          <AppLink href="/sign-up">
             <Button>Try now free</Button>
-          </Link>
-          <Link href="https://github.com/KUSTIKs/project-management-app">
+          </AppLink>
+          <AppLink href="https://github.com/KUSTIKs/project-management-app">
             <Button variant="ghost" startIcon={<Icon.GithubFill />}>
               Project repo
             </Button>
-          </Link>
+          </AppLink>
         </div>
       </div>
       <Image

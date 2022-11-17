@@ -2,9 +2,13 @@
 
 import { FC } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
-import { Button, Dropdown, Icon } from '@project-management-app/components';
+import {
+  AppLink,
+  Button,
+  Dropdown,
+  Icon,
+} from '@project-management-app/components';
 import {
   changeLocale,
   getLanguageFromLocale,
@@ -38,7 +42,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
     <header className={classes.header}>
       <div className={classes.container}>
         <div className={classes.group}>
-          <Link href="/">
+          <AppLink href="/">
             <Image
               src="/logo.png"
               alt="logo"
@@ -46,7 +50,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
               height={24}
               priority
             />
-          </Link>
+          </AppLink>
           {isAuthorized && (
             <>
               <NavItem href="/boards">Boards</NavItem>

@@ -54,13 +54,6 @@ const middleware = (request: NextRequest) => {
   const isDefaultNextLocale =
     nextLocale === appInternalizationConfig.defaultLocale;
 
-  console.log({
-    fullUrl,
-    appPathname,
-    pathLocale,
-    nextLocale,
-  });
-
   if (isDefaultNextLocale && isRootPathLocale) {
     const pathname = `/${nextLocale}${appPathname}`;
     return NextResponse.rewrite(new URL(pathname, fullUrl));

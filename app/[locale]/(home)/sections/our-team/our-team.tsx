@@ -1,8 +1,12 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
-import { Button, Icon, Typography } from '@project-management-app/components';
+import {
+  AppLink,
+  Button,
+  Icon,
+  Typography,
+} from '@project-management-app/components';
 
 import classes from './our-team.module.scss';
 
@@ -35,16 +39,16 @@ const OurTeam: FC = () => {
               </Typography>
             </div>
             <div className={classes.buttonGroup}>
-              <Link href="https://github.com/KUSTIKs">
+              <AppLink href="https://github.com/KUSTIKs">
                 <Button variant="ghost" startIcon={<Icon.GithubFill />}>
                   Github
                 </Button>
-              </Link>
-              <Link href="https://www.linkedin.com/in/artem-khvostyk-218953243/">
+              </AppLink>
+              <AppLink href="https://www.linkedin.com/in/artem-khvostyk-218953243/">
                 <Button variant="ghost" startIcon={<Icon.LinkedinFill />}>
                   Linked in
                 </Button>
-              </Link>
+              </AppLink>
             </div>
           </div>
         </div>
