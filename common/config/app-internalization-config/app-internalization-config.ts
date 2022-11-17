@@ -1,7 +1,10 @@
 import { LocaleName } from '@project-management-app/enums';
-import { InternalizationConfig } from '@project-management-app/types';
+import {
+  AppLocale,
+  InternalizationConfig,
+} from '@project-management-app/types';
 
-const appInternalizationConfig: InternalizationConfig<LocaleName> = {
+const appInternalizationConfig: InternalizationConfig<AppLocale> = {
   locales: [LocaleName.EN, LocaleName.RU],
   defaultLocale: LocaleName.EN,
 };

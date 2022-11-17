@@ -1,11 +1,10 @@
-import { LocaleName } from '@project-management-app/enums';
-
+import { AppLocale } from '../app-locale/app-locale.type';
 import { AppRouterFunctions } from '../app-router-functions/app-router-functions.type';
-import { ParsedAppPathname } from '../parsed-app-pathname/parsed-app-pathname';
+import { ParsedAppPathname } from '../parsed-app-pathname/parsed-app-pathname.type';
 
 type AppRouter = AppRouterFunctions &
   ParsedAppPathname & {
-    locales: LocaleName[];
+    locales: AppLocale[];
   };
 
 export type { AppRouter };

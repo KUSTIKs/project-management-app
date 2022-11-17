@@ -18,6 +18,8 @@ import { useAppRouter } from '@project-management-app/hooks';
 
 import { NavItem } from './subcomponents/subcomponents';
 import classes from './header.module.scss';
+import { headerDictionary } from './header.dictionary';
+
 type Props = {
   isAuthorized: boolean;
 };
@@ -25,10 +27,11 @@ type Props = {
 const Header: FC<Props> = ({ isAuthorized }) => {
   const router = useAppRouter();
   const { locale, locales } = router;
+  const contentMap = headerDictionary.getContentMap(locale);
 
-  const localeOptions: ObjectOption[] = locales.map((locale) => ({
-    name: getLanguageFromLocale(locale),
-    value: locale,
+  const localeOptions: ObjectOption[] = locales.map((localeOption) => ({
+    name: getLanguageFromLocale(localeOption, locale),
+    value: localeOption,
   }));
 
   const handleChangeLocale = (newLocale: string) => {
@@ -53,8 +56,8 @@ const Header: FC<Props> = ({ isAuthorized }) => {
           </AppLink>
           {isAuthorized && (
             <>
-              <NavItem href="/boards">Boards</NavItem>
-              <NavItem href="/profile">Profile</NavItem>
+              <NavItem href="/boards">{contentMap.boards}</NavItem>
+              <NavItem href="/profile">{contentMap.profile}</NavItem>
             </>
           )}
         </div>
@@ -70,7 +73,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
                   startIcon={<Icon.GlobalLine />}
                   endIcon={<Icon.ArrowDropDownLine />}
                 >
-                  {getLanguageFromLocale(locale)}
+                  {getLanguageFromLocale(locale, locale)}
                 </Button>
               }
               alignment="end"
@@ -81,13 +84,13 @@ const Header: FC<Props> = ({ isAuthorized }) => {
           <div className={classes.separator} />
           {isAuthorized ? (
             <Button variant="text" size="s">
-              Log out
+              {contentMap.logOut}
             </Button>
           ) : (
             <>
-              <NavItem href="/sign-up">Sign up</NavItem>
+              <NavItem href="/sign-up">{contentMap.signUp}</NavItem>
               <NavItem variant="contained" href="/log-in">
-                Log in
+                {contentMap.logIn}
               </NavItem>
             </>
           )}

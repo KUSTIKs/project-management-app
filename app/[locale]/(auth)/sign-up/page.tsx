@@ -6,25 +6,36 @@ import {
   TextInput,
   Typography,
 } from '@project-management-app/components';
+import { AppLocale } from '@project-management-app/types';
 
+import { authDictionary } from '../auth.dictionary';
 import classes from '../auth.module.scss';
 
-const SignUpPage: FC = () => {
+type Props = {
+  params: {
+    locale: AppLocale;
+  };
+};
+
+const SignUpPage: FC<Props> = ({ params }) => {
+  const { locale } = params;
+  const contentMap = authDictionary.getContentMap(locale);
+
   return (
     <div className={classes.wrapper}>
       <form className={classes.form}>
         <Typography variant="title1" weight={800}>
-          Sign up
+          {contentMap.signUp}
         </Typography>
         <div className={classes.inputs}>
-          <TextInput label="username" />
-          <TextInput label="login" />
-          <TextInput label="password" />
+          <TextInput label={contentMap.username} />
+          <TextInput label={contentMap.login} />
+          <TextInput label={contentMap.password} />
         </div>
-        <Button size="l">Submit</Button>
+        <Button size="l">{contentMap.submit}</Button>
       </form>
       <Typography variant="text" weight={500}>
-        Have an account ?{' '}
+        {contentMap.signUpMessage}{' '}
         <AppLink href="/log-in">
           <Typography
             variant="text"
@@ -32,7 +43,7 @@ const SignUpPage: FC = () => {
             colorName="blue/500"
             as="span"
           >
-            Log in
+            {contentMap.logIn}
           </Typography>
         </AppLink>
       </Typography>

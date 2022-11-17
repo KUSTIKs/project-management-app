@@ -1,17 +1,28 @@
 import { FC } from 'react';
 
 import { Typography, Button, Icon } from '@project-management-app/components';
+import { AppLocale } from '@project-management-app/types';
 
 import classes from './boards.module.scss';
+import { boardsDictionary } from './boards.dictionary';
 
-const BoardsPage: FC = () => {
+type Props = {
+  params: {
+    locale: AppLocale;
+  };
+};
+
+const BoardsPage: FC<Props> = ({ params }) => {
+  const { locale } = params;
+  const contentMap = boardsDictionary.getContentMap(locale);
+
   return (
     <div className={classes.container}>
       <div className={classes.topInfo}>
-        <Typography variant="title1">Boards</Typography>
+        <Typography variant="title1">{contentMap.title}</Typography>
         <div className={classes.group}>
           <Button size="m" variant="contained" startIcon={<Icon.AddLine />}>
-            New Board
+            {contentMap.newBoard}
           </Button>
         </div>
       </div>

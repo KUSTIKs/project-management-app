@@ -7,14 +7,22 @@ import {
   Icon,
   Typography,
 } from '@project-management-app/components';
+import { AppLocale } from '@project-management-app/types';
 
 import classes from './our-team.module.scss';
+import { ourTeamDictionary } from './our-team.dictionary';
 
-const OurTeam: FC = () => {
+type Props = {
+  locale: AppLocale;
+};
+
+const OurTeamSection: FC<Props> = ({ locale }) => {
+  const contentMap = ourTeamDictionary.getContentMap(locale);
+
   return (
     <section className={classes.container}>
       <Typography variant="largeTitle2" weight={700}>
-        Our Team
+        {contentMap.title}
       </Typography>
       <div className={classes.member}>
         <div className={classes.memberInfo}>
@@ -28,14 +36,14 @@ const OurTeam: FC = () => {
           <div className={classes.memberTextInfo}>
             <div>
               <Typography variant="largeTitle2" weight={600} as="p">
-                Artem Khvostyk
+                {contentMap.member1.name}
               </Typography>
               <Typography
                 variant="largeHeadline"
                 weight={500}
                 colorName="text/600"
               >
-                Developer, designer
+                {contentMap.member1.description}
               </Typography>
             </div>
             <div className={classes.buttonGroup}>
@@ -53,49 +61,20 @@ const OurTeam: FC = () => {
           </div>
         </div>
         <div className={classes.memberStatements}>
-          <div className={classes.memberStatement}>
-            <Typography variant="largeTitle3" weight={600}>
-              Quisque nunc enim
-            </Typography>
-            <Typography variant="text" weight={500} colorName="text/300">
-              Egestas proin et consequat aliquet purus sed massa. Et ipsum elit
-              dui nibh in ultrices tristique cras suspendisse.
-            </Typography>
-          </div>
-          <div className={classes.memberStatement}>
-            <Typography variant="largeTitle3" weight={600}>
-              Tellus quam tempus
-            </Typography>
-            <Typography variant="text" weight={500} colorName="text/300">
-              Accumsan vulputate proin nulla morbi rhoncus. Sit donec nulla
-              facilisis orci est erat tortor felis. Vestibulum ultricies ut cras
-              viverra ut.
-            </Typography>
-          </div>
-          <div className={classes.memberStatement}>
-            <Typography variant="largeTitle3" weight={600}>
-              Purus nisl nulla
-            </Typography>
-            <Typography variant="text" weight={500} colorName="text/300">
-              Aliquam aliquam faucibus vitae risus hac scelerisque posuere.
-              Malesuada quis vitae bibendum euismod adipiscing nisl. Volutpat
-              massa fringilla nunc feugiat scelerisque odio commodo et.
-            </Typography>
-          </div>
-          <div className={classes.memberStatement}>
-            <Typography variant="largeTitle3" weight={600}>
-              Eget aenean
-            </Typography>
-            <Typography variant="text" weight={500} colorName="text/300">
-              Augue scelerisque posuere turpis enim viverra malesuada ipsum.
-              Mattis non nisi pretium bibendum. Suscipit at eget vitae amet ut
-              nunc eu eget adipiscing.
-            </Typography>
-          </div>
+          {contentMap.member1.statements.map(({ description, title }, idx) => (
+            <div className={classes.memberStatement} key={idx}>
+              <Typography variant="largeTitle3" weight={600}>
+                {title}
+              </Typography>
+              <Typography variant="text" weight={500} colorName="text/300">
+                {description}
+              </Typography>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export { OurTeam };
+export { OurTeamSection };

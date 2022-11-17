@@ -7,10 +7,18 @@ import {
   Icon,
   Typography,
 } from '@project-management-app/components';
+import { AppLocale } from '@project-management-app/types';
 
 import classes from './footer.module.scss';
+import { footerDictionary } from './footer.dictionary';
 
-const Footer: FC = () => {
+type Props = {
+  locale: AppLocale;
+};
+
+const Footer: FC<Props> = ({ locale }) => {
+  const contentMap = footerDictionary.getContentMap(locale);
+
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
@@ -36,7 +44,7 @@ const Footer: FC = () => {
           colorName="text/700"
           as="small"
         >
-          ©2022 all rights reserved
+          ©2022 {contentMap.copyText}
         </Typography>
       </div>
     </footer>

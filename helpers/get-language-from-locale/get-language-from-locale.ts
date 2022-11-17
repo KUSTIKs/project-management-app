@@ -1,14 +1,26 @@
 import { LocaleName } from '@project-management-app/enums';
+import { AppLocale } from '@project-management-app/types';
 
-const getLanguageFromLocale = (locale: string) => {
-  switch (locale) {
-    case LocaleName.EN:
+const getLanguageFromLocale = (locale: string, userLocale: AppLocale) => {
+  if (userLocale === LocaleName.EN) {
+    if (locale === LocaleName.EN) {
       return 'English';
-    case LocaleName.RU:
+    }
+    if (locale === LocaleName.RU) {
       return 'Russian';
-    default:
-      return locale;
+    }
   }
+
+  if (userLocale === LocaleName.RU) {
+    if (locale === LocaleName.EN) {
+      return 'Английский';
+    }
+    if (locale === LocaleName.RU) {
+      return 'Русский';
+    }
+  }
+
+  return locale;
 };
 
 export { getLanguageFromLocale };

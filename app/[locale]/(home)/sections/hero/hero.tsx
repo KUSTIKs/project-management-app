@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 import {
   AppLink,
@@ -7,26 +8,34 @@ import {
   Icon,
   Typography,
 } from '@project-management-app/components';
+import { AppLocale } from '@project-management-app/types';
 
 import classes from './hero.module.scss';
+import { heroDictionary } from './hero.dictionary';
 
-const Hero: FC = () => {
+type Props = {
+  locale: AppLocale;
+};
+
+const HeroSection: FC<Props> = ({ locale }) => {
+  const contentMap = heroDictionary.getContentMap(locale);
+
   return (
     <section className={classes.container}>
       <div className={classes.info}>
         <Typography variant="largeTitle1" weight={800}>
-          Magic project manager
+          {contentMap.title}
         </Typography>
         <Typography variant="largeHeadline" weight={500} colorName="text/700">
-          Finally, a simple tool for process and project management
+          {contentMap.description}
         </Typography>
         <div className={classes.buttonGroup}>
           <AppLink href="/sign-up">
-            <Button>Try now free</Button>
+            <Button>{contentMap.tryNow}</Button>
           </AppLink>
           <AppLink href="https://github.com/KUSTIKs/project-management-app">
             <Button variant="ghost" startIcon={<Icon.GithubFill />}>
-              Project repo
+              {contentMap.projectRepo}
             </Button>
           </AppLink>
         </div>
@@ -42,4 +51,4 @@ const Hero: FC = () => {
   );
 };
 
-export { Hero };
+export { HeroSection };

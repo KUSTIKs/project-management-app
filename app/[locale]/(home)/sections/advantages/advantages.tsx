@@ -3,10 +3,18 @@ import { FC } from 'react';
 import Image from 'next/image';
 
 import { Typography } from '@project-management-app/components';
+import { AppLocale } from '@project-management-app/types';
 
 import classes from './advantages.module.scss';
+import { advantagesDictionary } from './advantages.dictionary';
 
-const Advantages: FC = () => {
+type Props = {
+  locale: AppLocale;
+};
+
+const AdvantagesSection: FC<Props> = ({ locale }) => {
+  const contentMap = advantagesDictionary.getContentMap(locale);
+
   return (
     <section className={classes.container}>
       <div className={classes.advantage}>
@@ -25,12 +33,10 @@ const Advantages: FC = () => {
           />
           <div>
             <Typography variant="largeTitle3" weight={600}>
-              Ac mauris ut quis
+              {contentMap.advantage2.title}
             </Typography>
             <Typography variant="text" weight={500} colorName="text/400">
-              Adipiscing vitae nisi dictum elementum adipiscing. Sem suspendisse
-              id eget fermentum. Ante eget risus ullamcorper feugiat. Iaculis
-              lectus ac id nibh orci lectus amet hendrerit.
+              {contentMap.advantage2.description}
             </Typography>
           </div>
         </div>
@@ -51,11 +57,10 @@ const Advantages: FC = () => {
           />
           <div>
             <Typography variant="largeTitle3" weight={600}>
-              Sodales commodo
+              {contentMap.advantage1.title}
             </Typography>
             <Typography variant="text" weight={500} colorName="text/400">
-              Amet laoreet vestibulum ut in sed tortor massa. Tempor vitae arcu
-              urna nulla eget enim et.
+              {contentMap.advantage1.description}
             </Typography>
           </div>
         </div>
@@ -64,4 +69,4 @@ const Advantages: FC = () => {
   );
 };
 
-export { Advantages };
+export { AdvantagesSection };

@@ -3,10 +3,18 @@ import { FC } from 'react';
 import Image from 'next/image';
 
 import { AppLink, Typography } from '@project-management-app/components';
+import { AppLocale } from '@project-management-app/types';
 
 import classes from './technologies.module.scss';
+import { technologiesDictionary } from './technologies.dictionary';
 
-const Technologies: FC = () => {
+type Props = {
+  locale: AppLocale;
+};
+
+const TechnologiesSection: FC<Props> = ({ locale }) => {
+  const contentMap = technologiesDictionary.getContentMap(locale);
+
   return (
     <section className={classes.container}>
       <div className={classes.topInfo}>
@@ -16,10 +24,10 @@ const Technologies: FC = () => {
             weight={700}
             style={{ marginBottom: 5 }}
           >
-            Technologies
+            {contentMap.title}
           </Typography>
           <Typography variant="largeHeadline" weight={500} colorName="text/600">
-            Build with the most reliable technologies
+            {contentMap.subtitle}
           </Typography>
         </div>
         <Image src="/books.png" alt="books" height={90} width={150} />
@@ -71,4 +79,4 @@ const Technologies: FC = () => {
   );
 };
 
-export { Technologies };
+export { TechnologiesSection };

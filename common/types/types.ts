@@ -4,4 +4,5 @@ export type { InternalizationConfig } from './internalization-config/internaliza
 export type { AppRouterFunctions } from './app-router-functions/app-router-functions.type';
 export type { AppNavigateOptions } from './app-navigate-options/app-navigate-options.type';
 export type { AppRouter } from './app-router/app-router.type';
-export type { ParsedAppPathname } from './parsed-app-pathname/parsed-app-pathname';
+export type { ParsedAppPathname } from './parsed-app-pathname/parsed-app-pathname.type';
+export type { AppLocale } from './app-locale/app-locale.type';

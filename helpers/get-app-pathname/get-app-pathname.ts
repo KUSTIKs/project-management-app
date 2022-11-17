@@ -1,6 +1,5 @@
 import { appInternalizationConfig } from '@project-management-app/config';
-import { LocaleName } from '@project-management-app/enums';
-import { parseAppPathname } from '@project-management-app/helpers';
+import { isAppLocale, parseAppPathname } from '@project-management-app/helpers';
 
 type GetAppPathnameParams = {
   pathname: string;
@@ -12,9 +11,7 @@ const getAppPathname = ({
   locale,
 }: GetAppPathnameParams) => {
   const { appPathname } = parseAppPathname(rawPathname);
-  const isValidLocale = appInternalizationConfig.locales.includes(
-    locale as LocaleName
-  );
+  const isValidLocale = isAppLocale(locale);
   const isDefaultLocale = locale === appInternalizationConfig.defaultLocale;
 
   if (locale === false || isDefaultLocale) {

@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 import { appInternalizationConfig } from '@project-management-app/config';
 import { CookieName, LocaleName } from '@project-management-app/enums';
-import { parseAppPathname } from '@project-management-app/helpers';
+import { isAppLocale, parseAppPathname } from '@project-management-app/helpers';
 
 const publicFileRegExp = /\.(.*)$/;
 
@@ -20,18 +20,12 @@ const detectLocale = ({ headers }: NextRequest) => {
     ?.split(',')[0]
     .split('-')[0]
     .toLowerCase();
-  const isValidAppLocale = appInternalizationConfig.locales.includes(
-    detectedLanguage as LocaleName
-  );
+  const isValidAppLocale = isAppLocale(detectedLanguage);
   const detectedLocale = isValidAppLocale
-    ? (detectedLanguage as LocaleName)
+    ? detectedLanguage
     : appInternalizationConfig.defaultLocale;
 
   return detectedLocale;
-};
-
-const isAppLocale = (locale: string) => {
-  return appInternalizationConfig.locales.includes(locale as LocaleName);
 };
 
 const middleware = (request: NextRequest) => {
