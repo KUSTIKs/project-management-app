@@ -1,24 +1,26 @@
 'use client';
 
-import { FC, useState } from 'react';
-import Link from 'next/link';
+import { FC } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button, Dropdown, Icon } from '@project-management-app/components';
-import { getLanguageFromLocale } from '@project-management-app/helpers';
+import {
+  changeLocale,
+  getLanguageFromLocale,
+} from '@project-management-app/helpers';
 import { ObjectOption } from '@project-management-app/types';
+import { useAppRouter } from '@project-management-app/hooks';
 
 import { NavItem } from './subcomponents/subcomponents';
 import classes from './header.module.scss';
-
 type Props = {
   isAuthorized: boolean;
 };
 
-const locales = ['English', 'Russian'];
-
 const Header: FC<Props> = ({ isAuthorized }) => {
-  const [locale, setLocale] = useState(locales[0]);
+  const router = useAppRouter();
+  const { locale, locales } = router;
 
   const localeOptions: ObjectOption[] = locales.map((locale) => ({
     name: getLanguageFromLocale(locale),
@@ -26,11 +28,10 @@ const Header: FC<Props> = ({ isAuthorized }) => {
   }));
 
   const handleChangeLocale = (newLocale: string) => {
-    // changeLocale({
-    //   locale: newLocale,
-    //   router,
-    // });
-    setLocale(newLocale);
+    changeLocale({
+      locale: newLocale,
+      router,
+    });
   };
 
   return (
@@ -65,7 +66,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
                   startIcon={<Icon.GlobalLine />}
                   endIcon={<Icon.ArrowDropDownLine />}
                 >
-                  {locale}
+                  {getLanguageFromLocale(locale)}
                 </Button>
               }
               alignment="end"

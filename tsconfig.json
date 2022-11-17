@@ -25,7 +25,9 @@
       "@project-management-app/widgets": ["widgets/widgets.ts"],
       "@project-management-app/helpers": ["helpers/helpers.ts"],
       "@project-management-app/enums": ["common/enums/enums.ts"],
-      "@project-management-app/types": ["common/types/types.ts"]
+      "@project-management-app/types": ["common/types/types.ts"],
+      "@project-management-app/config": ["common/config/config.ts"],
+      "@project-management-app/hooks": ["hooks/hooks.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

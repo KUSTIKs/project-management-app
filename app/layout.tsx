@@ -1,23 +1,17 @@
 import { ReactNode, FC } from 'react';
 
-import { Footer, Header } from '@project-management-app/widgets';
-
 import '../styles/global-styles.scss';
 
 type Props = {
   children: ReactNode;
 };
 
-const Layout: FC<Props> = ({ children }) => {
+const RootLayout: FC<Props> = ({ children }) => {
   return (
     <html lang="en">
-      <body>
-        <Header isAuthorized={true} />
-        {children}
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 };
 
-export default Layout;
+export default RootLayout;

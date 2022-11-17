@@ -1,18 +1,19 @@
-import { NextRouter } from 'next/router';
+import { CookieName } from '@project-management-app/enums';
+import { AppRouter } from '@project-management-app/types';
 
-type ChangeLocaleParams = { router: NextRouter; locale: string };
+type ChangeLocaleParams = {
+  router: AppRouter;
+  locale: string;
+};
 
 const changeLocale = ({ locale, router }: ChangeLocaleParams) => {
-  router.push(
-    {
-      pathname: router.pathname,
-      query: router.query,
-    },
-    router.asPath,
-    {
-      locale,
-    }
-  );
+  document.cookie = `${CookieName.NEXT_LOCALE}=${locale}; maxage=${
+    1000 * 60 * 60 * 24 * 7
+  }; path=/`;
+
+  router.push(router.appPathname, {
+    locale,
+  });
 };
 
 export { changeLocale };
