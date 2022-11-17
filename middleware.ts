@@ -35,7 +35,7 @@ const isAppLocale = (locale: string) => {
 };
 
 const middleware = (request: NextRequest) => {
-  const { nextUrl, cookies } = request;
+  const { nextUrl, cookies, url: fullUrl } = request;
 
   if (isRoute(request)) return;
 
@@ -44,7 +44,9 @@ const middleware = (request: NextRequest) => {
   const url = nextUrl.clone();
 
   const { appPathname, pathLocale } = parseAppPathname(url.pathname);
-  const isDefaultPathLocale = pathLocale === LocaleName.DEFAULT;
+  const isRootPathLocale = pathLocale === LocaleName.DEFAULT;
+  const isDefaultPathLocale =
+    pathLocale === appInternalizationConfig.defaultLocale;
 
   // Stored locale
   const nextLocale = cookies.get(CookieName.NEXT_LOCALE)?.value;
@@ -52,24 +54,43 @@ const middleware = (request: NextRequest) => {
   const isDefaultNextLocale =
     nextLocale === appInternalizationConfig.defaultLocale;
 
-  if (isValidNextLocale && isDefaultPathLocale) {
-    url.pathname = `/${nextLocale}${appPathname}`;
-    return NextResponse.redirect(url);
+  console.log({
+    fullUrl,
+    appPathname,
+    pathLocale,
+    nextLocale,
+  });
+
+  if (isDefaultNextLocale && isRootPathLocale) {
+    const pathname = `/${nextLocale}${appPathname}`;
+    return NextResponse.rewrite(new URL(pathname, fullUrl));
   }
 
-  if (isDefaultPathLocale && isDefaultNextLocale) {
-    url.pathname = `/${appInternalizationConfig.defaultLocale}${appPathname}`;
-    return NextResponse.redirect(url);
+  if (isValidNextLocale && isRootPathLocale) {
+    const pathname = `/${nextLocale}${appPathname}`;
+    return NextResponse.redirect(new URL(pathname, fullUrl));
   }
 
-  if (!isDefaultPathLocale) return;
+  if (!isValidNextLocale && isRootPathLocale) {
+    const detectedLocale = detectLocale(request);
 
-  const detectedLocale = detectLocale(request);
-  url.pathname = `/${detectLocale}${appPathname}`;
+    const pathname = `/${detectedLocale}${appPathname}`;
 
-  cookies.set(CookieName.NEXT_LOCALE, detectedLocale);
+    cookies.set(CookieName.NEXT_LOCALE, detectedLocale);
 
-  return NextResponse.redirect(url);
+    if (detectedLocale === appInternalizationConfig.defaultLocale) {
+      return NextResponse.rewrite(new URL(pathname, fullUrl));
+    }
+
+    return NextResponse.redirect(new URL(pathname, fullUrl));
+  }
+
+  if (isDefaultPathLocale) {
+    const pathname = appPathname;
+    return NextResponse.redirect(new URL(pathname, fullUrl));
+  }
+
+  return;
 };
 
 export { middleware };
