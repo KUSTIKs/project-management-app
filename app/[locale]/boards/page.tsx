@@ -4,7 +4,7 @@ import { Typography, Button, Icon } from '@project-management-app/components';
 
 import classes from './boards.module.scss';
 
-const Boards: FC = () => {
+const BoardsPage: FC = () => {
   return (
     <div className={classes.container}>
       <div className={classes.topInfo}>
@@ -26,4 +26,4 @@ const Boards: FC = () => {
   );
 };
 
-export default Boards;
+export default BoardsPage;

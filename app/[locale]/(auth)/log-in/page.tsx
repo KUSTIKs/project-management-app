@@ -9,7 +9,7 @@ import {
 
 import classes from '../auth.module.scss';
 
-const LogIn: FC = () => {
+const LogInPage: FC = () => {
   return (
     <div className={classes.wrapper}>
       <form className={classes.form}>
@@ -39,4 +39,4 @@ const LogIn: FC = () => {
   );
 };
 
-export default LogIn;
+export default LogInPage;

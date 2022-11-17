@@ -8,7 +8,7 @@ import {
 
 import classes from './profile.module.scss';
 
-const Profile: FC = () => {
+const ProfilePage: FC = () => {
   return (
     <div className={classes.container}>
       <form className={classes.form}>
@@ -35,4 +35,4 @@ const Profile: FC = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

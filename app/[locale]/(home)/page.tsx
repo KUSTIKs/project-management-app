@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Separator } from './components/components';
 import { Advantages, Hero, Technologies, OurTeam } from './sections/sections';
 
-const Home: FC = () => {
+const HomePage: FC = () => {
   return (
     <>
       <Hero />
@@ -16,4 +16,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;
