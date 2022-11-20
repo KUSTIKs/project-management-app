@@ -64,6 +64,10 @@
 .option {
   border-radius: 3px;
   padding: 5px;
+  border: none;
+  background: transparent;
+  text-align: start;
+  width: 100%;
   cursor: pointer;
   &:hover {
     background-color: var(--color-grey--100);

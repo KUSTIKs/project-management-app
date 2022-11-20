@@ -12,13 +12,19 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
     "classnames": "^2.3.2",
     "js-cookie": "^3.0.1",
+    "jsonwebtoken": "^8.5.1",
     "next": "13.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.39.4",
     "react-icons": "^4.6.0",
-    "sass": "^1.56.1"
+    "react-query": "^3.39.2",
+    "sass": "^1.56.1",
+    "sharp": "^0.31.2",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
@@ -33,6 +39,7 @@
     "@storybook/react": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
     "@types/js-cookie": "^3.0.2",
+    "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
@@ -43,6 +50,7 @@
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-storybook": "^0.6.7",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^7.0.0",
     "prettier": "^2.7.1",
     "storybook-addon-next": "^1.6.10",

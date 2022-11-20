@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import {
   cloneElement,
   FC,
+  FocusEventHandler,
   ReactElement,
   useCallback,
   useEffect,
@@ -12,6 +13,7 @@ import {
 } from 'react';
 
 import { Option } from '@project-management-app/types';
+import { isString } from '@project-management-app/helpers';
 
 import classes from './dropdown.module.scss';
 
@@ -55,6 +57,18 @@ const Dropdown: FC<Props> = ({
     }
   }, []);
 
+  const handleBlur: FocusEventHandler<HTMLDivElement> = () => {
+    requestAnimationFrame(() => {
+      const hasFocusedElementInside = wrapperRef.current?.contains(
+        document.activeElement
+      );
+
+      if (!hasFocusedElementInside) {
+        closeDropdown();
+      }
+    });
+  };
+
   useEffect(() => {
     globalThis.addEventListener('click', handleOuterClick);
     return () => {
@@ -63,7 +77,7 @@ const Dropdown: FC<Props> = ({
   }, [handleOuterClick]);
 
   return (
-    <div className={classes.wrapper} ref={wrapperRef}>
+    <div className={classes.wrapper} ref={wrapperRef} onBlur={handleBlur}>
       {cloneElement(trigger, {
         onClick: toggleDropdown,
       })}
@@ -79,18 +93,18 @@ const Dropdown: FC<Props> = ({
           })}
         >
           {options.map((option) => {
-            const isString = typeof option === 'string';
-            const { name, value } = isString
+            const { name, value } = isString(option)
               ? { name: option, value: option }
               : option;
 
             return (
-              <li
-                className={classes.option}
-                onClick={() => handleOptionClick(value)}
-                key={value}
-              >
-                {name}
+              <li key={value}>
+                <button
+                  className={classes.option}
+                  onClick={() => handleOptionClick(value)}
+                >
+                  {name}
+                </button>
               </li>
             );
           })}

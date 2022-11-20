@@ -1,13 +1,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 
-import {
-  AppLink,
-  Button,
-  Icon,
-  Typography,
-} from '@project-management-app/components';
+import { Button, Icon, Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
 
 import classes from './hero.module.scss';
@@ -30,22 +24,23 @@ const HeroSection: FC<Props> = ({ locale }) => {
           {contentMap.description}
         </Typography>
         <div className={classes.buttonGroup}>
-          <AppLink href="/sign-up">
-            <Button>{contentMap.tryNow}</Button>
-          </AppLink>
-          <AppLink href="https://github.com/KUSTIKs/project-management-app">
-            <Button variant="ghost" startIcon={<Icon.GithubFill />}>
-              {contentMap.projectRepo}
-            </Button>
-          </AppLink>
+          <Button href="/boards">{contentMap.tryNow}</Button>
+          <Button
+            variant="ghost"
+            startIcon={<Icon.GithubFill />}
+            href="https://github.com/KUSTIKs/project-management-app"
+          >
+            {contentMap.projectRepo}
+          </Button>
         </div>
       </div>
       <Image
-        src="/home-illustration.avif"
+        src="/images/home-illustration.avif"
         alt="home illustration"
         height={350}
         width={520}
         className={classes.image}
+        priority
       />
     </section>
   );

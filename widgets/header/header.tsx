@@ -2,6 +2,7 @@
 
 import { FC } from 'react';
 import Image from 'next/image';
+import Cookies from 'js-cookie';
 
 import {
   AppLink,
@@ -15,6 +16,7 @@ import {
 } from '@project-management-app/helpers';
 import { ObjectOption } from '@project-management-app/types';
 import { useAppRouter } from '@project-management-app/hooks';
+import { CookieName } from '@project-management-app/enums';
 
 import { NavItem } from './subcomponents/subcomponents';
 import classes from './header.module.scss';
@@ -29,9 +31,9 @@ const Header: FC<Props> = ({ isAuthorized }) => {
   const { locale, locales } = router;
   const contentMap = headerDictionary.getContentMap(locale);
 
-  const localeOptions: ObjectOption[] = locales.map((localeOption) => ({
-    name: getLanguageFromLocale(localeOption, locale),
-    value: localeOption,
+  const localeOptions: ObjectOption[] = locales.map((locale) => ({
+    name: getLanguageFromLocale(locale),
+    value: locale,
   }));
 
   const handleChangeLocale = (newLocale: string) => {
@@ -39,6 +41,12 @@ const Header: FC<Props> = ({ isAuthorized }) => {
       locale: newLocale,
       router,
     });
+  };
+
+  const handleLogOut = () => {
+    Cookies.remove(CookieName.NEXT_TOKEN);
+    router.push('/');
+    router.refresh();
   };
 
   return (
@@ -73,7 +81,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
                   startIcon={<Icon.GlobalLine />}
                   endIcon={<Icon.ArrowDropDownLine />}
                 >
-                  {getLanguageFromLocale(locale, locale)}
+                  {getLanguageFromLocale(locale)}
                 </Button>
               }
               alignment="end"
@@ -83,14 +91,14 @@ const Header: FC<Props> = ({ isAuthorized }) => {
 
           <div className={classes.separator} />
           {isAuthorized ? (
-            <Button variant="text" size="s">
+            <Button variant="text" size="s" onClick={handleLogOut}>
               {contentMap.logOut}
             </Button>
           ) : (
             <>
               <NavItem href="/sign-up">{contentMap.signUp}</NavItem>
-              <NavItem variant="contained" href="/log-in">
-                {contentMap.logIn}
+              <NavItem variant="contained" href="/sign-in">
+                {contentMap.signIn}
               </NavItem>
             </>
           )}

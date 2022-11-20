@@ -4,13 +4,13 @@ import { ContentDictionary } from '@project-management-app/helpers';
 const profileDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     title: 'Profile',
-    username: 'username',
+    name: 'name',
     login: 'login',
     update: 'Update',
   },
   [LocaleName.RU]: {
     title: 'Профиль',
-    username: 'имя пользователя',
+    name: 'имя',
     login: 'логин',
     update: 'Обновить',
   },

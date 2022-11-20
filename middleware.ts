@@ -1,16 +1,23 @@
 import { NextResponse, NextRequest } from 'next/server';
 
-import { appInternalizationConfig } from '@project-management-app/config';
+import {
+  appInternalizationConfig,
+  appRoutesConfig,
+} from '@project-management-app/config';
 import { CookieName, LocaleName } from '@project-management-app/enums';
-import { isAppLocale, parseAppPathname } from '@project-management-app/helpers';
+import {
+  decodeToken,
+  isAppLocale,
+  parseAppPathname,
+} from '@project-management-app/helpers';
 
 const publicFileRegExp = /\.(.*)$/;
 
 const isRoute = ({ nextUrl }: NextRequest) => {
   return (
-    nextUrl.pathname.startsWith('/_next') ||
-    nextUrl.pathname.includes('/api/') ||
-    publicFileRegExp.test(nextUrl.pathname)
+    !nextUrl.pathname.startsWith('/_next') &&
+    !nextUrl.pathname.includes('/api/') &&
+    !publicFileRegExp.test(nextUrl.pathname)
   );
 };
 
@@ -28,16 +35,40 @@ const detectLocale = ({ headers }: NextRequest) => {
   return detectedLocale;
 };
 
+const checkAuth = ({ nextUrl, cookies, url: fullUrl }: NextRequest) => {
+  const { appPathname } = parseAppPathname(nextUrl.pathname);
+
+  const isUnauthOnlyRoute =
+    appRoutesConfig.unauthOnlyRoutes.includes(appPathname);
+  const isSharedRoute = appRoutesConfig.sharedRoutes.includes(appPathname);
+  const isUnauthRoute = isUnauthOnlyRoute || isSharedRoute;
+
+  const token = cookies.get(CookieName.NEXT_TOKEN)?.value;
+  const { isExpired, payload } = decodeToken(token);
+  const isAuthorized = !isExpired && !!payload;
+
+  if (isAuthorized && isUnauthOnlyRoute) {
+    const pathname = '/';
+    return NextResponse.redirect(new URL(pathname, fullUrl));
+  } else if (!isAuthorized && !isUnauthRoute) {
+    const pathname = '/sign-in';
+    return NextResponse.redirect(new URL(pathname, fullUrl));
+  }
+};
+
 const middleware = (request: NextRequest) => {
   const { nextUrl, cookies, url: fullUrl } = request;
 
-  if (isRoute(request)) return;
+  if (!isRoute(request)) return;
+
+  const checkAuthResponse = checkAuth(request);
+  if (checkAuthResponse) {
+    return checkAuthResponse;
+  }
 
   //* /{locale}/{...pathChunks} or /{...pathChunks}
 
-  const url = nextUrl.clone();
-
-  const { appPathname, pathLocale } = parseAppPathname(url.pathname);
+  const { appPathname, pathLocale } = parseAppPathname(nextUrl.pathname);
   const isRootPathLocale = pathLocale === LocaleName.DEFAULT;
   const isDefaultPathLocale =
     pathLocale === appInternalizationConfig.defaultLocale;

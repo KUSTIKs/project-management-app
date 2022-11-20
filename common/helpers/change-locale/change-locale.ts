@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 import { CookieName } from '@project-management-app/enums';
 import { AppRouter } from '@project-management-app/types';
 
@@ -7,9 +9,10 @@ type ChangeLocaleParams = {
 };
 
 const changeLocale = ({ locale, router }: ChangeLocaleParams) => {
-  document.cookie = `${CookieName.NEXT_LOCALE}=${locale}; maxage=${
-    1000 * 60 * 60 * 24 * 7
-  }; path=/`;
+  Cookies.set(CookieName.NEXT_LOCALE, locale, {
+    path: '/',
+    expires: 1000 * 60 * 60 * 24 * 7,
+  });
 
   router.push(router.appPathname, {
     locale,

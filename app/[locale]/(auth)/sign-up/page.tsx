@@ -1,4 +1,9 @@
+'use client';
+
 import { FC } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from 'react-query';
 
 import {
   AppLink,
@@ -6,8 +11,12 @@ import {
   TextInput,
   Typography,
 } from '@project-management-app/components';
-import { AppLocale } from '@project-management-app/types';
+import { AppLocale, CreateUserDto } from '@project-management-app/types';
+import { authService } from '@project-management-app/services';
+import { useAppRouter } from '@project-management-app/hooks';
+import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 
+import { getSignUpSchema } from './sign-up.schema';
 import { authDictionary } from '../auth.dictionary';
 import classes from '../auth.module.scss';
 
@@ -20,30 +29,78 @@ type Props = {
 const SignUpPage: FC<Props> = ({ params }) => {
   const { locale } = params;
   const contentMap = authDictionary.getContentMap(locale);
+  const {
+    mutate: signUp,
+    error,
+    isLoading,
+  } = useMutation({
+    mutationFn: authService.signUp,
+    onSuccess: () => navigateToSignIn(),
+  });
+  const router = useAppRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateUserDto>({
+    resolver: zodResolver(
+      getSignUpSchema({
+        locale,
+      })
+    ),
+  });
+  const errorMessage = getKeyFromUnknown(error, 'message');
+
+  const handleSignUp: SubmitHandler<CreateUserDto> = (dto) => {
+    signUp(dto);
+  };
+
+  const navigateToSignIn = () => {
+    router.push('/sign-in');
+  };
 
   return (
     <div className={classes.wrapper}>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={handleSubmit(handleSignUp)}>
         <Typography variant="title1" weight={800}>
           {contentMap.signUp}
         </Typography>
-        <div className={classes.inputs}>
-          <TextInput label={contentMap.username} />
-          <TextInput label={contentMap.login} />
-          <TextInput label={contentMap.password} />
-        </div>
-        <Button size="l">{contentMap.submit}</Button>
+        <fieldset className={classes.fieldset} disabled={isLoading}>
+          <TextInput
+            {...register('name')}
+            label={contentMap.name}
+            errorMessage={errors.name?.message}
+          />
+          <TextInput
+            {...register('login')}
+            label={contentMap.login}
+            errorMessage={errors.login?.message}
+          />
+          <TextInput
+            {...register('password')}
+            label={contentMap.password}
+            errorMessage={errors.password?.message}
+          />
+          {isString(errorMessage) && (
+            <Typography variant="text" weight={600} colorName="red/200">
+              {errorMessage}
+            </Typography>
+          )}
+        </fieldset>
+        <Button size="l" isLoading={isLoading}>
+          {contentMap.submit}
+        </Button>
       </form>
       <Typography variant="text" weight={500}>
         {contentMap.signUpMessage}{' '}
-        <AppLink href="/log-in">
+        <AppLink href="/sign-in">
           <Typography
             variant="text"
             weight={600}
             colorName="blue/500"
             as="span"
           >
-            {contentMap.logIn}
+            {contentMap.signIn}
           </Typography>
         </AppLink>
       </Typography>

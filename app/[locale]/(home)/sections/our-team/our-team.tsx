@@ -1,12 +1,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import {
-  AppLink,
-  Button,
-  Icon,
-  Typography,
-} from '@project-management-app/components';
+import { Button, Icon, Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
 
 import classes from './our-team.module.scss';
@@ -27,7 +22,7 @@ const OurTeamSection: FC<Props> = ({ locale }) => {
       <div className={classes.member}>
         <div className={classes.memberInfo}>
           <Image
-            src="/my-picture.png"
+            src="/images/my-picture.png"
             alt="my picture"
             className={classes.memberImage}
             height={250}
@@ -47,16 +42,20 @@ const OurTeamSection: FC<Props> = ({ locale }) => {
               </Typography>
             </div>
             <div className={classes.buttonGroup}>
-              <AppLink href="https://github.com/KUSTIKs">
-                <Button variant="ghost" startIcon={<Icon.GithubFill />}>
-                  Github
-                </Button>
-              </AppLink>
-              <AppLink href="https://www.linkedin.com/in/artem-khvostyk-218953243/">
-                <Button variant="ghost" startIcon={<Icon.LinkedinFill />}>
-                  Linked in
-                </Button>
-              </AppLink>
+              <Button
+                variant="ghost"
+                startIcon={<Icon.GithubFill />}
+                href="https://github.com/KUSTIKs"
+              >
+                Github
+              </Button>
+              <Button
+                variant="ghost"
+                startIcon={<Icon.LinkedinFill />}
+                href="https://www.linkedin.com/in/artem-khvostyk-218953243/"
+              >
+                Linked in
+              </Button>
             </div>
           </div>
         </div>

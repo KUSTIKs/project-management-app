@@ -30,19 +30,19 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
             {contentMap.subtitle}
           </Typography>
         </div>
-        <Image src="/books.png" alt="books" height={90} width={150} />
+        <Image src="/images/books.png" alt="books" height={90} width={150} />
       </div>
       <div className={classes.technologiesWrapper}>
         <AppLink href="https://reactjs.org" className={classes.technologyCard}>
           <img
-            src="/react-logo.png"
+            src="/images/react-logo.png"
             alt="react"
             className={classes.technologyImage}
           />
         </AppLink>
         <AppLink href="https://nextjs.org" className={classes.technologyCard}>
           <img
-            src="/next-logo.png"
+            src="/images/next-logo.png"
             alt="next"
             className={classes.technologyImage}
           />
@@ -52,7 +52,7 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
           className={classes.technologyCard}
         >
           <img
-            src="/react-hook-form-logo.png"
+            src="/images/react-hook-form-logo.png"
             alt="react hook form"
             className={classes.technologyImage}
           />
@@ -62,14 +62,14 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
           className={classes.technologyCard}
         >
           <img
-            src="/react-query-logo.png"
+            src="/images/react-query-logo.png"
             alt="react query"
             className={classes.technologyImage}
           />
         </AppLink>
         <AppLink href="https://redux.js.org" className={classes.technologyCard}>
           <img
-            src="/redux-logo.png"
+            src="/images/redux-logo.png"
             alt="redux"
             className={classes.technologyImage}
           />

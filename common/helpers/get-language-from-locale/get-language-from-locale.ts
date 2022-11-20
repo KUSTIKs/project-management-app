@@ -1,7 +1,6 @@
 import { LocaleName } from '@project-management-app/enums';
-import { AppLocale } from '@project-management-app/types';
 
-const getLanguageFromLocale = (locale: string, userLocale: AppLocale) => {
+const getLanguageFromLocale = (locale: string, userLocale = locale) => {
   if (userLocale === LocaleName.EN) {
     if (locale === LocaleName.EN) {
       return 'English';

@@ -1,6 +1,7 @@
 .outerWrapper {
   display: grid;
   gap: 4px;
+  user-select: none;
 }
 
 .outerWrapper_variant_filled {
@@ -62,6 +63,7 @@
   font-weight: 500;
   transition: 200ms ease;
   padding: 22px 15px 8px;
+  border-radius: inherit;
   &::placeholder {
     color: transparent;
   }

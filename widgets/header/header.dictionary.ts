@@ -6,14 +6,14 @@ const headerDictionary = new ContentDictionary({
     boards: 'Boards',
     profile: 'Profile',
     signUp: 'Sign up',
-    logIn: 'Log in',
+    signIn: 'Log in',
     logOut: 'Log out',
   },
   [LocaleName.RU]: {
     boards: 'Доски',
     profile: 'Профиль',
-    signUp: 'Зарегистрироваться',
-    logIn: 'Войти',
+    signUp: 'Регистрация',
+    signIn: 'Войти',
     logOut: 'Выйти',
   },
 });

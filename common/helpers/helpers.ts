@@ -5,3 +5,7 @@ export { parseAppPathname } from './parse-app-pathname/parse-app-pathname';
 export { getAppPathname } from './get-app-pathname/get-app-pathname';
 export { ContentDictionary } from './content-dictionary/content-dictionary';
 export { isAppLocale } from './is-app-locale/is-app-locale';
+export { appFetch } from './app-fetch/app-fetch';
+export { decodeToken } from './decode-token/decode-token';
+export { getKeyFromUnknown } from './get-key-from-unknown/get-key-from-unknown';
+export * from './type-checks/type-checks';

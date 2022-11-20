@@ -19,13 +19,13 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
     <section className={classes.container}>
       <div className={classes.advantage}>
         <img
-          src="/boards-page-screenshot.png"
+          src="/images/boards-page-screenshot.png"
           alt="boards page"
           className={classes.advantageImage}
         />
         <div className={classes.advantageInfo}>
           <Image
-            src="/advantage-1.avif"
+            src="/images/advantage-1.avif"
             alt="advantage"
             height={60}
             width={90}
@@ -43,13 +43,13 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
       </div>
       <div className={classes.advantage}>
         <img
-          src="/board-page-screenshot.png"
+          src="/images/board-page-screenshot.png"
           alt="board detail page"
           className={classes.advantageImage}
         />
         <div className={classes.advantageInfo}>
           <Image
-            src="/advantage-2.avif"
+            src="/images/advantage-2.avif"
             alt="advantage"
             height={60}
             width={90}

@@ -1,16 +1,20 @@
 .button {
-  display: grid;
-  grid-auto-flow: column;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   font-weight: 600;
   transition: background-color 200ms ease;
   border: none;
   border-radius: 5px;
+  user-select: none;
   &:disabled {
-    opacity: 0.6;
     cursor: default;
   }
+}
+
+.button_disabled {
+  opacity: 0.6;
 }
 
 .button_size_s {

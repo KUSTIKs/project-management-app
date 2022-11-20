@@ -1,26 +1,41 @@
-import { FC, ButtonHTMLAttributes, ReactElement } from 'react';
+import { FC, ButtonHTMLAttributes, ReactElement, ElementType } from 'react';
 import classNames from 'classnames';
+
+import { AppLink, Loader } from '@project-management-app/components';
 
 import classes from './button.module.scss';
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> & {
   size?: 'm' | 's' | 'l';
   variant?: 'contained' | 'ghost' | 'text';
   startIcon?: ReactElement;
   endIcon?: ReactElement;
+  isLoading?: boolean;
+  isDisabled?: boolean;
+  href?: string;
 };
 
 const Button: FC<Props> = ({
   children,
   size = 'm',
   variant = 'contained',
+  isLoading = false,
+  isDisabled = false,
   startIcon,
   endIcon,
+  href,
   ...buttonAttrs
 }) => {
+  const Component: ElementType = href ? AppLink : 'button';
+  const linkProps = {
+    href,
+  };
+
   return (
-    <button
+    <Component
       {...buttonAttrs}
+      {...linkProps}
+      disabled={isLoading || isDisabled}
       className={classNames(classes.button, {
         [classes.button_size_l]: size === 'l',
         [classes.button_size_m]: size === 'm',
@@ -28,12 +43,14 @@ const Button: FC<Props> = ({
         [classes.button_variant_contained]: variant === 'contained',
         [classes.button_variant_ghost]: variant === 'ghost',
         [classes.button_variant_text]: variant === 'text',
+        [classes.button_disabled]: isDisabled,
       })}
     >
+      {isLoading && <Loader size="1.1em" />}
       {startIcon && <span className={classes.icon}>{startIcon}</span>}
       {children}
       {endIcon && <span className={classes.icon}>{endIcon}</span>}
-    </button>
+    </Component>
   );
 };
 

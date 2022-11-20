@@ -25,18 +25,21 @@ const Footer: FC<Props> = ({ locale }) => {
         <div className={classes.group}>
           <AppLink href="https://rs.school/">
             <Image
-              src="/rs-school-logo.png"
+              src="/images/rs-school-logo.png"
               alt="RsSchool"
               height={30}
               width={59}
               className={classes.rsSchoolLogo}
             />
           </AppLink>
-          <AppLink href="https://github.com/KUSTIKs">
-            <Button variant="text" size="s" startIcon={<Icon.GithubFill />}>
-              Kustiks
-            </Button>
-          </AppLink>
+          <Button
+            variant="text"
+            size="s"
+            startIcon={<Icon.GithubFill />}
+            href="https://github.com/KUSTIKs"
+          >
+            KUSTIKs
+          </Button>
         </div>
         <Typography
           variant="subhead"

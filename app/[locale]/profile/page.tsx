@@ -28,7 +28,7 @@ const ProfilePage: FC<Props> = ({ params }) => {
         </Typography>
         <div className={classes.inputs}>
           <TextInput
-            label={contentMap.username}
+            label={contentMap.name}
             variant="unfilled"
             defaultValue="random user"
           />
@@ -38,7 +38,7 @@ const ProfilePage: FC<Props> = ({ params }) => {
             defaultValue="random login"
           />
         </div>
-        <Button size="l" disabled>
+        <Button size="l" isDisabled>
           {contentMap.update}
         </Button>
       </form>
