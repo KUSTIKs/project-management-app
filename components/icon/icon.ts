@@ -5,6 +5,7 @@ import {
   RiGithubFill,
   RiAddLine,
   RiLinkedinFill,
+  RiEdit2Line,
 } from 'react-icons/ri';
 
 const Icon = {
@@ -14,6 +15,7 @@ const Icon = {
   GithubFill: RiGithubFill,
   AddLine: RiAddLine,
   LinkedinFill: RiLinkedinFill,
+  EditLine: RiEdit2Line,
 } as const;
 
 export { Icon };

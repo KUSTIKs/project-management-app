@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { IconBaseProps } from 'react-icons';
 

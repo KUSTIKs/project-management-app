@@ -30,6 +30,10 @@ const componentMeta: ComponentMeta<typeof Button> = {
     endIcon: iconNameArgType,
     startIcon: iconNameArgType,
   },
+  args: {
+    isDisabled: false,
+    isLoading: false,
+  },
 };
 
 const Template: ComponentStory<typeof Button> = ({

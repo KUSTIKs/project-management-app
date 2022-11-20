@@ -20,14 +20,26 @@
 .button_size_s {
   padding: 5px 8px;
   min-height: var(--height-button-s);
+  min-width: var(--height-button-s);
+  &.button_symmetricPadding {
+    padding: 5px;
+  }
 }
 .button_size_m {
   padding: 8px 14px;
   min-height: var(--height-button-m);
+  min-width: var(--height-button-m);
+  &.button_symmetricPadding {
+    padding: 8px;
+  }
 }
 .button_size_l {
   padding: 14px 20px;
   min-height: var(--height-button-l);
+  min-width: var(--height-button-l);
+  &.button_symmetricPadding {
+    padding: 14px;
+  }
 }
 
 .button_variant_contained {

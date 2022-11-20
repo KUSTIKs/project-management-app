@@ -5,3 +5,4 @@ export { Dropdown } from './dropdown/dropdown';
 export { Typography } from './typography/typography';
 export { AppLink } from './app-link/app-link';
 export { Loader } from './loader/loader';
+export { BoardCard } from './board-card/board-card';

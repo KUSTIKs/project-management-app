@@ -13,6 +13,7 @@ type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> & {
   isLoading?: boolean;
   isDisabled?: boolean;
   href?: string;
+  symmetricPadding?: boolean;
 };
 
 const Button: FC<Props> = ({
@@ -21,6 +22,7 @@ const Button: FC<Props> = ({
   variant = 'contained',
   isLoading = false,
   isDisabled = false,
+  symmetricPadding = false,
   startIcon,
   endIcon,
   href,
@@ -44,6 +46,7 @@ const Button: FC<Props> = ({
         [classes.button_variant_ghost]: variant === 'ghost',
         [classes.button_variant_text]: variant === 'text',
         [classes.button_disabled]: isDisabled,
+        [classes.button_symmetricPadding]: symmetricPadding,
       })}
     >
       {isLoading && <Loader size="1.1em" />}

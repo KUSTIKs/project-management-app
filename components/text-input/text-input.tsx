@@ -7,7 +7,6 @@ import React, {
   useRef,
   ForwardedRef,
   useState,
-  ChangeEvent,
   ChangeEventHandler,
 } from 'react';
 import classNames from 'classnames';
