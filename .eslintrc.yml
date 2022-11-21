@@ -17,9 +17,8 @@ settings:
     node: true
 
 rules:
-  no-unused-vars: off
   unused-imports/no-unused-imports: error
-  unused-imports/no-unused-vars: warn
+  unused-imports/no-unused-vars: off
   react/display-name: off
   import/no-unresolved: error
   import/order:

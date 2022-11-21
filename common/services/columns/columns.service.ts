@@ -19,9 +19,6 @@ class ColumnsService {
     const response = await appFetch(`/boards/${boardId}/columns`, {
       body: JSON.stringify(dto),
       method: HttpMethod.POST,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
     const data: Column[] = await response.json();
 
@@ -56,9 +53,6 @@ class ColumnsService {
     const response = await appFetch(`/boards/${boardId}/columns/${columnId}`, {
       body: JSON.stringify(dto),
       method: HttpMethod.PUT,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
     const data = await response.json();
 

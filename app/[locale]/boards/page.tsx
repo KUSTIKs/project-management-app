@@ -13,6 +13,7 @@ import {
 import { AppLocale } from '@project-management-app/types';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 import { boardsService } from '@project-management-app/services';
+import { QueryKey } from '@project-management-app/enums';
 
 import { boardsDictionary } from './boards.dictionary';
 import classes from './boards.module.scss';
@@ -33,7 +34,7 @@ const BoardsPage: FC<Props> = ({ params }) => {
     isLoading,
   } = useQuery({
     queryFn: boardsService.getAll,
-    queryKey: ['boards'],
+    queryKey: [QueryKey.BOARDS],
   });
   const errorMessage = getKeyFromUnknown(error, 'message');
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);

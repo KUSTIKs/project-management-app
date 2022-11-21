@@ -11,13 +11,17 @@ const appFetch = (resource: string, init?: RequestInit) => {
   const tokenHeaders = isString(token) && {
     authorization: `Bearer ${token}`,
   };
+  const contentHeaders = isString(init?.body) && {
+    'Content-Type': 'application/json',
+  };
 
   const fetchUrl = `${API_URL}${resource}`;
   return fetch(fetchUrl, {
     ...init,
     headers: {
-      ...init?.headers,
+      ...contentHeaders,
       ...tokenHeaders,
+      ...init?.headers,
     },
   });
 };

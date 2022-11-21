@@ -13,9 +13,6 @@ class AuthService {
     const response = await appFetch('/signin', {
       method: HttpMethod.POST,
       body: JSON.stringify(dto),
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
 
     const data = await response.json();
@@ -33,9 +30,6 @@ class AuthService {
     const response = await appFetch('/signup', {
       method: HttpMethod.POST,
       body: JSON.stringify(dto),
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
 
     const data = await response.json();

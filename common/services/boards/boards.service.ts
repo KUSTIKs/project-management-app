@@ -26,9 +26,6 @@ class BoardsService {
     const response = await appFetch('/boards', {
       body: JSON.stringify(dto),
       method: HttpMethod.POST,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
 
     if (response.ok) {
@@ -67,9 +64,6 @@ class BoardsService {
     const response = await appFetch(`/boards/${id}`, {
       body: JSON.stringify(dto),
       method: HttpMethod.PUT,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
     const data = await response.json();
 

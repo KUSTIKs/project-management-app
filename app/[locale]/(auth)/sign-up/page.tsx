@@ -15,6 +15,7 @@ import { AppLocale, CreateUserDto } from '@project-management-app/types';
 import { authService } from '@project-management-app/services';
 import { useAppRouter } from '@project-management-app/hooks';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
+import { QueryKey } from '@project-management-app/enums';
 
 import { getSignUpSchema } from './sign-up.schema';
 import { authDictionary } from '../auth.dictionary';
@@ -34,6 +35,7 @@ const SignUpPage: FC<Props> = ({ params }) => {
     error,
     isLoading,
   } = useMutation({
+    mutationKey: [QueryKey.AUTH, 'sign-up'],
     mutationFn: authService.signUp,
     onSuccess: () => navigateToSignIn(),
   });

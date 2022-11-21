@@ -26,9 +26,6 @@ class TasksService {
       {
         body: JSON.stringify(dto),
         method: HttpMethod.POST,
-        headers: {
-          'Content-Type': 'application/json',
-        },
       }
     );
     const data: Task[] = await response.json();
@@ -95,9 +92,6 @@ class TasksService {
       {
         body: JSON.stringify(dto),
         method: HttpMethod.PUT,
-        headers: {
-          'Content-Type': 'application/json',
-        },
       }
     );
     const data = await response.json();

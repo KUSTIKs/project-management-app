@@ -12,6 +12,7 @@ import {
 import { AppLocale, CreateBoardDto } from '@project-management-app/types';
 import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
+import { QueryKey } from '@project-management-app/enums';
 
 import { getCreateBoardSchema } from './create-board-modal.schema';
 import { createBoardModalDictionary } from './create-board-modal.dictionary';
@@ -29,7 +30,7 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
   const queryClient = useQueryClient();
   const { mutate: createBoard, error } = useMutation({
     mutationFn: boardsService.create,
-    mutationKey: ['boards'],
+    mutationKey: [QueryKey.BOARDS],
     onSuccess: () => handleCreated(),
   });
   const {
@@ -58,7 +59,7 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
 
   const handleCreated = () => {
     queryClient.invalidateQueries({
-      queryKey: ['boards'],
+      queryKey: [QueryKey.BOARDS],
     });
     handleCloseWithReset();
   };
