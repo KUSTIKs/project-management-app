@@ -7,7 +7,6 @@ import {
   Typography,
   Button,
   Icon,
-  BoardCard,
   Loader,
 } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
@@ -16,8 +15,8 @@ import { boardsService } from '@project-management-app/services';
 import { QueryKey } from '@project-management-app/enums';
 
 import { boardsDictionary } from './boards.dictionary';
+import { BoardCard, CreateBoardModal } from './components/components';
 import classes from './boards.module.scss';
-import { CreateBoardModal } from './components/components';
 
 type Props = {
   params: {
@@ -65,8 +64,8 @@ const BoardsPage: FC<Props> = ({ params }) => {
         {boards &&
           (boards.length > 0 ? (
             <ul className={classes.boardsWrapper}>
-              {boards.map(({ id, title, description }) => (
-                <BoardCard key={id} title={title} description={description} />
+              {boards.map((board) => (
+                <BoardCard key={board.id} {...board} locale={locale} />
               ))}
             </ul>
           ) : (

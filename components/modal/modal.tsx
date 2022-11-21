@@ -6,7 +6,7 @@ import { Button, Icon, Typography } from '@project-management-app/components';
 import { useOutsideClick } from '@project-management-app/hooks';
 
 import classes from './modal.module.scss';
-import { ModalFieldset } from './subcomponents/subcomponents';
+import { ModalButtonGroup, ModalFieldset } from './subcomponents/subcomponents';
 
 type Props = {
   title: string;
@@ -18,6 +18,7 @@ type Props = {
 
 const Modal: FC<Props> & {
   Fieldset: typeof ModalFieldset;
+  ButtonGroup: typeof ModalButtonGroup;
 } = ({ title, children, isOpen, handleClose, onSubmit }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const wrapperRef = useRef<HTMLElement>(null);
@@ -69,5 +70,6 @@ const Modal: FC<Props> & {
 };
 
 Modal.Fieldset = ModalFieldset;
+Modal.ButtonGroup = ModalButtonGroup;
 
 export { Modal };

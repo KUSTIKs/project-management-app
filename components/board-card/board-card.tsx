@@ -7,18 +7,35 @@ import classes from './board-card.module.scss';
 type Props = {
   title: string;
   description: string;
+  handleDelete?: () => void;
+  handleUpdate?: () => void;
 };
 
-const BoardCard: FC<Props> = ({ description, title }) => {
+const BoardCard: FC<Props> = ({
+  description,
+  title,
+  handleDelete,
+  handleUpdate,
+}) => {
   return (
     <article className={classes.wrapper}>
       <header className={classes.header}>
         <div className={classes.avatar}>{title[0]}</div>
         <div className={classes.actions}>
-          <Button size="m" variant="text" symmetricPadding>
+          <Button
+            size="m"
+            variant="text"
+            symmetricPadding
+            onClick={handleUpdate}
+          >
             <Icon.EditLine size={18} />
           </Button>
-          <Button size="m" variant="text" symmetricPadding>
+          <Button
+            size="m"
+            variant="text"
+            symmetricPadding
+            onClick={handleDelete}
+          >
             <Icon.BinLine size={18} />
           </Button>
         </div>

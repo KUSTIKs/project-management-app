@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import { FC, FieldsetHTMLAttributes, ReactNode } from 'react';
+import classNames from 'classnames';
 
 import classes from './modal-fieldset.module.scss';
 
