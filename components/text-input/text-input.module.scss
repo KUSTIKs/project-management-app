@@ -48,6 +48,11 @@
     background-color: var(--color-background--100);
     box-shadow: 0 0 0 2px var(--color-blue--500),
       0 0 0 4px var(--color-blue--500-a15);
+
+    .growingBlock,
+    .textarea {
+      min-height: var(--height-input-l);
+    }
   }
 }
 

@@ -33,6 +33,12 @@
   gap: 5px;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .description {
   overflow: hidden;
   text-overflow: ellipsis;

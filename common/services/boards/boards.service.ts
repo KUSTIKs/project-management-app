@@ -10,9 +10,16 @@ import {
 class BoardsService {
   async getAll() {
     const response = await appFetch('/boards');
-    const data: Board[] = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Board[] = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async create(dto: CreateBoardDto) {
@@ -23,9 +30,16 @@ class BoardsService {
         'Content-Type': 'application/json',
       },
     });
-    const data: Board[] = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Board = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async getById(id: string) {

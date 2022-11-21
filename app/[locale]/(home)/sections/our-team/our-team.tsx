@@ -12,7 +12,7 @@ type Props = {
 };
 
 const OurTeamSection: FC<Props> = ({ locale }) => {
-  const contentMap = ourTeamDictionary.getContentMap(locale);
+  const contentMap = ourTeamDictionary.getContentMap({ locale });
 
   return (
     <section className={classes.container}>

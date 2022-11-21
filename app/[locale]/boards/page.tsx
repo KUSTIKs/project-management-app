@@ -1,15 +1,22 @@
-import { FC } from 'react';
+'use client';
+
+import { useQuery } from 'react-query';
+import { FC, useState } from 'react';
 
 import {
   Typography,
   Button,
   Icon,
   BoardCard,
+  Loader,
 } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
+import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
+import { boardsService } from '@project-management-app/services';
 
-import classes from './boards.module.scss';
 import { boardsDictionary } from './boards.dictionary';
+import classes from './boards.module.scss';
+import { CreateBoardModal } from './components/components';
 
 type Props = {
   params: {
@@ -19,49 +26,74 @@ type Props = {
 
 const BoardsPage: FC<Props> = ({ params }) => {
   const { locale } = params;
-  const contentMap = boardsDictionary.getContentMap(locale);
+  const contentMap = boardsDictionary.getContentMap({ locale });
+  const {
+    data: boards,
+    error,
+    isLoading,
+  } = useQuery({
+    queryFn: boardsService.getAll,
+    queryKey: ['boards'],
+  });
+  const errorMessage = getKeyFromUnknown(error, 'message');
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
+  const openCreateModal = () => {
+    setIsCreateModalOpen(true);
+  };
+  const closeCreateModal = () => {
+    setIsCreateModalOpen(false);
+  };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.topInfo}>
-        <Typography variant="title1">{contentMap.title}</Typography>
-        <div className={classes.group}>
-          <Button size="m" variant="contained" startIcon={<Icon.AddLine />}>
-            {contentMap.newBoard}
-          </Button>
+    <>
+      <div className={classes.container}>
+        <div className={classes.topInfo}>
+          <Typography variant="title1">{contentMap.title}</Typography>
+          <div className={classes.group}>
+            <Button
+              size="m"
+              variant="contained"
+              startIcon={<Icon.AddLine />}
+              onClick={openCreateModal}
+            >
+              {contentMap.newBoard}
+            </Button>
+          </div>
         </div>
+        {boards &&
+          (boards.length > 0 ? (
+            <ul className={classes.boardsWrapper}>
+              {boards.map(({ id, title, description }) => (
+                <BoardCard key={id} title={title} description={description} />
+              ))}
+            </ul>
+          ) : (
+            <Typography
+              variant="largeHeadline"
+              weight={600}
+              colorName="text/700"
+            >
+              {contentMap.noBoardsMessage}
+            </Typography>
+          ))}
+        {isString(errorMessage) && (
+          <Typography variant="largeHeadline" weight={600} colorName="text/700">
+            {errorMessage}
+          </Typography>
+        )}
+        {isLoading && (
+          <div className={classes.loadingContainer}>
+            <Loader size={24} />
+          </div>
+        )}
       </div>
-      <ul className={classes.boardsWrapper}>
-        <BoardCard
-          title="Mamie Gregory"
-          description="Pariatur ullamco ut adipisicing esse veniam ullamco incididunt commodo."
-        />
-        <BoardCard
-          title="Stephen Robinson"
-          description="Tempor incididunt ex ut dolore anim qui quis eiusmod ullamco ipsum Lorem eiusmod id pariatur."
-        />
-        <BoardCard
-          title="Ray Sanders"
-          description="Veniam aliquip laborum amet consectetur et et laboris consectetur laborum nisi."
-        />
-        <BoardCard
-          title="Angel Bradley"
-          description="Cillum officia velit anim Lorem nisi dolore ipsum."
-        />
-        <BoardCard
-          title="Winnie Powell"
-          description="Duis eiusmod ex id amet cupidatat excepteur."
-        />
-        <BoardCard
-          title="Callie Sparks"
-          description="Tempor anim laborum dolor consequat excepteur exercitation."
-        />
-        <BoardCard
-          title="Anne Lopez"
-          description="Velit mollit eiusmod ullamco occaecat aliquip."
-        />
-      </ul>
-    </div>
+      <CreateBoardModal
+        locale={locale}
+        handleClose={closeCreateModal}
+        isOpen={isCreateModalOpen}
+      />
+    </>
   );
 };
 

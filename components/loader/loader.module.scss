@@ -1,8 +1,8 @@
 .loader {
   width: 1em;
   height: 1em;
-  border: 0.15em solid rgb(255 255 255);
-  border-bottom-color: rgb(255 255 255 / 0.25);
+  border: 0.15em solid var(--color-blue--500);
+  border-bottom-color: var(--color-blue--800);
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;

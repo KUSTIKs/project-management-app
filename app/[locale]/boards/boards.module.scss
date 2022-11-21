@@ -33,3 +33,10 @@
   background-color: var(--color-background--100);
   border-radius: 10px;
 }
+
+.loadingContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

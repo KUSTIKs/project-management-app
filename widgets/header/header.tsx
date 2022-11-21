@@ -29,7 +29,7 @@ type Props = {
 const Header: FC<Props> = ({ isAuthorized }) => {
   const router = useAppRouter();
   const { locale, locales } = router;
-  const contentMap = headerDictionary.getContentMap(locale);
+  const contentMap = headerDictionary.getContentMap({ locale });
 
   const localeOptions: ObjectOption[] = locales.map((locale) => ({
     name: getLanguageFromLocale(locale),

@@ -23,7 +23,7 @@ const BoardCard: FC<Props> = ({ description, title }) => {
           </Button>
         </div>
       </header>
-      <div>
+      <div className={classes.info}>
         <Typography variant="headline" weight={600} as="h2">
           {title}
         </Typography>

@@ -16,17 +16,16 @@ const validationMessageDictionary = new ContentDictionary({
 });
 
 const getSignInSchema = ({ locale }: { locale: AppLocale }) => {
-  const validationMessageContentMap =
-    validationMessageDictionary.getContentMap(locale);
+  const contentMap = validationMessageDictionary.getContentMap({ locale });
 
   return z.object<{
     [Key in keyof SignInUserDto]: ZodTypeAny;
   }>({
     login: z.string().min(1, {
-      message: validationMessageContentMap.loginRequired,
+      message: contentMap.loginRequired,
     }),
     password: z.string().min(1, {
-      message: validationMessageContentMap.passwordRequired,
+      message: contentMap.passwordRequired,
     }),
   });
 };

@@ -6,3 +6,5 @@ export { Typography } from './typography/typography';
 export { AppLink } from './app-link/app-link';
 export { Loader } from './loader/loader';
 export { BoardCard } from './board-card/board-card';
+export { Modal } from './modal/modal';
+export { ReactQueryProvider } from './react-query-provider/react-query-provider';

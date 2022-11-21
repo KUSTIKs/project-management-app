@@ -2,7 +2,7 @@ import { CSSProperties, ElementType, FC, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { AppColorName } from '@project-management-app/types';
-import { getCssVarFromAppColorName } from '@project-management-app/helpers';
+import { getAppColor } from '@project-management-app/helpers';
 
 import { getDefaultComponent } from './helpers/helpers';
 import { TypographyVariant } from './types/types';
@@ -27,7 +27,7 @@ const Typography: FC<Props> = ({
   className,
   as: Component = getDefaultComponent(variant),
 }) => {
-  const color = colorName && getCssVarFromAppColorName(colorName);
+  const color = colorName && getAppColor(colorName);
 
   return (
     <Component

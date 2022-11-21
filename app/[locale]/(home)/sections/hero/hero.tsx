@@ -12,7 +12,7 @@ type Props = {
 };
 
 const HeroSection: FC<Props> = ({ locale }) => {
-  const contentMap = heroDictionary.getContentMap(locale);
+  const contentMap = heroDictionary.getContentMap({ locale });
 
   return (
     <section className={classes.container}>

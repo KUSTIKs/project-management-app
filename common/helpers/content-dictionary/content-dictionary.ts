@@ -7,7 +7,7 @@ class ContentDictionary<T> {
     }
   ) {}
 
-  getContentMap(locale: AppLocale) {
+  getContentMap({ locale }: { locale: AppLocale }) {
     return this.dictionary[locale];
   }
 }

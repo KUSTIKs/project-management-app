@@ -1,4 +1,6 @@
-const getCssVarFromAppColorName = (colorName: string) => {
+import { AppColorName } from '@project-management-app/types';
+
+const getAppColor = (colorName: AppColorName) => {
   switch (colorName) {
     case 'text/100':
       return 'var(--color-text--100)';
@@ -45,4 +47,4 @@ const getCssVarFromAppColorName = (colorName: string) => {
   }
 };
 
-export { getCssVarFromAppColorName };
+export { getAppColor };

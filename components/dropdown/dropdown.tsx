@@ -1,19 +1,14 @@
 'use client';
 
 import classNames from 'classnames';
-import {
-  cloneElement,
-  FC,
-  FocusEventHandler,
-  ReactElement,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { cloneElement, FC, ReactElement, useRef, useState } from 'react';
 
 import { Option } from '@project-management-app/types';
 import { isString } from '@project-management-app/helpers';
+import {
+  useOutsideClick,
+  useOutsideFocus,
+} from '@project-management-app/hooks';
 
 import classes from './dropdown.module.scss';
 
@@ -38,7 +33,6 @@ const Dropdown: FC<Props> = ({
   const toggleDropdown = () => {
     setIsOpen((state) => !state);
   };
-
   const closeDropdown = () => {
     setIsOpen(false);
   };
@@ -48,33 +42,9 @@ const Dropdown: FC<Props> = ({
     closeDropdown();
   };
 
-  const handleOuterClick = useCallback((e: MouseEvent) => {
-    if (!(e.target instanceof HTMLElement)) return;
-    const isOuterClick = !wrapperRef.current?.contains(e.target);
+  const { onBlur: handleBlur } = useOutsideFocus(closeDropdown);
 
-    if (isOuterClick) {
-      closeDropdown();
-    }
-  }, []);
-
-  const handleBlur: FocusEventHandler<HTMLDivElement> = () => {
-    requestAnimationFrame(() => {
-      const hasFocusedElementInside = wrapperRef.current?.contains(
-        document.activeElement
-      );
-
-      if (!hasFocusedElementInside) {
-        closeDropdown();
-      }
-    });
-  };
-
-  useEffect(() => {
-    globalThis.addEventListener('click', handleOuterClick);
-    return () => {
-      globalThis.removeEventListener('click', handleOuterClick);
-    };
-  }, [handleOuterClick]);
+  useOutsideClick(wrapperRef, closeDropdown);
 
   return (
     <div className={classes.wrapper} ref={wrapperRef} onBlur={handleBlur}>

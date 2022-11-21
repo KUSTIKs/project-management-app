@@ -13,7 +13,7 @@ type Props = {
 };
 
 const AdvantagesSection: FC<Props> = ({ locale }) => {
-  const contentMap = advantagesDictionary.getContentMap(locale);
+  const contentMap = advantagesDictionary.getContentMap({ locale });
 
   return (
     <section className={classes.container}>

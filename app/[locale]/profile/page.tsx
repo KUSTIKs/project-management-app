@@ -18,7 +18,7 @@ type Props = {
 
 const ProfilePage: FC<Props> = ({ params }) => {
   const { locale } = params;
-  const contentMap = profileDictionary.getContentMap(locale);
+  const contentMap = profileDictionary.getContentMap({ locale });
 
   return (
     <div className={classes.container}>

@@ -30,27 +30,26 @@ const validationMessageDictionary = new ContentDictionary({
 });
 
 const getSignUpSchema = ({ locale }: { locale: AppLocale }) => {
-  const validationMessageContentMap =
-    validationMessageDictionary.getContentMap(locale);
+  const contentMap = validationMessageDictionary.getContentMap({ locale });
 
   return z.object<{
     [Key in keyof CreateUserDto]: ZodTypeAny;
   }>({
     login: z
       .string()
-      .min(1, validationMessageContentMap.loginRequired)
-      .min(4, validationMessageContentMap.loginMin)
-      .max(32, validationMessageContentMap.loginMax),
+      .min(1, contentMap.loginRequired)
+      .min(4, contentMap.loginMin)
+      .max(32, contentMap.loginMax),
     name: z
       .string()
-      .min(1, validationMessageContentMap.nameRequired)
-      .min(4, validationMessageContentMap.nameMin)
-      .max(32, validationMessageContentMap.nameMax),
+      .min(1, contentMap.nameRequired)
+      .min(4, contentMap.nameMin)
+      .max(32, contentMap.nameMax),
     password: z
       .string()
-      .min(1, validationMessageContentMap.passwordRequired)
-      .min(6, validationMessageContentMap.passwordMin)
-      .max(32, validationMessageContentMap.passwordMax),
+      .min(1, contentMap.passwordRequired)
+      .min(6, contentMap.passwordMin)
+      .max(32, contentMap.passwordMax),
   });
 };
 

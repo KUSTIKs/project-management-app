@@ -49,7 +49,9 @@ const Button: FC<Props> = ({
         [classes.button_symmetricPadding]: symmetricPadding,
       })}
     >
-      {isLoading && <Loader size="1.1em" />}
+      {isLoading && (
+        <Loader size="1.1em" colorPrimary="#fff" colorSecondary="#fff4" />
+      )}
       {startIcon && <span className={classes.icon}>{startIcon}</span>}
       {children}
       {endIcon && <span className={classes.icon}>{endIcon}</span>}

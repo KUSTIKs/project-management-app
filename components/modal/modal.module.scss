@@ -1,0 +1,23 @@
+.dialog {
+  border: none;
+  width: 100%;
+  max-width: var(--width-container-s);
+  background: none;
+  margin: auto;
+  padding: 15px;
+}
+
+.wrapper {
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--color-background--100);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}

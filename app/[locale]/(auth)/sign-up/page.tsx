@@ -28,7 +28,7 @@ type Props = {
 
 const SignUpPage: FC<Props> = ({ params }) => {
   const { locale } = params;
-  const contentMap = authDictionary.getContentMap(locale);
+  const contentMap = authDictionary.getContentMap({ locale });
   const {
     mutate: signUp,
     error,

@@ -17,7 +17,7 @@ type Props = {
 };
 
 const Footer: FC<Props> = ({ locale }) => {
-  const contentMap = footerDictionary.getContentMap(locale);
+  const contentMap = footerDictionary.getContentMap({ locale });
 
   return (
     <footer className={classes.footer}>
