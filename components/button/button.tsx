@@ -1,11 +1,14 @@
-import { FC, ButtonHTMLAttributes, ReactElement, ElementType } from 'react';
+import { FC, ButtonHTMLAttributes, ReactElement, ComponentProps } from 'react';
 import classNames from 'classnames';
 
 import { AppLink, Loader } from '@project-management-app/components';
 
 import classes from './button.module.scss';
 
-type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> & {
+type Props = (
+  | Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>
+  | ComponentProps<typeof AppLink>
+) & {
   size?: 'm' | 's' | 'l';
   variant?: 'contained' | 'ghost' | 'text';
   startIcon?: ReactElement;
@@ -26,18 +29,24 @@ const Button: FC<Props> = ({
   startIcon,
   endIcon,
   href,
-  ...buttonAttrs
+  ...attrs
 }) => {
-  const Component: ElementType = href ? AppLink : 'button';
+  const Component: any = href ? AppLink : 'button';
+  const isButton = Component === 'button';
   const linkProps = {
     href,
   };
+  const buttonProps: ButtonHTMLAttributes<HTMLButtonElement> | false = {
+    type: 'button',
+    disabled: isLoading || isDisabled,
+  };
+
+  const props = isButton ? buttonProps : linkProps;
 
   return (
     <Component
-      {...buttonAttrs}
-      {...linkProps}
-      disabled={isLoading || isDisabled}
+      {...props}
+      {...attrs}
       className={classNames(classes.button, {
         [classes.button_size_l]: size === 'l',
         [classes.button_size_m]: size === 'm',

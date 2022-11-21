@@ -1,26 +1,19 @@
 import { FC, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 
-import {
-  BoardCard as StatelessBoardCard,
-  DeleteEntityModal,
-} from '@project-management-app/components';
+import { BoardCard as StatelessBoardCard } from '@project-management-app/components';
 import { AppLocale, Board } from '@project-management-app/types';
-import { HttpMethod, QueryKey } from '@project-management-app/enums';
-import { boardsService } from '@project-management-app/services';
 
-type Props = Board & {
+import { UpdateBoardModal } from '../update-board-modal/update-board-modal';
+import { DeleteBoardModal } from '../delete-board-modal/delete-board-modal';
+
+type Props = {
+  board: Board;
   locale: AppLocale;
 };
 
-const BoardCard: FC<Props> = ({ id, title, description, locale }) => {
-  const queryClient = useQueryClient();
-  const { mutate: deleteBoard, isLoading } = useMutation({
-    mutationKey: [QueryKey.BOARDS, HttpMethod.DELETE],
-    mutationFn: () => boardsService.delete(id),
-    onSuccess: () => handleDeleted(),
-  });
+const BoardCard: FC<Props> = ({ board, locale }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
@@ -29,26 +22,32 @@ const BoardCard: FC<Props> = ({ id, title, description, locale }) => {
     setIsDeleteModalOpen(false);
   };
 
-  const handleDeleted = () => {
-    queryClient.invalidateQueries({
-      queryKey: [QueryKey.BOARDS],
-    });
+  const openUpdateModal = () => {
+    setIsUpdateModalOpen(true);
+  };
+  const closeUpdateModal = () => {
+    setIsUpdateModalOpen(false);
   };
 
   return (
     <>
-      <DeleteEntityModal
-        entityName={title}
-        handleDelete={deleteBoard}
-        isLoading={isLoading}
+      <DeleteBoardModal
+        board={board}
         locale={locale}
         handleClose={closeDeleteModal}
         isOpen={isDeleteModalOpen}
       />
+      <UpdateBoardModal
+        board={board}
+        handleClose={closeUpdateModal}
+        isOpen={isUpdateModalOpen}
+        locale={locale}
+      />
       <StatelessBoardCard
-        title={title}
-        description={description}
+        title={board.title}
+        description={board.description}
         handleDelete={openDeleteModal}
+        handleUpdate={openUpdateModal}
       />
     </>
   );

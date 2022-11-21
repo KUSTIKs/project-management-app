@@ -1,21 +1,21 @@
 import { LocaleName } from '@project-management-app/enums';
 import { ContentDictionary } from '@project-management-app/helpers';
 
-const createBoardModalDictionary = new ContentDictionary({
+const updateBoardModalDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     title: 'title',
     description: 'description',
-    create: 'Create',
+    updateBoard: 'Update board',
+    update: 'Update',
     cancel: 'Cancel',
-    createBoard: 'Create board',
   },
   [LocaleName.RU]: {
     title: 'заголовок',
     description: 'описание',
-    create: 'Создать',
+    updateBoard: 'Обновить доску',
+    update: 'Обновить',
     cancel: 'Отмена',
-    createBoard: 'Создать доску',
   },
 });
 
-export { createBoardModalDictionary };
+export { updateBoardModalDictionary };

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from 'react-query';
@@ -9,51 +9,62 @@ import {
   TextInput,
   Typography,
 } from '@project-management-app/components';
-import { AppLocale, CreateBoardDto } from '@project-management-app/types';
+import {
+  AppLocale,
+  Board,
+  UpdateBoardDto,
+} from '@project-management-app/types';
 import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 
-import { getCreateBoardSchema } from './create-board-modal.schema';
-import { createBoardModalDictionary } from './create-board-modal.dictionary';
+import { getCreateBoardSchema } from '../create-board-modal/create-board-modal.schema';
+import { updateBoardModalDictionary } from './update-board-modal.dictionary';
 
 type Props = {
   locale: AppLocale;
   isOpen: boolean;
   handleClose: () => void;
+  board: Board;
 };
 
-const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
-  const contentMap = createBoardModalDictionary.getContentMap({
+const UpdateBoardModal: FC<Props> = ({
+  handleClose,
+  isOpen,
+  locale,
+  board,
+}) => {
+  const contentMap = updateBoardModalDictionary.getContentMap({
     locale,
   });
   const queryClient = useQueryClient();
   const {
-    mutate: createBoard,
+    mutate: updateBoard,
     error,
     isLoading,
   } = useMutation({
-    mutationFn: boardsService.create,
-    mutationKey: [QueryKey.BOARDS, HttpMethod.POST],
-    onSuccess: () => handleCreated(),
+    mutationFn: (dto: UpdateBoardDto) => boardsService.update(board.id, dto),
+    mutationKey: [QueryKey.BOARDS, HttpMethod.PUT],
+    onSuccess: () => handleUpdated(),
   });
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm<CreateBoardDto>({
+    formState: { errors, isDirty },
+  } = useForm<UpdateBoardDto>({
     resolver: zodResolver(
       getCreateBoardSchema({
         locale,
       })
     ),
+    defaultValues: board,
   });
 
   const errorMessage = getKeyFromUnknown(error, 'message');
 
-  const handleCreateBoard: SubmitHandler<CreateBoardDto> = (dto) => {
-    createBoard(dto);
+  const handleUpdateBoard: SubmitHandler<UpdateBoardDto> = (dto) => {
+    updateBoard(dto);
   };
 
   const handleCloseWithReset = () => {
@@ -61,31 +72,37 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
     reset();
   };
 
-  const handleCreated = () => {
+  const handleUpdated = () => {
     queryClient.invalidateQueries({
       queryKey: [QueryKey.BOARDS],
     });
     handleCloseWithReset();
   };
 
+  useEffect(() => {
+    reset(board);
+  }, [board, reset]);
+
   return (
     <Modal
-      title={contentMap.createBoard}
+      title={contentMap.updateBoard}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}
-      onSubmit={handleSubmit(handleCreateBoard)}
+      onSubmit={handleSubmit(handleUpdateBoard)}
       isLoading={isLoading}
     >
       <Modal.Fieldset>
         <TextInput
           label={contentMap.title}
           {...register('title')}
+          variant="unfilled"
           errorMessage={errors.title?.message}
         />
         <TextInput
           label={contentMap.description}
           isMultiline
           {...register('description')}
+          variant="unfilled"
           errorMessage={errors.description?.message}
         />
         {isString(errorMessage) && (
@@ -95,15 +112,15 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
         )}
       </Modal.Fieldset>
       <Modal.ButtonGroup>
-        <Button size="l" onClick={handleClose} variant="ghost">
+        <Button size="l" variant="ghost">
           {contentMap.cancel}
         </Button>
-        <Button size="l" isLoading={isLoading}>
-          {contentMap.create}
+        <Button size="l" isLoading={isLoading} isDisabled={!isDirty}>
+          {contentMap.update}
         </Button>
       </Modal.ButtonGroup>
     </Modal>
   );
 };
 
-export { CreateBoardModal };
+export { UpdateBoardModal };

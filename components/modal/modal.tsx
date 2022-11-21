@@ -14,15 +14,18 @@ type Props = {
   isOpen?: boolean;
   handleClose?: () => void;
   onSubmit?: FormEventHandler<HTMLFormElement>;
+  isLoading?: boolean;
 };
 
 const Modal: FC<Props> & {
   Fieldset: typeof ModalFieldset;
   ButtonGroup: typeof ModalButtonGroup;
-} = ({ title, children, isOpen, handleClose, onSubmit }) => {
+} = ({ title, children, isOpen, handleClose, onSubmit, isLoading }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const wrapperRef = useRef<HTMLElement>(null);
   const Component: any = onSubmit ? 'form' : 'div';
+
+  const pointerEvents = isLoading ? 'none' : undefined;
 
   const openModal = () => {
     const isDialogOpen = dialogRef.current?.open;
@@ -48,6 +51,7 @@ const Modal: FC<Props> & {
         className={classes.wrapper}
         ref={wrapperRef}
         onSubmit={onSubmit}
+        style={{ pointerEvents }}
       >
         <div className={classes.header}>
           <Typography variant="title2" weight={700}>

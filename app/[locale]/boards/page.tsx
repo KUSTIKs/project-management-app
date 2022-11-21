@@ -65,7 +65,7 @@ const BoardsPage: FC<Props> = ({ params }) => {
           (boards.length > 0 ? (
             <ul className={classes.boardsWrapper}>
               {boards.map((board) => (
-                <BoardCard key={board.id} {...board} locale={locale} />
+                <BoardCard key={board.id} board={board} locale={locale} />
               ))}
             </ul>
           ) : (
