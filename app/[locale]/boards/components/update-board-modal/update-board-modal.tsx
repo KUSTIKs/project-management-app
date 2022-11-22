@@ -1,13 +1,14 @@
+'use client';
+
 import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from 'react-query';
 
 import {
-  Button,
   Modal,
   TextInput,
-  Typography,
+  UpdateEntityModal,
 } from '@project-management-app/components';
 import {
   AppLocale,
@@ -15,7 +16,7 @@ import {
   UpdateBoardDto,
 } from '@project-management-app/types';
 import { boardsService } from '@project-management-app/services';
-import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
+import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 
 import { getCreateBoardSchema } from '../create-board-modal/create-board-modal.schema';
@@ -84,12 +85,16 @@ const UpdateBoardModal: FC<Props> = ({
   }, [board, reset]);
 
   return (
-    <Modal
+    <UpdateEntityModal
+      withQuotes
+      locale={locale}
       title={contentMap.updateBoard}
+      errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}
-      onSubmit={handleSubmit(handleUpdateBoard)}
+      handleUpdate={handleSubmit(handleUpdateBoard)}
       isLoading={isLoading}
+      isActionDisabled={!isDirty}
     >
       <Modal.Fieldset>
         <TextInput
@@ -105,21 +110,8 @@ const UpdateBoardModal: FC<Props> = ({
           variant="unfilled"
           errorMessage={errors.description?.message}
         />
-        {isString(errorMessage) && (
-          <Typography variant="text" weight={600} colorName="red/200">
-            {errorMessage}
-          </Typography>
-        )}
       </Modal.Fieldset>
-      <Modal.ButtonGroup>
-        <Button size="l" variant="ghost">
-          {contentMap.cancel}
-        </Button>
-        <Button size="l" isLoading={isLoading} isDisabled={!isDirty}>
-          {contentMap.update}
-        </Button>
-      </Modal.ButtonGroup>
-    </Modal>
+    </UpdateEntityModal>
   );
 };
 

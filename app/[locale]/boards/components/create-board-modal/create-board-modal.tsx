@@ -4,14 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from 'react-query';
 
 import {
-  Button,
+  CreateEntityModal,
   Modal,
   TextInput,
-  Typography,
 } from '@project-management-app/components';
 import { AppLocale, CreateBoardDto } from '@project-management-app/types';
 import { boardsService } from '@project-management-app/services';
-import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
+import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 
 import { getCreateBoardSchema } from './create-board-modal.schema';
@@ -69,11 +68,13 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
   };
 
   return (
-    <Modal
+    <CreateEntityModal
       title={contentMap.createBoard}
+      locale={locale}
+      errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}
-      onSubmit={handleSubmit(handleCreateBoard)}
+      handleCreate={handleSubmit(handleCreateBoard)}
       isLoading={isLoading}
     >
       <Modal.Fieldset>
@@ -88,21 +89,8 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
           {...register('description')}
           errorMessage={errors.description?.message}
         />
-        {isString(errorMessage) && (
-          <Typography variant="text" weight={600} colorName="red/200">
-            {errorMessage}
-          </Typography>
-        )}
       </Modal.Fieldset>
-      <Modal.ButtonGroup>
-        <Button size="l" onClick={handleClose} variant="ghost">
-          {contentMap.cancel}
-        </Button>
-        <Button size="l" isLoading={isLoading}>
-          {contentMap.create}
-        </Button>
-      </Modal.ButtonGroup>
-    </Modal>
+    </CreateEntityModal>
   );
 };
 

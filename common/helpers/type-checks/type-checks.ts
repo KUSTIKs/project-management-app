@@ -14,4 +14,8 @@ const isObject = (value: unknown): value is Record<string, unknown> => {
   return typeof value === 'object' && value !== null && !isArray(value);
 };
 
-export { isString, isArray, isUndefined, isObject };
+const isFunction = (value: unknown): value is Function => {
+  return typeof value === 'function';
+};
+
+export { isString, isArray, isUndefined, isObject, isFunction };

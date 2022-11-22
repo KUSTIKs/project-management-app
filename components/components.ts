@@ -8,4 +8,4 @@ export { Loader } from './loader/loader';
 export { BoardCard } from './board-card/board-card';
 export { Modal } from './modal/modal';
 export { ReactQueryProvider } from './react-query-provider/react-query-provider';
-export { DeleteEntityModal } from './delete-entity-modal/delete-entity-modal';
+export * from './modals/modals';
