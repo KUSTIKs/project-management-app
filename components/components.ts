@@ -8,4 +8,6 @@ export { Loader } from './loader/loader';
 export { BoardCard } from './board-card/board-card';
 export { Modal } from './modal/modal';
 export { ReactQueryProvider } from './react-query-provider/react-query-provider';
+export { Column } from './column/column';
+export { TaskCard } from './task-card/task-card';
 export * from './modals/modals';
