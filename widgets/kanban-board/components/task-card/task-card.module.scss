@@ -6,3 +6,11 @@
   padding: 15px;
   border-radius: 10px;
 }
+
+.description {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

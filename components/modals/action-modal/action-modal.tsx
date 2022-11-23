@@ -3,7 +3,7 @@
 import { ComponentProps, FC, ReactNode } from 'react';
 
 import { Button, Modal, Typography } from '@project-management-app/components';
-import { isString } from '@project-management-app/helpers';
+import { isArray, isString } from '@project-management-app/helpers';
 import { useAppContext } from '@project-management-app/hooks';
 
 import { actionModalDictionary } from './action-modal.dictionary';
@@ -19,6 +19,7 @@ type Props = Pick<ComponentProps<typeof Modal>, 'handleClose' | 'isOpen'> & {
   handleAction: () => void;
   withQuotes?: boolean;
   title?: string;
+  isError?: boolean;
 };
 
 const ActionModal: FC<Props> = ({
@@ -33,6 +34,7 @@ const ActionModal: FC<Props> = ({
   isOpen,
   withQuotes,
   title,
+  isError,
 }) => {
   const { locale } = useAppContext();
   const contentMap = actionModalDictionary.getContentMap({ locale });
@@ -48,12 +50,36 @@ const ActionModal: FC<Props> = ({
       isOpen={isOpen}
     >
       <div className={classes.wrapper}>
-        {children}
-        {isString(errorMessage) && (
-          <Typography variant="text" weight={600} colorName="red/200">
-            {errorMessage}
-          </Typography>
-        )}
+        <>
+          {children}
+          {(errorMessage || isError) && (
+            <strong>
+              {isString(errorMessage) ? (
+                <Typography variant="text" weight={600} colorName="red/200">
+                  {errorMessage}
+                </Typography>
+              ) : isArray(errorMessage) ? (
+                errorMessage.map(
+                  (message, index) =>
+                    isString(message) && (
+                      <Typography
+                        variant="text"
+                        weight={600}
+                        colorName="red/200"
+                        key={index}
+                      >
+                        {message}
+                      </Typography>
+                    )
+                )
+              ) : (
+                <Typography variant="text" weight={600} colorName="red/200">
+                  {contentMap.errorMessage}
+                </Typography>
+              )}
+            </strong>
+          )}
+        </>
       </div>
       <Modal.ButtonGroup>
         <Button size="l" variant="ghost" onClick={handleClose}>

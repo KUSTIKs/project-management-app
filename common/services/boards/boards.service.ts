@@ -56,8 +56,6 @@ class BoardsService {
 
       throw error;
     }
-
-    return;
   }
 
   async update(id: string, dto: UpdateBoardDto) {
@@ -65,13 +63,16 @@ class BoardsService {
       body: JSON.stringify(dto),
       method: HttpMethod.PUT,
     });
-    const data = await response.json();
 
-    if (!response.ok) {
-      throw data as ApiError;
+    if (response.ok) {
+      const data: Board = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
     }
-
-    return data as Board;
   }
 }
 

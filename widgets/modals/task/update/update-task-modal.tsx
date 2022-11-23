@@ -1,34 +1,36 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from 'react-query';
 
 import {
-  CreateEntityModal,
   Modal,
   TextInput,
+  UpdateEntityModal,
 } from '@project-management-app/components';
-import { CreateTaskDto } from '@project-management-app/types';
+import { Task, UpdateTaskDto } from '@project-management-app/types';
 import { tasksService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { getCreateTaskSchema } from './create-task-modal.schema';
+import { getCreateTaskSchema } from '../create/create-task-modal.schema';
 import { taskModalsDictionary } from '../task-modals.dictionary';
 
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
+  task: Task;
   boardId: string;
   columnId: string;
 };
 
-const CreateTaskModal: FC<Props> = ({
+const UpdateTaskModal: FC<Props> = ({
   handleClose,
   isOpen,
+  task,
   boardId,
   columnId,
 }) => {
@@ -38,33 +40,35 @@ const CreateTaskModal: FC<Props> = ({
   });
   const queryClient = useQueryClient();
   const {
-    mutate: createTask,
+    mutate: updateTask,
     error,
     isLoading,
     isError,
   } = useMutation({
-    mutationFn: (dto: Omit<CreateTaskDto, 'userId'>) =>
-      tasksService.create({ boardId, columnId }, dto),
-    mutationKey: [QueryKey.TASKS, HttpMethod.POST],
-    onSuccess: () => handleCreated(),
+    mutationFn: (dto: UpdateTaskDto) =>
+      tasksService.update({ taskId: task.id, boardId, columnId }, dto),
+    mutationKey: [QueryKey.TASKS, HttpMethod.PUT],
+    onSuccess: () => handleUpdated(),
   });
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm<CreateTaskDto>({
+    formState: { errors, isDirty },
+  } = useForm<UpdateTaskDto>({
     resolver: zodResolver(
       getCreateTaskSchema({
         locale,
       })
     ),
+    defaultValues: task,
   });
 
   const errorMessage = getKeyFromUnknown(error, 'message');
 
-  const handleCreateTask: SubmitHandler<CreateTaskDto> = (dto) => {
-    createTask(dto);
+  const handleUpdateTask: SubmitHandler<Partial<UpdateTaskDto>> = (dto) => {
+    const { id, files, ...taskProps } = task;
+    updateTask({ ...taskProps, ...dto });
   };
 
   const handleCloseWithReset = () => {
@@ -72,22 +76,28 @@ const CreateTaskModal: FC<Props> = ({
     reset();
   };
 
-  const handleCreated = () => {
+  const handleUpdated = () => {
     queryClient.invalidateQueries({
       queryKey: [QueryKey.TASKS, { columnId }],
     });
     handleCloseWithReset();
   };
 
+  useEffect(() => {
+    reset(task);
+  }, [task, reset]);
+
   return (
-    <CreateEntityModal
-      title={contentMap.createTask}
+    <UpdateEntityModal
+      withQuotes
+      title={contentMap.updateTask}
       errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}
-      handleCreate={handleSubmit(handleCreateTask)}
+      handleUpdate={handleSubmit(handleUpdateTask)}
       isLoading={isLoading}
       isError={isError}
+      isActionDisabled={!isDirty}
     >
       <Modal.Fieldset>
         <TextInput
@@ -97,13 +107,13 @@ const CreateTaskModal: FC<Props> = ({
         />
         <TextInput
           label={contentMap.description}
-          isMultiline
           {...register('description')}
+          isMultiline
           errorMessage={errors.description?.message}
         />
       </Modal.Fieldset>
-    </CreateEntityModal>
+    </UpdateEntityModal>
   );
 };
 
-export { CreateTaskModal };
+export { UpdateTaskModal };

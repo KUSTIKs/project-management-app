@@ -8,8 +8,11 @@ import { Button, Icon, Typography } from '@project-management-app/components';
 import { Column as ColumnEntity } from '@project-management-app/types';
 import { QueryKey } from '@project-management-app/enums';
 import { tasksService } from '@project-management-app/services';
-import { useAppContext, useBooleanState } from '@project-management-app/hooks';
-import { CreateTaskModal } from '@project-management-app/widgets';
+import { useBooleanState } from '@project-management-app/hooks';
+import {
+  CreateTaskModal,
+  InfoColumnModal,
+} from '@project-management-app/widgets';
 
 import { TaskCard } from '../components';
 import classes from './column.module.scss';
@@ -22,13 +25,13 @@ type Props = {
 
 const Column: FC<Props> = ({ column, index, boardId }) => {
   const { id, title } = column;
-  const { locale } = useAppContext();
   const { data: tasks } = useQuery({
-    queryKey: [QueryKey.TASKS, { boardId, columnId: id }],
+    queryKey: [QueryKey.TASKS, { columnId: id }],
     queryFn: () => tasksService.getAll({ boardId, columnId: id }),
   });
   const [isCreateTaskModalOpen, isCreateTaskModalOpenActions] =
     useBooleanState(false);
+  const [isInfoModalOpen, isInfoModalOpenActions] = useBooleanState(false);
 
   return (
     <>
@@ -55,13 +58,24 @@ const Column: FC<Props> = ({ column, index, boardId }) => {
                     >
                       {title}
                     </Typography>
-                    <Button symmetricPadding size="s" variant="text">
+                    <Button
+                      symmetricPadding
+                      size="s"
+                      variant="text"
+                      onClick={isInfoModalOpenActions.setTrue}
+                    >
                       <Icon.InformationLine size={18} />
                     </Button>
                   </header>
                   <main className={classes.tasksWrapper}>
                     {tasks?.map((task, index) => (
-                      <TaskCard key={task.id} task={task} index={index} />
+                      <TaskCard
+                        key={task.id}
+                        task={task}
+                        boardId={boardId}
+                        columnId={id}
+                        index={index}
+                      />
                     ))}
                     {provided.placeholder}
                   </main>
@@ -85,6 +99,12 @@ const Column: FC<Props> = ({ column, index, boardId }) => {
         columnId={id}
         handleClose={isCreateTaskModalOpenActions.setFalse}
         isOpen={isCreateTaskModalOpen}
+      />
+      <InfoColumnModal
+        column={column}
+        boardId={boardId}
+        handleClose={isInfoModalOpenActions.setFalse}
+        isOpen={isInfoModalOpen}
       />
     </>
   );

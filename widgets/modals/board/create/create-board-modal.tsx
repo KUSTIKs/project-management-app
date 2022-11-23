@@ -34,6 +34,7 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
     mutate: createBoard,
     error,
     isLoading,
+    isError,
   } = useMutation({
     mutationFn: boardsService.create,
     mutationKey: [QueryKey.BOARDS, HttpMethod.POST],
@@ -78,6 +79,7 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
       isOpen={isOpen}
       handleCreate={handleSubmit(handleCreateBoard)}
       isLoading={isLoading}
+      isError={isError}
     >
       <Modal.Fieldset>
         <TextInput

@@ -35,6 +35,7 @@ const UpdateBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
     mutate: updateBoard,
     error,
     isLoading,
+    isError,
   } = useMutation({
     mutationFn: (dto: UpdateBoardDto) => boardsService.update(board.id, dto),
     mutationKey: [QueryKey.BOARDS, HttpMethod.PUT],
@@ -67,7 +68,7 @@ const UpdateBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
 
   const handleUpdated = () => {
     queryClient.invalidateQueries({
-      queryKey: [QueryKey.BOARDS, { id: board.id }],
+      queryKey: [QueryKey.BOARDS],
     });
     handleCloseWithReset();
   };
@@ -85,6 +86,7 @@ const UpdateBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
       isOpen={isOpen}
       handleUpdate={handleSubmit(handleUpdateBoard)}
       isLoading={isLoading}
+      isError={isError}
       isActionDisabled={!isDirty}
     >
       <Modal.Fieldset>

@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { ApiError } from 'next/dist/server/api-utils';
 
 import { CookieName, HttpMethod } from '@project-management-app/enums';
 import { appFetch } from '@project-management-app/helpers';
@@ -15,15 +16,17 @@ class AuthService {
       body: JSON.stringify(dto),
     });
 
-    const data = await response.json();
+    if (response.ok) {
+      const data: SignInUserResponseDto = await response.json();
 
-    if (!response.ok) {
-      throw data;
+      Cookies.set(CookieName.NEXT_TOKEN, data.token);
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
     }
-
-    Cookies.set(CookieName.NEXT_TOKEN, data.token);
-
-    return data as SignInUserResponseDto;
   }
 
   async signUp(dto: SignInUserDto) {
@@ -32,13 +35,15 @@ class AuthService {
       body: JSON.stringify(dto),
     });
 
-    const data = await response.json();
+    if (response.ok) {
+      const data: User = await response.json();
 
-    if (!response.ok) {
-      throw data;
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
     }
-
-    return data as User;
   }
 }
 

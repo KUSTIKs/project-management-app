@@ -14,9 +14,16 @@ class TasksService {
     const response = await appFetch(
       `/boards/${boardId}/columns/${columnId}/tasks`
     );
-    const data: Task[] = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Task[] = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async create(
@@ -36,9 +43,16 @@ class TasksService {
         method: HttpMethod.POST,
       }
     );
-    const data: Task[] = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Task = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async getById({
@@ -53,9 +67,16 @@ class TasksService {
     const response = await appFetch(
       `/boards/${boardId}/columns/${columnId}/tasks/${taskId}`
     );
-    const data: Task = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Task = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async delete({
@@ -79,8 +100,6 @@ class TasksService {
 
       throw error;
     }
-
-    return;
   }
 
   async update(
@@ -102,13 +121,16 @@ class TasksService {
         method: HttpMethod.PUT,
       }
     );
-    const data = await response.json();
 
-    if (!response.ok) {
-      throw data as ApiError;
+    if (response.ok) {
+      const data: Task = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
     }
-
-    return data as Task;
   }
 }
 

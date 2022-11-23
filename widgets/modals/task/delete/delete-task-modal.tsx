@@ -4,32 +4,41 @@ import { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { DeleteEntityModal } from '@project-management-app/components';
-import { Board } from '@project-management-app/types';
-import { boardsService } from '@project-management-app/services';
+import { Task } from '@project-management-app/types';
+import { tasksService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { boardModalsDictionary } from '../board-modals.dictionary';
+import { taskModalsDictionary } from '../task-modals.dictionary';
 
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
-  board: Board;
+  task: Task;
+  boardId: string;
+  columnId: string;
 };
 
-const DeleteBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
+const DeleteTaskModal: FC<Props> = ({
+  handleClose,
+  isOpen,
+  task,
+  boardId,
+  columnId,
+}) => {
   const { locale } = useAppContext();
-  const contentMap = boardModalsDictionary.getContentMap({ locale });
+  const contentMap = taskModalsDictionary.getContentMap({ locale });
   const queryClient = useQueryClient();
   const {
-    mutate: deleteBoard,
+    mutate: deleteTask,
     isLoading,
-    isError,
     error,
+    isError,
   } = useMutation({
-    mutationKey: [QueryKey.BOARDS, HttpMethod.DELETE],
-    mutationFn: () => boardsService.delete(board.id),
+    mutationKey: [QueryKey.TASKS, HttpMethod.DELETE],
+    mutationFn: () =>
+      tasksService.delete({ taskId: task.id, boardId, columnId }),
     onSuccess: () => handleDeleted(),
   });
 
@@ -37,17 +46,17 @@ const DeleteBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
 
   const handleDeleted = () => {
     queryClient.invalidateQueries({
-      queryKey: [QueryKey.BOARDS],
+      queryKey: [QueryKey.TASKS, { columnId }],
     });
     handleClose();
   };
 
   return (
     <DeleteEntityModal
-      title={contentMap.deleteBoard}
+      title={contentMap.deleteTask}
       withQuotes
-      entityName={board.title}
-      handleDelete={deleteBoard}
+      entityName={task.title}
+      handleDelete={deleteTask}
       isLoading={isLoading}
       isError={isError}
       errorMessage={errorMessage}
@@ -57,4 +66,4 @@ const DeleteBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
   );
 };
 
-export { DeleteBoardModal };
+export { DeleteTaskModal };

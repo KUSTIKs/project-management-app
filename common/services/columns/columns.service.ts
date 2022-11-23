@@ -10,9 +10,16 @@ import {
 class ColumnsService {
   async getAll({ boardId }: { boardId: string }) {
     const response = await appFetch(`/boards/${boardId}/columns`);
-    const data: Column[] = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Column[] = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async create({ boardId }: { boardId: string }, dto: CreateColumnDto) {
@@ -20,16 +27,30 @@ class ColumnsService {
       body: JSON.stringify(dto),
       method: HttpMethod.POST,
     });
-    const data: Column[] = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Column = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async getById({ boardId, columnId }: { boardId: string; columnId: string }) {
     const response = await appFetch(`/boards/${boardId}/columns/${columnId}`);
-    const data: Column = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Column = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async delete({ boardId, columnId }: { boardId: string; columnId: string }) {
@@ -42,8 +63,6 @@ class ColumnsService {
 
       throw error;
     }
-
-    return;
   }
 
   async update(
@@ -54,13 +73,16 @@ class ColumnsService {
       body: JSON.stringify(dto),
       method: HttpMethod.PUT,
     });
-    const data = await response.json();
 
-    if (!response.ok) {
-      throw data as ApiError;
+    if (response.ok) {
+      const data: Column = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
     }
-
-    return data as Column;
   }
 }
 

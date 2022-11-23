@@ -1,6 +1,6 @@
 type ApiError = {
   statusCode: number;
-  message: string;
+  message: string | string[];
 };
 
 export type { ApiError };

@@ -3,12 +3,22 @@ import { ContentDictionary } from '@project-management-app/helpers';
 
 const columnModalsDictionary = new ContentDictionary({
   [LocaleName.EN]: {
-    createColumn: 'Create column',
     title: 'title',
+    update: 'Update',
+    delete: 'Delete',
+    createColumn: 'Create column',
+    updateColumn: 'Update column',
+    deleteColumn: 'Delete column',
+    infoColumn: 'Column info',
   },
   [LocaleName.RU]: {
-    createColumn: 'Создать колонку',
     title: 'заголовок',
+    update: 'Обновить',
+    delete: 'Удалить',
+    createColumn: 'Создать колонку',
+    updateColumn: 'Обновить колонку',
+    deleteColumn: 'Удалить колонку',
+    infoColumn: 'Информация о колонке',
   },
 });
 
