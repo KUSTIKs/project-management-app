@@ -5,7 +5,10 @@ import { Footer, Header } from '@project-management-app/widgets';
 import { AppLocale } from '@project-management-app/types';
 import { CookieName } from '@project-management-app/enums';
 import { decodeToken } from '@project-management-app/helpers';
-import { ReactQueryProvider } from '@project-management-app/components';
+import {
+  AppContextProvider,
+  ReactQueryProvider,
+} from '@project-management-app/components';
 
 import '../../styles/global-styles.scss';
 
@@ -26,11 +29,13 @@ const RootLayout: FC<Props> = ({ children, params }) => {
   return (
     <html lang={locale}>
       <body>
-        <ReactQueryProvider>
-          <Header isAuthorized={isAuthorized} />
-          {children}
-          <Footer locale={locale} />
-        </ReactQueryProvider>
+        <AppContextProvider locale={locale} payload={payload}>
+          <ReactQueryProvider>
+            <Header isAuthorized={isAuthorized} />
+            {children}
+            <Footer locale={locale} />
+          </ReactQueryProvider>
+        </AppContextProvider>
       </body>
     </html>
   );

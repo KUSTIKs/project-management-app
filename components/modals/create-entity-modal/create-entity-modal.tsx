@@ -1,6 +1,9 @@
+'use client';
+
 import { ComponentProps, FC, ReactNode } from 'react';
 
 import { Modal } from '@project-management-app/components';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { createEntityModalDictionary } from './create-entity-modal.dictionary';
 import { ActionModal } from '../modals';
@@ -18,8 +21,9 @@ const CreateEntityModal: FC<Props> = ({
   handleCreate,
   ...modalProps
 }) => {
+  const { locale } = useAppContext();
   const contentMap = createEntityModalDictionary.getContentMap({
-    locale: modalProps.locale,
+    locale,
   });
 
   return (

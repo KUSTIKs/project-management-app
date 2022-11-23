@@ -8,27 +8,23 @@ import {
   Modal,
   TextInput,
 } from '@project-management-app/components';
-import { AppLocale, CreateColumnDto } from '@project-management-app/types';
+import { CreateColumnDto } from '@project-management-app/types';
 import { columnsService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { getCreateColumnSchema } from './create-column-modal.schema';
 import { createColumnModalDictionary } from './create-column-modal.dictionary';
 
 type Props = {
-  locale: AppLocale;
   isOpen: boolean;
   handleClose: () => void;
   boardId: string;
 };
 
-const CreateColumnModal: FC<Props> = ({
-  handleClose,
-  isOpen,
-  locale,
-  boardId,
-}) => {
+const CreateColumnModal: FC<Props> = ({ handleClose, isOpen, boardId }) => {
+  const { locale } = useAppContext();
   const contentMap = createColumnModalDictionary.getContentMap({
     locale,
   });
@@ -77,7 +73,6 @@ const CreateColumnModal: FC<Props> = ({
   return (
     <CreateEntityModal
       title={contentMap.createColumn}
-      locale={locale}
       errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}

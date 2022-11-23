@@ -8,16 +8,16 @@ import {
   Modal,
   TextInput,
 } from '@project-management-app/components';
-import { AppLocale, CreateTaskDto } from '@project-management-app/types';
+import { CreateTaskDto } from '@project-management-app/types';
 import { tasksService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { getCreateTaskSchema } from './create-task-modal.schema';
 import { createTaskModalDictionary } from './create-task-modal.dictionary';
 
 type Props = {
-  locale: AppLocale;
   isOpen: boolean;
   handleClose: () => void;
   boardId: string;
@@ -27,10 +27,10 @@ type Props = {
 const CreateTaskModal: FC<Props> = ({
   handleClose,
   isOpen,
-  locale,
   boardId,
   columnId,
 }) => {
+  const { locale } = useAppContext();
   const contentMap = createTaskModalDictionary.getContentMap({
     locale,
   });
@@ -79,7 +79,6 @@ const CreateTaskModal: FC<Props> = ({
   return (
     <CreateEntityModal
       title={contentMap.createTask}
-      locale={locale}
       errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}

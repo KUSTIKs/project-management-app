@@ -8,21 +8,22 @@ import {
   Modal,
   TextInput,
 } from '@project-management-app/components';
-import { AppLocale, CreateBoardDto } from '@project-management-app/types';
+import { CreateBoardDto } from '@project-management-app/types';
 import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { getCreateBoardSchema } from './create-board-modal.schema';
 import { createBoardModalDictionary } from './create-board-modal.dictionary';
 
 type Props = {
-  locale: AppLocale;
   isOpen: boolean;
   handleClose: () => void;
 };
 
-const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
+const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
+  const { locale } = useAppContext();
   const contentMap = createBoardModalDictionary.getContentMap({
     locale,
   });
@@ -70,7 +71,6 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen, locale }) => {
   return (
     <CreateEntityModal
       title={contentMap.createBoard}
-      locale={locale}
       errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}

@@ -1,8 +1,10 @@
+'use client';
+
 import { ComponentProps, FC, ReactNode } from 'react';
 
 import { Button, Modal, Typography } from '@project-management-app/components';
-import { AppLocale } from '@project-management-app/types';
 import { isString } from '@project-management-app/helpers';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { actionModalDictionary } from './action-modal.dictionary';
 import classes from './action-modal.module.scss';
@@ -13,7 +15,6 @@ type Props = Pick<ComponentProps<typeof Modal>, 'handleClose' | 'isOpen'> & {
   children: ReactNode;
   isLoading?: boolean;
   isActionDisabled?: boolean;
-  locale: AppLocale;
   errorMessage?: unknown;
   handleAction: () => void;
   withQuotes?: boolean;
@@ -27,13 +28,13 @@ const ActionModal: FC<Props> = ({
   handleClose,
   isLoading,
   isActionDisabled,
-  locale,
   errorMessage,
   handleAction,
   isOpen,
   withQuotes,
   title,
 }) => {
+  const { locale } = useAppContext();
   const contentMap = actionModalDictionary.getContentMap({ locale });
   const formattedEntityName = withQuotes ? `'${entityName}'` : entityName;
   const titleWithEntity = `${actionName} ${formattedEntityName ?? ''}`;

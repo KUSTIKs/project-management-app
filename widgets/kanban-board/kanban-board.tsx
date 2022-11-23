@@ -4,11 +4,12 @@ import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { FC } from 'react';
 import { useQuery } from 'react-query';
 
-import { AppLocale, FullBoard } from '@project-management-app/types';
+import { FullBoard } from '@project-management-app/types';
 import { QueryKey } from '@project-management-app/enums';
 import { columnsService } from '@project-management-app/services';
 import { Loader, Typography } from '@project-management-app/components';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { Column } from './components/components';
 import classes from './kanban-board.module.scss';
@@ -17,7 +18,6 @@ import { kanbanBoardDictionary } from './kanban-board.dictionary';
 
 type Props = {
   boardId: string;
-  locale: AppLocale;
 };
 
 const DATA: FullBoard = {
@@ -120,7 +120,8 @@ const DATA: FullBoard = {
   ],
 };
 
-const KanbanBoard: FC<Props> = ({ boardId, locale }) => {
+const KanbanBoard: FC<Props> = ({ boardId }) => {
+  const { locale } = useAppContext();
   const contentMap = kanbanBoardDictionary.getContentMap({ locale });
   const {
     data: columns,
@@ -213,7 +214,6 @@ const KanbanBoard: FC<Props> = ({ boardId, locale }) => {
                 column={column}
                 boardId={boardId}
                 index={index}
-                locale={locale}
               />
             ))}
             {provided.placeholder}

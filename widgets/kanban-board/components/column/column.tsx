@@ -5,12 +5,10 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useQuery } from 'react-query';
 
 import { Button, Icon, Typography } from '@project-management-app/components';
-import {
-  AppLocale,
-  Column as ColumnEntity,
-} from '@project-management-app/types';
+import { Column as ColumnEntity } from '@project-management-app/types';
 import { QueryKey } from '@project-management-app/enums';
 import { tasksService } from '@project-management-app/services';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { CreateTaskModal, TaskCard } from '../components';
 import classes from './column.module.scss';
@@ -19,11 +17,11 @@ type Props = {
   column: ColumnEntity;
   boardId: string;
   index: number;
-  locale: AppLocale;
 };
 
-const Column: FC<Props> = ({ column, index, boardId, locale }) => {
+const Column: FC<Props> = ({ column, index, boardId }) => {
   const { id, title } = column;
+  const { locale } = useAppContext();
   const { data: tasks } = useQuery({
     queryKey: [QueryKey.TASKS, { boardId, columnId: id }],
     queryFn: () => tasksService.getAll({ boardId, columnId: id }),
@@ -92,7 +90,6 @@ const Column: FC<Props> = ({ column, index, boardId, locale }) => {
         columnId={id}
         handleClose={closeCreateTaskModal}
         isOpen={isCreateTaskModalOpen}
-        locale={locale}
       />
     </>
   );

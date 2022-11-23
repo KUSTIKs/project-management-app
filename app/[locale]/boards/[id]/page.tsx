@@ -85,13 +85,12 @@ const BoardPage: FC<Props> = ({ params }) => {
         </div>
       </div>
       <div className={classes.columnsWrapperContainer}>
-        <KanbanBoard boardId={board.id} locale={locale} />
+        <KanbanBoard boardId={board.id} />
       </div>
       <CreateColumnModal
         boardId={board.id}
         handleClose={closeCreateColumnModal}
         isOpen={isCreateColumnModalOpen}
-        locale={locale}
       />
     </>
   );

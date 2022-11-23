@@ -1,6 +1,6 @@
 import { LocaleName } from '@project-management-app/enums';
 
-import { AppLocale } from '../app-locale/app-locale.type';
+import { AppLocale } from './app-locale.type';
 
 type ParsedAppPathname = {
   rawPathname: string;

@@ -8,4 +8,5 @@ export { Loader } from './loader/loader';
 export { BoardCard } from './board-card/board-card';
 export { Modal } from './modal/modal';
 export { ReactQueryProvider } from './react-query-provider/react-query-provider';
+export { AppContextProvider } from './app-context-provider/app-context-provider';
 export * from './modals/modals';

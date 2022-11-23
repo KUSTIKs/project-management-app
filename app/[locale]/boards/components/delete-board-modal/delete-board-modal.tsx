@@ -2,26 +2,22 @@ import { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { DeleteEntityModal } from '@project-management-app/components';
-import { AppLocale, Board } from '@project-management-app/types';
+import { Board } from '@project-management-app/types';
 import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { deleteBoardModalDictionary } from './delete-board-modal.dictionary';
 
 type Props = {
-  locale: AppLocale;
   isOpen: boolean;
   handleClose: () => void;
   board: Board;
 };
 
-const DeleteBoardModal: FC<Props> = ({
-  handleClose,
-  isOpen,
-  locale,
-  board,
-}) => {
+const DeleteBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
+  const { locale } = useAppContext();
   const contentMap = deleteBoardModalDictionary.getContentMap({ locale });
   const queryClient = useQueryClient();
   const {
@@ -51,7 +47,6 @@ const DeleteBoardModal: FC<Props> = ({
       handleDelete={deleteBoard}
       isLoading={isLoading}
       errorMessage={errorMessage}
-      locale={locale}
       handleClose={handleClose}
       isOpen={isOpen}
     />

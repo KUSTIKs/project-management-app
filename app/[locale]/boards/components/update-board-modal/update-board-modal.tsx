@@ -10,31 +10,23 @@ import {
   TextInput,
   UpdateEntityModal,
 } from '@project-management-app/components';
-import {
-  AppLocale,
-  Board,
-  UpdateBoardDto,
-} from '@project-management-app/types';
+import { Board, UpdateBoardDto } from '@project-management-app/types';
 import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { getCreateBoardSchema } from '../create-board-modal/create-board-modal.schema';
 import { updateBoardModalDictionary } from './update-board-modal.dictionary';
 
 type Props = {
-  locale: AppLocale;
   isOpen: boolean;
   handleClose: () => void;
   board: Board;
 };
 
-const UpdateBoardModal: FC<Props> = ({
-  handleClose,
-  isOpen,
-  locale,
-  board,
-}) => {
+const UpdateBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
+  const { locale } = useAppContext();
   const contentMap = updateBoardModalDictionary.getContentMap({
     locale,
   });
@@ -87,7 +79,6 @@ const UpdateBoardModal: FC<Props> = ({
   return (
     <UpdateEntityModal
       withQuotes
-      locale={locale}
       title={contentMap.updateBoard}
       errorMessage={errorMessage}
       handleClose={handleCloseWithReset}

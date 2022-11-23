@@ -9,4 +9,5 @@ export { appFetch } from './app-fetch/app-fetch';
 export { decodeToken } from './decode-token/decode-token';
 export { getKeyFromUnknown } from './get-key-from-unknown/get-key-from-unknown';
 export { handleDndDrugEnd } from './handle-dnd-drag-end/handle-dnd-drag-end';
+export { AppContext } from './app-context/app-context';
 export * from './type-checks/type-checks';

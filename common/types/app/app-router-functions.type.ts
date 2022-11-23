@@ -1,4 +1,4 @@
-import { AppNavigateOptions } from '../app-navigate-options/app-navigate-options.type';
+import { AppNavigateOptions } from './app-navigate-options.type';
 
 type AppRouterFunctions = {
   back: () => void;

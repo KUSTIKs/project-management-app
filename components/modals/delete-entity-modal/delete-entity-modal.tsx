@@ -1,6 +1,9 @@
+'use client';
+
 import { ComponentProps, FC } from 'react';
 
 import { Typography } from '@project-management-app/components';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { getDeleteEntityModalDictionary } from './delete-entity-modal.dictionary';
 import { ActionModal } from '../modals';
@@ -15,11 +18,12 @@ type Props = Omit<
 
 const DeleteEntityModal: FC<Props> = ({ handleDelete, ...modalProps }) => {
   const { withQuotes, entityName } = modalProps;
+  const { locale } = useAppContext();
   const formattedEntityName = withQuotes ? `'${entityName}'` : entityName;
   const contentMap = getDeleteEntityModalDictionary({
     entityName: formattedEntityName,
   }).getContentMap({
-    locale: modalProps.locale,
+    locale,
   });
 
   return (
