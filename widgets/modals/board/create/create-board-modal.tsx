@@ -17,7 +17,7 @@ import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
 import { getCreateBoardSchema } from './create-board-modal.schema';
-import { createBoardModalDictionary } from './create-board-modal.dictionary';
+import { boardModalsDictionary } from '../board-modals.dictionary';
 
 type Props = {
   isOpen: boolean;
@@ -26,7 +26,7 @@ type Props = {
 
 const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
   const { locale } = useAppContext();
-  const contentMap = createBoardModalDictionary.getContentMap({
+  const contentMap = boardModalsDictionary.getContentMap({
     locale,
   });
   const queryClient = useQueryClient();

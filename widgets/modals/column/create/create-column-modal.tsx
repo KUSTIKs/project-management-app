@@ -16,8 +16,8 @@ import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
+import { columnModalsDictionary } from '../column-modals.dictionary';
 import { getCreateColumnSchema } from './create-column-modal.schema';
-import { createColumnModalDictionary } from './create-column-modal.dictionary';
 
 type Props = {
   isOpen: boolean;
@@ -27,7 +27,7 @@ type Props = {
 
 const CreateColumnModal: FC<Props> = ({ handleClose, isOpen, boardId }) => {
   const { locale } = useAppContext();
-  const contentMap = createColumnModalDictionary.getContentMap({
+  const contentMap = columnModalsDictionary.getContentMap({
     locale,
   });
   const queryClient = useQueryClient();

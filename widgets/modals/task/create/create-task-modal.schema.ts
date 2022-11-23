@@ -7,19 +7,21 @@ import { ContentDictionary } from '@project-management-app/helpers';
 const validationMessageDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     titleRequired: 'Title is required',
-    titleMin: 'Title min length is 4',
-    titleMax: 'Title max length is 64',
+    titleMin: (value: number) => `Title min length is ${value}`,
+    titleMax: (value: number) => `Title max length is ${value}`,
     descriptionRequired: 'Description is required',
-    descriptionMin: 'Description min length is 8',
-    descriptionMax: 'Description max length is 256',
+    descriptionMin: (value: number) => `Description min length is ${value}`,
+    descriptionMax: (value: number) => `Description max length is ${value}`,
   },
   [LocaleName.RU]: {
     titleRequired: 'Заголовок обязателен',
-    titleMin: 'Заголовок должен иметь от 4 символов',
-    titleMax: 'Заголовок должен иметь до 64 символов',
+    titleMin: (value: number) => `Заголовок должен иметь от ${value} символов`,
+    titleMax: (value: number) => `Заголовок должен иметь до ${value} символов`,
     descriptionRequired: 'Описание обязателено',
-    descriptionMin: 'Описание должно иметь от 8 символов',
-    descriptionMax: 'Описание должно иметь до 256 символов',
+    descriptionMin: (value: number) =>
+      `Описание должно иметь от ${value} символов`,
+    descriptionMax: (value: number) =>
+      `Описание должно иметь до ${value} символов`,
   },
 });
 
@@ -32,13 +34,13 @@ const getCreateTaskSchema = ({ locale }: { locale: AppLocale }) => {
     title: z
       .string()
       .min(1, contentMap.titleRequired)
-      .min(4, contentMap.titleMin)
-      .max(64, contentMap.titleMax),
+      .min(4, contentMap.titleMin(4))
+      .max(64, contentMap.titleMax(64)),
     description: z
       .string()
       .min(1, contentMap.descriptionRequired)
-      .min(8, contentMap.descriptionMin)
-      .max(256, contentMap.descriptionMax),
+      .min(8, contentMap.descriptionMin(8))
+      .max(256, contentMap.descriptionMax(256)),
   });
 };
 

@@ -17,7 +17,7 @@ import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
 import { getCreateTaskSchema } from './create-task-modal.schema';
-import { createTaskModalDictionary } from './create-task-modal.dictionary';
+import { createTaskModalsDictionary } from '../task-modals.dictionary';
 
 type Props = {
   isOpen: boolean;
@@ -33,7 +33,7 @@ const CreateTaskModal: FC<Props> = ({
   columnId,
 }) => {
   const { locale } = useAppContext();
-  const contentMap = createTaskModalDictionary.getContentMap({
+  const contentMap = createTaskModalsDictionary.getContentMap({
     locale,
   });
   const queryClient = useQueryClient();

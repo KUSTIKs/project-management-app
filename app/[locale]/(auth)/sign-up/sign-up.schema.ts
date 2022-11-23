@@ -7,25 +7,25 @@ import { ContentDictionary } from '@project-management-app/helpers';
 const validationMessageDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     loginRequired: 'Login is required',
-    loginMin: 'Login min length is 4',
-    loginMax: 'Login max length is 32',
+    loginMin: (value: number) => `Login min length is ${value}`,
+    loginMax: (value: number) => `Login max length is ${value}`,
     nameRequired: 'Name is required',
-    nameMin: 'Name min length is 4',
-    nameMax: 'Name max length is 32',
+    nameMin: (value: number) => `Name min length is ${value}`,
+    nameMax: (value: number) => `Name max length is ${value}`,
     passwordRequired: 'Password is required',
-    passwordMin: 'Password min length is 6',
-    passwordMax: 'Password max length is 32',
+    passwordMin: (value: number) => `Password min length is ${value}`,
+    passwordMax: (value: number) => `Password max length is ${value}`,
   },
   [LocaleName.RU]: {
     loginRequired: 'Логин обязателен',
-    loginMin: 'Логин должен иметь от 4 символов',
-    loginMax: 'Логин должен иметь до 32 символов',
+    loginMin: (value: number) => `Логин должен иметь от ${value} символов`,
+    loginMax: (value: number) => `Логин должен иметь до ${value} символов`,
     nameRequired: 'Имя обязателено',
-    nameMin: 'Имя должно иметь от 4 символов',
-    nameMax: 'Имя должно иметь до 32 символов',
+    nameMin: (value: number) => `Имя должно иметь от ${value} символов`,
+    nameMax: (value: number) => `Имя должно иметь до ${value} символов`,
     passwordRequired: 'Пароль обязателен',
-    passwordMin: 'Пароль должен иметь от 6 символов',
-    passwordMax: 'Пароль должен иметь до 32 символов',
+    passwordMin: (value: number) => `Пароль должен иметь от ${value} символов`,
+    passwordMax: (value: number) => `Пароль должен иметь до ${value} символов`,
   },
 });
 
@@ -38,18 +38,18 @@ const getSignUpSchema = ({ locale }: { locale: AppLocale }) => {
     login: z
       .string()
       .min(1, contentMap.loginRequired)
-      .min(4, contentMap.loginMin)
-      .max(32, contentMap.loginMax),
+      .min(4, contentMap.loginMin(4))
+      .max(32, contentMap.loginMax(32)),
     name: z
       .string()
       .min(1, contentMap.nameRequired)
-      .min(4, contentMap.nameMin)
-      .max(32, contentMap.nameMax),
+      .min(4, contentMap.nameMin(4))
+      .max(32, contentMap.nameMax(32)),
     password: z
       .string()
       .min(1, contentMap.passwordRequired)
-      .min(6, contentMap.passwordMin)
-      .max(32, contentMap.passwordMax),
+      .min(6, contentMap.passwordMin(6))
+      .max(32, contentMap.passwordMax(32)),
   });
 };
 

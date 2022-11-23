@@ -10,7 +10,7 @@ import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { deleteBoardModalDictionary } from './delete-board-modal.dictionary';
+import { boardModalsDictionary } from '../board-modals.dictionary';
 
 type Props = {
   isOpen: boolean;
@@ -20,7 +20,7 @@ type Props = {
 
 const DeleteBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
   const { locale } = useAppContext();
-  const contentMap = deleteBoardModalDictionary.getContentMap({ locale });
+  const contentMap = boardModalsDictionary.getContentMap({ locale });
   const queryClient = useQueryClient();
   const {
     mutate: deleteBoard,
@@ -36,7 +36,7 @@ const DeleteBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
 
   const handleDeleted = () => {
     queryClient.invalidateQueries({
-      queryKey: [QueryKey.BOARDS],
+      queryKey: [QueryKey.BOARDS, { id: board.id }],
     });
     handleClose();
   };

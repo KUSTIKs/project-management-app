@@ -1,7 +1,7 @@
 import { LocaleName } from '@project-management-app/enums';
 import { ContentDictionary } from '@project-management-app/helpers';
 
-const createTaskModalDictionary = new ContentDictionary({
+const createTaskModalsDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     title: 'title',
     description: 'description',
@@ -14,4 +14,4 @@ const createTaskModalDictionary = new ContentDictionary({
   },
 });
 
-export { createTaskModalDictionary };
+export { createTaskModalsDictionary };

@@ -1,7 +1,7 @@
 import { LocaleName } from '@project-management-app/enums';
 import { ContentDictionary } from '@project-management-app/helpers';
 
-const createColumnModalDictionary = new ContentDictionary({
+const columnModalsDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     createColumn: 'Create column',
     title: 'title',
@@ -12,4 +12,4 @@ const createColumnModalDictionary = new ContentDictionary({
   },
 });
 
-export { createColumnModalDictionary };
+export { columnModalsDictionary };

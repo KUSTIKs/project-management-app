@@ -7,13 +7,13 @@ import { ContentDictionary } from '@project-management-app/helpers';
 const validationMessageDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     titleRequired: 'Title is required',
-    titleMin: 'Title min length is 4',
-    titleMax: 'Title max length is 32',
+    titleMin: (value: number) => `Title min length is ${value}`,
+    titleMax: (value: number) => `Title max length is ${value}`,
   },
   [LocaleName.RU]: {
     titleRequired: 'Заголовок обязателен',
-    titleMin: 'Заголовок должен иметь от 4 символов',
-    titleMax: 'Заголовок должен иметь до 32 символов',
+    titleMin: (value: number) => `Заголовок должен иметь от ${value} символов`,
+    titleMax: (value: number) => `Заголовок должен иметь до ${value} символов`,
   },
 });
 
@@ -26,8 +26,8 @@ const getCreateColumnSchema = ({ locale }: { locale: AppLocale }) => {
     title: z
       .string()
       .min(1, contentMap.titleRequired)
-      .min(4, contentMap.titleMin)
-      .max(32, contentMap.titleMax),
+      .min(4, contentMap.titleMin(4))
+      .max(32, contentMap.titleMax(32)),
   });
 };
 

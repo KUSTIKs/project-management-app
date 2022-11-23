@@ -13,10 +13,12 @@ import {
 import {
   CreateColumnModal,
   KanbanBoard,
+  UpdateBoardModal,
 } from '@project-management-app/widgets';
 import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 import { useBooleanState } from '@project-management-app/hooks';
+import { QueryKey } from '@project-management-app/enums';
 
 import classes from './board.module.scss';
 import { boardDictionary } from './board.dictionary';
@@ -36,11 +38,13 @@ const BoardPage: FC<Props> = ({ params }) => {
     isLoading,
     error,
   } = useQuery({
+    queryKey: [QueryKey.BOARDS, { id }],
     queryFn: () => boardsService.getById(id),
   });
   const errorMessage = getKeyFromUnknown(error, 'message');
   const [isCreateColumnModalOpen, isCreateColumnModalOpenActions] =
     useBooleanState(false);
+  const [isUpdateOpen, isUpdateOpenActions] = useBooleanState(false);
 
   if (isLoading) {
     return (
@@ -68,7 +72,12 @@ const BoardPage: FC<Props> = ({ params }) => {
         <div className={classes.topInfo}>
           <Typography variant="title1">{board.title}</Typography>
           <div className={classes.group}>
-            <Button size="m" variant="ghost" startIcon={<Icon.EditLine />}>
+            <Button
+              size="m"
+              variant="ghost"
+              startIcon={<Icon.EditLine />}
+              onClick={isUpdateOpenActions.setTrue}
+            >
               {contentMap.edit}
             </Button>
             <Button
@@ -88,6 +97,11 @@ const BoardPage: FC<Props> = ({ params }) => {
         boardId={board.id}
         handleClose={isCreateColumnModalOpenActions.setFalse}
         isOpen={isCreateColumnModalOpen}
+      />
+      <UpdateBoardModal
+        board={board}
+        handleClose={isUpdateOpenActions.setFalse}
+        isOpen={isUpdateOpen}
       />
     </>
   );
