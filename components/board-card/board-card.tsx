@@ -1,6 +1,11 @@
 import { FC } from 'react';
 
-import { Button, Icon, Typography } from '@project-management-app/components';
+import {
+  AppLink,
+  Button,
+  Icon,
+  Typography,
+} from '@project-management-app/components';
 
 import classes from './board-card.module.scss';
 
@@ -9,6 +14,7 @@ type Props = {
   description: string;
   handleDelete?: () => void;
   handleUpdate?: () => void;
+  boardId: string;
 };
 
 const BoardCard: FC<Props> = ({
@@ -16,7 +22,10 @@ const BoardCard: FC<Props> = ({
   title,
   handleDelete,
   handleUpdate,
+  boardId,
 }) => {
+  const boardHref = `/boards/${boardId}`;
+
   return (
     <article className={classes.wrapper}>
       <header className={classes.header}>
@@ -53,6 +62,11 @@ const BoardCard: FC<Props> = ({
           {description}
         </Typography>
       </div>
+      <AppLink
+        href={boardHref}
+        className={classes.link}
+        aria-label="Go to board page"
+      />
     </article>
   );
 };

@@ -29,6 +29,7 @@ const BoardCard: FC<Props> = ({ board }) => {
         isOpen={isUpdateModalOpen}
       />
       <StatelessBoardCard
+        boardId={board.id}
         title={board.title}
         description={board.description}
         handleDelete={isDeleteModalOpenActions.setTrue}

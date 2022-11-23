@@ -51,7 +51,7 @@
 
   --fz-large-headline-medium: 20px;
 
-  /* size styles */
+  /* Size styles */
   --height-button-s: 28px;
   --height-button-m: 34px;
   --height-button-l: 48px;
@@ -84,12 +84,14 @@ body {
   cursor: default;
 }
 
+a,
 textarea,
 input,
 button,
 select {
   font-family: inherit;
   font-size: inherit;
+  color: inherit;
 }
 
 button {

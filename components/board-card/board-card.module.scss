@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
+  overflow: hidden;
 }
 
 .header {
@@ -31,6 +33,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  z-index: 1;
 }
 
 .info {
@@ -45,4 +48,9 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+.link {
+  position: absolute;
+  inset: 0;
 }
