@@ -1,13 +1,24 @@
 'use client';
 
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { useEffect, useState } from 'react';
+import { FC } from 'react';
+import { useQuery } from 'react-query';
 
-import { FullBoard, FullColumn } from '@project-management-app/types';
+import { AppLocale, FullBoard } from '@project-management-app/types';
+import { QueryKey } from '@project-management-app/enums';
+import { columnsService } from '@project-management-app/services';
+import { Loader, Typography } from '@project-management-app/components';
+import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 
 import { Column } from './components/components';
 import classes from './kanban-board.module.scss';
 import { DndDroppableId, DndType } from './enums/enums';
+import { kanbanBoardDictionary } from './kanban-board.dictionary';
+
+type Props = {
+  boardId: string;
+  locale: AppLocale;
+};
 
 const DATA: FullBoard = {
   id: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
@@ -109,66 +120,78 @@ const DATA: FullBoard = {
   ],
 };
 
-const KanbanBoard = () => {
-  const [columns, setColumns] = useState<FullColumn[]>([]);
-
-  const updateState = (columns: FullColumn[]) => {
-    setColumns(columns.slice());
-  };
+const KanbanBoard: FC<Props> = ({ boardId, locale }) => {
+  const contentMap = kanbanBoardDictionary.getContentMap({ locale });
+  const {
+    data: columns,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: [QueryKey.COLUMNS, { boardId }],
+    queryFn: () => columnsService.getAll({ boardId }),
+  });
+  const errorMessage = getKeyFromUnknown(error, 'message');
 
   const handleDragEnd = ({ destination, source, type }: DropResult) => {
-    if (
-      !destination ||
-      (destination.droppableId === source.droppableId &&
-        destination.index === source.index)
-    ) {
-      return;
-    }
-
-    if (type === DndType.GROUP) {
-      const workValue = [...columns];
-      workValue[source.index] = columns[destination.index];
-      workValue[destination.index] = columns[source.index];
-
-      updateState(workValue);
-
-      return;
-    }
-
-    const sourceIndex = columns.findIndex(
-      ({ id }) => id === source.droppableId
-    );
-    const destinationIndex = columns.findIndex(
-      ({ id }) => id === destination.droppableId
-    );
-
-    if (sourceIndex < 0 || destinationIndex < 0) return;
-
-    const sourceTasks = columns[sourceIndex].tasks.slice();
-    const destinationTasks =
-      source.droppableId !== destination.droppableId
-        ? columns[sourceIndex].tasks.slice()
-        : sourceTasks;
-
-    const [deletedTask] = sourceTasks.splice(source.index, 1);
-    destinationTasks.splice(destination.index, 0, deletedTask);
-
-    const workValue = columns.slice();
-    workValue[sourceIndex] = {
-      ...columns[sourceIndex],
-      tasks: sourceTasks,
-    };
-    workValue[destinationIndex] = {
-      ...columns[destinationIndex],
-      tasks: destinationTasks,
-    };
-
-    updateState(workValue);
+    // if (
+    //   !destination ||
+    //   (destination.droppableId === source.droppableId &&
+    //     destination.index === source.index)
+    // ) {
+    //   return;
+    // }
+    // if (type === DndType.GROUP) {
+    //   const workValue = [...columns];
+    //   workValue[source.index] = columns[destination.index];
+    //   workValue[destination.index] = columns[source.index];
+    //   updateState(workValue);
+    //   return;
+    // }
+    // const sourceIndex = columns.findIndex(
+    //   ({ id }) => id === source.droppableId
+    // );
+    // const destinationIndex = columns.findIndex(
+    //   ({ id }) => id === destination.droppableId
+    // );
+    // if (sourceIndex < 0 || destinationIndex < 0) return;
+    // const sourceTasks = columns[sourceIndex].tasks.slice();
+    // const destinationTasks =
+    //   source.droppableId !== destination.droppableId
+    //     ? columns[sourceIndex].tasks.slice()
+    //     : sourceTasks;
+    // const [deletedTask] = sourceTasks.splice(source.index, 1);
+    // destinationTasks.splice(destination.index, 0, deletedTask);
+    // const workValue = columns.slice();
+    // workValue[sourceIndex] = {
+    //   ...columns[sourceIndex],
+    //   tasks: sourceTasks,
+    // };
+    // workValue[destinationIndex] = {
+    //   ...columns[destinationIndex],
+    //   tasks: destinationTasks,
+    // };
+    // updateState(workValue);
   };
 
-  useEffect(() => {
-    updateState(DATA.columns);
-  }, []);
+  if (isLoading) {
+    return (
+      <div className={classes.container}>
+        <div className={classes.loadingContainer}>
+          <Loader size={24} />
+        </div>
+      </div>
+    );
+  }
+
+  if (!columns || columns.length === 0 || error) {
+    return (
+      <div className={classes.container}>
+        <Typography variant="largeHeadline" weight={600} colorName="text/700">
+          {isString(errorMessage) ? errorMessage : contentMap.noColumns}
+        </Typography>
+      </div>
+    );
+  }
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
@@ -184,8 +207,14 @@ const KanbanBoard = () => {
             {...provided.innerRef}
             ref={provided.innerRef}
           >
-            {columns.map((column, index) => (
-              <Column key={column.id} column={column} index={index} />
+            {columns?.map((column, index) => (
+              <Column
+                key={column.id}
+                column={column}
+                boardId={boardId}
+                index={index}
+                locale={locale}
+              />
             ))}
             {provided.placeholder}
           </div>

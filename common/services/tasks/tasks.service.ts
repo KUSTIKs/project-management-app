@@ -1,5 +1,7 @@
-import { HttpMethod } from '@project-management-app/enums';
-import { appFetch } from '@project-management-app/helpers';
+import Cookies from 'js-cookie';
+
+import { CookieName, HttpMethod } from '@project-management-app/enums';
+import { appFetch, decodeToken } from '@project-management-app/helpers';
 import {
   ApiError,
   Task,
@@ -19,12 +21,18 @@ class TasksService {
 
   async create(
     { boardId, columnId }: { boardId: string; columnId: string },
-    dto: CreateTaskDto
+    dto: Omit<CreateTaskDto, 'userId'>
   ) {
+    const token = Cookies.get(CookieName.NEXT_TOKEN);
+    const { payload } = decodeToken(token);
+
     const response = await appFetch(
       `/boards/${boardId}/columns/${columnId}/tasks`,
       {
-        body: JSON.stringify(dto),
+        body: JSON.stringify({
+          ...dto,
+          userId: payload?.userId,
+        }),
         method: HttpMethod.POST,
       }
     );
