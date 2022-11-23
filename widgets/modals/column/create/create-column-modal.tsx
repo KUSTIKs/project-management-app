@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,41 +10,35 @@ import {
   Modal,
   TextInput,
 } from '@project-management-app/components';
-import { CreateTaskDto } from '@project-management-app/types';
-import { tasksService } from '@project-management-app/services';
+import { CreateColumnDto } from '@project-management-app/types';
+import { columnsService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { getCreateTaskSchema } from './create-task-modal.schema';
-import { createTaskModalDictionary } from './create-task-modal.dictionary';
+import { getCreateColumnSchema } from './create-column-modal.schema';
+import { createColumnModalDictionary } from './create-column-modal.dictionary';
 
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
   boardId: string;
-  columnId: string;
 };
 
-const CreateTaskModal: FC<Props> = ({
-  handleClose,
-  isOpen,
-  boardId,
-  columnId,
-}) => {
+const CreateColumnModal: FC<Props> = ({ handleClose, isOpen, boardId }) => {
   const { locale } = useAppContext();
-  const contentMap = createTaskModalDictionary.getContentMap({
+  const contentMap = createColumnModalDictionary.getContentMap({
     locale,
   });
   const queryClient = useQueryClient();
   const {
-    mutate: createTask,
+    mutate: createColumn,
     error,
     isLoading,
   } = useMutation({
-    mutationFn: (dto: Omit<CreateTaskDto, 'userId'>) =>
-      tasksService.create({ boardId, columnId }, dto),
-    mutationKey: [QueryKey.TASKS, HttpMethod.POST],
+    mutationFn: (dto: CreateColumnDto) =>
+      columnsService.create({ boardId }, dto),
+    mutationKey: [QueryKey.COLUMNS, HttpMethod.POST],
     onSuccess: () => handleCreated(),
   });
   const {
@@ -50,9 +46,9 @@ const CreateTaskModal: FC<Props> = ({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<CreateTaskDto>({
+  } = useForm<CreateColumnDto>({
     resolver: zodResolver(
-      getCreateTaskSchema({
+      getCreateColumnSchema({
         locale,
       })
     ),
@@ -60,8 +56,8 @@ const CreateTaskModal: FC<Props> = ({
 
   const errorMessage = getKeyFromUnknown(error, 'message');
 
-  const handleCreateTask: SubmitHandler<CreateTaskDto> = (dto) => {
-    createTask(dto);
+  const handleCreateColumn: SubmitHandler<CreateColumnDto> = (dto) => {
+    createColumn(dto);
   };
 
   const handleCloseWithReset = () => {
@@ -71,18 +67,18 @@ const CreateTaskModal: FC<Props> = ({
 
   const handleCreated = () => {
     queryClient.invalidateQueries({
-      queryKey: [QueryKey.TASKS],
+      queryKey: [QueryKey.COLUMNS],
     });
     handleCloseWithReset();
   };
 
   return (
     <CreateEntityModal
-      title={contentMap.createTask}
+      title={contentMap.createColumn}
       errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}
-      handleCreate={handleSubmit(handleCreateTask)}
+      handleCreate={handleSubmit(handleCreateColumn)}
       isLoading={isLoading}
     >
       <Modal.Fieldset>
@@ -91,15 +87,9 @@ const CreateTaskModal: FC<Props> = ({
           {...register('title')}
           errorMessage={errors.title?.message}
         />
-        <TextInput
-          label={contentMap.description}
-          isMultiline
-          {...register('description')}
-          errorMessage={errors.description?.message}
-        />
       </Modal.Fieldset>
     </CreateEntityModal>
   );
 };
 
-export { CreateTaskModal };
+export { CreateColumnModal };

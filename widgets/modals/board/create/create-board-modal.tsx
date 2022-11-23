@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,35 +10,33 @@ import {
   Modal,
   TextInput,
 } from '@project-management-app/components';
-import { CreateColumnDto } from '@project-management-app/types';
-import { columnsService } from '@project-management-app/services';
+import { CreateBoardDto } from '@project-management-app/types';
+import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { getCreateColumnSchema } from './create-column-modal.schema';
-import { createColumnModalDictionary } from './create-column-modal.dictionary';
+import { getCreateBoardSchema } from './create-board-modal.schema';
+import { createBoardModalDictionary } from './create-board-modal.dictionary';
 
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
-  boardId: string;
 };
 
-const CreateColumnModal: FC<Props> = ({ handleClose, isOpen, boardId }) => {
+const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
   const { locale } = useAppContext();
-  const contentMap = createColumnModalDictionary.getContentMap({
+  const contentMap = createBoardModalDictionary.getContentMap({
     locale,
   });
   const queryClient = useQueryClient();
   const {
-    mutate: createColumn,
+    mutate: createBoard,
     error,
     isLoading,
   } = useMutation({
-    mutationFn: (dto: CreateColumnDto) =>
-      columnsService.create({ boardId }, dto),
-    mutationKey: [QueryKey.COLUMNS, HttpMethod.POST],
+    mutationFn: boardsService.create,
+    mutationKey: [QueryKey.BOARDS, HttpMethod.POST],
     onSuccess: () => handleCreated(),
   });
   const {
@@ -44,9 +44,9 @@ const CreateColumnModal: FC<Props> = ({ handleClose, isOpen, boardId }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<CreateColumnDto>({
+  } = useForm<CreateBoardDto>({
     resolver: zodResolver(
-      getCreateColumnSchema({
+      getCreateBoardSchema({
         locale,
       })
     ),
@@ -54,8 +54,8 @@ const CreateColumnModal: FC<Props> = ({ handleClose, isOpen, boardId }) => {
 
   const errorMessage = getKeyFromUnknown(error, 'message');
 
-  const handleCreateColumn: SubmitHandler<CreateColumnDto> = (dto) => {
-    createColumn(dto);
+  const handleCreateBoard: SubmitHandler<CreateBoardDto> = (dto) => {
+    createBoard(dto);
   };
 
   const handleCloseWithReset = () => {
@@ -65,18 +65,18 @@ const CreateColumnModal: FC<Props> = ({ handleClose, isOpen, boardId }) => {
 
   const handleCreated = () => {
     queryClient.invalidateQueries({
-      queryKey: [QueryKey.COLUMNS],
+      queryKey: [QueryKey.BOARDS],
     });
     handleCloseWithReset();
   };
 
   return (
     <CreateEntityModal
-      title={contentMap.createColumn}
+      title={contentMap.createBoard}
       errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}
-      handleCreate={handleSubmit(handleCreateColumn)}
+      handleCreate={handleSubmit(handleCreateBoard)}
       isLoading={isLoading}
     >
       <Modal.Fieldset>
@@ -85,9 +85,15 @@ const CreateColumnModal: FC<Props> = ({ handleClose, isOpen, boardId }) => {
           {...register('title')}
           errorMessage={errors.title?.message}
         />
+        <TextInput
+          label={contentMap.description}
+          isMultiline
+          {...register('description')}
+          errorMessage={errors.description?.message}
+        />
       </Modal.Fieldset>
     </CreateEntityModal>
   );
 };
 
-export { CreateColumnModal };
+export { CreateBoardModal };

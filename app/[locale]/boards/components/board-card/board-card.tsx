@@ -2,9 +2,10 @@ import { FC, useState } from 'react';
 
 import { BoardCard as StatelessBoardCard } from '@project-management-app/components';
 import { Board } from '@project-management-app/types';
-
-import { UpdateBoardModal } from '../update-board-modal/update-board-modal';
-import { DeleteBoardModal } from '../delete-board-modal/delete-board-modal';
+import {
+  DeleteBoardModal,
+  UpdateBoardModal,
+} from '@project-management-app/widgets';
 
 type Props = {
   board: Board;

@@ -16,7 +16,7 @@ import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { getCreateBoardSchema } from '../create-board-modal/create-board-modal.schema';
+import { getCreateBoardSchema } from '../create/create-board-modal.schema';
 import { updateBoardModalDictionary } from './update-board-modal.dictionary';
 
 type Props = {

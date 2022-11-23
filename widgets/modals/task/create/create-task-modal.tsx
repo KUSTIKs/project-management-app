@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,33 +10,41 @@ import {
   Modal,
   TextInput,
 } from '@project-management-app/components';
-import { CreateBoardDto } from '@project-management-app/types';
-import { boardsService } from '@project-management-app/services';
+import { CreateTaskDto } from '@project-management-app/types';
+import { tasksService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { getCreateBoardSchema } from './create-board-modal.schema';
-import { createBoardModalDictionary } from './create-board-modal.dictionary';
+import { getCreateTaskSchema } from './create-task-modal.schema';
+import { createTaskModalDictionary } from './create-task-modal.dictionary';
 
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
+  boardId: string;
+  columnId: string;
 };
 
-const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
+const CreateTaskModal: FC<Props> = ({
+  handleClose,
+  isOpen,
+  boardId,
+  columnId,
+}) => {
   const { locale } = useAppContext();
-  const contentMap = createBoardModalDictionary.getContentMap({
+  const contentMap = createTaskModalDictionary.getContentMap({
     locale,
   });
   const queryClient = useQueryClient();
   const {
-    mutate: createBoard,
+    mutate: createTask,
     error,
     isLoading,
   } = useMutation({
-    mutationFn: boardsService.create,
-    mutationKey: [QueryKey.BOARDS, HttpMethod.POST],
+    mutationFn: (dto: Omit<CreateTaskDto, 'userId'>) =>
+      tasksService.create({ boardId, columnId }, dto),
+    mutationKey: [QueryKey.TASKS, HttpMethod.POST],
     onSuccess: () => handleCreated(),
   });
   const {
@@ -42,9 +52,9 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<CreateBoardDto>({
+  } = useForm<CreateTaskDto>({
     resolver: zodResolver(
-      getCreateBoardSchema({
+      getCreateTaskSchema({
         locale,
       })
     ),
@@ -52,8 +62,8 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
 
   const errorMessage = getKeyFromUnknown(error, 'message');
 
-  const handleCreateBoard: SubmitHandler<CreateBoardDto> = (dto) => {
-    createBoard(dto);
+  const handleCreateTask: SubmitHandler<CreateTaskDto> = (dto) => {
+    createTask(dto);
   };
 
   const handleCloseWithReset = () => {
@@ -63,18 +73,18 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
 
   const handleCreated = () => {
     queryClient.invalidateQueries({
-      queryKey: [QueryKey.BOARDS],
+      queryKey: [QueryKey.TASKS],
     });
     handleCloseWithReset();
   };
 
   return (
     <CreateEntityModal
-      title={contentMap.createBoard}
+      title={contentMap.createTask}
       errorMessage={errorMessage}
       handleClose={handleCloseWithReset}
       isOpen={isOpen}
-      handleCreate={handleSubmit(handleCreateBoard)}
+      handleCreate={handleSubmit(handleCreateTask)}
       isLoading={isLoading}
     >
       <Modal.Fieldset>
@@ -94,4 +104,4 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
   );
 };
 
-export { CreateBoardModal };
+export { CreateTaskModal };

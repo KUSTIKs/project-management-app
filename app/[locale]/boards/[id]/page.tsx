@@ -10,13 +10,15 @@ import {
   Loader,
   Typography,
 } from '@project-management-app/components';
-import { KanbanBoard } from '@project-management-app/widgets';
+import {
+  CreateColumnModal,
+  KanbanBoard,
+} from '@project-management-app/widgets';
 import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 
 import classes from './board.module.scss';
 import { boardDictionary } from './board.dictionary';
-import { CreateColumnModal } from './components/components';
 
 type Props = {
   params: {

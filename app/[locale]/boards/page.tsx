@@ -13,9 +13,10 @@ import { AppLocale } from '@project-management-app/types';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 import { boardsService } from '@project-management-app/services';
 import { QueryKey } from '@project-management-app/enums';
+import { CreateBoardModal } from '@project-management-app/widgets';
 
 import { boardsDictionary } from './boards.dictionary';
-import { BoardCard, CreateBoardModal } from './components/components';
+import { BoardCard } from './components/components';
 import classes from './boards.module.scss';
 
 type Props = {

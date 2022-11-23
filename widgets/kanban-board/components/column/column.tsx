@@ -9,8 +9,9 @@ import { Column as ColumnEntity } from '@project-management-app/types';
 import { QueryKey } from '@project-management-app/enums';
 import { tasksService } from '@project-management-app/services';
 import { useAppContext } from '@project-management-app/hooks';
+import { CreateTaskModal } from '@project-management-app/widgets';
 
-import { CreateTaskModal, TaskCard } from '../components';
+import { TaskCard } from '../components';
 import classes from './column.module.scss';
 
 type Props = {
