@@ -1,6 +1,7 @@
 'use client';
 
 import { FC, FormEventHandler, ReactNode, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 import { Button, Icon, Typography } from '@project-management-app/components';
 import { useOutsideClick } from '@project-management-app/hooks';
@@ -56,7 +57,7 @@ const Modal: FC<Props> & {
 
   if (!isOpen) return null;
 
-  return (
+  const modal = (
     <dialog ref={dialogRef} className={classes.dialog} open={false}>
       <Component
         {...props}
@@ -82,6 +83,8 @@ const Modal: FC<Props> & {
       </Component>
     </dialog>
   );
+
+  return createPortal(modal, document.getElementById('modal-portal')!);
 };
 
 Modal.Fieldset = ModalFieldset;

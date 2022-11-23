@@ -36,6 +36,7 @@ const RootLayout: FC<Props> = ({ children, params }) => {
             <Footer locale={locale} />
           </ReactQueryProvider>
         </AppContextProvider>
+        <div id="modal-portal" />
       </body>
     </html>
   );
