@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useQuery } from 'react-query';
 
 import { AppLocale } from '@project-management-app/types';
@@ -16,6 +16,7 @@ import {
 } from '@project-management-app/widgets';
 import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
+import { useBooleanState } from '@project-management-app/hooks';
 
 import classes from './board.module.scss';
 import { boardDictionary } from './board.dictionary';
@@ -38,14 +39,8 @@ const BoardPage: FC<Props> = ({ params }) => {
     queryFn: () => boardsService.getById(id),
   });
   const errorMessage = getKeyFromUnknown(error, 'message');
-  const [isCreateColumnModalOpen, setIsCreateColumnModalOpen] = useState(false);
-
-  const openCreateColumnModal = () => {
-    setIsCreateColumnModalOpen(true);
-  };
-  const closeCreateColumnModal = () => {
-    setIsCreateColumnModalOpen(false);
-  };
+  const [isCreateColumnModalOpen, isCreateColumnModalOpenActions] =
+    useBooleanState(false);
 
   if (isLoading) {
     return (
@@ -79,7 +74,7 @@ const BoardPage: FC<Props> = ({ params }) => {
             <Button
               size="m"
               startIcon={<Icon.AddLine />}
-              onClick={openCreateColumnModal}
+              onClick={isCreateColumnModalOpenActions.setTrue}
             >
               {contentMap.newColumn}
             </Button>
@@ -91,7 +86,7 @@ const BoardPage: FC<Props> = ({ params }) => {
       </div>
       <CreateColumnModal
         boardId={board.id}
-        handleClose={closeCreateColumnModal}
+        handleClose={isCreateColumnModalOpenActions.setFalse}
         isOpen={isCreateColumnModalOpen}
       />
     </>

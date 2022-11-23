@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from 'react-query';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import {
   Typography,
@@ -14,6 +14,7 @@ import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 import { boardsService } from '@project-management-app/services';
 import { QueryKey } from '@project-management-app/enums';
 import { CreateBoardModal } from '@project-management-app/widgets';
+import { useBooleanState } from '@project-management-app/hooks';
 
 import { boardsDictionary } from './boards.dictionary';
 import { BoardCard } from './components/components';
@@ -37,14 +38,7 @@ const BoardsPage: FC<Props> = ({ params }) => {
     queryKey: [QueryKey.BOARDS],
   });
   const errorMessage = getKeyFromUnknown(error, 'message');
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-
-  const openCreateModal = () => {
-    setIsCreateModalOpen(true);
-  };
-  const closeCreateModal = () => {
-    setIsCreateModalOpen(false);
-  };
+  const [isCreateModalOpen, isCreateModalOpenActions] = useBooleanState(false);
 
   return (
     <>
@@ -56,7 +50,7 @@ const BoardsPage: FC<Props> = ({ params }) => {
               size="m"
               variant="contained"
               startIcon={<Icon.AddLine />}
-              onClick={openCreateModal}
+              onClick={isCreateModalOpenActions.setTrue}
             >
               {contentMap.newBoard}
             </Button>
@@ -90,7 +84,7 @@ const BoardsPage: FC<Props> = ({ params }) => {
         )}
       </div>
       <CreateBoardModal
-        handleClose={closeCreateModal}
+        handleClose={isCreateModalOpenActions.setFalse}
         isOpen={isCreateModalOpen}
       />
     </>

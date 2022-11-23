@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { BoardCard as StatelessBoardCard } from '@project-management-app/components';
 import { Board } from '@project-management-app/types';
@@ -6,46 +6,33 @@ import {
   DeleteBoardModal,
   UpdateBoardModal,
 } from '@project-management-app/widgets';
+import { useBooleanState } from '@project-management-app/hooks';
 
 type Props = {
   board: Board;
 };
 
 const BoardCard: FC<Props> = ({ board }) => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-
-  const openDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-  const closeDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const openUpdateModal = () => {
-    setIsUpdateModalOpen(true);
-  };
-  const closeUpdateModal = () => {
-    setIsUpdateModalOpen(false);
-  };
+  const [isDeleteModalOpen, isDeleteModalOpenActions] = useBooleanState(false);
+  const [isUpdateModalOpen, isUpdateModalOpenActions] = useBooleanState(false);
 
   return (
     <>
       <DeleteBoardModal
         board={board}
-        handleClose={closeDeleteModal}
+        handleClose={isDeleteModalOpenActions.setFalse}
         isOpen={isDeleteModalOpen}
       />
       <UpdateBoardModal
         board={board}
-        handleClose={closeUpdateModal}
+        handleClose={isUpdateModalOpenActions.setFalse}
         isOpen={isUpdateModalOpen}
       />
       <StatelessBoardCard
         title={board.title}
         description={board.description}
-        handleDelete={openDeleteModal}
-        handleUpdate={openUpdateModal}
+        handleDelete={isDeleteModalOpenActions.setTrue}
+        handleUpdate={isUpdateModalOpenActions.setTrue}
       />
     </>
   );

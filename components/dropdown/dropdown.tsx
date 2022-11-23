@@ -1,11 +1,12 @@
 'use client';
 
 import classNames from 'classnames';
-import { cloneElement, FC, ReactElement, useRef, useState } from 'react';
+import { cloneElement, FC, ReactElement, useRef } from 'react';
 
 import { Option } from '@project-management-app/types';
 import { isString } from '@project-management-app/helpers';
 import {
+  useBooleanState,
   useOutsideClick,
   useOutsideFocus,
 } from '@project-management-app/hooks';
@@ -27,29 +28,22 @@ const Dropdown: FC<Props> = ({
   direction = 'down',
   alignment = 'start',
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, isOpenActions] = useBooleanState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-
-  const toggleDropdown = () => {
-    setIsOpen((state) => !state);
-  };
-  const closeDropdown = () => {
-    setIsOpen(false);
-  };
 
   const handleOptionClick = (value: string) => {
     handleChange(value);
-    closeDropdown();
+    isOpenActions.setFalse();
   };
 
-  const { onBlur: handleBlur } = useOutsideFocus(closeDropdown);
+  const { onBlur: handleBlur } = useOutsideFocus(isOpenActions.setFalse);
 
-  useOutsideClick(wrapperRef, closeDropdown);
+  useOutsideClick(wrapperRef, isOpenActions.setFalse);
 
   return (
     <div className={classes.wrapper} ref={wrapperRef} onBlur={handleBlur}>
       {cloneElement(trigger, {
-        onClick: toggleDropdown,
+        onClick: isOpenActions.toggle,
       })}
       {isOpen && (
         <ul

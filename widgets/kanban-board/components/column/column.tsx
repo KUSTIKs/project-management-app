@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useQuery } from 'react-query';
 
@@ -8,7 +8,7 @@ import { Button, Icon, Typography } from '@project-management-app/components';
 import { Column as ColumnEntity } from '@project-management-app/types';
 import { QueryKey } from '@project-management-app/enums';
 import { tasksService } from '@project-management-app/services';
-import { useAppContext } from '@project-management-app/hooks';
+import { useAppContext, useBooleanState } from '@project-management-app/hooks';
 import { CreateTaskModal } from '@project-management-app/widgets';
 
 import { TaskCard } from '../components';
@@ -27,14 +27,8 @@ const Column: FC<Props> = ({ column, index, boardId }) => {
     queryKey: [QueryKey.TASKS, { boardId, columnId: id }],
     queryFn: () => tasksService.getAll({ boardId, columnId: id }),
   });
-  const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
-
-  const openCreateTaskModal = () => {
-    setIsCreateTaskModalOpen(true);
-  };
-  const closeCreateTaskModal = () => {
-    setIsCreateTaskModalOpen(false);
-  };
+  const [isCreateTaskModalOpen, isCreateTaskModalOpenActions] =
+    useBooleanState(false);
 
   return (
     <>
@@ -75,7 +69,7 @@ const Column: FC<Props> = ({ column, index, boardId }) => {
                     <Button
                       variant="text"
                       startIcon={<Icon.AddLine />}
-                      onClick={openCreateTaskModal}
+                      onClick={isCreateTaskModalOpenActions.setTrue}
                     >
                       New Task
                     </Button>
@@ -89,7 +83,7 @@ const Column: FC<Props> = ({ column, index, boardId }) => {
       <CreateTaskModal
         boardId={boardId}
         columnId={id}
-        handleClose={closeCreateTaskModal}
+        handleClose={isCreateTaskModalOpenActions.setFalse}
         isOpen={isCreateTaskModalOpen}
       />
     </>
