@@ -2,6 +2,10 @@ const isString = (value: unknown): value is string => {
   return typeof value === 'string';
 };
 
+const isNumber = (value: unknown): value is number => {
+  return typeof value === 'number';
+};
+
 const isUndefined = (value: unknown): value is undefined => {
   return typeof value === 'undefined';
 };
@@ -18,4 +22,4 @@ const isFunction = (value: unknown): value is Function => {
   return typeof value === 'function';
 };
 
-export { isString, isArray, isUndefined, isObject, isFunction };
+export { isString, isNumber, isArray, isUndefined, isObject, isFunction };
