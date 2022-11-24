@@ -15,8 +15,8 @@ import { tasksService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
+import { getUpdateTaskSchema } from '@project-management-app/schemas';
 
-import { getCreateTaskSchema } from '../create/create-task-modal.schema';
 import { taskModalsDictionary } from '../task-modals.dictionary';
 
 type Props = {
@@ -57,7 +57,7 @@ const UpdateTaskModal: FC<Props> = ({
     formState: { errors, isDirty },
   } = useForm<UpdateTaskDto>({
     resolver: zodResolver(
-      getCreateTaskSchema({
+      getUpdateTaskSchema({
         locale,
       })
     ),

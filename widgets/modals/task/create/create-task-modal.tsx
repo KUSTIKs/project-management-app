@@ -15,8 +15,8 @@ import { tasksService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
+import { getCreateTaskSchema } from '@project-management-app/schemas';
 
-import { getCreateTaskSchema } from './create-task-modal.schema';
 import { taskModalsDictionary } from '../task-modals.dictionary';
 
 type Props = {

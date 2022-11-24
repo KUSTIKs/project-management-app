@@ -13,9 +13,9 @@ import {
 import { usersService } from '@project-management-app/services';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 import { QueryKey } from '@project-management-app/enums';
+import { getUpdateUserSchema } from '@project-management-app/schemas';
 
 import { profileDictionary } from '../../profile.dictionary';
-import { getUpdateUserSchema } from './update-form.schema';
 import classes from '../../profile.module.scss';
 
 type Props = {

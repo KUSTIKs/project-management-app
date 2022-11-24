@@ -16,8 +16,8 @@ import { useAppRouter } from '@project-management-app/hooks';
 import { authService } from '@project-management-app/services';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 import { QueryKey } from '@project-management-app/enums';
+import { getSignInSchema } from '@project-management-app/schemas';
 
-import { getSignInSchema } from './sign-in.schema';
 import { authDictionary } from '../auth.dictionary';
 import classes from '../auth.module.scss';
 

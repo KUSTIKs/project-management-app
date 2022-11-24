@@ -16,8 +16,8 @@ import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { getCreateColumnSchema } from '../create/create-column-modal.schema';
 import { columnModalsDictionary } from '../column-modals.dictionary';
+import { getUpdateColumnSchema } from 'common/schemas/column/update-column-schema';
 
 type Props = {
   isOpen: boolean;
@@ -55,7 +55,7 @@ const UpdateColumnModal: FC<Props> = ({
     formState: { errors, isDirty },
   } = useForm<UpdateColumnDto>({
     resolver: zodResolver(
-      getCreateColumnSchema({
+      getUpdateColumnSchema({
         locale,
       })
     ),

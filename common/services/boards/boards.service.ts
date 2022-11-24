@@ -41,9 +41,16 @@ class BoardsService {
 
   async getById(id: string) {
     const response = await appFetch(`/boards/${id}`);
-    const data: Board = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: Board = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async delete(id: string) {

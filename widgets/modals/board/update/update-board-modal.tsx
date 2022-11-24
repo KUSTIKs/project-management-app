@@ -15,8 +15,8 @@ import { boardsService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
+import { getUpdateBoardSchema } from '@project-management-app/schemas';
 
-import { getCreateBoardSchema } from '../create/create-board-modal.schema';
 import { boardModalsDictionary } from '../board-modals.dictionary';
 
 type Props = {
@@ -48,7 +48,7 @@ const UpdateBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
     formState: { errors, isDirty },
   } = useForm<UpdateBoardDto>({
     resolver: zodResolver(
-      getCreateBoardSchema({
+      getUpdateBoardSchema({
         locale,
       })
     ),

@@ -17,7 +17,7 @@ import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
 
 import { columnModalsDictionary } from '../column-modals.dictionary';
-import { getCreateColumnSchema } from './create-column-modal.schema';
+import { getCreateColumnSchema } from 'common/schemas/column/create-column-schema';
 
 type Props = {
   isOpen: boolean;
