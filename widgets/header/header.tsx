@@ -45,8 +45,8 @@ const Header: FC<Props> = ({ isAuthorized }) => {
 
   const handleLogOut = () => {
     Cookies.remove(CookieName.NEXT_TOKEN);
-    router.push('/');
     router.refresh();
+    router.push('/');
   };
 
   return (

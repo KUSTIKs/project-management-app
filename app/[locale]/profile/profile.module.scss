@@ -6,14 +6,28 @@
   margin-top: 5vh;
 }
 
-.form {
+.wrapper {
   display: grid;
   gap: 20px;
 }
 
-.inputs {
+.topInfo {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.loadingContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fieldset {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  min-height: 200px;
+  border: none;
 }

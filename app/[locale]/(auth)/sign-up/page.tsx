@@ -89,7 +89,7 @@ const SignUpPage: FC<Props> = ({ params }) => {
             </Typography>
           )}
         </fieldset>
-        <Button size="l" isLoading={isLoading}>
+        <Button size="l" isLoading={isLoading} type="submit">
           {contentMap.submit}
         </Button>
       </form>

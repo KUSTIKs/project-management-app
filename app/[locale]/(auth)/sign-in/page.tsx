@@ -58,8 +58,8 @@ const SignInPage: FC<Props> = ({ params }) => {
   };
 
   const navigateToBoards = () => {
-    router.push('/boards');
     router.refresh();
+    router.push('/boards');
   };
 
   return (
@@ -85,7 +85,7 @@ const SignInPage: FC<Props> = ({ params }) => {
             </Typography>
           )}
         </fieldset>
-        <Button size="l" isLoading={isLoading}>
+        <Button size="l" isLoading={isLoading} type="submit">
           {contentMap.submit}
         </Button>
       </form>

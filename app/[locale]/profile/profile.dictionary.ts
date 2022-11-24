@@ -6,13 +6,19 @@ const profileDictionary = new ContentDictionary({
     title: 'Profile',
     name: 'name',
     login: 'login',
+    password: 'password',
     update: 'Update',
+    cancel: 'Cancel',
+    somethingWrong: 'Something went wrong',
   },
   [LocaleName.RU]: {
     title: 'Профиль',
     name: 'имя',
     login: 'логин',
+    password: 'пароль',
     update: 'Обновить',
+    cancel: 'Отмена',
+    somethingWrong: 'Что-то пошло не так',
   },
 });
 
