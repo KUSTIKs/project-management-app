@@ -67,7 +67,12 @@
   --width-container-xs: 400px;
 
   /* Effect styles */
-  --window-shade: 0px 0px 20px rgba(0, 0, 0, 0.05);
+  --window-shade: rgba(0, 0, 0, 0.04) 0px 36px 89px 0px,
+    rgba(0, 0, 0, 0.03) 0px 23.3px 52.1px 0px,
+    rgba(0, 0, 0, 0.024) 0px 13.9px 28.3px 0px,
+    rgba(0, 0, 0, 0.02) 0px 7.2px 14.5px 0px,
+    rgba(0, 0, 0, 0.016) 0px 3px 7.3px 0px,
+    rgba(0, 0, 0, 0.008) 0px 0.6px 3.5px 0px;
 }
 
 * {

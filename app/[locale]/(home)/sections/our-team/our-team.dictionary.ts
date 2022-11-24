@@ -9,24 +9,24 @@ const ourTeamDictionary = new ContentDictionary({
       description: 'Developer, designer',
       statements: [
         {
-          title: 'Quisque nunc enim',
+          title: 'Design',
           description:
-            'Egestas proin et consequat aliquet purus sed massa. Et ipsum elit dui nibh in ultrices tristique cras suspendisse.',
+            'Created a user-friendly interface using the latest innovations in figma',
         },
         {
-          title: 'Tellus quam tempus',
+          title: 'Architecture',
           description:
-            'Accumsan vulputate proin nulla morbi rhoncus. Sit donec nulla facilisis orci est erat tortor felis. Vestibulum ultricies ut cras viverra ut.',
+            'Created a reliable project structure with clear and clean code, organized CI/CD',
         },
         {
-          title: 'Purus nisl nulla',
+          title: 'Functionality',
           description:
-            'Aliquam aliquam faucibus vitae risus hac scelerisque posuere. Malesuada quis vitae bibendum euismod adipiscing nisl. Volutpat massa fringilla nunc feugiat scelerisque odio commodo et.',
+            'Implemented functionality with readable and easy-to-understand code using best practices and design patterns',
         },
         {
-          title: 'Eget aenean',
+          title: 'Accessibility',
           description:
-            'Augue scelerisque posuere turpis enim viverra malesuada ipsum. Mattis non nisi pretium bibendum. Suscipit at eget vitae amet ut nunc eu eget adipiscing.',
+            'Added support for three languages: English, Russian and Ukrainian',
         },
       ],
     },
@@ -38,24 +38,24 @@ const ourTeamDictionary = new ContentDictionary({
       description: 'Разработчик, дизайнер',
       statements: [
         {
-          title: 'Я сейчас плачу',
+          title: 'Дизайн',
           description:
-            'Приморский край, прежде всего, немного перебор. Кусочки были брошены в ультразвуковую суспензию дерьма.',
+            'Создал удобный интерфейс с использованием последних инноваций в figma',
         },
         {
-          title: 'Телус',
+          title: 'Архитектура',
           description:
-            'Аккерман, никакой "рапсодии Ронды" не было. Пожертвовать liquid orchestra был крутым ублюдком. Ультразвуковая одежда выживет.',
+            'Создал надежную структуру проекта с понятным и чистым кодом. Организовал CI/CD',
         },
         {
-          title: 'Пурус ничто',
+          title: 'Функционал',
           description:
-            'Есть смех, когда я могу посмеяться над ним. Я хотел знать, что случилось с "ниссаном". Слишком много кафе прямо сейчас, я ненавидел композитора.',
+            'Реализовал функциональность с читаемым и легким для понимания кодом, использующим лучшие практики и шаблоны проектирования',
         },
         {
-          title: 'Эней',
+          title: 'Доступность',
           description:
-            'Индюки могут видеть худшее, худшее будет пропущено. У Мэтта не было жука. Прямо сейчас я все еще нахожусь под влиянием своей собственной зависимости.',
+            'Добавил поддержка трех языков: английского, русского и украинского',
         },
       ],
     },
@@ -67,24 +67,24 @@ const ourTeamDictionary = new ContentDictionary({
       description: 'Розробник, дизайнер',
       statements: [
         {
-          title: ' я зараз плачу',
+          title: 'Дизайн',
           description:
-            'В першу чергу, це трохи перебір. Шматки кидали в ультразвукову суспензію лайна.',
+            'Створив зручний інтерфейс з використанням останніх інновацій в figma',
         },
         {
-          title: 'Телус',
+          title: 'Архітектура',
           description:
-            'Аккерман, рапсодії Ронди не було. Нічого не жертвуйте, щоб полегшити Феліксу. Ультразвуковий одяг виживе.',
+            'Створив надійну структуру проекту зі зрозумілим і чистим кодом. Організував CI / CD',
         },
         {
-          title: 'Пурус ніщо',
+          title: 'Функціонал',
           description:
-            'Є сміх, коли я можу посміятися над ним. Я хотів знати, що сталося з Ніссаном. Занадто багато кафе прямо зараз, я ненавидів композитора.',
+            'Реалізував функціональність з читабельним і легким для розуміння кодом, що використовує кращі практики та шаблони проєктування',
         },
         {
-          title: 'Еней',
+          title: 'Доступність',
           description:
-            'Індики можуть бачити найгірше, найгірше буде пропущено. У Метта не було жука. Зараз я все ще перебуваю під впливом власної залежності',
+            'Додав підтримка трьох мов: англійської, російської та української',
         },
       ],
     },

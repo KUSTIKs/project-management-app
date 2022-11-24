@@ -4,38 +4,37 @@ import { ContentDictionary } from '@project-management-app/helpers';
 const advantagesDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     advantage1: {
-      title: 'Ac mauris ut quis',
+      title: 'Organize work',
       description:
-        'Adipiscing vitae nisi dictum elementum adipiscing. Sem suspendisse id eget fermentum. Ante eget risus ullamcorper feugiat. Iaculis lectus ac id nibh orci lectus amet hendrerit.',
+        'Flexible kanban boards help teams visualize their workflow, limit work-in-progress, and maximize efficiency as a team',
     },
     advantage2: {
-      title: 'Sodales commodo',
-      description:
-        'Amet laoreet vestibulum ut in sed tortor massa. Tempor vitae arcu urna nulla eget enim et.',
+      title: 'Make work visible',
+      description: 'Track work through an open, collaborative platform',
     },
   },
   [LocaleName.RU]: {
     advantage1: {
-      title: 'Сед доминг номинати',
+      title: 'Организуйте работу',
       description:
-        'Юсто диспутандо ех хас, еу реяуе малорум постулант пер. Аппетере сингулис реферрентур про еу, яуо ид стет ерат, сед елит цонцлудатуряуе но. Не хис яуод перфецто цонвенире, иус не апериам цомплецтитур.',
+        'Гибкие доски канбан помогают командам визуализировать свой рабочий процесс, ограничивать количество незавершенных работ и повышать эффективность работы всей команды',
     },
     advantage2: {
-      title: 'Епицури атоморум',
+      title: 'Сделайте работу видимой',
       description:
-        'Витае аццусамус вел цу, ет денияуе деленити адверсариум вих.',
+        'Отслеживайте работу с помощью открытой платформы для совместной работы',
     },
   },
   [LocaleName.UK]: {
     advantage1: {
-      title: 'Мауріціо',
+      title: 'Організуйте роботу',
       description:
-        'Ви не Словник залежності. Не відмовляйтеся від власної карти бродіння. Сідлай свого власного втікача. Буде випущено читання Айві the nibbles.',
+        'Гнучкі канбан дошки допомагають командам візуалізувати свій робочий процес, обмежувати кількість незавершених робіт і підвищувати ефективність роботи всієї команди',
     },
     advantage2: {
-      title: 'комічна содова',
+      title: 'Зробіть роботу видимою',
       description:
-        'Я ношу багато сміття на метеликах. Немає ніякої необхідності мочитися самостійно.',
+        'Відстежуйте роботу за допомогою відкритої платформи для спільної роботи',
     },
   },
 });

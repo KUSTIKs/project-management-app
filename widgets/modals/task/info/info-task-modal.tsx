@@ -71,9 +71,13 @@ const InfoTaskModal: FC<Props> = ({
             </Button>
           </Modal.Actions>
           <Modal.Fieldset disabled>
-            <TextInput label="title" variant="unfilled" value={title} />
             <TextInput
-              label="description"
+              label={contentMap.title}
+              variant="unfilled"
+              value={title}
+            />
+            <TextInput
+              label={contentMap.description}
               variant="unfilled"
               isMultiline
               value={description}

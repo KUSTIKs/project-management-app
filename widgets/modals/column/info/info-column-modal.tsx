@@ -69,7 +69,11 @@ const InfoColumnModal: FC<Props> = ({
             </Button>
           </Modal.Actions>
           <Modal.Fieldset disabled>
-            <TextInput label="title" variant="unfilled" value={title} />
+            <TextInput
+              label={contentMap.title}
+              variant="unfilled"
+              value={title}
+            />
           </Modal.Fieldset>
         </Modal>
       )}

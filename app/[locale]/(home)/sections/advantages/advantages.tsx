@@ -19,7 +19,7 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
     <section className={classes.container}>
       <div className={classes.advantage}>
         <img
-          src="/images/boards-page-screenshot.png"
+          src="/images/boards_page-screenshot.png"
           alt="boards page"
           className={classes.advantageImage}
         />
@@ -33,17 +33,17 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
           />
           <div>
             <Typography variant="largeTitle3" weight={600}>
-              {contentMap.advantage2.title}
+              {contentMap.advantage1.title}
             </Typography>
             <Typography variant="text" weight={500} colorName="text/400">
-              {contentMap.advantage2.description}
+              {contentMap.advantage1.description}
             </Typography>
           </div>
         </div>
       </div>
       <div className={classes.advantage}>
         <img
-          src="/images/board-page-screenshot.png"
+          src="/images/board_page-screenshot.png"
           alt="board detail page"
           className={classes.advantageImage}
         />
@@ -57,10 +57,10 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
           />
           <div>
             <Typography variant="largeTitle3" weight={600}>
-              {contentMap.advantage1.title}
+              {contentMap.advantage2.title}
             </Typography>
             <Typography variant="text" weight={500} colorName="text/400">
-              {contentMap.advantage1.description}
+              {contentMap.advantage2.description}
             </Typography>
           </div>
         </div>

@@ -20,7 +20,7 @@ const heroDictionary = new ContentDictionary({
     description:
       'Нарешті, простий інструмент для управління процесами та проектами',
     tryNow: 'Спробуйте зараз',
-    projectRepo: 'Репозиторій проекту',
+    projectRepo: 'Репозиторій',
   },
 });
 
