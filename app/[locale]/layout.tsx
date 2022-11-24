@@ -4,11 +4,12 @@ import { cookies } from 'next/headers';
 import { Footer, Header } from '@project-management-app/widgets';
 import { AppLocale } from '@project-management-app/types';
 import { CookieName } from '@project-management-app/enums';
-import { decodeToken } from '@project-management-app/helpers';
+import { decodeToken, isAppLocale } from '@project-management-app/helpers';
 import {
   AppContextProvider,
   ReactQueryProvider,
 } from '@project-management-app/components';
+import { appInternalizationConfig } from '@project-management-app/config';
 
 import '../../styles/global-styles.scss';
 
@@ -20,7 +21,9 @@ type Props = {
 };
 
 const RootLayout: FC<Props> = ({ children, params }) => {
-  const { locale } = params;
+  const locale = isAppLocale(params.locale)
+    ? params.locale
+    : appInternalizationConfig.defaultLocale;
 
   const token = cookies().get(CookieName.NEXT_TOKEN)?.value;
   const { isExpired, payload } = decodeToken(token);

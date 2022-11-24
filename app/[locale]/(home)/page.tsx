@@ -1,6 +1,8 @@
 import { FC } from 'react';
 
 import { AppLocale } from '@project-management-app/types';
+import { appInternalizationConfig } from '@project-management-app/config';
+import { isAppLocale } from '@project-management-app/helpers';
 
 import { Separator } from './components/components';
 import {
@@ -17,7 +19,9 @@ type Props = {
 };
 
 const HomePage: FC<Props> = ({ params }) => {
-  const { locale } = params;
+  const locale = isAppLocale(params.locale)
+    ? params.locale
+    : appInternalizationConfig.defaultLocale;
 
   return (
     <>
