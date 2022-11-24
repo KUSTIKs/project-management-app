@@ -7,7 +7,6 @@ import { useAtom } from 'jotai';
 
 import {
   Column as ColumnEntity,
-  FullBoard,
   UpdateColumnDto,
   UpdateTaskDto,
 } from '@project-management-app/types';
@@ -25,106 +24,6 @@ import { displayTasksMapAtom } from './helpers/helpers';
 
 type Props = {
   boardId: string;
-};
-
-const DATA: FullBoard = {
-  id: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
-  title: 'Matilda Gill',
-  description:
-    'Occaecat in officia laborum exercitation proident irure dolore id.',
-  columns: [
-    {
-      id: 'c28f9bdf-4f5d-5dab-a887-61df6a887f86',
-      order: 0,
-      title: 'Travis Barnett',
-      tasks: [
-        {
-          boardId: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
-          columnId: 'c28f9bdf-4f5d-5dab-a887-61df6a887f86',
-          description:
-            'Do pariatur officia id velit quis ullamco culpa ex veniam sint excepteur.',
-          files: [],
-          id: '1804bb25-2e98-5e4d-8950-71169a633043',
-          order: 0,
-          title: 'Jesus Mendoza',
-          userId: '531b2435-262a-5975-a9b0-d4afd0104340',
-        },
-        {
-          boardId: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
-          columnId: 'c28f9bdf-4f5d-5dab-a887-61df6a887f86',
-          description:
-            'Nisi aute commodo tempor duis reprehenderit ut officia ipsum.',
-          files: [],
-          id: '57622241-9927-5f1d-a3a9-60069fcfa645',
-          order: 1,
-          title: 'Rachel Cummings',
-          userId: '531b2435-262a-5975-a9b0-d4afd0104340',
-        },
-        {
-          boardId: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
-          columnId: 'c28f9bdf-4f5d-5dab-a887-61df6a887f86',
-          description:
-            'In elit quis sit anim elit sunt ut do amet sit tempor duis.',
-          files: [],
-          id: '9a31faba-cfb7-523b-bcf0-3643fd2d7836',
-          order: 2,
-          title: 'Laura Clark',
-          userId: '531b2435-262a-5975-a9b0-d4afd0104340',
-        },
-      ],
-    },
-    {
-      id: '13824cfb-3cd6-512b-ad5b-76b9f60a850e',
-      order: 1,
-      title: 'Christine Duncan',
-      tasks: [
-        {
-          boardId: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
-          columnId: '13824cfb-3cd6-512b-ad5b-76b9f60a850e',
-          description:
-            'Voluptate duis anim voluptate cillum velit non nostrud magna voluptate proident irure.',
-          files: [],
-          id: 'e7f2f66c-7169-5551-aefb-db118b658bdf',
-          order: 0,
-          title: 'Aiden Castillo',
-          userId: '531b2435-262a-5975-a9b0-d4afd0104340',
-        },
-        {
-          boardId: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
-          columnId: '13824cfb-3cd6-512b-ad5b-76b9f60a850e',
-          description:
-            'Proident proident minim tempor aliqua nostrud occaecat.',
-          files: [],
-          id: '72091372-99f2-57d1-aecf-0d9827124e1d',
-          order: 1,
-          title: 'Loretta Alexander',
-          userId: '531b2435-262a-5975-a9b0-d4afd0104340',
-        },
-        {
-          boardId: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
-          columnId: '13824cfb-3cd6-512b-ad5b-76b9f60a850e',
-          description:
-            'Dolor aliqua magna nisi officia incididunt anim ea elit aliqua occaecat laboris deserunt.',
-          files: [],
-          id: '66a9a4dd-7bf7-5c72-862b-e139fb8ce7a8',
-          order: 2,
-          title: 'Herman Pierce',
-          userId: '531b2435-262a-5975-a9b0-d4afd0104340',
-        },
-        {
-          boardId: '9b7ce739-1bbb-52e5-adba-27282ef4fa58',
-          columnId: '13824cfb-3cd6-512b-ad5b-76b9f60a850e',
-          description:
-            'Sit labore deserunt pariatur nulla pariatur ut occaecat fugiat nostrud tempor commodo commodo voluptate.',
-          files: [],
-          id: 'b25230e6-820d-5145-b658-8e431c91bc53',
-          order: 3,
-          title: 'Jesse Hart',
-          userId: '531b2435-262a-5975-a9b0-d4afd0104340',
-        },
-      ],
-    },
-  ],
 };
 
 const KanbanBoard: FC<Props> = ({ boardId }) => {
@@ -178,12 +77,16 @@ const KanbanBoard: FC<Props> = ({ boardId }) => {
     ) {
       return;
     }
+
     if (type === DndType.GROUP) {
-      const workValue = [...displayColumns];
       const sourceColumn = displayColumns[source.index];
       const destinationColumn = displayColumns[destination.index];
-      workValue[source.index] = destinationColumn;
-      workValue[destination.index] = sourceColumn;
+
+      const workValue = [...displayColumns];
+
+      const [movedColumn] = workValue.splice(source.index, 1);
+      workValue.splice(destination.index, 0, movedColumn);
+
       setDisplayColumns(workValue);
       updateColumn({
         columnId: sourceColumn.id,
