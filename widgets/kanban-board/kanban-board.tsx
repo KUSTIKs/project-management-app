@@ -1,20 +1,27 @@
 'use client';
 
+import { FC, useEffect, useState } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { FC } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useAtom } from 'jotai';
 
-import { FullBoard } from '@project-management-app/types';
+import {
+  Column as ColumnEntity,
+  FullBoard,
+  UpdateColumnDto,
+  UpdateTaskDto,
+} from '@project-management-app/types';
 import { QueryKey } from '@project-management-app/enums';
-import { columnsService } from '@project-management-app/services';
+import { columnsService, tasksService } from '@project-management-app/services';
 import { Loader, Typography } from '@project-management-app/components';
 import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
-import { useAppContext, useBooleanState } from '@project-management-app/hooks';
+import { useAppContext } from '@project-management-app/hooks';
 
 import { Column } from './components/components';
-import classes from './kanban-board.module.scss';
 import { DndDroppableId, DndType } from './enums/enums';
 import { kanbanBoardDictionary } from './kanban-board.dictionary';
+import classes from './kanban-board.module.scss';
+import { displayTasksMapAtom } from './helpers/helpers';
 
 type Props = {
   boardId: string;
@@ -123,6 +130,7 @@ const DATA: FullBoard = {
 const KanbanBoard: FC<Props> = ({ boardId }) => {
   const { locale } = useAppContext();
   const contentMap = kanbanBoardDictionary.getContentMap({ locale });
+  const queryClient = useQueryClient();
   const {
     data: columns,
     isLoading,
@@ -131,48 +139,124 @@ const KanbanBoard: FC<Props> = ({ boardId }) => {
     queryKey: [QueryKey.COLUMNS, { boardId }],
     queryFn: () => columnsService.getAll({ boardId }),
   });
+  const { mutate: updateColumn, isLoading: isUpdatingColumn } = useMutation({
+    mutationFn: ({
+      columnId,
+      dto,
+    }: {
+      columnId: string;
+      dto: UpdateColumnDto;
+    }) => columnsService.update({ boardId, columnId }, dto),
+    onSuccess: () => handleColumnUpdated(),
+  });
+  const { mutate: updateTask, isLoading: isUpdatingTask } = useMutation({
+    mutationFn: ({
+      columnId,
+      taskId,
+      dto,
+    }: {
+      columnId: string;
+      taskId: string;
+      dto: UpdateTaskDto;
+    }) => tasksService.update({ boardId, columnId, taskId }, dto),
+    onSuccess: (data, variables) => handleTaskUpdated(variables),
+  });
+  const [displayColumns, setDisplayColumns] = useState<ColumnEntity[]>();
+  const [displayTasksMap, setDisplayTasksMap] = useAtom(displayTasksMapAtom);
+
   const errorMessage = getKeyFromUnknown(error, 'message');
 
+  const isSwapping = isUpdatingColumn || isUpdatingTask;
+
   const handleDragEnd = ({ destination, source, type }: DropResult) => {
-    // if (
-    //   !destination ||
-    //   (destination.droppableId === source.droppableId &&
-    //     destination.index === source.index)
-    // ) {
-    //   return;
-    // }
-    // if (type === DndType.GROUP) {
-    //   const workValue = [...columns];
-    //   workValue[source.index] = columns[destination.index];
-    //   workValue[destination.index] = columns[source.index];
-    //   updateState(workValue);
-    //   return;
-    // }
-    // const sourceIndex = columns.findIndex(
-    //   ({ id }) => id === source.droppableId
-    // );
-    // const destinationIndex = columns.findIndex(
-    //   ({ id }) => id === destination.droppableId
-    // );
-    // if (sourceIndex < 0 || destinationIndex < 0) return;
-    // const sourceTasks = columns[sourceIndex].tasks.slice();
-    // const destinationTasks =
-    //   source.droppableId !== destination.droppableId
-    //     ? columns[sourceIndex].tasks.slice()
-    //     : sourceTasks;
-    // const [deletedTask] = sourceTasks.splice(source.index, 1);
-    // destinationTasks.splice(destination.index, 0, deletedTask);
-    // const workValue = columns.slice();
-    // workValue[sourceIndex] = {
-    //   ...columns[sourceIndex],
-    //   tasks: sourceTasks,
-    // };
-    // workValue[destinationIndex] = {
-    //   ...columns[destinationIndex],
-    //   tasks: destinationTasks,
-    // };
-    // updateState(workValue);
+    if (
+      !destination ||
+      !columns ||
+      !displayColumns ||
+      (destination.droppableId === source.droppableId &&
+        destination.index === source.index)
+    ) {
+      return;
+    }
+    if (type === DndType.GROUP) {
+      const workValue = [...displayColumns];
+      const sourceColumn = displayColumns[source.index];
+      const destinationColumn = displayColumns[destination.index];
+      workValue[source.index] = destinationColumn;
+      workValue[destination.index] = sourceColumn;
+      setDisplayColumns(workValue);
+      updateColumn({
+        columnId: sourceColumn.id,
+        dto: {
+          order: destinationColumn.order,
+          title: sourceColumn.title,
+        },
+      });
+      return;
+    }
+
+    const sourceColumn = displayColumns.find(
+      ({ id }) => id === source.droppableId
+    );
+    const destinationColumn = displayColumns.find(
+      ({ id }) => id === destination.droppableId
+    );
+
+    if (!sourceColumn || !destinationColumn) return;
+
+    const sourceTasks = displayTasksMap.get(sourceColumn.id)?.slice();
+    const destinationTasks =
+      source.droppableId === destination.droppableId
+        ? sourceTasks
+        : displayTasksMap.get(destinationColumn.id)?.slice();
+
+    if (!sourceTasks || !destinationTasks) return;
+
+    const [movedTask] = sourceTasks.splice(source.index, 1);
+    destinationTasks.splice(destination.index, 0, movedTask);
+
+    setDisplayTasksMap((state) => {
+      const workValue = new Map(state);
+
+      workValue.set(sourceColumn.id, sourceTasks);
+      workValue.set(destinationColumn.id, destinationTasks);
+
+      return workValue;
+    });
+
+    const { id, files, ...movedTaskProps } = movedTask;
+    updateTask({
+      taskId: id,
+      columnId: sourceColumn.id,
+      dto: {
+        ...movedTaskProps,
+        boardId,
+        columnId: destinationColumn.id,
+        order: destination.index + 1,
+      },
+    });
   };
+
+  const handleColumnUpdated = () => {
+    queryClient.invalidateQueries({
+      queryKey: [QueryKey.COLUMNS],
+    });
+  };
+  const handleTaskUpdated = (variables: {
+    columnId: string;
+    dto: UpdateTaskDto;
+  }) => {
+    queryClient.invalidateQueries({
+      queryKey: [QueryKey.TASKS, { columnId: variables.columnId }],
+    });
+    queryClient.invalidateQueries({
+      queryKey: [QueryKey.TASKS, { columnId: variables.dto.columnId }],
+    });
+  };
+
+  useEffect(() => {
+    setDisplayColumns(columns?.slice().sort((a, b) => a.order - b.order));
+  }, [columns]);
 
   if (isLoading) {
     return (
@@ -200,6 +284,7 @@ const KanbanBoard: FC<Props> = ({ boardId }) => {
         droppableId={DndDroppableId.ROOT}
         type={DndType.GROUP}
         direction="horizontal"
+        isDropDisabled={isSwapping}
       >
         {(provided) => (
           <div
@@ -208,12 +293,13 @@ const KanbanBoard: FC<Props> = ({ boardId }) => {
             {...provided.innerRef}
             ref={provided.innerRef}
           >
-            {columns?.map((column, index) => (
+            {displayColumns?.map((column, index) => (
               <Column
                 key={column.id}
                 column={column}
                 boardId={boardId}
                 index={index}
+                isSwapping={isSwapping}
               />
             ))}
             {provided.placeholder}

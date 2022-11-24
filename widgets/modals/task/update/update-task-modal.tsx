@@ -103,11 +103,13 @@ const UpdateTaskModal: FC<Props> = ({
         <TextInput
           label={contentMap.title}
           {...register('title')}
+          variant="unfilled"
           errorMessage={errors.title?.message}
         />
         <TextInput
           label={contentMap.description}
           {...register('description')}
+          variant="unfilled"
           isMultiline
           errorMessage={errors.description?.message}
         />

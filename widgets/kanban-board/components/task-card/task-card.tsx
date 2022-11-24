@@ -15,15 +15,22 @@ type Props = {
   columnId: string;
   boardId: string;
   index: number;
+  isSwapping: boolean;
 };
 
-const TaskCard: FC<Props> = ({ task, index, boardId, columnId }) => {
+const TaskCard: FC<Props> = ({
+  task,
+  index,
+  boardId,
+  columnId,
+  isSwapping,
+}) => {
   const { id, title, description } = task;
   const [isInfoModalOpen, isInfoModalOpenActions] = useBooleanState(false);
 
   return (
     <>
-      <Draggable draggableId={id} index={index}>
+      <Draggable draggableId={id} index={index} isDragDisabled={isSwapping}>
         {(provided) => (
           <div
             className={classes.wrapper}

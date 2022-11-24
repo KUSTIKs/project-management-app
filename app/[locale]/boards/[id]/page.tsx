@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import { AppLocale } from '@project-management-app/types';
 import {
   Button,
+  DragScroll,
   Icon,
   Loader,
   Typography,
@@ -90,9 +91,9 @@ const BoardPage: FC<Props> = ({ params }) => {
           </div>
         </div>
       </div>
-      <div className={classes.columnsWrapperContainer}>
+      <DragScroll className={classes.columnsWrapperContainer}>
         <KanbanBoard boardId={board.id} />
-      </div>
+      </DragScroll>
       <CreateColumnModal
         boardId={board.id}
         handleClose={isCreateColumnModalOpenActions.setFalse}

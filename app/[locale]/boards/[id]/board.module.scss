@@ -26,12 +26,13 @@
   margin: 0 auto;
   padding: 0 15px 15px;
   overflow: auto;
+  min-height: 200px;
   &::-webkit-scrollbar {
     width: 3px;
     height: 3px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: var(--color-grey--300);
+    background-color: var(--color-grey--100);
     border-radius: 20px;
   }
 }

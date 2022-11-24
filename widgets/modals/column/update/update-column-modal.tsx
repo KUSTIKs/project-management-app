@@ -101,6 +101,7 @@ const UpdateColumnModal: FC<Props> = ({
         <TextInput
           label={contentMap.title}
           {...register('title')}
+          variant="unfilled"
           errorMessage={errors.title?.message}
         />
       </Modal.Fieldset>

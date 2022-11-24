@@ -4,8 +4,11 @@ import {
   ApiError,
   Column,
   CreateColumnDto,
+  FullColumn,
   UpdateColumnDto,
 } from '@project-management-app/types';
+
+import { tasksService } from '../tasks/tasks.service';
 
 class ColumnsService {
   async getAll({ boardId }: { boardId: string }) {
@@ -20,6 +23,21 @@ class ColumnsService {
 
       throw error;
     }
+  }
+
+  async getAllFull({ boardId }: { boardId: string }) {
+    const columns = await this.getAll({ boardId });
+    const fullColumns: FullColumn[] = await Promise.all(
+      columns.map(async (column) => ({
+        ...column,
+        tasks: await tasksService.getAll({
+          boardId,
+          columnId: column.id,
+        }),
+      }))
+    );
+
+    return fullColumns;
   }
 
   async create({ boardId }: { boardId: string }, dto: CreateColumnDto) {

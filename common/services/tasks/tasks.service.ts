@@ -132,6 +132,22 @@ class TasksService {
       throw error;
     }
   }
+
+  async reorder(
+    params: {
+      boardId: string;
+      taskId: string;
+      columnId: string;
+    },
+    { order }: { order: number }
+  ) {
+    const task = await this.getById(params);
+    const { id, files, ...taskProps } = task;
+    return await this.update(params, {
+      ...taskProps,
+      order,
+    });
+  }
 }
 
 const tasksService = new TasksService();

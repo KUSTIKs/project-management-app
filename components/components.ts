@@ -9,4 +9,5 @@ export { BoardCard } from './board-card/board-card';
 export { Modal } from './modal/modal';
 export { ReactQueryProvider } from './react-query-provider/react-query-provider';
 export { AppContextProvider } from './app-context-provider/app-context-provider';
+export { DragScroll } from './drag-scroll/drag-scroll';
 export * from './modals/modals';
