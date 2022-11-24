@@ -20,6 +20,15 @@ const columnModalsDictionary = new ContentDictionary({
     deleteColumn: 'Удалить колонку',
     infoColumn: 'Информация о колонке',
   },
+  [LocaleName.UK]: {
+    title: 'заголовок',
+    update: 'Оновити',
+    delete: 'Видалити',
+    createColumn: 'Створити колонку',
+    updateColumn: 'Оновити колонку',
+    deleteColumn: 'Видалити колонку',
+    infoColumn: 'Інформація про колонку',
+  },
 });
 
 export { columnModalsDictionary };

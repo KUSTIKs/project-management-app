@@ -12,6 +12,11 @@ const boardDictionary = new ContentDictionary({
     edit: 'Изменить',
     noBoardFound: 'Доска не найдена',
   },
+  [LocaleName.UK]: {
+    newColumn: 'Нова колонка',
+    edit: 'Змінити',
+    noBoardFound: 'Дошка не знайдена',
+  },
 });
 
 export { boardDictionary };

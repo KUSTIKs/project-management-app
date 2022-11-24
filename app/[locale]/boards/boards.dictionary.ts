@@ -12,6 +12,11 @@ const boardsDictionary = new ContentDictionary({
     newBoard: 'Новая доска',
     noBoardsMessage: 'Доски еще не созданы',
   },
+  [LocaleName.UK]: {
+    title: 'Дошки',
+    newBoard: 'Нова дошка',
+    noBoardsMessage: 'Дошки ще не створені',
+  },
 });
 
 export { boardsDictionary };

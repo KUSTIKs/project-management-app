@@ -10,6 +10,10 @@ const actionModalDictionary = new ContentDictionary({
     cancel: 'Отмена',
     errorMessage: 'Что-то пошло не так',
   },
+  [LocaleName.UK]: {
+    cancel: 'Скусувати',
+    errorMessage: 'Щось пішло не так',
+  },
 });
 
 export { actionModalDictionary };

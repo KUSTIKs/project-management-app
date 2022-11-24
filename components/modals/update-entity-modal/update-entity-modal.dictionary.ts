@@ -8,6 +8,9 @@ const updateEntityModalDictionary = new ContentDictionary({
   [LocaleName.RU]: {
     update: 'Обновить',
   },
+  [LocaleName.UK]: {
+    update: 'Оновити',
+  },
 });
 
 export { updateEntityModalDictionary };

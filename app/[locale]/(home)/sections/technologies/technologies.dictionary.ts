@@ -10,6 +10,10 @@ const technologiesDictionary = new ContentDictionary({
     title: 'Технологии',
     subtitle: 'Создано с использованием самых надежных технологий',
   },
+  [LocaleName.UK]: {
+    title: 'Технології',
+    subtitle: 'Створено з використанням найнадійніших технологій',
+  },
 });
 
 export { technologiesDictionary };

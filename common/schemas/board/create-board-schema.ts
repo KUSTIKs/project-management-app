@@ -23,6 +23,15 @@ const validationMessageDictionary = new ContentDictionary({
     descriptionMax: (value: number) =>
       `Описание должно иметь до ${value} символов`,
   },
+  [LocaleName.UK]: {
+    titleRequired: "Заголовок обов'язковий",
+    titleMin: (value: number) => `Заголовок повинен мати від ${value} символів`,
+    titleMax: (value: number) => `Заголовок повинен мати до ${value} символів`,
+    descriptionRequired: "Опис обов'язковий",
+    descriptionMin: (value: number) =>
+      `Опис повинен мати від ${value} символів`,
+    descriptionMax: (value: number) => `Опис повинен мати до ${value} символів`,
+  },
 });
 
 const getCreateBoardSchema = ({ locale }: { locale: AppLocale }) => {

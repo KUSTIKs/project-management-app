@@ -8,6 +8,9 @@ const columnDictionary = new ContentDictionary({
   [LocaleName.RU]: {
     newTask: 'Новое задание',
   },
+  [LocaleName.UK]: {
+    newTask: 'Нове завдання',
+  },
 });
 
 export { columnDictionary };

@@ -16,6 +16,13 @@ const headerDictionary = new ContentDictionary({
     signIn: 'Войти',
     logOut: 'Выйти',
   },
+  [LocaleName.UK]: {
+    boards: 'Дошки',
+    profile: 'Профіль',
+    signUp: 'Реєстрація',
+    signIn: 'Увійти',
+    logOut: 'Вийти',
+  },
 });
 
 export { headerDictionary };

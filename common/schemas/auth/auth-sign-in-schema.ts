@@ -13,6 +13,10 @@ const validationMessageDictionary = new ContentDictionary({
     loginRequired: 'Логин обязателен',
     passwordRequired: 'Пароль обязателен',
   },
+  [LocaleName.UK]: {
+    loginRequired: "Логін обов'язковий",
+    passwordRequired: "Пароль обов'язковий",
+  },
 });
 
 const getSignInSchema = ({ locale }: { locale: AppLocale }) => {

@@ -26,6 +26,18 @@ const advantagesDictionary = new ContentDictionary({
         'Витае аццусамус вел цу, ет денияуе деленити адверсариум вих.',
     },
   },
+  [LocaleName.UK]: {
+    advantage1: {
+      title: 'Мауріціо',
+      description:
+        'Ви не Словник залежності. Не відмовляйтеся від власної карти бродіння. Сідлай свого власного втікача. Буде випущено читання Айві the nibbles.',
+    },
+    advantage2: {
+      title: 'комічна содова',
+      description:
+        'Я ношу багато сміття на метеликах. Немає ніякої необхідності мочитися самостійно.',
+    },
+  },
 });
 
 export { advantagesDictionary };

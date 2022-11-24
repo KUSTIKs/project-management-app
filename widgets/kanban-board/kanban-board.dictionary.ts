@@ -8,6 +8,9 @@ const kanbanBoardDictionary = new ContentDictionary({
   [LocaleName.RU]: {
     noColumns: 'Колонки еще не созданы',
   },
+  [LocaleName.UK]: {
+    noColumns: 'Колонки ще не створені',
+  },
 });
 
 export { kanbanBoardDictionary };

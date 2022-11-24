@@ -27,6 +27,17 @@ const validationMessageDictionary = new ContentDictionary({
     passwordMin: (value: number) => `Пароль должен иметь от ${value} символов`,
     passwordMax: (value: number) => `Пароль должен иметь до ${value} символов`,
   },
+  [LocaleName.UK]: {
+    loginRequired: "Логін обов'язковий",
+    loginMin: (value: number) => `Логін повинен мати від ${value} символів`,
+    loginMax: (value: number) => `Логін повинен мати до ${value} символів`,
+    nameRequired: "Ім'я обов'язкове",
+    nameMin: (value: number) => `Ім'я повинно мати від ${value} символів`,
+    nameMax: (value: number) => `Ім'я повинно мати до ${value} символів`,
+    passwordRequired: "Пароль обов'язковий",
+    passwordMin: (value: number) => `Пароль повинен мати від ${value} символів`,
+    passwordMax: (value: number) => `Пароль повинен мати до ${value} символів`,
+  },
 });
 
 const getSignUpSchema = ({ locale }: { locale: AppLocale }) => {

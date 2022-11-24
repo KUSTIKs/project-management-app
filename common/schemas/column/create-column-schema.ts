@@ -15,6 +15,11 @@ const validationMessageDictionary = new ContentDictionary({
     titleMin: (value: number) => `Заголовок должен иметь от ${value} символов`,
     titleMax: (value: number) => `Заголовок должен иметь до ${value} символов`,
   },
+  [LocaleName.UK]: {
+    titleRequired: "Заголовок обов'язковий",
+    titleMin: (value: number) => `Заголовок повинен мати від ${value} символів`,
+    titleMax: (value: number) => `Заголовок повинен мати до ${value} символів`,
+  },
 });
 
 const getCreateColumnSchema = ({ locale }: { locale: AppLocale }) => {

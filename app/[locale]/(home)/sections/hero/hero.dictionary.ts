@@ -15,6 +15,13 @@ const heroDictionary = new ContentDictionary({
     tryNow: 'Начни сейчас',
     projectRepo: 'Репозиторий',
   },
+  [LocaleName.UK]: {
+    title: 'Magic project manager',
+    description:
+      'Нарешті, простий інструмент для управління процесами та проектами',
+    tryNow: 'Спробуйте зараз',
+    projectRepo: 'Репозиторій проекту',
+  },
 });
 
 export { heroDictionary };

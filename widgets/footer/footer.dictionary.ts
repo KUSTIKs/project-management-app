@@ -8,6 +8,9 @@ const footerDictionary = new ContentDictionary({
   [LocaleName.RU]: {
     copyText: 'все права защищены',
   },
+  [LocaleName.UK]: {
+    copyText: 'всі права захищені',
+  },
 });
 
 export { footerDictionary };

@@ -22,6 +22,16 @@ const authDictionary = new ContentDictionary({
     signInMessage: 'Нет учетной записи?',
     signUpMessage: 'Есть учетная запись?',
   },
+  [LocaleName.UK]: {
+    signUp: 'Реєстрація',
+    signIn: 'Увійти',
+    name: "ім'я",
+    login: 'логін',
+    password: 'пароль',
+    submit: 'Підтвердити',
+    signInMessage: 'Немає облікового запису?',
+    signUpMessage: 'Є обліковий запис?',
+  },
 });
 
 export { authDictionary };

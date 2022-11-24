@@ -20,6 +20,15 @@ const profileDictionary = new ContentDictionary({
     cancel: 'Отмена',
     somethingWrong: 'Что-то пошло не так',
   },
+  [LocaleName.UK]: {
+    title: 'Профіль',
+    name: "ім'я",
+    login: 'логін',
+    password: 'пароль',
+    update: 'Оновити',
+    cancel: 'Скасувати',
+    somethingWrong: 'Щось пішло не так',
+  },
 });
 
 export { profileDictionary };
