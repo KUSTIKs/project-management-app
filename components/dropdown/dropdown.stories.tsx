@@ -9,20 +9,11 @@ const componentMeta: ComponentMeta<typeof Dropdown> = {
   title: 'Components/Dropdown',
   component: Dropdown,
   argTypes: {
-    direction: {
-      control: 'radio',
-      options: ['up', 'down', 'left', 'right'],
-      defaultValue: 'down',
-    },
-    alignment: {
-      control: 'radio',
-      options: ['start', 'end'],
-      defaultValue: 'end',
-    },
     handleChange: {
       table: {
         disable: true,
       },
+      action: 'Changed',
     },
     trigger: {
       table: {
@@ -38,7 +29,6 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
 
 const Default = Template.bind({});
 Default.args = {
-  handleChange() {},
   options: [
     'Antarctica',
     'Togo',
@@ -57,10 +47,17 @@ Default.args = {
     'Argentina',
   ],
   trigger: (
-    <Button variant="ghost" size="m" startIcon={<Icon.GlobalLine />}>
+    <Button
+      variant="ghost"
+      size="m"
+      startIcon={<Icon.GlobalLine />}
+      endIcon={<Icon.ArrowDropDownLine />}
+    >
       Country
     </Button>
   ),
+  alignment: 'start',
+  direction: 'down',
 };
 
 export default componentMeta;

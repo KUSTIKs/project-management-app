@@ -84,7 +84,14 @@ const Modal: FC<Props> & {
     </dialog>
   );
 
-  return createPortal(modal, document.getElementById('modal-portal')!);
+  const container = document.getElementById('modal-portal');
+
+  if (!container) {
+    console.error('Could not found element with id "modal-portal"');
+    return null;
+  }
+
+  return createPortal(modal, container);
 };
 
 Modal.Fieldset = ModalFieldset;

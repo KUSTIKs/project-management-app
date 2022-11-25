@@ -16,16 +16,12 @@ const componentMeta: ComponentMeta<typeof Button> = {
   argTypes: {
     children: {
       control: 'text',
-      defaultValue: 'Button',
     },
     size: {
       control: 'radio',
-      options: ['s', 'm', 'l'],
-      defaultValue: 'm',
     },
     variant: {
       control: 'radio',
-      options: ['contained', 'ghost', 'text'],
     },
     endIcon: iconNameArgType,
     startIcon: iconNameArgType,
@@ -33,6 +29,8 @@ const componentMeta: ComponentMeta<typeof Button> = {
   args: {
     isDisabled: false,
     isLoading: false,
+    size: 'm',
+    children: 'Button',
   },
 };
 

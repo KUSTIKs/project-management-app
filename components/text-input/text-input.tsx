@@ -30,7 +30,7 @@ const TextInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
     {
       label,
       errorMessage,
-      isError = !!errorMessage,
+      isError,
       variant = 'filled',
       isMultiline = false,
       ...inputAttrs
@@ -71,7 +71,7 @@ const TextInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
     return (
       <div
         className={classNames(classes.outerWrapper, {
-          [classes.outerWrapper_isError]: isError,
+          [classes.outerWrapper_isError]: isError || errorMessage,
           [classes.outerWrapper_variant_filled]: variant === 'filled',
           [classes.outerWrapper_variant_unfilled]: variant === 'unfilled',
         })}

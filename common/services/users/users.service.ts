@@ -19,9 +19,16 @@ class UsersService {
 
   async getById(id: string) {
     const response = await appFetch(`/users/${id}`);
-    const data: User = await response.json();
 
-    return data;
+    if (response.ok) {
+      const data: User = await response.json();
+
+      return data;
+    } else {
+      const error: ApiError = await response.json();
+
+      throw error;
+    }
   }
 
   async delete(id: string) {
