@@ -75,16 +75,19 @@ const UpdateForm: FC<Props> = ({ user, exitUpdatingMode }) => {
           label={contentMap.name}
           {...register('name')}
           errorMessage={errors.name?.message}
+          autoComplete="nickname"
         />
         <TextInput
           label={contentMap.login}
           {...register('login')}
           errorMessage={errors.login?.message}
+          autoComplete="username"
         />
         <TextInput
           label={contentMap.password}
           {...register('password')}
           errorMessage={errors.password?.message}
+          autoComplete="new-password"
         />
         {isString(errorMessage) && (
           <Typography variant="text" weight={600} colorName="red/200">

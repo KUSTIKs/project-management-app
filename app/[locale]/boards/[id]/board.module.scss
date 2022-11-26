@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .group {
@@ -20,11 +21,11 @@
 }
 
 .columnsWrapperContainer {
-  max-width: 100%;
-  min-width: var(--width-container-m);
-  width: fit-content;
+  width: 100%;
+  max-width: var(--width-container-m);
   margin: 0 auto;
-  padding: 0 15px 15px;
+  min-height: 200px;
+  padding: 0 15px 30px;
   overflow: auto;
   min-height: 200px;
   &::-webkit-scrollbar {

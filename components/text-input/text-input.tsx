@@ -115,10 +115,4 @@ const TextInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
   }
 );
 
-const A = () => {
-  const ref = useRef<HTMLTextAreaElement>(null);
-
-  return <TextInput label="sd" ref={ref} />;
-};
-
 export { TextInput };

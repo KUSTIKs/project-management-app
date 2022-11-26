@@ -74,12 +74,14 @@ const InfoTaskModal: FC<Props> = ({
             <TextInput
               label={contentMap.title}
               variant="unfilled"
+              readOnly
               value={title}
             />
             <TextInput
               label={contentMap.description}
               variant="unfilled"
               isMultiline
+              readOnly
               value={description}
             />
           </Modal.Fieldset>

@@ -6,6 +6,7 @@ const heroDictionary = new ContentDictionary({
     title: 'Magic project manager',
     description: 'Finally, a simple tool for process and project management',
     tryNow: 'Try now free',
+    goToBoards: 'Go to boards',
     projectRepo: 'Project repo',
   },
   [LocaleName.RU]: {
@@ -13,6 +14,7 @@ const heroDictionary = new ContentDictionary({
     description:
       'Наконец, простой инструмент для управления процессами и проектами',
     tryNow: 'Начни сейчас',
+    goToBoards: 'Перейти к доскам',
     projectRepo: 'Репозиторий',
   },
   [LocaleName.UK]: {
@@ -20,6 +22,7 @@ const heroDictionary = new ContentDictionary({
     description:
       'Нарешті, простий інструмент для управління процесами та проектами',
     tryNow: 'Спробуйте зараз',
+    goToBoards: 'Перейти до дощок',
     projectRepo: 'Репозиторій',
   },
 });

@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   max-width: var(--width-container-m);
-  padding: 15px 30px;
+  padding: 15px 20px;
   margin: 80px auto;
   gap: 80px;
   display: grid;
@@ -10,12 +10,15 @@
 .advantage {
   display: grid;
   gap: 50px;
-  grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  grid-template-areas: 'advantage-image advantage-image advantage-info';
+  &:nth-child(even) {
+    grid-template-areas: 'advantage-info advantage-image advantage-image';
+  }
 }
 
 .advantageImage {
-  grid-column: span 2;
+  grid-area: advantage-image;
   width: 100%;
   aspect-ratio: 1280/832;
   border-radius: 10px;
@@ -23,6 +26,7 @@
 }
 
 .advantageInfo {
+  grid-area: advantage-info;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -34,13 +38,9 @@
 }
 
 @media screen and (max-width: 1050px) {
-  .container {
-    padding-inline: 50px;
-  }
   .advantage {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 30px;
   }
 }

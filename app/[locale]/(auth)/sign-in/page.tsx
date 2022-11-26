@@ -73,11 +73,13 @@ const SignInPage: FC<Props> = ({ params }) => {
             {...register('login')}
             label={contentMap.login}
             errorMessage={errors.login?.message}
+            autoComplete="username"
           />
           <TextInput
             {...register('password')}
             label={contentMap.password}
             errorMessage={errors.password?.message}
+            autoComplete="current-password"
           />
           {isString(errorMessage) && (
             <Typography variant="text" weight={600} colorName="red/200">

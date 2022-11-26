@@ -73,6 +73,7 @@ const InfoColumnModal: FC<Props> = ({
               label={contentMap.title}
               variant="unfilled"
               value={title}
+              readOnly
             />
           </Modal.Fieldset>
         </Modal>

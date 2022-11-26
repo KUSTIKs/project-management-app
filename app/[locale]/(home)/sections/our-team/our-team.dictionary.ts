@@ -16,7 +16,7 @@ const ourTeamDictionary = new ContentDictionary({
         {
           title: 'Architecture',
           description:
-            'Created a reliable project structure with clear and clean code, organized CI/CD',
+            'Set up a reliable project structure with clear and clean code, organized CI/CD',
         },
         {
           title: 'Functionality',
@@ -45,7 +45,7 @@ const ourTeamDictionary = new ContentDictionary({
         {
           title: 'Архитектура',
           description:
-            'Создал надежную структуру проекта с понятным и чистым кодом. Организовал CI/CD',
+            'Задал надежную структуру проекта с понятным и чистым кодом, организовал CI/CD',
         },
         {
           title: 'Функционал',
@@ -55,7 +55,7 @@ const ourTeamDictionary = new ContentDictionary({
         {
           title: 'Доступность',
           description:
-            'Добавил поддержка трех языков: английского, русского и украинского',
+            'Добавил поддержку трех языков: английского, русского и украинского',
         },
       ],
     },
@@ -74,7 +74,7 @@ const ourTeamDictionary = new ContentDictionary({
         {
           title: 'Архітектура',
           description:
-            'Створив надійну структуру проекту зі зрозумілим і чистим кодом. Організував CI / CD',
+            'Задав надійну структуру проєкту зі зрозумілим і чистим кодом, організував CI / CD',
         },
         {
           title: 'Функціонал',
@@ -84,7 +84,7 @@ const ourTeamDictionary = new ContentDictionary({
         {
           title: 'Доступність',
           description:
-            'Додав підтримка трьох мов: англійської, російської та української',
+            'Додав підтримку трьох мов: англійської, російської та української',
         },
       ],
     },

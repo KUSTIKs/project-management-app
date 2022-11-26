@@ -19,6 +19,7 @@ type Props = {
   handleChange: (value: string) => void;
   direction?: 'up' | 'down' | 'left' | 'right';
   alignment?: 'start' | 'end';
+  size?: 's' | 'm' | 'l';
 };
 
 const Dropdown: FC<Props> = ({
@@ -27,6 +28,7 @@ const Dropdown: FC<Props> = ({
   trigger,
   direction = 'down',
   alignment = 'start',
+  size = 's',
 }) => {
   const [isOpen, isOpenActions] = useBooleanState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -64,7 +66,11 @@ const Dropdown: FC<Props> = ({
             return (
               <li key={value}>
                 <button
-                  className={classes.option}
+                  className={classNames(classes.option, {
+                    [classes.option_size_s]: size === 's',
+                    [classes.option_size_m]: size === 'm',
+                    [classes.option_size_l]: size === 'l',
+                  })}
                   onClick={() => handleOptionClick(value)}
                 >
                   {name}

@@ -1,8 +1,11 @@
+'use client';
+
 import { FC } from 'react';
 import Image from 'next/image';
 
 import { Button, Icon, Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
+import { useAppContext } from '@project-management-app/hooks';
 
 import classes from './hero.module.scss';
 import { heroDictionary } from './hero.dictionary';
@@ -13,6 +16,7 @@ type Props = {
 
 const HeroSection: FC<Props> = ({ locale }) => {
   const contentMap = heroDictionary.getContentMap({ locale });
+  const { isAuthorized } = useAppContext();
 
   return (
     <section className={classes.container}>
@@ -24,7 +28,11 @@ const HeroSection: FC<Props> = ({ locale }) => {
           {contentMap.description}
         </Typography>
         <div className={classes.buttonGroup}>
-          <Button href="/boards">{contentMap.tryNow}</Button>
+          {isAuthorized ? (
+            <Button href="/boards">{contentMap.goToBoards}</Button>
+          ) : (
+            <Button href="/sign-in">{contentMap.tryNow}</Button>
+          )}
           <Button
             variant="ghost"
             startIcon={<Icon.GithubFill />}

@@ -1,108 +1,65 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Cookies from 'js-cookie';
 
+import { AppLink, Button, Icon } from '@project-management-app/components';
 import {
-  AppLink,
-  Button,
-  Dropdown,
-  Icon,
-} from '@project-management-app/components';
-import {
-  changeLocale,
-  getLanguageFromLocale,
-} from '@project-management-app/helpers';
-import { ObjectOption } from '@project-management-app/types';
-import { useAppRouter } from '@project-management-app/hooks';
-import { CookieName } from '@project-management-app/enums';
+  useAppRouter,
+  useBooleanState,
+  useMediaQuery,
+  useOutsideClick,
+} from '@project-management-app/hooks';
 
-import { NavItem } from './subcomponents/subcomponents';
 import classes from './header.module.scss';
-import { headerDictionary } from './header.dictionary';
+import { Menu } from './components/components';
 
 type Props = {
   isAuthorized: boolean;
 };
 
 const Header: FC<Props> = ({ isAuthorized }) => {
-  const router = useAppRouter();
-  const { locale, locales } = router;
-  const contentMap = headerDictionary.getContentMap({ locale });
+  const [isMenuOpen, isMenuOpenActions] = useBooleanState(false);
+  const isMobile = useMediaQuery('(max-width: 800px)');
+  const headerRef = useRef<HTMLElement>(null);
+  const { appPathname } = useAppRouter();
 
-  const localeOptions: ObjectOption[] = locales.map((locale) => ({
-    name: getLanguageFromLocale(locale),
-    value: locale,
-  }));
+  useOutsideClick(headerRef, isMenuOpenActions.setFalse);
 
-  const handleChangeLocale = (newLocale: string) => {
-    changeLocale({
-      locale: newLocale,
-      router,
-    });
-  };
-
-  const handleLogOut = () => {
-    Cookies.remove(CookieName.NEXT_TOKEN);
-    router.refresh();
-    router.push('/');
-  };
+  useEffect(() => {
+    isMenuOpenActions.setFalse();
+  }, [appPathname, isMenuOpenActions]);
 
   return (
-    <header className={classes.header}>
+    <header className={classes.header} ref={headerRef}>
       <div className={classes.container}>
-        <div className={classes.group}>
-          <AppLink href="/">
-            <Image
-              src="/logo.png"
-              alt="logo"
-              width={173}
-              height={24}
-              priority
-            />
-          </AppLink>
-          {isAuthorized && (
-            <>
-              <NavItem href="/boards">{contentMap.boards}</NavItem>
-              <NavItem href="/profile">{contentMap.profile}</NavItem>
-            </>
-          )}
-        </div>
-        <div className={classes.group}>
-          {locale && (
-            <Dropdown
-              handleChange={handleChangeLocale}
-              options={localeOptions}
-              trigger={
-                <Button
-                  variant="text"
-                  size="s"
-                  startIcon={<Icon.GlobalLine />}
-                  endIcon={<Icon.ArrowDropDownLine />}
-                >
-                  {getLanguageFromLocale(locale)}
-                </Button>
-              }
-              alignment="end"
-              direction="down"
-            />
-          )}
-
-          <div className={classes.separator} />
-          {isAuthorized ? (
-            <Button variant="text" size="s" onClick={handleLogOut}>
-              {contentMap.logOut}
-            </Button>
-          ) : (
-            <>
-              <NavItem href="/sign-up">{contentMap.signUp}</NavItem>
-              <NavItem variant="contained" href="/sign-in">
-                {contentMap.signIn}
-              </NavItem>
-            </>
-          )}
-        </div>
+        <AppLink href="/">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={173}
+            height={24}
+            priority
+            className={classes.logo}
+          />
+        </AppLink>
+        {isMobile && (
+          <Button
+            symmetricPadding
+            size="s"
+            variant="text"
+            onClick={isMenuOpenActions.toggle}
+          >
+            {isMenuOpen ? (
+              <Icon.CloseLine size={20} />
+            ) : (
+              <Icon.MenuLine size={20} />
+            )}
+          </Button>
+        )}
+        {!(isMobile && !isMenuOpen) && (
+          <Menu isAuthorized={isAuthorized} isMobile={isMobile} />
+        )}
       </div>
     </header>
   );

@@ -4,6 +4,7 @@
   border-bottom: 2px solid var(--color-grey--100);
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 .container {
@@ -19,15 +20,6 @@
   gap: 10px;
 }
 
-.group {
-  display: grid;
-  grid-auto-flow: column;
-  align-items: center;
-  gap: 5px;
-}
-
-.separator {
-  width: 1px;
-  height: 80%;
-  background-color: var(--color-grey--200);
+.logo {
+  display: block;
 }

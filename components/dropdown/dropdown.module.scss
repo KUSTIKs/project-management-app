@@ -1,6 +1,6 @@
 .wrapper {
   position: relative;
-  width: max-content;
+  display: grid;
 }
 
 .optionList {
@@ -63,7 +63,6 @@
 
 .option {
   border-radius: 3px;
-  padding: 5px;
   border: none;
   background: transparent;
   text-align: start;
@@ -72,4 +71,14 @@
   &:hover {
     background-color: var(--color-grey--100);
   }
+}
+
+.option_size_s {
+  padding: 5px 8px;
+}
+.option_size_m {
+  padding: 8px 10px;
+}
+.option_size_l {
+  padding: 10px 15px;
 }

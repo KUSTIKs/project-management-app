@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const useBooleanState = (defaultState: boolean) => {
   const [state, setState] = useState(defaultState);
@@ -13,11 +13,14 @@ const useBooleanState = (defaultState: boolean) => {
     setState((state) => !state);
   };
 
-  const stateActions = {
-    setTrue,
-    setFalse,
-    toggle,
-  };
+  const stateActions = useMemo(
+    () => ({
+      setTrue,
+      setFalse,
+      toggle,
+    }),
+    []
+  );
 
   return [state, stateActions] as const;
 };

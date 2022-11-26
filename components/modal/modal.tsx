@@ -39,6 +39,10 @@ const Modal: FC<Props> & {
   };
   const props = isForm && formProps;
 
+  const setOverflow = (value: string) => {
+    document.documentElement.style.overflow = value;
+  };
+
   const openModal = () => {
     const isDialogOpen = dialogRef.current?.open;
 
@@ -47,13 +51,21 @@ const Modal: FC<Props> & {
     }
   };
 
+  useOutsideClick(wrapperRef, handleClose);
+
   useEffect(() => {
     if (!isOpen) return;
 
     openModal();
   }, [isOpen]);
 
-  useOutsideClick(wrapperRef, handleClose);
+  useEffect(() => {
+    setOverflow(isOpen ? 'hidden' : 'unset');
+
+    return () => {
+      setOverflow('unset');
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

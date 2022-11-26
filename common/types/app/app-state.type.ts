@@ -4,6 +4,7 @@ import { AppLocale } from './app';
 type AppState = {
   locale: AppLocale;
   payload: TokenPayload | null | undefined;
+  isAuthorized: boolean;
 };
 
 export type { AppState };

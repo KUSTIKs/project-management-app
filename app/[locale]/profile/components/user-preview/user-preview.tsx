@@ -22,11 +22,13 @@ const UserPreview: FC<Props> = ({ user }) => {
           label={contentMap.name}
           value={user.name}
           variant="unfilled"
+          readOnly
         />
         <TextInput
           label={contentMap.login}
           value={user.login}
           variant="unfilled"
+          readOnly
         />
       </fieldset>
     </>

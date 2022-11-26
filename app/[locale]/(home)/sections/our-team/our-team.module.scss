@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   max-width: var(--width-container-m);
-  padding: 15px 30px;
+  padding: 15px 20px;
   margin: 80px auto;
 }
 
@@ -15,6 +15,7 @@
   display: flex;
   gap: 50px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .memberTextInfo {

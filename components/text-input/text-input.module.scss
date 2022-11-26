@@ -1,7 +1,6 @@
 .outerWrapper {
   display: grid;
   gap: 4px;
-  user-select: none;
 }
 
 .outerWrapper_variant_filled {
@@ -101,6 +100,7 @@
   font-weight: 500;
   transition: 200ms ease;
   pointer-events: none;
+  user-select: none;
 }
 
 .errorMessage {

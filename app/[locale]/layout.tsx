@@ -32,7 +32,11 @@ const RootLayout: FC<Props> = ({ children, params }) => {
   return (
     <html lang={locale}>
       <body>
-        <AppContextProvider locale={locale} payload={payload}>
+        <AppContextProvider
+          locale={locale}
+          payload={payload}
+          isAuthorized={isAuthorized}
+        >
           <ReactQueryProvider>
             <Header isAuthorized={isAuthorized} />
             {children}

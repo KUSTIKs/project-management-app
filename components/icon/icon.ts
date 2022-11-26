@@ -8,6 +8,7 @@ import {
   RiEdit2Line,
   RiCloseLine,
   RiInformationLine,
+  RiMenuLine,
 } from 'react-icons/ri';
 
 const Icon = {
@@ -20,6 +21,7 @@ const Icon = {
   EditLine: RiEdit2Line,
   CloseLine: RiCloseLine,
   InformationLine: RiInformationLine,
+  MenuLine: RiMenuLine,
 } as const;
 
 export { Icon };

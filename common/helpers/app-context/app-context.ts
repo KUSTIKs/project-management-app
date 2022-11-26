@@ -8,6 +8,7 @@ import { AppState } from '@project-management-app/types';
 const AppContext = createContext<AppState>({
   locale: appInternalizationConfig.defaultLocale,
   payload: null,
+  isAuthorized: false,
 });
 
 export { AppContext };
