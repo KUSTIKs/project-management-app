@@ -1,34 +1,148 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div id="top"></div>
 
-## Getting Started
+![banner](/public/images/meta-image.png)
 
-First, run the development server:
+<div align="center">
+  <h1 align="center">Magic project manager</h1>
 
-```bash
-npm run dev
-# or
+  <p align="center">
+    Simple tool for process and project management
+    <br/>
+    <br/>
+    <a href="https://project-management-app-kustiks.vercel.app">Live App</a>
+    ·
+    <a href="https://github.com/KUSTIKs/project-management-app/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/KUSTIKs/project-management-app/issues">Request Feature</a>
+  </p>
+</div>
+
+## About this project
+
+Magic project manager is the visual tool that empowers your team to manage any type of project, workflow, or task tracking. It is build using next.js and its experimental (for now) app folder.
+
+This application uses pre-made [kanban rest](https://github.com/vitaly-sazonov/kanban-rest) api.
+
+### Links
+
+- [Live app](https://project-management-app-kustiks.vercel.app)
+- [Live storybook](https://magic-project-manager-storybook.netlify.app/)
+- [Figma layout](https://www.figma.com/file/T13yeSAVHeknB4EoFQCF8I/Untitled?node-id=0%3A1&t=oAeZZOCfrdaEE0Hw-1)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Built With
+
+- [React.js](https://reactjs.org)
+- [Next.js](https://nextjs.org)
+- [Typescript](https://www.typescriptlang.org)
+- [React Query](https://react-query-v3.tanstack.com)
+
+### Additional Tools
+
+- [Figma](https://www.figma.com)
+- [Storybook](https://storybook.js.org)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Prerequisites
+
+- node v18.12.1
+
+- In this project yarn is used, so make sure, you have it installed
+
+  ```sh
+  npm install yarn@latest -g
+  ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Install
+
+```sh
+yarn install
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Usage
+
+### Dev mode
+
+```sh
+yarn run dev
+```
+
+### Prod mode
+
+```sh
+$ yarn build
+Done ✓
+$ yarn start
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Scripts
+
+### Dev
+
+> Launches application in development mode
+
+```sh
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+> Builds the application
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```sh
+yarn build
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Start
 
-## Learn More
+> Starts builded application
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+yarn start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Lint
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> Lints source code
 
-## Deploy on Vercel
+```sh
+yarn lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Storybook
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> Launches storybook in dev mode
+
+```sh
+yarn storybook
+```
+
+### Build Storybook
+
+> Builds storybook
+
+```sh
+yarn build-storybook
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Author
+
+👤 **Artem Khvostyk**
+
+- [Linked In](https://www.linkedin.com/in/artem-khvostyk-218953243/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
