@@ -4,8 +4,6 @@ import { ContentDictionary } from '@project-management-app/helpers';
 const columnModalsDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     title: 'title',
-    update: 'Update',
-    delete: 'Delete',
     createColumn: 'Create column',
     updateColumn: 'Update column',
     deleteColumn: 'Delete column',
@@ -13,8 +11,6 @@ const columnModalsDictionary = new ContentDictionary({
   },
   [LocaleName.RU]: {
     title: 'заголовок',
-    update: 'Обновить',
-    delete: 'Удалить',
     createColumn: 'Создать колонку',
     updateColumn: 'Обновить колонку',
     deleteColumn: 'Удалить колонку',
@@ -22,8 +18,6 @@ const columnModalsDictionary = new ContentDictionary({
   },
   [LocaleName.UK]: {
     title: 'заголовок',
-    update: 'Оновити',
-    delete: 'Видалити',
     createColumn: 'Створити колонку',
     updateColumn: 'Оновити колонку',
     deleteColumn: 'Видалити колонку',

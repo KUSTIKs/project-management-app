@@ -4,9 +4,7 @@ import { FC } from 'react';
 
 import { Column } from '@project-management-app/types';
 import {
-  Button,
-  Icon,
-  Modal,
+  InfoEntityModal,
   TextPreview,
 } from '@project-management-app/components';
 import { useAppContext, useBooleanState } from '@project-management-app/hooks';
@@ -33,56 +31,27 @@ const InfoColumnModal: FC<Props> = ({
   const [isUpdateModalOpen, isUpdateModalOpenActions] = useBooleanState(false);
   const [isDeleteModalOpen, isDeleteModalOpenActions] = useBooleanState(false);
 
-  const handleUpdateModalClose = () => {
-    isUpdateModalOpenActions.setFalse();
-    handleClose();
-  };
-  const handleDeleteModalClose = () => {
-    isDeleteModalOpenActions.setFalse();
-    handleClose();
-  };
-
   return (
     <>
-      {!isDeleteModalOpen && !isUpdateModalOpen && (
-        <Modal
-          title={contentMap.infoColumn}
-          handleClose={handleClose}
-          isOpen={isOpen}
-        >
-          <Modal.Actions>
-            <Button
-              size="s"
-              variant="ghost"
-              startIcon={<Icon.EditLine />}
-              onClick={isUpdateModalOpenActions.setTrue}
-            >
-              {contentMap.update}
-            </Button>
-            <Button
-              size="s"
-              variant="ghost"
-              startIcon={<Icon.BinLine />}
-              onClick={isDeleteModalOpenActions.setTrue}
-            >
-              {contentMap.delete}
-            </Button>
-          </Modal.Actions>
-          <Modal.Fieldset disabled>
-            <TextPreview label={contentMap.title}>{title}</TextPreview>
-          </Modal.Fieldset>
-        </Modal>
-      )}
+      <InfoEntityModal
+        title={contentMap.infoColumn}
+        handleClose={handleClose}
+        isOpen={isOpen}
+        handleDeleteClick={isDeleteModalOpenActions.setTrue}
+        handleUpdateClick={isUpdateModalOpenActions.setTrue}
+      >
+        <TextPreview label={contentMap.title}>{title}</TextPreview>
+      </InfoEntityModal>
       <UpdateColumnModal
         boardId={boardId}
         column={column}
-        handleClose={handleUpdateModalClose}
+        handleClose={isUpdateModalOpenActions.setFalse}
         isOpen={isUpdateModalOpen}
       />
       <DeleteColumnModal
         boardId={boardId}
         column={column}
-        handleClose={handleDeleteModalClose}
+        handleClose={isDeleteModalOpenActions.setFalse}
         isOpen={isDeleteModalOpen}
       />
     </>

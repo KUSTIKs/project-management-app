@@ -5,8 +5,8 @@ import { ComponentProps, FC, ReactNode } from 'react';
 import { Modal } from '@project-management-app/components';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { updateEntityModalDictionary } from './update-entity-modal.dictionary';
 import { ActionModal } from '../modals';
+import { modalsDictionary } from '../modals.dictionary';
 
 type Props = Omit<
   ComponentProps<typeof ActionModal>,
@@ -22,7 +22,7 @@ const UpdateEntityModal: FC<Props> = ({
   ...modalProps
 }) => {
   const { locale } = useAppContext();
-  const contentMap = updateEntityModalDictionary.getContentMap({
+  const contentMap = modalsDictionary.getContentMap({
     locale,
   });
 

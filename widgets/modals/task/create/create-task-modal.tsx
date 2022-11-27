@@ -98,7 +98,7 @@ const CreateTaskModal: FC<Props> = ({
         label={contentMap.assignedTo}
         defaultValue={payload?.userId}
         {...register('userId')}
-        errorMessage={errors.description?.message}
+        errorMessage={errors.userId?.message}
       >
         {users?.map(({ id, login }) => (
           <option key={id} value={id}>

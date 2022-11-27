@@ -7,9 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import { Task } from '@project-management-app/types';
 import {
   AppLink,
-  Button,
-  Icon,
-  Modal,
+  InfoEntityModal,
   TextPreview,
 } from '@project-management-app/components';
 import { useAppContext, useBooleanState } from '@project-management-app/hooks';
@@ -47,75 +45,44 @@ const InfoTaskModal: FC<Props> = ({
     queryKey: [QueryKey.USERS, task.userId],
   });
 
-  const handleUpdateModalClose = () => {
-    isUpdateModalOpenActions.setFalse();
-    handleClose();
-  };
-  const handleDeleteModalClose = () => {
-    isDeleteModalOpenActions.setFalse();
-    handleClose();
-  };
-
   return (
     <>
-      {!isUpdateModalOpen && !isDeleteModalOpen && (
-        <Modal
-          title={contentMap.infoTask}
-          handleClose={handleClose}
-          isOpen={isOpen}
-        >
-          <Modal.Actions>
-            <Button
-              size="s"
-              variant="ghost"
-              startIcon={<Icon.EditLine />}
-              onClick={isUpdateModalOpenActions.setTrue}
-            >
-              {contentMap.update}
-            </Button>
-            <Button
-              size="s"
-              variant="ghost"
-              startIcon={<Icon.BinLine />}
-              onClick={isDeleteModalOpenActions.setTrue}
-            >
-              {contentMap.delete}
-            </Button>
-          </Modal.Actions>
-          <Modal.Fieldset disabled>
-            <TextPreview label={contentMap.assignedTo}>
-              {assignedTo?.login}
-            </TextPreview>
-            <TextPreview label={contentMap.title}>{title}</TextPreview>
-            <TextPreview label={contentMap.description}>
-              <ReactMarkdown
-                unwrapDisallowed
-                allowedElements={allowedMarkdownElements}
-                linkTarget="_blank"
-                components={{
-                  a: ({ href, ...props }) => (
-                    <AppLink href={href!} {...props} />
-                  ),
-                }}
-              >
-                {description}
-              </ReactMarkdown>
-            </TextPreview>
-          </Modal.Fieldset>
-        </Modal>
-      )}
+      <InfoEntityModal
+        title={contentMap.infoTask}
+        handleClose={handleClose}
+        isOpen={isOpen}
+        handleUpdateClick={isUpdateModalOpenActions.setTrue}
+        handleDeleteClick={isDeleteModalOpenActions.setTrue}
+      >
+        <TextPreview label={contentMap.assignedTo}>
+          {assignedTo?.login}
+        </TextPreview>
+        <TextPreview label={contentMap.title}>{title}</TextPreview>
+        <TextPreview label={contentMap.description}>
+          <ReactMarkdown
+            unwrapDisallowed
+            allowedElements={allowedMarkdownElements}
+            linkTarget="_blank"
+            components={{
+              a: ({ href, ...props }) => <AppLink href={href!} {...props} />,
+            }}
+          >
+            {description}
+          </ReactMarkdown>
+        </TextPreview>
+      </InfoEntityModal>
       <UpdateTaskModal
         columnId={columnId}
         boardId={boardId}
         task={task}
-        handleClose={handleUpdateModalClose}
+        handleClose={isUpdateModalOpenActions.setFalse}
         isOpen={isUpdateModalOpen}
       />
       <DeleteTaskModal
         columnId={columnId}
         boardId={boardId}
         task={task}
-        handleClose={handleDeleteModalClose}
+        handleClose={isDeleteModalOpenActions.setFalse}
         isOpen={isDeleteModalOpen}
       />
     </>

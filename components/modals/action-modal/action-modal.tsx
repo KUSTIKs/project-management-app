@@ -6,8 +6,8 @@ import { Button, Modal, Typography } from '@project-management-app/components';
 import { isArray, isString } from '@project-management-app/helpers';
 import { useAppContext } from '@project-management-app/hooks';
 
-import { actionModalDictionary } from './action-modal.dictionary';
 import classes from './action-modal.module.scss';
+import { modalsDictionary } from '../modals.dictionary';
 
 type Props = Pick<ComponentProps<typeof Modal>, 'handleClose' | 'isOpen'> & {
   entityName?: string;
@@ -37,7 +37,7 @@ const ActionModal: FC<Props> = ({
   isError,
 }) => {
   const { locale } = useAppContext();
-  const contentMap = actionModalDictionary.getContentMap({ locale });
+  const contentMap = modalsDictionary.getContentMap({ locale });
   const formattedEntityName = withQuotes ? `'${entityName}'` : entityName;
   const titleWithEntity = `${actionName} ${formattedEntityName ?? ''}`;
 
@@ -74,7 +74,7 @@ const ActionModal: FC<Props> = ({
                 )
               ) : (
                 <Typography variant="text" weight={600} colorName="red/200">
-                  {contentMap.errorMessage}
+                  {contentMap.somethingWentWrong}
                 </Typography>
               )}
             </strong>
