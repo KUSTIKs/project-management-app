@@ -6,7 +6,7 @@ import { Typography } from '@project-management-app/components';
 import { Modal } from './modal';
 
 const componentMeta: ComponentMeta<typeof Modal> = {
-  title: 'Components/Modal',
+  title: 'Modal',
   component: Modal,
   argTypes: {
     handleClose: {
@@ -33,6 +33,7 @@ const componentMeta: ComponentMeta<typeof Modal> = {
 const Template: ComponentStory<typeof Modal> = (args) => <Modal {...args} />;
 
 const Default = Template.bind({});
+Default.storyName = 'Modal';
 
 export default componentMeta;
 export { Default };

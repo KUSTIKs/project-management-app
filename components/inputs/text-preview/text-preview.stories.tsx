@@ -17,6 +17,7 @@ const Template: ComponentStory<typeof TextPreview> = (args) => (
 );
 
 const Default = Template.bind({});
+Default.storyName = 'TextPreview';
 
 export default componentMeta;
 export { Default };

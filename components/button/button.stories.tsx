@@ -11,7 +11,7 @@ const iconNameArgType = {
 };
 
 const componentMeta: ComponentMeta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'Button',
   component: Button,
   argTypes: {
     children: {

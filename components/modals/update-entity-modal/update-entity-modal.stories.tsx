@@ -6,7 +6,7 @@ import { Typography } from '@project-management-app/components';
 import { UpdateEntityModal } from './update-entity-modal';
 
 const componentMeta: ComponentMeta<typeof UpdateEntityModal> = {
-  title: 'Components/Modals/UpdateEntityModal',
+  title: 'Modals/UpdateEntityModal',
   component: UpdateEntityModal,
   argTypes: {
     handleClose: {
@@ -44,6 +44,7 @@ const Template: ComponentStory<typeof UpdateEntityModal> = (args) => (
 );
 
 const Default = Template.bind({});
+Default.storyName = 'UpdateEntityModal';
 
 export default componentMeta;
 export { Default };

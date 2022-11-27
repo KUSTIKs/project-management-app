@@ -6,7 +6,7 @@ import { Typography } from '@project-management-app/components';
 import { ActionModal } from './action-modal';
 
 const componentMeta: ComponentMeta<typeof ActionModal> = {
-  title: 'Components/Modals/ActionModal',
+  title: 'Modals/ActionModal',
   component: ActionModal,
   argTypes: {
     handleClose: {
@@ -45,6 +45,7 @@ const Template: ComponentStory<typeof ActionModal> = (args) => (
 );
 
 const Default = Template.bind({});
+Default.storyName = 'ActionModal';
 
 export default componentMeta;
 export { Default };

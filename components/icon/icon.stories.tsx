@@ -13,7 +13,7 @@ const IconPreview: FC<{ iconName: keyof typeof Icon } & IconBaseProps> = ({
 };
 
 const componentMeta: ComponentMeta<typeof IconPreview> = {
-  title: 'Components/Icon',
+  title: 'Icon',
   component: IconPreview,
   argTypes: {
     iconName: {
@@ -28,6 +28,7 @@ const Template: ComponentStory<typeof IconPreview> = (args) => (
 );
 
 const Default = Template.bind({});
+Default.storyName = 'Icon';
 Default.args = {
   iconName: 'BinLine',
   size: 20,

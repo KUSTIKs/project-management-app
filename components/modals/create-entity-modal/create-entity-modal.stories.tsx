@@ -6,7 +6,7 @@ import { Typography } from '@project-management-app/components';
 import { CreateEntityModal } from './create-entity-modal';
 
 const componentMeta: ComponentMeta<typeof CreateEntityModal> = {
-  title: 'Components/Modals/CreateEntityModal',
+  title: 'Modals/CreateEntityModal',
   component: CreateEntityModal,
   argTypes: {
     handleClose: {
@@ -44,6 +44,7 @@ const Template: ComponentStory<typeof CreateEntityModal> = (args) => (
 );
 
 const Default = Template.bind({});
+Default.storyName = 'CreateEntityModal';
 
 export default componentMeta;
 export { Default };

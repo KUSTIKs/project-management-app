@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Typography } from './typography';
 
 const componentMeta: ComponentMeta<typeof Typography> = {
-  title: 'Components/Typography',
+  title: 'Typography',
   component: Typography,
   args: {
     variant: 'text',
@@ -17,6 +17,7 @@ const Template: ComponentStory<typeof Typography> = (args) => (
 );
 
 const Default = Template.bind({});
+Default.storyName = 'Typography';
 
 export default componentMeta;
 export { Default };

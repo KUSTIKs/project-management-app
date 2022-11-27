@@ -23,7 +23,7 @@ const validationMessageDictionary = new ContentDictionary({
       `Описание должно иметь от ${value} символов`,
     descriptionMax: (value: number) =>
       `Описание должно иметь до ${value} символов`,
-    userIdRequired: 'Назначенный на обязателен',
+    userIdRequired: 'Назначенно на являеться обязательным полем',
   },
   [LocaleName.UK]: {
     titleRequired: "Заголовок обов'язковий",
@@ -33,7 +33,7 @@ const validationMessageDictionary = new ContentDictionary({
     descriptionMin: (value: number) =>
       `Опис повинен мати від ${value} символів`,
     descriptionMax: (value: number) => `Опис повинен мати до ${value} символів`,
-    userIdRequired: "Назначенный на обов'язковий",
+    userIdRequired: "Призначено на є обов'язковим полем",
   },
 });
 

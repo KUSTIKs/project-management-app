@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { DeleteEntityModal } from './delete-entity-modal';
 
 const componentMeta: ComponentMeta<typeof DeleteEntityModal> = {
-  title: 'Components/Modals/DeleteEntityModal',
+  title: 'Modals/DeleteEntityModal',
   component: DeleteEntityModal,
   argTypes: {
     handleClose: {
@@ -32,6 +32,7 @@ const Template: ComponentStory<typeof DeleteEntityModal> = (args) => (
 );
 
 const Default = Template.bind({});
+Default.storyName = 'DeleteEntityModal';
 
 export default componentMeta;
 export { Default };

@@ -6,7 +6,7 @@ import { Button, Icon } from '@project-management-app/components';
 import { Dropdown } from './dropdown';
 
 const componentMeta: ComponentMeta<typeof Dropdown> = {
-  title: 'Components/Dropdown',
+  title: 'Dropdown',
   component: Dropdown,
   argTypes: {
     handleChange: {
@@ -28,6 +28,7 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
 );
 
 const Default = Template.bind({});
+Default.storyName = 'Dropdown';
 Default.args = {
   options: [
     'Antarctica',
