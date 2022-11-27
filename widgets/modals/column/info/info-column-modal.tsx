@@ -7,7 +7,7 @@ import {
   Button,
   Icon,
   Modal,
-  TextInput,
+  TextPreview,
 } from '@project-management-app/components';
 import { useAppContext, useBooleanState } from '@project-management-app/hooks';
 
@@ -69,12 +69,7 @@ const InfoColumnModal: FC<Props> = ({
             </Button>
           </Modal.Actions>
           <Modal.Fieldset disabled>
-            <TextInput
-              label={contentMap.title}
-              variant="unfilled"
-              value={title}
-              readOnly
-            />
+            <TextPreview label={contentMap.title}>{title}</TextPreview>
           </Modal.Fieldset>
         </Modal>
       )}

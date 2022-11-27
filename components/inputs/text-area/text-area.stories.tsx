@@ -1,31 +1,29 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { TextInput } from './text-input';
+import { TextArea } from './text-area';
 
-const componentMeta: ComponentMeta<typeof TextInput> = {
-  title: 'Components/TextInput',
-  component: TextInput,
+const componentMeta: ComponentMeta<typeof TextArea> = {
+  title: 'Inputs/TextArea',
+  component: TextArea,
   argTypes: {
     errorMessage: {
       control: 'text',
     },
     variant: {
       control: 'radio',
-      options: ['filled', 'unfilled'],
     },
   },
   args: {
     label: 'Label',
-    value: 'value',
+    defaultValue: 'value',
     required: false,
     isError: false,
-    isMultiline: false,
   },
 };
 
-const Template: ComponentStory<typeof TextInput> = (args) => (
-  <TextInput {...args} />
+const Template: ComponentStory<typeof TextArea> = (args) => (
+  <TextArea {...args} />
 );
 
 const Filled = Template.bind({});

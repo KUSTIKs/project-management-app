@@ -10,16 +10,18 @@ import {
   useOutsideClick,
   useOutsideFocus,
 } from '@project-management-app/hooks';
+import { Typography } from '@project-management-app/components';
 
 import classes from './dropdown.module.scss';
 
 type Props = {
   trigger: ReactElement;
-  options: Option[];
+  options?: Option[];
   handleChange: (value: string) => void;
   direction?: 'up' | 'down' | 'left' | 'right';
   alignment?: 'start' | 'end';
   size?: 's' | 'm' | 'l';
+  maxOptionListHeight?: number;
 };
 
 const Dropdown: FC<Props> = ({
@@ -29,6 +31,7 @@ const Dropdown: FC<Props> = ({
   direction = 'down',
   alignment = 'start',
   size = 's',
+  maxOptionListHeight,
 }) => {
   const [isOpen, isOpenActions] = useBooleanState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -57,8 +60,21 @@ const Dropdown: FC<Props> = ({
             [classes.optionList_alignment_start]: alignment === 'start',
             [classes.optionList_alignment_end]: alignment === 'end',
           })}
+          style={{
+            maxHeight: maxOptionListHeight,
+          }}
         >
-          {options.map((option) => {
+          {!options?.length && (
+            <Typography
+              variant="headline"
+              weight={500}
+              colorName="text/600"
+              style={{ padding: '5px 10px' }}
+            >
+              No options for now
+            </Typography>
+          )}
+          {options?.map((option) => {
             const { name, value } = isString(option)
               ? { name: option, value: option }
               : option;

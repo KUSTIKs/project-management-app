@@ -1,11 +1,9 @@
 'use client';
 
 import React, {
-  InputHTMLAttributes,
   TextareaHTMLAttributes,
   forwardRef,
   useRef,
-  ForwardedRef,
   useState,
   useEffect,
   ChangeEventHandler,
@@ -14,27 +12,19 @@ import React, {
 import classNames from 'classnames';
 import { mergeRefs } from 'react-merge-refs';
 
-import classes from './text-input.module.scss';
+import { InputVariant } from '../inputs.types';
+import classes from '../inputs.module.scss';
 
-type Props = InputHTMLAttributes<HTMLInputElement> &
-  TextareaHTMLAttributes<HTMLTextAreaElement> & {
-    label: string;
-    errorMessage?: string | null;
-    isError?: boolean;
-    variant?: 'filled' | 'unfilled';
-    isMultiline?: boolean;
-  };
+type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  label: string;
+  errorMessage?: string | null;
+  isError?: boolean;
+  variant?: InputVariant;
+};
 
-const TextInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
+const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   (
-    {
-      label,
-      errorMessage,
-      isError,
-      variant = 'filled',
-      isMultiline = false,
-      ...inputAttrs
-    },
+    { label, errorMessage, isError, variant = 'filled', ...inputAttrs },
     ref
   ) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -60,7 +50,7 @@ const TextInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
 
     const handleTextAreaBlur: FocusEventHandler<HTMLTextAreaElement> = (e) => {
       setGrowingBlockValue(e.target.value);
-      inputAttrs.onFocus?.(e);
+      inputAttrs.onBlur?.(e);
     };
 
     useEffect(() => {
@@ -77,31 +67,21 @@ const TextInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
         })}
       >
         <div className={classes.inputWrapper}>
-          {isMultiline ? (
-            <div className={classes.textareaWrapper}>
-              <p aria-hidden className={classes.growingBlock}>
-                {growingBlockValue}
-              </p>
-              <textarea
-                className={classes.textarea}
-                placeholder={label}
-                rows={1}
-                {...inputAttrs}
-                onInput={handleTextAreaInput}
-                onFocus={handleTextAreaFocus}
-                onBlur={handleTextAreaBlur}
-                ref={mergeRefs([ref, textareaRef])}
-              />
-            </div>
-          ) : (
-            <input
-              className={classes.input}
+          <div className={classes.textareaWrapper}>
+            <p aria-hidden className={classes.growingBlock}>
+              {growingBlockValue}
+            </p>
+            <textarea
+              className={classes.textarea}
               placeholder={label}
+              rows={1}
               {...inputAttrs}
-              ref={ref as ForwardedRef<HTMLInputElement>}
+              onInput={handleTextAreaInput}
+              onFocus={handleTextAreaFocus}
+              onBlur={handleTextAreaBlur}
+              ref={mergeRefs([ref, textareaRef])}
             />
-          )}
-
+          </div>
           <label className={classes.label}>
             {label}
             {!!inputAttrs.required && '*'}
@@ -115,4 +95,4 @@ const TextInput = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
   }
 );
 
-export { TextInput };
+export { TextArea };

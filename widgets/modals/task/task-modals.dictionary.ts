@@ -5,6 +5,7 @@ const taskModalsDictionary = new ContentDictionary({
   [LocaleName.EN]: {
     title: 'title',
     description: 'description',
+    assignedTo: 'assigned to',
     update: 'Update',
     delete: 'Delete',
     createTask: 'Create task',
@@ -15,6 +16,7 @@ const taskModalsDictionary = new ContentDictionary({
   [LocaleName.RU]: {
     title: 'заголовок',
     description: 'описание',
+    assignedTo: 'назначенный на',
     update: 'Обновить',
     delete: 'Удалить',
     createTask: 'Создать задание',
@@ -25,6 +27,7 @@ const taskModalsDictionary = new ContentDictionary({
   [LocaleName.UK]: {
     title: 'заголовок',
     description: 'опис',
+    assignedTo: 'призначений на',
     update: 'Оновити',
     delete: 'Видалити',
     createTask: 'Створити завдання',

@@ -11,11 +11,10 @@
   width: 100%;
   max-height: 300px;
   display: grid;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 18px 0px,
-    rgba(0, 0, 0, 0.025) 0px 2px 8px 0px, rgba(0, 0, 0, 0.02) 0px 0.8px 3px 0px,
-    rgba(0, 0, 0, 0.01) 0px 0.175px 1px 0px;
+  box-shadow: var(--window-shade);
   background-color: var(--color-background--100);
   overflow: auto;
+  z-index: 1;
   &::-webkit-scrollbar {
     width: 3px;
     height: 3px;

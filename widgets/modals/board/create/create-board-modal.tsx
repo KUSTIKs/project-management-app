@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import {
   CreateEntityModal,
-  Modal,
+  TextArea,
   TextInput,
 } from '@project-management-app/components';
 import { CreateBoardDto } from '@project-management-app/types';
@@ -81,19 +81,16 @@ const CreateBoardModal: FC<Props> = ({ handleClose, isOpen }) => {
       isLoading={isLoading}
       isError={isError}
     >
-      <Modal.Fieldset>
-        <TextInput
-          label={contentMap.title}
-          {...register('title')}
-          errorMessage={errors.title?.message}
-        />
-        <TextInput
-          label={contentMap.description}
-          isMultiline
-          {...register('description')}
-          errorMessage={errors.description?.message}
-        />
-      </Modal.Fieldset>
+      <TextInput
+        label={contentMap.title}
+        {...register('title')}
+        errorMessage={errors.title?.message}
+      />
+      <TextArea
+        label={contentMap.description}
+        {...register('description')}
+        errorMessage={errors.description?.message}
+      />
     </CreateEntityModal>
   );
 };

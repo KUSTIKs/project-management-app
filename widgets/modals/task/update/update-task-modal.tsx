@@ -3,15 +3,16 @@
 import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import {
-  Modal,
+  Select,
+  TextArea,
   TextInput,
   UpdateEntityModal,
 } from '@project-management-app/components';
 import { Task, UpdateTaskDto } from '@project-management-app/types';
-import { tasksService } from '@project-management-app/services';
+import { tasksService, usersService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
@@ -50,10 +51,15 @@ const UpdateTaskModal: FC<Props> = ({
     mutationKey: [QueryKey.TASKS, HttpMethod.PUT],
     onSuccess: () => handleUpdated(),
   });
+  const { data: users } = useQuery({
+    queryFn: usersService.getAll,
+    queryKey: [QueryKey.USERS],
+  });
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isDirty },
   } = useForm<UpdateTaskDto>({
     resolver: zodResolver(
@@ -62,6 +68,10 @@ const UpdateTaskModal: FC<Props> = ({
       })
     ),
     defaultValues: task,
+  });
+  const { data: assignedTo } = useQuery({
+    queryFn: () => usersService.getById(watch('userId')),
+    queryKey: [QueryKey.USERS, watch('userId')],
   });
 
   const errorMessage = getKeyFromUnknown(error, 'message');
@@ -99,21 +109,31 @@ const UpdateTaskModal: FC<Props> = ({
       isError={isError}
       isActionDisabled={!isDirty}
     >
-      <Modal.Fieldset>
-        <TextInput
-          label={contentMap.title}
-          {...register('title')}
-          variant="unfilled"
-          errorMessage={errors.title?.message}
-        />
-        <TextInput
-          label={contentMap.description}
-          {...register('description')}
-          variant="unfilled"
-          isMultiline
-          errorMessage={errors.description?.message}
-        />
-      </Modal.Fieldset>
+      <Select
+        label={contentMap.assignedTo}
+        variant="unfilled"
+        defaultValue={assignedTo?.id}
+        {...register('userId')}
+        errorMessage={errors.userId?.message}
+      >
+        {users?.map(({ id, login }) => (
+          <option key={id} value={id}>
+            {login}
+          </option>
+        ))}
+      </Select>
+      <TextInput
+        label={contentMap.title}
+        {...register('title')}
+        variant="unfilled"
+        errorMessage={errors.title?.message}
+      />
+      <TextArea
+        label={contentMap.description}
+        {...register('description')}
+        variant="unfilled"
+        errorMessage={errors.description?.message}
+      />
     </UpdateEntityModal>
   );
 };

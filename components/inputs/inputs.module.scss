@@ -37,6 +37,7 @@
   border-radius: 5px;
   .input:not(:placeholder-shown) ~ .label,
   .textareaWrapper:not(:has(:placeholder-shown)) ~ .label,
+  .preview ~ .label,
   &:focus-within .label {
     top: 8px;
     transform: none;
@@ -50,6 +51,7 @@
   }
 }
 
+.preview,
 .growingBlock,
 .textarea,
 .input {
@@ -74,15 +76,27 @@
   grid-area: 1 / 1 / 2 / 2;
 }
 
+select.input {
+  appearance: none;
+}
+
 .textarea {
   resize: none;
 }
 
+.preview,
 .growingBlock {
   white-space: pre-wrap;
-  visibility: hidden;
   font-size: inherit;
   font-family: inherit;
+}
+
+.preview {
+  cursor: text;
+}
+
+.growingBlock {
+  visibility: hidden;
 }
 
 .textareaWrapper {

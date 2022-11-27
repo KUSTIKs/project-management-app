@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from 'react-query';
 
 import {
-  Modal,
+  TextArea,
   TextInput,
   UpdateEntityModal,
 } from '@project-management-app/components';
@@ -89,21 +89,18 @@ const UpdateBoardModal: FC<Props> = ({ handleClose, isOpen, board }) => {
       isError={isError}
       isActionDisabled={!isDirty}
     >
-      <Modal.Fieldset>
-        <TextInput
-          label={contentMap.title}
-          {...register('title')}
-          variant="unfilled"
-          errorMessage={errors.title?.message}
-        />
-        <TextInput
-          label={contentMap.description}
-          isMultiline
-          {...register('description')}
-          variant="unfilled"
-          errorMessage={errors.description?.message}
-        />
-      </Modal.Fieldset>
+      <TextInput
+        label={contentMap.title}
+        {...register('title')}
+        variant="unfilled"
+        errorMessage={errors.title?.message}
+      />
+      <TextArea
+        label={contentMap.description}
+        {...register('description')}
+        variant="unfilled"
+        errorMessage={errors.description?.message}
+      />
     </UpdateEntityModal>
   );
 };

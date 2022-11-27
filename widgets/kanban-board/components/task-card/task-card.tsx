@@ -2,6 +2,7 @@
 
 import { FC } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import ReactMarkdown from 'react-markdown';
 
 import { Typography } from '@project-management-app/components';
 import { Task } from '@project-management-app/types';
@@ -48,7 +49,9 @@ const TaskCard: FC<Props> = ({
               weight={500}
               className={classes.description}
             >
-              {description}
+              <ReactMarkdown allowedElements={[]} unwrapDisallowed>
+                {description}
+              </ReactMarkdown>
             </Typography>
           </div>
         )}

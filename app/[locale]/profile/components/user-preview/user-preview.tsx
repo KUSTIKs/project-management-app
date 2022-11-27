@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { User } from '@project-management-app/types';
 import { useAppContext } from '@project-management-app/hooks';
-import { TextInput } from '@project-management-app/components';
+import { TextPreview } from '@project-management-app/components';
 
 import { profileDictionary } from '../../profile.dictionary';
 import classes from '../../profile.module.scss';
@@ -18,18 +18,8 @@ const UserPreview: FC<Props> = ({ user }) => {
   return (
     <>
       <fieldset className={classes.fieldset} disabled>
-        <TextInput
-          label={contentMap.name}
-          value={user.name}
-          variant="unfilled"
-          readOnly
-        />
-        <TextInput
-          label={contentMap.login}
-          value={user.login}
-          variant="unfilled"
-          readOnly
-        />
+        <TextPreview label={contentMap.name}>{user.name}</TextPreview>
+        <TextPreview label={contentMap.login}>{user.login}</TextPreview>
       </fieldset>
     </>
   );

@@ -3,15 +3,16 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import {
   CreateEntityModal,
-  Modal,
+  Select,
+  TextArea,
   TextInput,
 } from '@project-management-app/components';
 import { CreateTaskDto } from '@project-management-app/types';
-import { tasksService } from '@project-management-app/services';
+import { tasksService, usersService } from '@project-management-app/services';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
 import { HttpMethod, QueryKey } from '@project-management-app/enums';
 import { useAppContext } from '@project-management-app/hooks';
@@ -32,7 +33,7 @@ const CreateTaskModal: FC<Props> = ({
   boardId,
   columnId,
 }) => {
-  const { locale } = useAppContext();
+  const { locale, payload } = useAppContext();
   const contentMap = taskModalsDictionary.getContentMap({
     locale,
   });
@@ -59,6 +60,10 @@ const CreateTaskModal: FC<Props> = ({
         locale,
       })
     ),
+  });
+  const { data: users } = useQuery({
+    queryFn: usersService.getAll,
+    queryKey: [QueryKey.USERS],
   });
 
   const errorMessage = getKeyFromUnknown(error, 'message');
@@ -89,19 +94,28 @@ const CreateTaskModal: FC<Props> = ({
       isLoading={isLoading}
       isError={isError}
     >
-      <Modal.Fieldset>
-        <TextInput
-          label={contentMap.title}
-          {...register('title')}
-          errorMessage={errors.title?.message}
-        />
-        <TextInput
-          label={contentMap.description}
-          isMultiline
-          {...register('description')}
-          errorMessage={errors.description?.message}
-        />
-      </Modal.Fieldset>
+      <Select
+        label={contentMap.assignedTo}
+        defaultValue={payload?.userId}
+        {...register('userId')}
+        errorMessage={errors.description?.message}
+      >
+        {users?.map(({ id, login }) => (
+          <option key={id} value={id}>
+            {login}
+          </option>
+        ))}
+      </Select>
+      <TextInput
+        label={contentMap.title}
+        {...register('title')}
+        errorMessage={errors.title?.message}
+      />
+      <TextArea
+        label={contentMap.description}
+        {...register('description')}
+        errorMessage={errors.description?.message}
+      />
     </CreateEntityModal>
   );
 };

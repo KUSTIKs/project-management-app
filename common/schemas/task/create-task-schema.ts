@@ -12,6 +12,7 @@ const validationMessageDictionary = new ContentDictionary({
     descriptionRequired: 'Description is required',
     descriptionMin: (value: number) => `Description min length is ${value}`,
     descriptionMax: (value: number) => `Description max length is ${value}`,
+    userIdRequired: 'Assigned to is required',
   },
   [LocaleName.RU]: {
     titleRequired: 'Заголовок обязателен',
@@ -22,6 +23,7 @@ const validationMessageDictionary = new ContentDictionary({
       `Описание должно иметь от ${value} символов`,
     descriptionMax: (value: number) =>
       `Описание должно иметь до ${value} символов`,
+    userIdRequired: 'Назначенный на обязателен',
   },
   [LocaleName.UK]: {
     titleRequired: "Заголовок обов'язковий",
@@ -31,6 +33,7 @@ const validationMessageDictionary = new ContentDictionary({
     descriptionMin: (value: number) =>
       `Опис повинен мати від ${value} символів`,
     descriptionMax: (value: number) => `Опис повинен мати до ${value} символів`,
+    userIdRequired: "Назначенный на обов'язковий",
   },
 });
 
@@ -38,7 +41,7 @@ const getCreateTaskSchema = ({ locale }: { locale: AppLocale }) => {
   const contentMap = validationMessageDictionary.getContentMap({ locale });
 
   return z.object<{
-    [Key in keyof Omit<CreateTaskDto, 'userId'>]: ZodTypeAny;
+    [Key in keyof CreateTaskDto]: ZodTypeAny;
   }>({
     title: z
       .string()
@@ -50,6 +53,7 @@ const getCreateTaskSchema = ({ locale }: { locale: AppLocale }) => {
       .min(1, contentMap.descriptionRequired)
       .min(8, contentMap.descriptionMin(8))
       .max(256, contentMap.descriptionMax(256)),
+    userId: z.string().min(1, contentMap.userIdRequired),
   });
 };
 
