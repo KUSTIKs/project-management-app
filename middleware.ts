@@ -49,10 +49,14 @@ const checkAuth = ({ nextUrl, cookies, url: fullUrl }: NextRequest) => {
 
   if (isAuthorized && isUnauthOnlyRoute) {
     const pathname = '/';
-    return NextResponse.redirect(new URL(pathname, fullUrl));
+    const url = new URL(pathname, fullUrl);
+    url.search = nextUrl.search;
+    return NextResponse.redirect(url);
   } else if (!isAuthorized && !isUnauthRoute) {
     const pathname = '/sign-in';
-    return NextResponse.redirect(new URL(pathname, fullUrl));
+    const url = new URL(pathname, fullUrl);
+    url.search = nextUrl.search;
+    return NextResponse.redirect(url);
   }
 };
 
@@ -81,12 +85,16 @@ const middleware = (request: NextRequest) => {
 
   if (isDefaultNextLocale && isRootPathLocale) {
     const pathname = `/${nextLocale}${appPathname}`;
-    return NextResponse.rewrite(new URL(pathname, fullUrl));
+    const url = new URL(pathname, fullUrl);
+    url.search = nextUrl.search;
+    return NextResponse.rewrite(url);
   }
 
   if (isValidNextLocale && isRootPathLocale) {
     const pathname = `/${nextLocale}${appPathname}`;
-    return NextResponse.redirect(new URL(pathname, fullUrl));
+    const url = new URL(pathname, fullUrl);
+    url.search = nextUrl.search;
+    return NextResponse.redirect(url);
   }
 
   if (!isValidNextLocale && isRootPathLocale) {
@@ -97,15 +105,21 @@ const middleware = (request: NextRequest) => {
     cookies.set(CookieName.NEXT_LOCALE, detectedLocale);
 
     if (detectedLocale === appInternalizationConfig.defaultLocale) {
-      return NextResponse.rewrite(new URL(pathname, fullUrl));
+      const url = new URL(pathname, fullUrl);
+      url.search = nextUrl.search;
+      return NextResponse.rewrite(url);
     }
 
-    return NextResponse.redirect(new URL(pathname, fullUrl));
+    const url = new URL(pathname, fullUrl);
+    url.search = nextUrl.search;
+    return NextResponse.redirect(url);
   }
 
   if (isDefaultPathLocale) {
     const pathname = appPathname;
-    return NextResponse.redirect(new URL(pathname, fullUrl));
+    const url = new URL(pathname, fullUrl);
+    url.search = nextUrl.search;
+    return NextResponse.redirect(url);
   }
 
   return;

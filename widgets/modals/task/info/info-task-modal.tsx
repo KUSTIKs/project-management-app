@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import ReactMarkdown from 'react-markdown';
 
@@ -45,6 +45,17 @@ const InfoTaskModal: FC<Props> = ({
     queryKey: [QueryKey.USERS, task.userId],
   });
 
+  const taskHref = useMemo(() => {
+    const boardPageUrl = new URL(`/boards/${boardId}`, location.href);
+
+    boardPageUrl.searchParams.set('columnId', columnId);
+    boardPageUrl.searchParams.set('taskId', task.id);
+
+    const stringUrl = boardPageUrl.toString();
+
+    return stringUrl;
+  }, [boardId, columnId, task.id]);
+
   return (
     <>
       <InfoEntityModal
@@ -53,6 +64,7 @@ const InfoTaskModal: FC<Props> = ({
         isOpen={isOpen}
         handleUpdateClick={isUpdateModalOpenActions.setTrue}
         handleDeleteClick={isDeleteModalOpenActions.setTrue}
+        copyHref={taskHref}
       >
         <TextPreview label={contentMap.assignedTo}>
           {assignedTo?.login}

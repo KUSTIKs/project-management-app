@@ -12,11 +12,16 @@ import {
 } from '@project-management-app/components';
 import {
   CreateColumnModal,
+  InfoTaskModal,
   KanbanBoard,
   UpdateBoardModal,
 } from '@project-management-app/widgets';
-import { boardsService } from '@project-management-app/services';
-import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
+import { boardsService, tasksService } from '@project-management-app/services';
+import {
+  getKeyFromUnknown,
+  getValidChild,
+  isUndefined,
+} from '@project-management-app/helpers';
 import { useBooleanState } from '@project-management-app/hooks';
 import { QueryKey } from '@project-management-app/enums';
 
@@ -28,23 +33,47 @@ type Props = {
     locale: AppLocale;
     id: string;
   };
+  searchParams: {
+    taskId?: string;
+    columnId?: string;
+  };
 };
 
-const BoardPage: FC<Props> = ({ params }) => {
+const BoardPage: FC<Props> = ({ params, searchParams }) => {
   const { id, locale } = params;
+  const { columnId, taskId } = searchParams;
   const contentMap = boardDictionary.getContentMap({ locale });
   const {
     data: board,
-    isLoading,
-    error,
+    isLoading: isBoardLoading,
+    error: boardError,
   } = useQuery({
     queryKey: [QueryKey.BOARDS, { id }],
     queryFn: () => boardsService.getById(id),
   });
-  const errorMessage = getKeyFromUnknown(error, 'message');
+  const {
+    data: task,
+    isLoading: isTaskLoading,
+    isError: isTaskError,
+  } = useQuery({
+    queryKey: [QueryKey.TASKS, taskId],
+    queryFn: () => {
+      if (isUndefined(columnId) || isUndefined(taskId)) return;
+
+      return tasksService.getById({
+        boardId: id,
+        columnId,
+        taskId,
+      });
+    },
+  });
+  const [isUpdateOpen, isUpdateOpenActions] = useBooleanState(false);
   const [isCreateColumnModalOpen, isCreateColumnModalOpenActions] =
     useBooleanState(false);
-  const [isUpdateOpen, isUpdateOpenActions] = useBooleanState(false);
+  const [isInfoTaskModalOpen, isInfoTaskModalOpenActions] =
+    useBooleanState(true);
+
+  const isLoading = isBoardLoading || isTaskLoading;
 
   if (isLoading) {
     return (
@@ -56,11 +85,24 @@ const BoardPage: FC<Props> = ({ params }) => {
     );
   }
 
-  if (!board || error) {
+  if (!board || boardError) {
     return (
       <div className={classes.container}>
         <Typography variant="largeHeadline" weight={600} colorName="text/700">
-          {isString(errorMessage) ? errorMessage : contentMap.noBoardFound}
+          {getValidChild(
+            getKeyFromUnknown(boardError, 'message'),
+            contentMap.noBoardFound
+          )}
+        </Typography>
+      </div>
+    );
+  }
+
+  if (isTaskError) {
+    return (
+      <div className={classes.container}>
+        <Typography variant="largeHeadline" weight={600} colorName="text/700">
+          {contentMap.noTaskFound}
         </Typography>
       </div>
     );
@@ -103,6 +145,15 @@ const BoardPage: FC<Props> = ({ params }) => {
         handleClose={isUpdateOpenActions.setFalse}
         isOpen={isUpdateOpen}
       />
+      {task && (
+        <InfoTaskModal
+          boardId={id}
+          columnId={task.columnId}
+          handleClose={isInfoTaskModalOpenActions.setFalse}
+          isOpen={isInfoTaskModalOpen}
+          task={task}
+        />
+      )}
     </>
   );
 };

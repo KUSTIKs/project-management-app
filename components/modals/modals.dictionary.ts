@@ -7,6 +7,9 @@ const modalsDictionary = new ContentDictionary({
     create: 'Create',
     delete: 'Delete',
     update: 'Update',
+    copyLink: 'Copy link',
+    copied: 'Copied',
+    notCopied: 'Not copied',
     somethingWentWrong: 'Something went wrong',
   },
   [LocaleName.RU]: {
@@ -14,6 +17,9 @@ const modalsDictionary = new ContentDictionary({
     create: 'Создать',
     delete: 'Удалить',
     update: 'Обновить',
+    copyLink: 'Копировать ссылку',
+    copied: 'Скопировано',
+    notCopied: 'Не скопировано',
     somethingWentWrong: 'Что-то пошло не так',
   },
   [LocaleName.UK]: {
@@ -21,6 +27,9 @@ const modalsDictionary = new ContentDictionary({
     create: 'Створити',
     delete: 'Видалити',
     update: 'Оновити',
+    copyLink: 'Копіювати посилання',
+    copied: 'Скопійовано',
+    notCopied: 'Не скопійовано',
     somethingWentWrong: 'Щось пішло не так',
   },
 });

@@ -10,4 +10,6 @@ export { decodeToken } from './decode-token/decode-token';
 export { getKeyFromUnknown } from './get-key-from-unknown/get-key-from-unknown';
 export { handleDndDrugEnd } from './handle-dnd-drag-end/handle-dnd-drag-end';
 export { AppContext } from './app-context/app-context';
+export { getValidChild } from './get-valid-child/get-valid-child';
+export { isValidChild } from './is-valid-child/is-valid-child';
 export * from './type-checks/type-checks';
