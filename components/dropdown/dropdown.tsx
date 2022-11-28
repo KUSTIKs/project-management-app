@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames';
-import { cloneElement, FC, ReactElement, useRef } from 'react';
+import { cloneElement, ReactElement, useRef } from 'react';
 
 import { Option } from '@project-management-app/types';
 import { isString } from '@project-management-app/helpers';
@@ -14,17 +14,17 @@ import { Typography } from '@project-management-app/components';
 
 import classes from './dropdown.module.scss';
 
-type Props = {
+type Props<T extends string> = {
   trigger: ReactElement;
-  options?: Option[];
-  handleChange: (value: string) => void;
+  options?: Option<T>[];
+  handleChange: (value: T) => void;
   direction?: 'up' | 'down' | 'left' | 'right';
   alignment?: 'start' | 'end';
   size?: 's' | 'm' | 'l';
   maxOptionListHeight?: number;
 };
 
-const Dropdown: FC<Props> = ({
+const Dropdown = <T extends string>({
   options,
   handleChange,
   trigger,
@@ -32,11 +32,11 @@ const Dropdown: FC<Props> = ({
   alignment = 'start',
   size = 's',
   maxOptionListHeight,
-}) => {
+}: Props<T>) => {
   const [isOpen, isOpenActions] = useBooleanState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const handleOptionClick = (value: string) => {
+  const handleOptionClick = (value: T) => {
     handleChange(value);
     isOpenActions.setFalse();
   };
@@ -75,9 +75,8 @@ const Dropdown: FC<Props> = ({
             </Typography>
           )}
           {options?.map((option) => {
-            const { name, value } = isString(option)
-              ? { name: option, value: option }
-              : option;
+            const name = isString(option) ? option : option.name;
+            const value = isString(option) ? option : option.value;
 
             return (
               <li key={value}>

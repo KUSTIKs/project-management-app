@@ -8,7 +8,7 @@ import {
   getLanguageFromLocale,
 } from '@project-management-app/helpers';
 import { useAppRouter } from '@project-management-app/hooks';
-import { ObjectOption } from '@project-management-app/types';
+import { AppLocale, ObjectOption } from '@project-management-app/types';
 import { CookieName } from '@project-management-app/enums';
 
 import { headerDictionary } from '../../header.dictionary';
@@ -17,14 +17,15 @@ import classes from './menu.module.scss';
 type Props = {
   isMobile: boolean;
   isAuthorized: boolean;
+  handleSearchClick: () => void;
 };
 
-const Menu: FC<Props> = ({ isMobile, isAuthorized }) => {
+const Menu: FC<Props> = ({ isMobile, isAuthorized, handleSearchClick }) => {
   const router = useAppRouter();
   const { locale, locales } = router;
   const contentMap = headerDictionary.getContentMap({ locale });
 
-  const localeOptions: ObjectOption[] = locales.map((locale) => ({
+  const localeOptions: ObjectOption<AppLocale>[] = locales.map((locale) => ({
     name: getLanguageFromLocale(locale),
     value: locale,
   }));
@@ -63,6 +64,20 @@ const Menu: FC<Props> = ({ isMobile, isAuthorized }) => {
         )}
       </div>
       <div className={classes.group}>
+        {isAuthorized && (
+          <>
+            <Button
+              symmetricPadding
+              variant="text"
+              size={buttonsSize}
+              onClick={handleSearchClick}
+              startIcon={isMobile && <Icon.SearchLine />}
+            >
+              {isMobile ? 'Search' : <Icon.SearchLine size={18} />}
+            </Button>
+            <div className={classes.separator} />
+          </>
+        )}
         {locale && (
           <Dropdown
             handleChange={handleChangeLocale}
@@ -82,7 +97,6 @@ const Menu: FC<Props> = ({ isMobile, isAuthorized }) => {
             size={buttonsSize}
           />
         )}
-
         <div className={classes.separator} />
         {isAuthorized ? (
           <Button variant="ghost" size={buttonsSize} onClick={handleLogOut}>

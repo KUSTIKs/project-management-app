@@ -1,4 +1,4 @@
-import { FC, ButtonHTMLAttributes, ReactElement, ComponentProps } from 'react';
+import { FC, ButtonHTMLAttributes, ComponentProps, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { AppLink, Loader } from '@project-management-app/components';
@@ -11,8 +11,8 @@ type Props = (
 ) & {
   size?: 'm' | 's' | 'l';
   variant?: 'contained' | 'ghost' | 'text';
-  startIcon?: ReactElement;
-  endIcon?: ReactElement;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
   isLoading?: boolean;
   isDisabled?: boolean;
   href?: string;

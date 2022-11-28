@@ -1,4 +1,4 @@
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 
 import {
@@ -11,6 +11,7 @@ import { AppRouter, AppRouterFunctions } from '@project-management-app/types';
 const useAppRouter = (): AppRouter => {
   const router = useRouter();
   const fullPathname = usePathname()!;
+  const searchParams = useSearchParams();
   const parsedPathname = parseAppPathname(fullPathname);
 
   const appRouter = useMemo<AppRouterFunctions>(
@@ -48,6 +49,7 @@ const useAppRouter = (): AppRouter => {
   return {
     ...appRouter,
     ...parsedPathname,
+    searchParams,
     locales: appInternalizationConfig.locales,
   };
 };

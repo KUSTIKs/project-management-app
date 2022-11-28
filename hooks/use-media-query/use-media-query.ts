@@ -12,7 +12,7 @@ const useMediaQuery = (query: string) => {
   }, [query]);
 
   useEffect(() => {
-    const matchMedia = window.matchMedia(query);
+    const matchMedia = window?.matchMedia(query);
 
     handleChange();
 

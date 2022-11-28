@@ -6505,6 +6505,11 @@ functions-have-names@^1.2.2:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
+fuse.js@^6.6.2:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-6.6.2.tgz#fe463fed4b98c0226ac3da2856a415576dc9a111"
+  integrity sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==
+
 gauge@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-3.0.2.tgz#03bf4441c044383908bcfa0656ad91803259b395"
@@ -12193,6 +12198,11 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-debounce@^8.0.4:
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-8.0.4.tgz#27e93b2f010bd0b8ad06e9fc7de891d9ee5d6b8e"
+  integrity sha512-fGqsYQzl8kLHF2QpQSgIwgOgJmnh6j5L6SIzQiHdLfwp3q1egUL3btq5Bg2SJysH6A0ILLgT2IqXZKoNJr0nFw==
 
 use-memo-one@^1.1.1:
   version "1.1.3"

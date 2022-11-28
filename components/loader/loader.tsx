@@ -1,20 +1,28 @@
-import { CSSProperties, FC } from 'react';
+import { FC, HTMLAttributes } from 'react';
+import classNames from 'classnames';
 
 import { isString } from '@project-management-app/helpers';
 
 import classes from './loader.module.scss';
 
-type Props = {
+type Props = HTMLAttributes<HTMLDivElement> & {
   size?: number | string;
-  style?: CSSProperties;
   colorPrimary?: string;
   colorSecondary?: string;
 };
 
-const Loader: FC<Props> = ({ size, style, colorPrimary, colorSecondary }) => {
+const Loader: FC<Props> = ({
+  size,
+  style,
+  colorPrimary,
+  colorSecondary,
+  className,
+  ...attrs
+}) => {
   return (
     <div
-      className={classes.loader}
+      {...attrs}
+      className={classNames(className, classes.loader)}
       style={{
         ...style,
         fontSize: isString(size) ? size : `${size}px`,

@@ -9,6 +9,9 @@ import {
   UpdateTaskDto,
 } from '@project-management-app/types';
 
+import { boardsService } from '../boards/boards.service';
+import { columnsService } from '../columns/columns.service';
+
 class TasksService {
   async getAll({ boardId, columnId }: { boardId: string; columnId: string }) {
     const response = await appFetch(
@@ -131,6 +134,27 @@ class TasksService {
 
       throw error;
     }
+  }
+
+  async getAllFromAll() {
+    const boards = await boardsService.getAll();
+    const columns = await Promise.all(
+      boards.map(async ({ id }) => ({
+        boardId: id,
+        columns: await columnsService.getAll({ boardId: id }),
+      }))
+    );
+    const tasks = await Promise.all(
+      columns.map(({ boardId, columns }) => {
+        return Promise.all(
+          columns.map(({ id }) => {
+            return tasksService.getAll({ boardId, columnId: id });
+          })
+        );
+      })
+    );
+
+    return tasks.flat(2);
   }
 }
 

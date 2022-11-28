@@ -81,6 +81,10 @@ const CreateTaskModal: FC<Props> = ({
     queryClient.invalidateQueries({
       queryKey: [QueryKey.TASKS, { columnId }],
     });
+    queryClient.invalidateQueries({
+      queryKey: [QueryKey.TASKS],
+      exact: true,
+    });
     handleCloseWithReset();
   };
 

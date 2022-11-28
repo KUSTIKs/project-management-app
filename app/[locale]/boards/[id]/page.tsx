@@ -33,13 +33,13 @@ type Props = {
     locale: AppLocale;
     id: string;
   };
-  searchParams: {
+  searchParams?: {
     taskId?: string;
     columnId?: string;
   };
 };
 
-const BoardPage: FC<Props> = ({ params, searchParams }) => {
+const BoardPage: FC<Props> = ({ params, searchParams = {} }) => {
   const { id, locale } = params;
   const { columnId, taskId } = searchParams;
   const contentMap = boardDictionary.getContentMap({ locale });

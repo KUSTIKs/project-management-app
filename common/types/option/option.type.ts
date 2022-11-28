@@ -1,8 +1,8 @@
-type ObjectOption = {
+type ObjectOption<T extends string> = {
   name: string;
-  value: string;
+  value: T;
 };
 
-type Option = string | ObjectOption;
+type Option<T extends string> = T | ObjectOption<T>;
 
 export type { ObjectOption, Option };

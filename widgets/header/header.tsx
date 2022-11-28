@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useOutsideClick,
 } from '@project-management-app/hooks';
+import { SearchModal } from '@project-management-app/widgets';
 
 import classes from './header.module.scss';
 import { Menu } from './components/components';
@@ -19,6 +20,7 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ isAuthorized }) => {
+  const [isSearchModalOpen, isSearchModalOpenActions] = useBooleanState(false);
   const [isMenuOpen, isMenuOpenActions] = useBooleanState(false);
   const isMobile = useMediaQuery('(max-width: 800px)');
   const headerRef = useRef<HTMLElement>(null);
@@ -31,37 +33,49 @@ const Header: FC<Props> = ({ isAuthorized }) => {
   }, [appPathname, isMenuOpenActions]);
 
   return (
-    <header className={classes.header} ref={headerRef}>
-      <div className={classes.container}>
-        <AppLink href="/">
-          <Image
-            src="/logo.png"
-            alt="logo"
-            width={173}
-            height={24}
-            priority
-            className={classes.logo}
-          />
-        </AppLink>
-        {isMobile && (
-          <Button
-            symmetricPadding
-            size="s"
-            variant="text"
-            onClick={isMenuOpenActions.toggle}
-          >
-            {isMenuOpen ? (
-              <Icon.CloseLine size={20} />
-            ) : (
-              <Icon.MenuLine size={20} />
-            )}
-          </Button>
-        )}
-        {!(isMobile && !isMenuOpen) && (
-          <Menu isAuthorized={isAuthorized} isMobile={isMobile} />
-        )}
-      </div>
-    </header>
+    <>
+      <header className={classes.header} ref={headerRef}>
+        <div className={classes.container}>
+          <AppLink href="/">
+            <Image
+              src="/logo.png"
+              alt="logo"
+              width={173}
+              height={24}
+              priority
+              className={classes.logo}
+            />
+          </AppLink>
+          {isMobile && (
+            <Button
+              symmetricPadding
+              size="s"
+              variant="text"
+              onClick={isMenuOpenActions.toggle}
+            >
+              {isMenuOpen ? (
+                <Icon.CloseLine size={20} />
+              ) : (
+                <Icon.MenuLine size={20} />
+              )}
+            </Button>
+          )}
+          {!(isMobile && !isMenuOpen) && (
+            <Menu
+              isAuthorized={isAuthorized}
+              isMobile={isMobile}
+              handleSearchClick={isSearchModalOpenActions.setTrue}
+            />
+          )}
+        </div>
+      </header>
+      {isAuthorized && (
+        <SearchModal
+          isOpen={isSearchModalOpen}
+          handleClose={isSearchModalOpenActions.setFalse}
+        />
+      )}
+    </>
   );
 };
 

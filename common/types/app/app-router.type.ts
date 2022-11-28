@@ -5,6 +5,7 @@ import { ParsedAppPathname } from './parsed-app-pathname.type';
 type AppRouter = AppRouterFunctions &
   ParsedAppPathname & {
     locales: AppLocale[];
+    searchParams: URLSearchParams;
   };
 
 export type { AppRouter };

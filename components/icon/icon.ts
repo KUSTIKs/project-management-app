@@ -11,6 +11,10 @@ import {
   RiMenuLine,
   RiLink,
   RiCheckLine,
+  RiSearchLine,
+  RiCloseCircleFill,
+  RiStickyNoteFill,
+  RiArtboardFill,
 } from 'react-icons/ri';
 
 const Icon = {
@@ -26,6 +30,10 @@ const Icon = {
   MenuLine: RiMenuLine,
   LinkLine: RiLink,
   CheckLine: RiCheckLine,
+  SearchLine: RiSearchLine,
+  CloseCircleFill: RiCloseCircleFill,
+  StickyNoteFill: RiStickyNoteFill,
+  ArtboardFill: RiArtboardFill,
 } as const;
 
 export { Icon };
