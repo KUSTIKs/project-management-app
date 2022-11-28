@@ -45,56 +45,57 @@ const ActionModal: FC<Props> = ({
     <Modal
       title={title || titleWithEntity}
       isDisabled={isLoading}
-      onSubmit={handleAction}
       handleClose={handleClose}
       isOpen={isOpen}
     >
-      <div className={classes.wrapper}>
-        <>
-          {children}
-          {(errorMessage || isError) && (
-            <strong>
-              {isString(errorMessage) ? (
-                <Typography variant="text" weight={600} colorName="red/200">
-                  {errorMessage}
-                </Typography>
-              ) : isArray(errorMessage) ? (
-                errorMessage.map(
-                  (message, index) =>
-                    isString(message) && (
-                      <Typography
-                        variant="text"
-                        weight={600}
-                        colorName="red/200"
-                        key={index}
-                      >
-                        {message}
-                      </Typography>
-                    )
-                )
-              ) : (
-                <Typography variant="text" weight={600} colorName="red/200">
-                  {contentMap.somethingWentWrong}
-                </Typography>
-              )}
-            </strong>
-          )}
-        </>
-      </div>
-      <Modal.ButtonGroup>
-        <Button size="l" variant="ghost" onClick={handleClose}>
-          {contentMap.cancel}
-        </Button>
-        <Button
-          size="l"
-          type="submit"
-          onClick={handleAction}
-          isLoading={isLoading}
-          isDisabled={isActionDisabled}
-        >
-          {actionName}
-        </Button>
-      </Modal.ButtonGroup>
+      <form onSubmit={handleAction} style={{ display: 'contents' }}>
+        <div className={classes.wrapper}>
+          <>
+            {children}
+            {(errorMessage || isError) && (
+              <strong>
+                {isString(errorMessage) ? (
+                  <Typography variant="text" weight={600} colorName="red/200">
+                    {errorMessage}
+                  </Typography>
+                ) : isArray(errorMessage) ? (
+                  errorMessage.map(
+                    (message, index) =>
+                      isString(message) && (
+                        <Typography
+                          variant="text"
+                          weight={600}
+                          colorName="red/200"
+                          key={index}
+                        >
+                          {message}
+                        </Typography>
+                      )
+                  )
+                ) : (
+                  <Typography variant="text" weight={600} colorName="red/200">
+                    {contentMap.somethingWentWrong}
+                  </Typography>
+                )}
+              </strong>
+            )}
+          </>
+        </div>
+        <Modal.ButtonGroup>
+          <Button size="l" variant="ghost" onClick={handleClose}>
+            {contentMap.cancel}
+          </Button>
+          <Button
+            size="l"
+            type="submit"
+            onClick={handleAction}
+            isLoading={isLoading}
+            isDisabled={isActionDisabled}
+          >
+            {actionName}
+          </Button>
+        </Modal.ButtonGroup>
+      </form>
     </Modal>
   );
 };

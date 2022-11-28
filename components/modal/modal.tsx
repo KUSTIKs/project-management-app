@@ -1,7 +1,8 @@
 'use client';
 
-import { FC, FormEventHandler, ReactNode, useEffect, useRef } from 'react';
+import { FC, ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { Button, Icon, Typography } from '@project-management-app/components';
 import { useOutsideClick } from '@project-management-app/hooks';
@@ -12,13 +13,13 @@ import {
   ModalButtonGroup,
   ModalFieldset,
 } from './subcomponents/subcomponents';
+import { dropIn, fadeIn } from './helpers/helpers';
 
 type Props = {
   title: string;
   children: ReactNode;
   isOpen?: boolean;
   handleClose?: () => void;
-  onSubmit?: FormEventHandler<HTMLFormElement>;
   isDisabled?: boolean;
 };
 
@@ -26,38 +27,16 @@ const Modal: FC<Props> & {
   Fieldset: typeof ModalFieldset;
   ButtonGroup: typeof ModalButtonGroup;
   Actions: typeof ModalActions;
-} = ({ title, children, isOpen, handleClose, onSubmit, isDisabled }) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const wrapperRef = useRef<HTMLElement>(null);
-  const Component: any = onSubmit ? 'form' : 'div';
-  const isForm = Component === 'form';
+} = ({ title, children, isOpen, handleClose, isDisabled }) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const pointerEvents = isDisabled ? 'none' : undefined;
-
-  const formProps = {
-    onSubmit,
-  };
-  const props = isForm && formProps;
 
   const setOverflow = (value: string) => {
     document.documentElement.style.overflow = value;
   };
 
-  const openModal = () => {
-    const isDialogOpen = dialogRef.current?.open;
-
-    if (!isDialogOpen) {
-      dialogRef.current?.showModal();
-    }
-  };
-
   useOutsideClick(wrapperRef, handleClose);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    openModal();
-  }, [isOpen]);
 
   useEffect(() => {
     setOverflow(isOpen ? 'hidden' : 'unset');
@@ -67,15 +46,22 @@ const Modal: FC<Props> & {
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
-
   const modal = (
-    <dialog ref={dialogRef} className={classes.dialog} open={false}>
-      <Component
-        {...props}
+    <motion.div
+      className={classes.backdrop}
+      variants={fadeIn}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+    >
+      <motion.div
         className={classes.wrapper}
         ref={wrapperRef}
         style={{ pointerEvents }}
+        variants={dropIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
       >
         <div className={classes.header}>
           <Typography variant="title2" weight={700}>
@@ -92,8 +78,8 @@ const Modal: FC<Props> & {
           </Button>
         </div>
         {children}
-      </Component>
-    </dialog>
+      </motion.div>
+    </motion.div>
   );
 
   const container = document.getElementById('modal-portal');
@@ -103,7 +89,12 @@ const Modal: FC<Props> & {
     return null;
   }
 
-  return createPortal(modal, container);
+  return createPortal(
+    <AnimatePresence initial={false} mode="wait">
+      {isOpen ? modal : null}
+    </AnimatePresence>,
+    container
+  );
 };
 
 Modal.Fieldset = ModalFieldset;
