@@ -18,6 +18,7 @@ import { getKeyFromUnknown, isString } from '@project-management-app/helpers';
 import classes from './profile.module.scss';
 import { profileDictionary } from './profile.dictionary';
 import { UpdateForm, UserPreview } from './components/components';
+import { DeleteUserModal } from 'widgets/modals/user/user-modals';
 
 type Props = {
   params: {
@@ -30,6 +31,7 @@ const ProfilePage: FC<Props> = ({ params }) => {
   const { payload } = useAppContext();
   const contentMap = profileDictionary.getContentMap({ locale });
   const [isUpdating, isUpdatingActions] = useBooleanState(false);
+  const [isDeleteModalOpen, isDeleteModalOpenActions] = useBooleanState(false);
   const {
     data: user,
     isLoading,
@@ -62,42 +64,61 @@ const ProfilePage: FC<Props> = ({ params }) => {
   }
 
   return (
-    <div className={classes.container}>
-      <div className={classes.wrapper}>
-        <div className={classes.topInfo}>
-          <Typography variant="title1" weight={700}>
-            {contentMap.title}
-          </Typography>
+    <>
+      <div className={classes.container}>
+        <div className={classes.wrapper}>
+          <div className={classes.topInfo}>
+            <Typography variant="title1" weight={700}>
+              {contentMap.title}
+            </Typography>
+            <div className={classes.actions}>
+              {isUpdating ? (
+                <Button
+                  size="m"
+                  variant="ghost"
+                  startIcon={<Icon.CloseLine />}
+                  onClick={isUpdatingActions.setFalse}
+                >
+                  {contentMap.cancel}
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    size="m"
+                    variant="ghost"
+                    startIcon={<Icon.BinLine />}
+                    onClick={isDeleteModalOpenActions.setTrue}
+                  >
+                    {contentMap.delete}
+                  </Button>
+                  <Button
+                    size="m"
+                    variant="ghost"
+                    startIcon={<Icon.EditLine />}
+                    onClick={isUpdatingActions.setTrue}
+                  >
+                    {contentMap.update}
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
           {isUpdating ? (
-            <Button
-              size="m"
-              variant="ghost"
-              startIcon={<Icon.CloseLine />}
-              onClick={isUpdatingActions.setFalse}
-            >
-              {contentMap.cancel}
-            </Button>
+            <UpdateForm
+              exitUpdatingMode={isUpdatingActions.setFalse}
+              user={user}
+            />
           ) : (
-            <Button
-              size="m"
-              variant="ghost"
-              startIcon={<Icon.EditLine />}
-              onClick={isUpdatingActions.setTrue}
-            >
-              {contentMap.update}
-            </Button>
+            <UserPreview user={user} />
           )}
         </div>
-        {isUpdating ? (
-          <UpdateForm
-            exitUpdatingMode={isUpdatingActions.setFalse}
-            user={user}
-          />
-        ) : (
-          <UserPreview user={user} />
-        )}
       </div>
-    </div>
+      <DeleteUserModal
+        isOpen={isDeleteModalOpen}
+        handleClose={isDeleteModalOpenActions.setFalse}
+        user={user}
+      />
+    </>
   );
 };
 

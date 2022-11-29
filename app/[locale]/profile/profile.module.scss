@@ -18,6 +18,12 @@
   flex-wrap: wrap;
 }
 
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .loadingContainer {
   width: 100%;
   display: flex;
