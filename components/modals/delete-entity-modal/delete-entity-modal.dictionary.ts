@@ -12,6 +12,9 @@ const getDeleteEntityModalDictionary = (vars: { entityName: string }) =>
     [LocaleName.UK]: {
       message: `Ця дія не може бути скасована. Ви впевнені, що хочете видалити ${vars.entityName}?`,
     },
+    [LocaleName.CS]: {
+      message: `Tuto akci nelze vrátit zpět. Jste si jisti, že chcete smazat ${vars.entityName}?`,
+    },
   });
 
 export { getDeleteEntityModalDictionary };

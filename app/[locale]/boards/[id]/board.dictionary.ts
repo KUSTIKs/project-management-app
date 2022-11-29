@@ -20,6 +20,12 @@ const boardDictionary = new ContentDictionary({
     noBoardFound: 'Дошка не знайдена',
     noTaskFound: 'Завдання не знайдено',
   },
+  [LocaleName.CS]: {
+    newColumn: 'Nový sloupec',
+    edit: 'Upravit',
+    noBoardFound: 'Deska nebyla nalezena',
+    noTaskFound: 'Úkol nebyl nalezen',
+  },
 });
 
 export { boardDictionary };

@@ -23,6 +23,13 @@ const columnModalsDictionary = new ContentDictionary({
     deleteColumn: 'Видалити колонку',
     infoColumn: 'Інформація про колонку',
   },
+  [LocaleName.CS]: {
+    title: 'titulek',
+    createColumn: 'Vytvořit sloupec',
+    updateColumn: 'Aktualizovat sloupec',
+    deleteColumn: 'Smazat sloupec',
+    infoColumn: 'Informace o sloupci',
+  },
 });
 
 export { columnModalsDictionary };

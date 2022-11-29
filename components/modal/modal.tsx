@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, ReactNode, useEffect, useRef } from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -29,6 +29,7 @@ const Modal: FC<Props> & {
   Actions: typeof ModalActions;
 } = ({ title, children, isOpen, handleClose, isDisabled }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [container, setContainer] = useState<HTMLElement>();
 
   const pointerEvents = isDisabled ? 'none' : undefined;
 
@@ -45,6 +46,17 @@ const Modal: FC<Props> & {
       setOverflow('unset');
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    const container = document.getElementById('modal-portal');
+
+    if (!container) {
+      console.error('Could not found element with id "modal-portal"');
+      return;
+    }
+
+    setContainer(container);
+  }, []);
 
   const modal = (
     <motion.div
@@ -82,12 +94,7 @@ const Modal: FC<Props> & {
     </motion.div>
   );
 
-  const container = document.getElementById('modal-portal');
-
-  if (!container) {
-    console.error('Could not found element with id "modal-portal"');
-    return null;
-  }
+  if (!container) return null;
 
   return createPortal(
     <AnimatePresence initial={false} mode="wait">

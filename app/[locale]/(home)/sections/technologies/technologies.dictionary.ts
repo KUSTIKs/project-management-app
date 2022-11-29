@@ -14,6 +14,10 @@ const technologiesDictionary = new ContentDictionary({
     title: 'Технології',
     subtitle: 'Створено з використанням найнадійніших технологій',
   },
+  [LocaleName.CS]: {
+    title: 'Technologie',
+    subtitle: 'Vytvořeno pomocí nejspolehlivějších technologií',
+  },
 });
 
 export { technologiesDictionary };

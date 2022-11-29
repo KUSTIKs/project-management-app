@@ -26,7 +26,7 @@ const ourTeamDictionary = new ContentDictionary({
         {
           title: 'Accessibility',
           description:
-            'Added support for three languages: English, Russian and Ukrainian',
+            'Added support for four languages: English, Russian, Ukrainian and Czech',
         },
       ],
     },
@@ -55,7 +55,7 @@ const ourTeamDictionary = new ContentDictionary({
         {
           title: 'Доступность',
           description:
-            'Добавил поддержку трех языков: английского, русского и украинского',
+            'Добавил поддержку четырёх языков: английского, русского, украинского и чешского',
         },
       ],
     },
@@ -84,7 +84,36 @@ const ourTeamDictionary = new ContentDictionary({
         {
           title: 'Доступність',
           description:
-            'Додав підтримку трьох мов: англійської, російської та української',
+            'Додав підтримку чотирьох мов: англійської, російської, української та чеської',
+        },
+      ],
+    },
+  },
+  [LocaleName.CS]: {
+    title: 'Náš tým',
+    member1: {
+      name: 'Artem Khvostyk',
+      description: 'Vývojář, designér',
+      statements: [
+        {
+          title: 'Design',
+          description:
+            'Vytvořil uživatelsky přívětivé rozhraní pomocí nejnovějších inovací v figma',
+        },
+        {
+          title: 'Architektura',
+          description:
+            'Vytvořil spolehlivou strukturu projektu s jasným a čistým kódem, organizoval CI / CD',
+        },
+        {
+          title: 'Funkcionalita',
+          description:
+            'Implementoval funkčnost s čitelným a snadno srozumitelným kódem pomocí osvědčených postupů a návrhových vzorů',
+        },
+        {
+          title: 'Dostupnost',
+          description:
+            'Přidal podporu pro čtyři jazyky: angličtinu, ruštinu, ukrajinštinu a češtinu',
         },
       ],
     },

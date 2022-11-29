@@ -23,6 +23,13 @@ const searchModalDictionary = new ContentDictionary({
     boards: 'Дошки',
     tasks: 'Завдання',
   },
+  [LocaleName.CS]: {
+    nothingFound: 'Nic nebylo nalezeno',
+    typeHere: 'Zadejte dotaz zde',
+    all: 'Všechny',
+    boards: 'Desky',
+    tasks: 'Úlohy',
+  },
 });
 
 export { searchModalDictionary };

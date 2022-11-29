@@ -11,6 +11,9 @@ const getLanguageFromLocale = (locale: string, userLocale = locale) => {
     if (locale === LocaleName.UK) {
       return 'Ukrainian';
     }
+    if (locale === LocaleName.CS) {
+      return 'Czech';
+    }
   }
 
   if (userLocale === LocaleName.RU) {
@@ -23,6 +26,9 @@ const getLanguageFromLocale = (locale: string, userLocale = locale) => {
     if (locale === LocaleName.UK) {
       return 'Украинский';
     }
+    if (locale === LocaleName.CS) {
+      return 'Чешский';
+    }
   }
 
   if (userLocale === LocaleName.UK) {
@@ -34,6 +40,24 @@ const getLanguageFromLocale = (locale: string, userLocale = locale) => {
     }
     if (locale === LocaleName.UK) {
       return 'Українська';
+    }
+    if (locale === LocaleName.CS) {
+      return 'Чеська';
+    }
+  }
+
+  if (userLocale === LocaleName.CS) {
+    if (locale === LocaleName.EN) {
+      return 'Angličtina';
+    }
+    if (locale === LocaleName.RU) {
+      return 'Ruština';
+    }
+    if (locale === LocaleName.UK) {
+      return 'Ukrajinština';
+    }
+    if (locale === LocaleName.CS) {
+      return 'Čeština';
     }
   }
 

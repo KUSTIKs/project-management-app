@@ -27,7 +27,16 @@ const taskModalsDictionary = new ContentDictionary({
     createTask: 'Створити завдання',
     updateTask: 'Оновити завдання',
     deleteTask: 'Видалити завдання',
-    infoTask: 'Інформация про завдвння',
+    infoTask: 'Інформація про завдвння',
+  },
+  [LocaleName.CS]: {
+    title: 'titulek',
+    description: 'popis',
+    assignedTo: 'přiřazeno k',
+    deleteTask: 'Smazat úkol',
+    createTask: 'Vytvořit úkol',
+    updateTask: 'Aktualizovat úkol',
+    infoTask: 'Informace o úkolu',
   },
 });
 

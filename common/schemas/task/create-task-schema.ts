@@ -35,6 +35,15 @@ const validationMessageDictionary = new ContentDictionary({
     descriptionMax: (value: number) => `Опис повинен мати до ${value} символів`,
     userIdRequired: "Призначено на є обов'язковим полем",
   },
+  [LocaleName.CS]: {
+    titleRequired: 'Titulek je vyžadován',
+    titleMin: (value: number) => `Titulek musí mít od ${value} znaků`,
+    titleMax: (value: number) => `Titulek musí mít až ${value} znaků`,
+    descriptionRequired: 'Popis je vyžadován',
+    descriptionMin: (value: number) => `Popis musí mít od ${value} znaků`,
+    descriptionMax: (value: number) => `Popis musí mít až ${value} znaků`,
+    userIdRequired: 'Přiřazeno k je povinné pole',
+  },
 });
 
 const getCreateTaskSchema = ({ locale }: { locale: AppLocale }) => {

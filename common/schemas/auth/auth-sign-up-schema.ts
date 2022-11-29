@@ -38,6 +38,17 @@ const validationMessageDictionary = new ContentDictionary({
     passwordMin: (value: number) => `Пароль повинен мати від ${value} символів`,
     passwordMax: (value: number) => `Пароль повинен мати до ${value} символів`,
   },
+  [LocaleName.CS]: {
+    loginRequired: 'Přihlášení je vyžadováno',
+    loginMin: (value: number) => `Přihlášení musí mít až ${value} znaků`,
+    loginMax: (value: number) => `Přihlášení musí mít od ${value} znaků`,
+    nameRequired: 'Jméno je vyžadováno',
+    nameMin: (value: number) => `Jméno musí mít až ${value} znaků`,
+    nameMax: (value: number) => `Jméno musí mít od ${value} znaků`,
+    passwordRequired: 'Heslo je vyžadováno',
+    passwordMin: (value: number) => `Heslo musí mít až ${value} znaků`,
+    passwordMax: (value: number) => `Heslo musí mít od ${value} znaků`,
+  },
 });
 
 const getSignUpSchema = ({ locale }: { locale: AppLocale }) => {

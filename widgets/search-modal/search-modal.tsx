@@ -50,6 +50,7 @@ const SearchModal: FC<Props> = ({ handleClose, isOpen }) => {
     maxWait: 2000,
   });
   const { fuse, isLoading } = useSearchFuse({ tab });
+  const [container, setContainer] = useState<HTMLElement>();
 
   const results = useMemo(() => {
     return fuse.search(searchValue);
@@ -65,6 +66,7 @@ const SearchModal: FC<Props> = ({ handleClose, isOpen }) => {
   };
 
   const setOverflow = (value: string) => {
+    if (typeof window === 'undefined') return;
     document.documentElement.style.overflow = value;
   };
 
@@ -83,6 +85,17 @@ const SearchModal: FC<Props> = ({ handleClose, isOpen }) => {
   useEffect(() => {
     handleClose();
   }, [handleClose, appPathname, searchParams]);
+
+  useEffect(() => {
+    const container = document.getElementById('modal-portal');
+
+    if (!container) {
+      console.error('Could not found element with id "modal-portal"');
+      return;
+    }
+
+    setContainer(container);
+  }, []);
 
   useEffect(() => {
     if (isOpen) return;
@@ -176,10 +189,7 @@ const SearchModal: FC<Props> = ({ handleClose, isOpen }) => {
     </motion.div>
   );
 
-  const container = document.getElementById('modal-portal');
-
   if (!container) {
-    console.error('Could not found element with id "modal-portal"');
     return null;
   }
 

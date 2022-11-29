@@ -20,6 +20,11 @@ const validationMessageDictionary = new ContentDictionary({
     titleMin: (value: number) => `Заголовок повинен мати від ${value} символів`,
     titleMax: (value: number) => `Заголовок повинен мати до ${value} символів`,
   },
+  [LocaleName.CS]: {
+    titleRequired: 'Titulek je vyžadován',
+    titleMin: (value: number) => `Titulek musí mít od ${value} znaků`,
+    titleMax: (value: number) => `Titulek musí mít až ${value} znaků`,
+  },
 });
 
 const getCreateColumnSchema = ({ locale }: { locale: AppLocale }) => {

@@ -37,6 +37,18 @@ const advantagesDictionary = new ContentDictionary({
         'Відстежуйте роботу за допомогою відкритої платформи для спільної роботи',
     },
   },
+  [LocaleName.CS]: {
+    advantage1: {
+      title: 'Uspořádejte práci',
+      description:
+        'Flexibilní kanbanové desky pomáhají týmům vizualizovat tento pracovní postup, omezují probíhající práci a maximalizují efektivitu jako tým',
+    },
+    advantage2: {
+      title: 'Zviditelněte práci',
+      description:
+        'Sledujte práci prostřednictvím otevřené platformy pro spolupráci',
+    },
+  },
 });
 
 export { advantagesDictionary };

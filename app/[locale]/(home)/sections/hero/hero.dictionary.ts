@@ -25,6 +25,13 @@ const heroDictionary = new ContentDictionary({
     goToBoards: 'Перейти до дощок',
     projectRepo: 'Репозиторій',
   },
+  [LocaleName.CS]: {
+    title: 'Magic project manager',
+    description: 'Konečně jednoduchý nástroj pro řízení procesů a projektů',
+    tryNow: 'Vyzkoušejte nyní',
+    goToBoards: 'Přejít na desky',
+    projectRepo: 'Repo projektu',
+  },
 });
 
 export { heroDictionary };

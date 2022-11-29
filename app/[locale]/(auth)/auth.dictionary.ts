@@ -32,6 +32,16 @@ const authDictionary = new ContentDictionary({
     signInMessage: 'Немає облікового запису?',
     signUpMessage: 'Є обліковий запис?',
   },
+  [LocaleName.CS]: {
+    signUp: 'Registrace',
+    signIn: 'Přihlásit',
+    name: 'jméno',
+    login: 'přihlášení',
+    password: 'heslo',
+    submit: 'Předložit',
+    signInMessage: 'Nemáte účet ?',
+    signUpMessage: 'Máte účet ?',
+  },
 });
 
 export { authDictionary };

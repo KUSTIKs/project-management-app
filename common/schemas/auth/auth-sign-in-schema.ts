@@ -17,6 +17,10 @@ const validationMessageDictionary = new ContentDictionary({
     loginRequired: "Логін обов'язковий",
     passwordRequired: "Пароль обов'язковий",
   },
+  [LocaleName.CS]: {
+    loginRequired: 'Přihlášení je vyžadováno',
+    passwordRequired: 'Heslo je vyžadováno',
+  },
 });
 
 const getSignInSchema = ({ locale }: { locale: AppLocale }) => {

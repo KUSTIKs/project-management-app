@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 const useMediaQuery = (query: string) => {
   const getMatches = (query: string) => {
-    return window?.matchMedia(query).matches;
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia(query).matches;
   };
 
   const [matches, setMatches] = useState(getMatches(query));

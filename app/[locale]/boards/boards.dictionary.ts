@@ -17,6 +17,11 @@ const boardsDictionary = new ContentDictionary({
     newBoard: 'Нова дошка',
     noBoardsMessage: 'Дошки ще не створені',
   },
+  [LocaleName.CS]: {
+    title: 'Desky',
+    newBoard: 'Nová deska',
+    noBoardsMessage: 'Zatím nebyly vytvořeny žádné desky',
+  },
 });
 
 export { boardsDictionary };

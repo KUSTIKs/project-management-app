@@ -32,6 +32,16 @@ const modalsDictionary = new ContentDictionary({
     notCopied: 'Не скопійовано',
     somethingWentWrong: 'Щось пішло не так',
   },
+  [LocaleName.CS]: {
+    cancel: 'Zrušit',
+    create: 'Vytvořit',
+    delete: 'Smazat',
+    update: 'Aktualizovat',
+    copyLink: 'Kopírovat odkaz',
+    copied: 'Zkopírováno',
+    notCopied: 'Nekopírováno',
+    somethingWentWrong: 'Něco se pokazilo',
+  },
 });
 
 export { modalsDictionary };

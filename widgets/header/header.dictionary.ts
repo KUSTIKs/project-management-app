@@ -6,7 +6,7 @@ const headerDictionary = new ContentDictionary({
     boards: 'Boards',
     profile: 'Profile',
     signUp: 'Sign up',
-    signIn: 'Log in',
+    signIn: 'Sign in',
     logOut: 'Log out',
   },
   [LocaleName.RU]: {
@@ -22,6 +22,13 @@ const headerDictionary = new ContentDictionary({
     signUp: 'Реєстрація',
     signIn: 'Увійти',
     logOut: 'Вийти',
+  },
+  [LocaleName.CS]: {
+    boards: 'Desky',
+    profile: 'Profil',
+    signUp: 'Registrace',
+    signIn: 'Přihlásit',
+    logOut: 'Odhlásit',
   },
 });
 

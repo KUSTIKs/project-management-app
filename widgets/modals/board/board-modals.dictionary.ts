@@ -23,6 +23,13 @@ const boardModalsDictionary = new ContentDictionary({
     createBoard: 'Створити дошку',
     updateBoard: 'Оновити дошку',
   },
+  [LocaleName.CS]: {
+    title: 'titulek',
+    description: 'popis',
+    deleteBoard: 'Smazat desku',
+    createBoard: 'Vytvořit desku',
+    updateBoard: 'Aktualizovat desku',
+  },
 });
 
 export { boardModalsDictionary };

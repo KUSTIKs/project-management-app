@@ -5,7 +5,7 @@ import {
 } from '@project-management-app/types';
 
 const appInternalizationConfig: InternalizationConfig<AppLocale> = {
-  locales: [LocaleName.EN, LocaleName.RU, LocaleName.UK],
+  locales: [LocaleName.EN, LocaleName.RU, LocaleName.UK, LocaleName.CS],
   defaultLocale: LocaleName.EN,
 };
 

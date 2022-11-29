@@ -52,6 +52,7 @@ const DeleteTaskModal: FC<Props> = ({
       queryKey: [QueryKey.TASKS],
       exact: true,
     });
+
     handleClose();
   };
 
