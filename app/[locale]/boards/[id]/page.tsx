@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useQuery } from 'react-query';
 
 import { AppLocale } from '@project-management-app/types';
@@ -20,9 +20,9 @@ import { boardsService, tasksService } from '@project-management-app/services';
 import {
   getKeyFromUnknown,
   getValidChild,
-  isUndefined,
+  isString,
 } from '@project-management-app/helpers';
-import { useBooleanState } from '@project-management-app/hooks';
+import { useAppRouter, useBooleanState } from '@project-management-app/hooks';
 import { QueryKey } from '@project-management-app/enums';
 
 import classes from './board.module.scss';
@@ -43,6 +43,7 @@ const BoardPage: FC<Props> = ({ params, searchParams = {} }) => {
   const { id, locale } = params;
   const { columnId, taskId } = searchParams;
   const contentMap = boardDictionary.getContentMap({ locale });
+  const router = useAppRouter();
   const {
     data: board,
     isLoading: isBoardLoading,
@@ -58,7 +59,7 @@ const BoardPage: FC<Props> = ({ params, searchParams = {} }) => {
   } = useQuery({
     queryKey: [QueryKey.TASKS, taskId],
     queryFn: () => {
-      if (isUndefined(columnId) || isUndefined(taskId)) return;
+      if (!isString(columnId) || !isString(taskId)) return;
 
       return tasksService.getById({
         boardId: id,
@@ -74,6 +75,25 @@ const BoardPage: FC<Props> = ({ params, searchParams = {} }) => {
     useBooleanState(true);
 
   const isLoading = isBoardLoading || isTaskLoading;
+
+  const handleInfoTaskModalClose = () => {
+    isInfoTaskModalOpenActions.setFalse();
+
+    const currentUrl = new URL(router.appPathname, location.href);
+
+    currentUrl.search = router.searchParams.toString();
+
+    currentUrl.searchParams.delete('taskId');
+    currentUrl.searchParams.delete('columnId');
+
+    router.replace(currentUrl.toString());
+  };
+
+  useEffect(() => {
+    if (!task) return;
+
+    isInfoTaskModalOpenActions.setTrue();
+  }, [isInfoTaskModalOpenActions, task]);
 
   if (isLoading) {
     return (
@@ -149,7 +169,7 @@ const BoardPage: FC<Props> = ({ params, searchParams = {} }) => {
         <InfoTaskModal
           boardId={id}
           columnId={task.columnId}
-          handleClose={isInfoTaskModalOpenActions.setFalse}
+          handleClose={handleInfoTaskModalClose}
           isOpen={isInfoTaskModalOpen}
           task={task}
         />
