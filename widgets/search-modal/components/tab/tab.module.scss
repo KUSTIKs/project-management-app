@@ -8,8 +8,11 @@
   background-color: transparent;
   border: none;
   transition: color 100ms ease;
-  &:not(&_active):hover {
-    color: var(--color-text--400);
+  &:not(&_active) {
+    &:hover,
+    &:focus {
+      color: var(--color-text--400);
+    }
   }
 }
 

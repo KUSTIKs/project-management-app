@@ -28,6 +28,11 @@ const BoardCard: FC<Props> = ({
 
   return (
     <article className={classes.wrapper}>
+      <AppLink
+        href={boardHref}
+        className={classes.link}
+        aria-label="Go to board page"
+      />
       <header className={classes.header}>
         <div className={classes.avatar}>{title[0]}</div>
         <div className={classes.actions}>
@@ -62,11 +67,6 @@ const BoardCard: FC<Props> = ({
           {description}
         </Typography>
       </div>
-      <AppLink
-        href={boardHref}
-        className={classes.link}
-        aria-label="Go to board page"
-      />
     </article>
   );
 };

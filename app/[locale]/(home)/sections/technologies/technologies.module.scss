@@ -30,7 +30,8 @@
   border-radius: 5px;
   transition: background-color 100ms ease;
   padding: 20px;
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--color-grey--100);
   }
 }

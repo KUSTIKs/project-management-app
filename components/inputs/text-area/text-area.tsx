@@ -67,7 +67,11 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
         })}
       >
         <div className={classes.inputWrapper}>
-          <div className={classes.textareaWrapper}>
+          <div
+            className={classNames(classes.textareaWrapper, {
+              [classes.textareaWrapper_hasValue]: !!growingBlockValue,
+            })}
+          >
             <p aria-hidden className={classes.growingBlock}>
               {growingBlockValue}
             </p>

@@ -3,6 +3,11 @@
   gap: 15px;
   align-items: center;
   padding: 15px 20px;
+  transition: background-color 100ms ease;
+  &:hover,
+  &:focus {
+    background-color: var(--color-grey--100);
+  }
 }
 
 .iconWrapper {
