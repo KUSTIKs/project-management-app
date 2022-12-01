@@ -2,34 +2,34 @@
 
 :root {
   /* Color styles */
-  --color-text--100: hsl(0 0% 0%);
-  --color-text--200: hsl(210 2.2% 17.6%);
-  --color-text--300: hsl(0 0% 26.7%);
-  --color-text--400: hsl(0 0% 40%);
-  --color-text--600: hsl(0 0% 52.2%);
-  --color-text--700: hsl(0 0% 60%);
-  --color-text--800: hsl(0 0% 70.2%);
+  --color-text--100: hsl(0deg 0% 0%);
+  --color-text--200: hsl(0deg 0% 20%);
+  --color-text--300: hsl(0deg 0% 30%);
+  --color-text--400: hsl(0deg 0% 40%);
+  --color-text--600: hsl(0deg 0% 60%);
+  --color-text--700: hsl(0deg 0% 70%);
+  --color-text--800: hsl(0deg 0% 80%);
 
-  --color-grey--100: hsl(0 0% 96.9%);
-  --color-grey--200: hsl(0 0% 94.1%);
-  --color-grey--300: hsl(0 0% 90.2%);
+  --color-grey--100: hsl(0deg 0% 97%);
+  --color-grey--200: hsl(0deg 0% 94%);
+  --color-grey--300: hsl(0deg 0% 90%);
 
-  --color-background--100: hsl(0 0% 100%);
+  --color-background--100: hsl(0deg 0% 100%);
 
-  --color-contrast-100: hsl(0 0% 0%);
-  --color-contrast-100-a25: hsl(0 0% 0% / 25%);
+  --color-contrast-100: hsl(0deg 0% 0%);
+  --color-contrast-100-a25: hsl(0deg 0% 0% / 25%);
 
-  --color-blue--200: hsl(212 54.3% 42.9%);
-  --color-blue--400: hsl(212 76% 55%);
-  --color-blue--500: hsl(212 84% 63.3%);
-  --color-blue--500-a15: hsl(212 84% 63.3% / 15%);
-  --color-blue--800: hsl(214 88.9% 96.5%);
+  --color-blue--200: hsl(210deg 55% 40%);
+  --color-blue--400: hsl(210deg 80% 55%);
+  --color-blue--500: hsl(210deg 85% 60%);
+  --color-blue--500-a15: hsl(210deg 85% 60% / 15%);
+  --color-blue--800: hsl(210deg 90% 95%);
 
-  --color-red--200: hsl(0 43.2% 53.7%);
-  --color-red--500: hsl(0 64% 68.4%);
-  --color-red--500-a15: hsl(0 64% 68.4% / 15%);
-  --color-red--700: hsl(0 100% 94%);
-  --color-red--800: hsl(0 100% 97.1%);
+  --color-red--200: hsl(0 45% 50%);
+  --color-red--500: hsl(0 65% 70%);
+  --color-red--500-a15: hsl(0 66% 70% / 15%);
+  --color-red--700: hsl(0 100% 95%);
+  --color-red--800: hsl(0 100% 98%);
 
   /* Text-size styles */
   --fz-title-1-bold: 32px;
@@ -70,27 +70,12 @@
   --width-container-xs: 400px;
 
   /* Effect styles */
-  --window-shade: rgba(0, 0, 0, 0.04) 0px 36px 89px 0px,
-    rgba(0, 0, 0, 0.03) 0px 23.3px 52.1px 0px,
-    rgba(0, 0, 0, 0.024) 0px 13.9px 28.3px 0px,
-    rgba(0, 0, 0, 0.02) 0px 7.2px 14.5px 0px,
-    rgba(0, 0, 0, 0.016) 0px 3px 7.3px 0px,
-    rgba(0, 0, 0, 0.008) 0px 0.6px 3.5px 0px;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Gilroy', sans-serif;
-  font-size: 15px;
-  background-color: var(--color-background--100);
-  color: var(--color-text--100);
-  cursor: default;
-  word-break: break-word;
+  --window-shade: hsl(0deg 0% 0% / 4%) 0px 35px 90px 0px,
+    hsl(0deg 0% 0% / 3%) 0px 20px 50px 0px,
+    hsl(0deg 0% 0% / 2.5%) 0px 15px 30px 0px,
+    hsl(0deg 0% 0% / 2%) 0px 5px 15px 0px,
+    hsl(0deg 0% 0% / 1.5%) 0px 5px 10px 0px,
+    hsl(0deg 0% 0% / 1%) 0px 0px 5px 0px;
 }
 
 .dark {
@@ -106,20 +91,20 @@ body {
   --color-text--700: hsl(0deg 0% 52%);
   --color-text--800: hsl(0deg 0% 44%);
 
-  --color-grey--100: hsl(0 0% 13%);
-  --color-grey--200: hsl(0 0% 15%);
-  --color-grey--300: hsl(0 0% 20%);
+  --color-grey--100: hsl(0deg 0% 13%);
+  --color-grey--200: hsl(0deg 0% 15%);
+  --color-grey--300: hsl(0deg 0% 20%);
 
   --color-background--100: hsl(0deg 0% 10%);
 
   --color-contrast-100: hsl(0deg 0% 100%);
   --color-contrast-100-a25: hsl(0deg 0% 100% / 10%);
 
-  --color-blue--200: hsl(212 50% 60%);
-  --color-blue--400: hsl(212 70% 80%);
-  --color-blue--500: hsl(212 70% 70%);
-  --color-blue--500-a15: hsl(212 30% 40% / 20%);
-  --color-blue--800: hsl(212 30% 15%);
+  --color-blue--200: hsl(210deg 55% 60%);
+  --color-blue--400: hsl(210deg 80% 80%);
+  --color-blue--500: hsl(210deg 85% 70%);
+  --color-blue--500-a15: hsl(210deg 85% 40% / 20%);
+  --color-blue--800: hsl(210deg 10% 15%);
 
   --color-red--200: hsl(0 60% 60%);
   --color-red--500: hsl(0 40% 40%);
@@ -128,6 +113,21 @@ body {
   --color-red--800: hsl(0 10% 15%);
 
   --window-shade: hsl(0deg 0% 100% / 5%) 0 15px 50px 2px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 15px;
+  background-color: var(--color-background--100);
+  color: var(--color-text--100);
+  cursor: default;
+  word-break: break-word;
 }
 
 a,
