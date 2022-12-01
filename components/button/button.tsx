@@ -47,7 +47,7 @@ const Button: FC<Props> = ({
     <Component
       {...props}
       {...attrs}
-      className={classNames(classes.button, {
+      className={classNames(classes.button, attrs.className, {
         [classes.button_size_l]: size === 'l',
         [classes.button_size_m]: size === 'm',
         [classes.button_size_s]: size === 's',
@@ -59,7 +59,11 @@ const Button: FC<Props> = ({
       })}
     >
       {isLoading && (
-        <Loader size="1.1em" colorPrimary="#fff" colorSecondary="#fff4" />
+        <Loader
+          size="1.1em"
+          colorPrimary="currentColor"
+          colorSecondary="transparent"
+        />
       )}
       {startIcon && <span className={classes.icon}>{startIcon}</span>}
       {children}

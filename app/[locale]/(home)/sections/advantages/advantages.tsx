@@ -1,9 +1,13 @@
+'use client';
+
 /* eslint-disable @next/next/no-img-element */
 import { FC } from 'react';
 import Image from 'next/image';
 
 import { Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
+import { useTheme } from '@project-management-app/hooks';
+import { ThemeName } from '@project-management-app/enums';
 
 import classes from './advantages.module.scss';
 import { advantagesDictionary } from './advantages.dictionary';
@@ -14,12 +18,22 @@ type Props = {
 
 const AdvantagesSection: FC<Props> = ({ locale }) => {
   const contentMap = advantagesDictionary.getContentMap({ locale });
+  const { resolvedTheme } = useTheme();
+
+  const isDarkTheme = resolvedTheme === ThemeName.DARK;
+
+  const boardsPageScreenshotSrc = isDarkTheme
+    ? '/images/boards-page-screenshot_dark.png'
+    : '/images/boards-page-screenshot.png';
+  const boardPageScreenshotSrc = isDarkTheme
+    ? '/images/board-page-screenshot_dark.png'
+    : '/images/board-page-screenshot.png';
 
   return (
     <section className={classes.container}>
       <div className={classes.advantage}>
         <img
-          src="/images/boards_page-screenshot.png"
+          src={boardsPageScreenshotSrc}
           alt="boards page"
           className={classes.advantageImage}
         />
@@ -43,7 +57,7 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
       </div>
       <div className={classes.advantage}>
         <img
-          src="/images/board_page-screenshot.png"
+          src={boardPageScreenshotSrc}
           alt="board detail page"
           className={classes.advantageImage}
         />

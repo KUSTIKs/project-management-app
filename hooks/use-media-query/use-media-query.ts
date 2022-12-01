@@ -6,14 +6,16 @@ const useMediaQuery = (query: string) => {
     return window.matchMedia(query).matches;
   };
 
-  const [matches, setMatches] = useState(getMatches(query));
+  const [isMatch, setIsMatch] = useState(getMatches(query));
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const handleChange = useCallback(() => {
-    setMatches(getMatches(query));
+    setIsMatch(getMatches(query));
+    setIsLoaded(true);
   }, [query]);
 
   useEffect(() => {
-    const matchMedia = window?.matchMedia(query);
+    const matchMedia = window.matchMedia(query);
 
     handleChange();
 
@@ -24,7 +26,7 @@ const useMediaQuery = (query: string) => {
     };
   }, [handleChange, query]);
 
-  return matches;
+  return { isMatch, isLoaded } as const;
 };
 
 export { useMediaQuery };

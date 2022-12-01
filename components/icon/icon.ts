@@ -15,7 +15,11 @@ import {
   RiCloseCircleFill,
   RiStickyNoteFill,
   RiArtboardFill,
+  RiBrushLine,
+  RiSettings4Line,
 } from 'react-icons/ri';
+
+import { RsSchoolLogo } from './components/components';
 
 const Icon = {
   BinLine: RiDeleteBinLine,
@@ -34,6 +38,9 @@ const Icon = {
   CloseCircleFill: RiCloseCircleFill,
   StickyNoteFill: RiStickyNoteFill,
   ArtboardFill: RiArtboardFill,
+  BrushLine: RiBrushLine,
+  SettingsLine: RiSettings4Line,
+  RsSchoolLogo,
 } as const;
 
 export { Icon };

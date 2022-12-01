@@ -1,16 +1,16 @@
 .typography_variant_largeTitle1 {
-  font-size: 64px;
-  line-height: 70px;
+  font-size: clamp(32px, calc(64 / 1000 * 100vw), 64px);
+  line-height: 1.2em;
 }
 
 .typography_variant_largeTitle2 {
-  font-size: 36px;
-  line-height: 42px;
+  font-size: clamp(24px, calc(36 / 1000 * 100vw), 36px);
+  line-height: 1.2em;
 }
 
 .typography_variant_largeTitle3 {
-  font-size: 24px;
-  line-height: 28px;
+  font-size: clamp(18px, calc(24 / 1000 * 100vw), 24px);
+  line-height: 1.2em;
 }
 
 .typography_variant_title1 {
@@ -24,8 +24,8 @@
 }
 
 .typography_variant_largeHeadline {
-  font-size: 20px;
-  line-height: 24px;
+  font-size: clamp(16px, calc(20 / 1000 * 100vw), 20px);
+  line-height: 1.2em;
 }
 
 .typography_variant_headline {

@@ -12,4 +12,6 @@ export { handleDndDrugEnd } from './handle-dnd-drag-end/handle-dnd-drag-end';
 export { AppContext } from './app-context/app-context';
 export { getValidChild } from './get-valid-child/get-valid-child';
 export { isValidChild } from './is-valid-child/is-valid-child';
+export { ThemeContext } from './theme-context/theme-context';
+export { resolveTheme } from './resolve-theme/resolve-theme';
 export * from './type-checks/type-checks';

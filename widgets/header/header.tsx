@@ -1,15 +1,15 @@
 'use client';
 
-import { FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 import Image from 'next/image';
 
 import { AppLink, Button, Icon } from '@project-management-app/components';
 import {
-  useAppRouter,
   useBooleanState,
-  useMediaQuery,
   useOutsideClick,
+  useTheme,
 } from '@project-management-app/hooks';
+import { ThemeName } from '@project-management-app/enums';
 import { SearchModal } from '@project-management-app/widgets';
 
 import classes from './header.module.scss';
@@ -22,15 +22,14 @@ type Props = {
 const Header: FC<Props> = ({ isAuthorized }) => {
   const [isSearchModalOpen, isSearchModalOpenActions] = useBooleanState(false);
   const [isMenuOpen, isMenuOpenActions] = useBooleanState(false);
-  const isMobile = useMediaQuery('(max-width: 800px)');
   const headerRef = useRef<HTMLElement>(null);
-  const { appPathname } = useAppRouter();
+  const { resolvedTheme } = useTheme();
+
+  const isDarkTheme = resolvedTheme === ThemeName.DARK;
+
+  const logoSrc = isDarkTheme ? '/images/logo_dark.png' : '/images/logo.png';
 
   useOutsideClick(headerRef, isMenuOpenActions.setFalse);
-
-  useEffect(() => {
-    isMenuOpenActions.setFalse();
-  }, [appPathname, isMenuOpenActions]);
 
   return (
     <>
@@ -38,7 +37,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
         <div className={classes.container}>
           <AppLink href="/">
             <Image
-              src="/logo.png"
+              src={logoSrc}
               alt="logo"
               width={173}
               height={24}
@@ -46,7 +45,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
               className={classes.logo}
             />
           </AppLink>
-          {isMobile && (
+          <div className={classes.menuButton}>
             <Button
               symmetricPadding
               size="s"
@@ -59,14 +58,12 @@ const Header: FC<Props> = ({ isAuthorized }) => {
                 <Icon.MenuLine size={20} />
               )}
             </Button>
-          )}
-          {!(isMobile && !isMenuOpen) && (
-            <Menu
-              isAuthorized={isAuthorized}
-              isMobile={isMobile}
-              handleSearchClick={isSearchModalOpenActions.setTrue}
-            />
-          )}
+          </div>
+          <Menu
+            isAuthorized={isAuthorized}
+            handleSearchClick={isSearchModalOpenActions.setTrue}
+            isOpen={isMenuOpen}
+          />
         </div>
       </header>
       {isAuthorized && (

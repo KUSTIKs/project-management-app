@@ -1,12 +1,6 @@
 import { FC } from 'react';
-import Image from 'next/image';
 
-import {
-  AppLink,
-  Button,
-  Icon,
-  Typography,
-} from '@project-management-app/components';
+import { Button, Icon, Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
 
 import classes from './footer.module.scss';
@@ -23,15 +17,14 @@ const Footer: FC<Props> = ({ locale }) => {
     <footer className={classes.footer}>
       <div className={classes.container}>
         <div className={classes.group}>
-          <AppLink href="https://rs.school/">
-            <Image
-              src="/images/rs-school-logo.png"
-              alt="RsSchool"
-              height={30}
-              width={59}
-              className={classes.rsSchoolLogo}
-            />
-          </AppLink>
+          <Button
+            variant="text"
+            size="s"
+            symmetricPadding
+            href="https://rs.school"
+          >
+            <Icon.RsSchoolLogo height="2em" width="auto" />
+          </Button>
           <Button
             variant="text"
             size="s"

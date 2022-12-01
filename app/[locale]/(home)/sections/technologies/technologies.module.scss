@@ -13,9 +13,13 @@
   flex-wrap: wrap-reverse;
 }
 
+:global(.dark) .illustration {
+  filter: invert(1);
+}
+
 .technologiesWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 .technologyCard {
@@ -32,5 +36,9 @@
 }
 
 .technologyImage {
-  height: 50px;
+  object-fit: contain;
+}
+
+:global(.dark) .invertible {
+  filter: invert(1);
 }

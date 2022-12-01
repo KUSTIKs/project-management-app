@@ -43,7 +43,7 @@ const HeroSection: FC<Props> = ({ locale }) => {
         </div>
       </div>
       <Image
-        src="/images/home-illustration.avif"
+        src="/images/home__hero-illustration.png"
         alt="home illustration"
         height={350}
         width={520}

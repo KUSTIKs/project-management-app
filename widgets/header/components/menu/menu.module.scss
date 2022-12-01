@@ -17,18 +17,25 @@
   background-color: var(--color-grey--200);
 }
 
-.menu_mobile {
-  position: absolute;
-  padding: 10px;
-  inset: 100% 0 auto;
-  flex-direction: column;
-  background-color: var(--color-background--100);
-  box-shadow: 0 20px 20px rgb(0, 0, 0, 5%);
-  border-top: 2px solid var(--color-grey--100);
+@media (max-width: 900px) {
+  .menu {
+    position: absolute;
+    padding: 10px;
+    inset: 100% 0 auto;
+    flex-direction: column;
+    background-color: var(--color-background--100);
+    box-shadow: 0 20px 20px var(--color-contrast-100-a25);
+    border-top: 2px solid var(--color-grey--100);
+    &:not(&_open) {
+      display: none;
+    }
+  }
+
   .separator {
     width: 100%;
     height: 1px;
   }
+
   .group {
     display: grid;
     margin: 0 auto;

@@ -1,13 +1,19 @@
 import { FC, ReactNode } from 'react';
 import { cookies } from 'next/headers';
+import classNames from 'classnames';
 
 import { Footer, Header } from '@project-management-app/widgets';
 import { AppLocale } from '@project-management-app/types';
-import { CookieName } from '@project-management-app/enums';
-import { decodeToken, isAppLocale } from '@project-management-app/helpers';
+import { CookieName, ThemeName } from '@project-management-app/enums';
+import {
+  decodeToken,
+  isAppLocale,
+  resolveTheme,
+} from '@project-management-app/helpers';
 import {
   AppContextProvider,
   ReactQueryProvider,
+  ThemeProvider,
 } from '@project-management-app/components';
 import { appInternalizationConfig } from '@project-management-app/config';
 
@@ -29,21 +35,40 @@ const RootLayout: FC<Props> = ({ children, params }) => {
   const { isExpired, payload } = decodeToken(token);
   const isAuthorized = !isExpired && !!payload;
 
+  const storedTheme = cookies().get(CookieName.NEXT_THEME)?.value;
+  const storedPrefersTheme = cookies().get(
+    CookieName.NEXT_PREFERS_THEME
+  )?.value;
+  const resolvedTheme = resolveTheme({
+    theme: storedTheme,
+    prefersTheme: storedPrefersTheme,
+  });
+
   return (
-    <html lang={locale}>
+    <html
+      lang={locale}
+      className={classNames({
+        [ThemeName.DARK]: resolvedTheme === ThemeName.DARK,
+      })}
+    >
       <body>
         <AppContextProvider
           locale={locale}
           payload={payload}
           isAuthorized={isAuthorized}
         >
-          <ReactQueryProvider>
-            <Header isAuthorized={isAuthorized} />
-            {children}
-            <Footer locale={locale} />
-          </ReactQueryProvider>
+          <ThemeProvider
+            storedTheme={storedTheme}
+            storedPrefersTheme={storedPrefersTheme}
+          >
+            <ReactQueryProvider>
+              <Header isAuthorized={isAuthorized} />
+              {children}
+              <Footer locale={locale} />
+              <div id="modal-portal" />
+            </ReactQueryProvider>
+          </ThemeProvider>
         </AppContextProvider>
-        <div id="modal-portal" />
       </body>
     </html>
   );

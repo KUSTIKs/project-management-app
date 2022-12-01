@@ -18,6 +18,7 @@ import {
   useAppContext,
   useAppRouter,
   useOutsideClick,
+  useOutsideFocus,
 } from '@project-management-app/hooks';
 
 import classes from './search-modal.module.scss';
@@ -51,6 +52,7 @@ const SearchModal: FC<Props> = ({ handleClose, isOpen }) => {
   });
   const { fuse, isLoading } = useSearchFuse({ tab });
   const [container, setContainer] = useState<HTMLElement>();
+  const register = useOutsideFocus(handleClose);
 
   const results = useMemo(() => {
     return fuse.search(searchValue);
@@ -111,6 +113,7 @@ const SearchModal: FC<Props> = ({ handleClose, isOpen }) => {
       initial="hidden"
       animate="visible"
       exit="hidden"
+      {...register}
     >
       <motion.div
         className={classes.wrapper}

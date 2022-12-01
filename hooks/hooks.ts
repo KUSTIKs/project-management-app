@@ -4,3 +4,4 @@ export { useOutsideFocus } from './use-outside-focus/use-outside-focus';
 export { useAppContext } from './use-app-context/use-app-context';
 export { useBooleanState } from './use-boolean-state/use-boolean-state';
 export { useMediaQuery } from './use-media-query/use-media-query';
+export { useTheme } from './use-theme/use-theme';

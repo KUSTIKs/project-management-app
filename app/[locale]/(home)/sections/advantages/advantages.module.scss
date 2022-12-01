@@ -11,14 +11,14 @@
   display: grid;
   gap: 50px;
   align-items: center;
-  grid-template-areas: 'advantage-image advantage-image advantage-info';
-  &:nth-child(even) {
-    grid-template-areas: 'advantage-info advantage-image advantage-image';
+  grid-template-columns: repeat(3, 1fr);
+  &:nth-child(even) .advantageImage {
+    order: 2;
   }
 }
 
 .advantageImage {
-  grid-area: advantage-image;
+  grid-column: span 2;
   width: 100%;
   aspect-ratio: 1280/832;
   border-radius: 10px;
@@ -26,7 +26,6 @@
 }
 
 .advantageInfo {
-  grid-area: advantage-info;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -35,6 +34,10 @@
 
 .advantageInfoImage {
   object-fit: contain;
+
+  :global(.dark) & {
+    filter: invert(1);
+  }
 }
 
 @media screen and (max-width: 1050px) {

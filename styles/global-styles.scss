@@ -16,6 +16,9 @@
 
   --color-background--100: hsl(0 0% 100%);
 
+  --color-contrast-100: hsl(0 0% 0%);
+  --color-contrast-100-a25: hsl(0 0% 0% / 25%);
+
   --color-blue--200: hsl(212 54.3% 42.9%);
   --color-blue--400: hsl(212 76% 55%);
   --color-blue--500: hsl(212 84% 63.3%);
@@ -87,6 +90,43 @@ body {
   background-color: var(--color-background--100);
   color: var(--color-text--100);
   cursor: default;
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Color styles */
+  --color-text--100: hsl(0deg 0% 100%);
+  --color-text--200: hsl(0deg 0% 92%);
+  --color-text--300: hsl(0deg 0% 84%);
+  --color-text--400: hsl(0deg 0% 76%);
+  --color-text--500: hsl(0deg 0% 68%);
+  --color-text--600: hsl(0deg 0% 60%);
+  --color-text--700: hsl(0deg 0% 52%);
+  --color-text--800: hsl(0deg 0% 44%);
+
+  --color-grey--100: hsl(0 0% 13%);
+  --color-grey--200: hsl(0 0% 15%);
+  --color-grey--300: hsl(0 0% 20%);
+
+  --color-background--100: hsl(0deg 0% 10%);
+
+  --color-contrast-100: hsl(0deg 0% 100%);
+  --color-contrast-100-a25: hsl(0deg 0% 100% / 10%);
+
+  --color-blue--200: hsl(212 50% 60%);
+  --color-blue--400: hsl(212 70% 80%);
+  --color-blue--500: hsl(212 70% 70%);
+  --color-blue--500-a15: hsl(212 30% 40% / 20%);
+  --color-blue--800: hsl(212 30% 15%);
+
+  --color-red--200: hsl(0 60% 60%);
+  --color-red--500: hsl(0 40% 40%);
+  --color-red--500-a15: hsl(0 40% 40% / 20%);
+  --color-red--700: hsl(0 10% 20%);
+  --color-red--800: hsl(0 10% 15%);
+
+  --window-shade: hsl(0deg 0% 100% / 5%) 0 15px 50px 2px;
 }
 
 a,
