@@ -132,6 +132,7 @@ const SearchModal: FC<Props> = ({ handleClose, isOpen }) => {
               value={value}
               className={classes.input}
               onChange={handleChange}
+              autoFocus
             />
             {value && (
               <button className={classes.clearButton} onClick={clearValue}>

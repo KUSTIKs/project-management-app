@@ -1,8 +1,8 @@
 import { RefObject, useCallback, useEffect } from 'react';
 
 const useOutsideClick = (ref: RefObject<HTMLElement>, handler?: () => void) => {
-  const handleOutsideClick = useCallback(
-    (e: MouseEvent) => {
+  const handleOutside = useCallback(
+    (e: MouseEvent | TouchEvent) => {
       if (!(e.target instanceof HTMLElement) || !ref.current) return;
 
       const isOutsideClick = !ref.current.contains(e.target);
@@ -17,12 +17,14 @@ const useOutsideClick = (ref: RefObject<HTMLElement>, handler?: () => void) => {
   useEffect(() => {
     if (!handler) return;
 
-    globalThis.addEventListener('mousedown', handleOutsideClick);
+    globalThis.addEventListener('mousedown', handleOutside);
+    globalThis.addEventListener('touchstart', handleOutside);
 
     return () => {
-      globalThis.removeEventListener('mousedown', handleOutsideClick);
+      globalThis.removeEventListener('mousedown', handleOutside);
+      globalThis.removeEventListener('touchstart', handleOutside);
     };
-  }, [handleOutsideClick, handler]);
+  }, [handleOutside, handler]);
 };
 
 export { useOutsideClick };

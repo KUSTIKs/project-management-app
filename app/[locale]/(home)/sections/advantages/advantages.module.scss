@@ -20,6 +20,7 @@
 .advantageImage {
   grid-column: span 2;
   width: 100%;
+  height: auto;
   aspect-ratio: 1280/832;
   border-radius: 10px;
   box-shadow: var(--window-shade);

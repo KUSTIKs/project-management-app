@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import { AnimatePresence, motion } from 'framer-motion';
 import classNames from 'classnames';
+import Cookies from 'js-cookie';
 
 import {
   Button,
@@ -20,9 +21,9 @@ import {
 import { AppLocale, ObjectOption } from '@project-management-app/types';
 import { CookieName, ThemeName } from '@project-management-app/enums';
 
+import { headerDictionary } from '../../header.dictionary';
+import { getThemeDisplayName } from '../../helpers/helpers';
 import classes from './menu.module.scss';
-import { headerDictionary } from 'widgets/header/header.dictionary';
-import { getThemeDisplayName } from 'widgets/header/helpers/helpers';
 
 type Props = {
   isAuthorized: boolean;
@@ -36,7 +37,10 @@ const Menu: FC<Props> = ({ isAuthorized, handleSearchClick, isOpen }) => {
   const contentMap = headerDictionary.getContentMap({ locale });
   const { theme, setTheme, themes } = useTheme();
   const [buttonsSize, setButtonsSize] = useState<'l' | 's'>('s');
-  const { isMatch: isMobile, isLoaded } = useMediaQuery('(max-width: 900px)');
+  const mobileQuery = useMediaQuery('(max-width: 900px)');
+
+  const { isLoaded } = mobileQuery;
+  const isMobile = mobileQuery.isLoaded && mobileQuery.isMatch;
 
   const localeOptions: ObjectOption<AppLocale>[] = locales.map((locale) => ({
     name: getLanguageFromLocale(locale),
@@ -64,12 +68,10 @@ const Menu: FC<Props> = ({ isAuthorized, handleSearchClick, isOpen }) => {
     setButtonsSize(isMobile ? 'l' : 's');
   }, [isMobile]);
 
-  return (
-    <nav
-      className={classNames(classes.menu, {
-        [classes.menu_open]: isOpen,
-      })}
-    >
+  console.log({ isMobile });
+
+  const menuContent = (
+    <>
       <div className={classes.group}>
         {isAuthorized && (
           <>
@@ -90,9 +92,9 @@ const Menu: FC<Props> = ({ isAuthorized, handleSearchClick, isOpen }) => {
               variant="text"
               size={buttonsSize}
               onClick={handleSearchClick}
-              startIcon={isMobile && isLoaded && <Icon.SearchLine />}
+              startIcon={isMobile && <Icon.SearchLine />}
             >
-              {isMobile && isLoaded ? 'Search' : <Icon.SearchLine size={18} />}
+              {isMobile ? 'Search' : <Icon.SearchLine size={18} />}
             </Button>
             <div className={classes.separator} />
           </>
@@ -159,8 +161,33 @@ const Menu: FC<Props> = ({ isAuthorized, handleSearchClick, isOpen }) => {
           </>
         )}
       </div>
-    </nav>
+    </>
   );
+
+  if (isMobile) {
+    return (
+      <AnimatePresence mode="wait" initial={false}>
+        {isOpen && (
+          <motion.nav
+            className={classNames(classes.menu, {
+              [classes.menu_loaded]: isLoaded,
+            })}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              type: 'spring',
+              duration: 0.3,
+            }}
+          >
+            {menuContent}
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    );
+  }
+
+  return <nav className={classes.menu}>{menuContent}</nav>;
 };
 
 export { Menu };

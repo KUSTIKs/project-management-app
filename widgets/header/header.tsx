@@ -1,12 +1,14 @@
 'use client';
 
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 import { AppLink, Button, Icon } from '@project-management-app/components';
 import {
+  useAppRouter,
   useBooleanState,
   useOutsideClick,
+  useOutsideFocus,
   useTheme,
 } from '@project-management-app/hooks';
 import { ThemeName } from '@project-management-app/enums';
@@ -22,18 +24,25 @@ type Props = {
 const Header: FC<Props> = ({ isAuthorized }) => {
   const [isSearchModalOpen, isSearchModalOpenActions] = useBooleanState(false);
   const [isMenuOpen, isMenuOpenActions] = useBooleanState(false);
+  const register = useOutsideFocus(isMenuOpenActions.setFalse);
   const headerRef = useRef<HTMLElement>(null);
   const { resolvedTheme } = useTheme();
+  const router = useAppRouter();
 
   const isDarkTheme = resolvedTheme === ThemeName.DARK;
 
   const logoSrc = isDarkTheme ? '/images/logo_dark.png' : '/images/logo.png';
 
+  useEffect(
+    () => isMenuOpenActions.setFalse,
+    [isMenuOpenActions.setFalse, router.appPathname, router.searchParams]
+  );
+
   useOutsideClick(headerRef, isMenuOpenActions.setFalse);
 
   return (
     <>
-      <header className={classes.header} ref={headerRef}>
+      <header {...register} className={classes.header} ref={headerRef}>
         <div className={classes.container}>
           <AppLink href="/">
             <Image

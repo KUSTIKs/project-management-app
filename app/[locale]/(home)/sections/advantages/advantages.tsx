@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element */
 import { FC } from 'react';
 import Image from 'next/image';
 
@@ -32,9 +31,11 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
   return (
     <section className={classes.container}>
       <div className={classes.advantage}>
-        <img
+        <Image
           src={boardsPageScreenshotSrc}
           alt="boards page"
+          height={832}
+          width={1280}
           className={classes.advantageImage}
         />
         <div className={classes.advantageInfo}>
@@ -56,9 +57,11 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
         </div>
       </div>
       <div className={classes.advantage}>
-        <img
+        <Image
           src={boardPageScreenshotSrc}
           alt="board detail page"
+          height={832}
+          width={1280}
           className={classes.advantageImage}
         />
         <div className={classes.advantageInfo}>

@@ -24,9 +24,10 @@
     inset: 100% 0 auto;
     flex-direction: column;
     background-color: var(--color-background--100);
-    box-shadow: 0 20px 20px var(--color-contrast-100-a25);
+    z-index: -1;
     border-top: 2px solid var(--color-grey--100);
-    &:not(&_open) {
+    border-bottom: 2px solid var(--color-grey--100);
+    &:not(&_loaded) {
       display: none;
     }
   }
