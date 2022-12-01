@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { IconBaseProps } from 'react-icons';
 
 import { Icon } from './icon';
 
-const IconPreview: FC<{ iconName: keyof typeof Icon } & IconBaseProps> = ({
+const IconPreview: FC<{ iconName: keyof typeof Icon }> = ({
   iconName,
   ...iconProps
 }) => {
@@ -31,7 +30,6 @@ const Default = Template.bind({});
 Default.storyName = 'Icon';
 Default.args = {
   iconName: 'BinLine',
-  size: 20,
 };
 
 export default componentMeta;
