@@ -40,7 +40,12 @@ const TaskCard: FC<Props> = ({
             {...provided.dragHandleProps}
             onClick={isInfoModalOpenActions.setTrue}
           >
-            <Typography variant="headline" colorName="text/300" weight={600}>
+            <Typography
+              variant="headline"
+              colorName="text/300"
+              weight={600}
+              className={classes.title}
+            >
               {title}
             </Typography>
             <Typography
