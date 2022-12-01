@@ -58,8 +58,8 @@ const SignInPage: FC<Props> = ({ params }) => {
   };
 
   const navigateToBoards = () => {
-    router.refresh();
     router.push('/boards');
+    router.refresh();
   };
 
   return (

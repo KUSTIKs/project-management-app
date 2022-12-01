@@ -56,8 +56,8 @@ const Menu: FC<Props> = ({ isAuthorized, handleSearchClick, isOpen }) => {
 
   const handleLogOut = () => {
     Cookies.remove(CookieName.NEXT_TOKEN);
-    router.refresh();
     router.push('/');
+    router.refresh();
   };
 
   useEffect(() => {
