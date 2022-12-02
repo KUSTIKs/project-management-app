@@ -17,6 +17,8 @@ import {
   RiArtboardFill,
   RiBrushLine,
   RiSettings4Line,
+  RiEyeLine,
+  RiEyeOffLine,
 } from 'react-icons/ri';
 
 import { RsSchoolLogo } from './components/components';
@@ -40,6 +42,8 @@ const Icon = {
   ArtboardFill: RiArtboardFill,
   BrushLine: RiBrushLine,
   SettingsLine: RiSettings4Line,
+  EyeLine: RiEyeLine,
+  EyeOffLine: RiEyeOffLine,
   RsSchoolLogo,
 } as const;
 

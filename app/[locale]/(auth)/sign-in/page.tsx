@@ -79,6 +79,7 @@ const SignInPage: FC<Props> = ({ params }) => {
             {...register('password')}
             label={contentMap.password}
             errorMessage={errors.password?.message}
+            type="password"
             autoComplete="current-password"
           />
           {isString(errorMessage) && (

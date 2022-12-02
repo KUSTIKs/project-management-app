@@ -84,6 +84,7 @@ const SignUpPage: FC<Props> = ({ params }) => {
             {...register('password')}
             label={contentMap.password}
             errorMessage={errors.password?.message}
+            type="password"
             autoComplete="new-password"
           />
           {isString(errorMessage) && (

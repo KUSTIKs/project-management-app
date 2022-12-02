@@ -3,6 +3,9 @@
 import React, { InputHTMLAttributes, forwardRef } from 'react';
 import classNames from 'classnames';
 
+import { Icon } from '@project-management-app/components';
+import { useBooleanState } from '@project-management-app/hooks';
+
 import { InputVariant } from '../inputs.types';
 import classes from '../inputs.module.scss';
 
@@ -18,6 +21,15 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
     { label, errorMessage, isError, variant = 'filled', ...inputAttrs },
     ref
   ) => {
+    const isPassword = inputAttrs.type === 'password';
+    const [isPasswordShown, isPasswordShownActions] = useBooleanState(false);
+    const inputType =
+      isPassword && isPasswordShown
+        ? 'text'
+        : isPassword && !isPasswordShown
+        ? 'password'
+        : inputAttrs.type;
+
     return (
       <div
         className={classNames(classes.outerWrapper, {
@@ -28,15 +40,27 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
       >
         <div className={classes.inputWrapper}>
           <input
-            className={classes.input}
+            className={classNames(classes.input, {
+              [classes.input_withAction]: isPassword,
+            })}
             placeholder={label}
             {...inputAttrs}
+            type={inputType}
             ref={ref}
           />
           <label className={classes.label}>
             {label}
             {!!inputAttrs.required && '*'}
           </label>
+          {isPassword && (
+            <button
+              className={classes.action}
+              type="button"
+              onClick={isPasswordShownActions.toggle}
+            >
+              {isPasswordShown ? <Icon.EyeOffLine /> : <Icon.EyeLine />}
+            </button>
+          )}
         </div>
         {!!errorMessage && (
           <p className={classes.errorMessage}>{errorMessage}</p>
