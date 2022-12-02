@@ -4,19 +4,34 @@
 }
 
 .outerWrapper_variant_filled {
-  &.outerWrapper_isError .inputWrapper:not(:focus-within) {
+  &.outerWrapper_isError .inputWrapper {
     background-color: var(--color-red--800);
     box-shadow: 0 0 0 1px var(--color-red--700);
+    &:not(:focus-within):hover {
+      background-color: var(--color-red--700);
+    }
   }
   .inputWrapper {
     background-color: var(--color-grey--100);
     box-shadow: 0 0 0 1px var(--color-grey--200);
+    &:not(:focus-within):hover {
+      background-color: var(--color-grey--200);
+    }
   }
 }
 .outerWrapper_variant_unfilled {
+  &.outerWrapper_isError .inputWrapper {
+    background-color: var(--color-background--100);
+    &:not(:focus-within):hover {
+      background-color: var(--color-red--800);
+    }
+  }
   .inputWrapper {
-    background-color: transparent;
+    background-color: var(--color-background--100);
     box-shadow: none;
+    &:not(:focus-within):hover {
+      background-color: var(--color-grey--100);
+    }
   }
 }
 
@@ -36,6 +51,7 @@
   position: relative;
   border-radius: 5px;
   .input:not(:placeholder-shown) ~ .label,
+  .select:not(:placeholder-shown) ~ .label,
   .textareaWrapper_hasValue ~ .label,
   .preview ~ .label,
   &:focus-within .label {
@@ -45,7 +61,6 @@
     font-weight: 600;
   }
   &:focus-within {
-    background-color: var(--color-background--100);
     box-shadow: 0 0 0 2px var(--color-blue--500),
       0 0 0 4px var(--color-blue--500-a15);
   }
@@ -54,6 +69,7 @@
 .preview,
 .growingBlock,
 .textarea,
+.select,
 .input {
   width: 0;
   flex: 1;
@@ -71,6 +87,14 @@
   &::placeholder {
     color: transparent;
   }
+}
+
+.select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.input {
   &[type='password'] {
     letter-spacing: 0.125em;
     font-weight: 600;
@@ -81,10 +105,6 @@
 .growingBlock {
   width: 100%;
   grid-area: 1 / 1 / 2 / 2;
-}
-
-select.input {
-  appearance: none;
 }
 
 .textarea {

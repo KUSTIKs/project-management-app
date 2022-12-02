@@ -57,7 +57,7 @@ const DeleteUserModal: FC<Props> = ({ handleClose, isOpen, user }) => {
   return (
     <DeleteEntityModal
       title={contentMap.deleteAccount}
-      entityName={contentMap.account}
+      entityName={contentMap.yourAccount}
       handleDelete={deleteUser}
       isLoading={isLoading}
       isError={isError}

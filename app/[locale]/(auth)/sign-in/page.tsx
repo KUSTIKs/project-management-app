@@ -8,6 +8,7 @@ import { useMutation } from 'react-query';
 import {
   AppLink,
   Button,
+  PasswordInput,
   TextInput,
   Typography,
 } from '@project-management-app/components';
@@ -75,11 +76,10 @@ const SignInPage: FC<Props> = ({ params }) => {
             errorMessage={errors.login?.message}
             autoComplete="username"
           />
-          <TextInput
+          <PasswordInput
             {...register('password')}
             label={contentMap.password}
             errorMessage={errors.password?.message}
-            type="password"
             autoComplete="current-password"
           />
           {isString(errorMessage) && (

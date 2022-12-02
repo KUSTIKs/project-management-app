@@ -7,6 +7,7 @@ import { UpdateUserDto, User } from '@project-management-app/types';
 import { useAppContext } from '@project-management-app/hooks';
 import {
   Button,
+  PasswordInput,
   TextInput,
   Typography,
 } from '@project-management-app/components';
@@ -73,6 +74,7 @@ const UpdateForm: FC<Props> = ({ user, exitUpdatingMode }) => {
       <fieldset className={classes.fieldset} disabled={isLoading}>
         <TextInput
           label={contentMap.name}
+          variant="unfilled"
           {...register('name')}
           errorMessage={errors.name?.message}
           autoComplete="nickname"
@@ -80,12 +82,14 @@ const UpdateForm: FC<Props> = ({ user, exitUpdatingMode }) => {
         <TextInput
           label={contentMap.login}
           {...register('login')}
+          variant="unfilled"
           errorMessage={errors.login?.message}
           autoComplete="username"
         />
-        <TextInput
+        <PasswordInput
           label={contentMap.password}
           {...register('password')}
+          variant="unfilled"
           errorMessage={errors.password?.message}
           autoComplete="new-password"
         />

@@ -3,6 +3,8 @@
 import React, { forwardRef, SelectHTMLAttributes } from 'react';
 import classNames from 'classnames';
 
+import { Icon } from '@project-management-app/components';
+
 import classes from '../inputs.module.scss';
 
 type Props = SelectHTMLAttributes<HTMLSelectElement> & {
@@ -27,7 +29,7 @@ const Select = forwardRef<HTMLSelectElement, Props>(
       >
         <div className={classes.inputWrapper}>
           <select
-            className={classes.input}
+            className={classNames(classes.select, classes.select_withAction)}
             placeholder={label}
             {...inputAttrs}
             ref={ref}
@@ -36,6 +38,13 @@ const Select = forwardRef<HTMLSelectElement, Props>(
             {label}
             {!!inputAttrs.required && '*'}
           </label>
+          <button
+            className={classes.action}
+            type="button"
+            style={{ pointerEvents: 'none' }}
+          >
+            <Icon.ArrowDownSLine />
+          </button>
         </div>
         {!!errorMessage && (
           <p className={classes.errorMessage}>{errorMessage}</p>
