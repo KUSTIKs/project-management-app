@@ -13,6 +13,8 @@ import {
 } from '@project-management-app/hooks';
 import { ThemeName } from '@project-management-app/enums';
 import { SearchModal } from '@project-management-app/widgets';
+import LogoDarkImg from '@project-management-app/images/logo_dark.png';
+import LogoImg from '@project-management-app/images/logo.png';
 
 import classes from './header.module.scss';
 import { Menu } from './components/components';
@@ -31,7 +33,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
 
   const isDarkTheme = resolvedTheme === ThemeName.DARK;
 
-  const logoSrc = isDarkTheme ? '/images/logo_dark.png' : '/images/logo.png';
+  const logoSrc = isDarkTheme ? LogoDarkImg : LogoImg;
 
   useEffect(
     () => isMenuOpenActions.setFalse,
@@ -45,14 +47,7 @@ const Header: FC<Props> = ({ isAuthorized }) => {
       <header {...register} className={classes.header} ref={headerRef}>
         <div className={classes.container}>
           <AppLink href="/">
-            <Image
-              src={logoSrc}
-              alt="logo"
-              width={173}
-              height={24}
-              priority
-              className={classes.logo}
-            />
+            <Image src={logoSrc} alt="logo" priority className={classes.logo} />
           </AppLink>
           <div className={classes.menuButton}>
             <Button

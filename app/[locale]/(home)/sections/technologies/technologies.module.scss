@@ -13,8 +13,9 @@
   flex-wrap: wrap-reverse;
 }
 
-:global(.dark) .illustration {
-  filter: invert(1);
+.illustration {
+  height: 90px;
+  width: auto;
 }
 
 .technologiesWrapper {
@@ -37,10 +38,6 @@
 }
 
 .technologyImage {
-  object-fit: contain;
+  height: 50px;
   width: auto;
-}
-
-:global(.dark) .invertible {
-  filter: invert(1);
 }

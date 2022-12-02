@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import { Button, Icon, Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
+import MyPictureImg from '@project-management-app/images/my-picture.png';
 
 import classes from './our-team.module.scss';
 import { ourTeamDictionary } from './our-team.dictionary';
@@ -22,11 +23,10 @@ const OurTeamSection: FC<Props> = ({ locale }) => {
       <div className={classes.member}>
         <div className={classes.memberInfo}>
           <Image
-            src="/images/my-picture.png"
+            src={MyPictureImg}
             alt="my picture"
             className={classes.memberImage}
-            height={250}
-            width={250}
+            placeholder="blur"
           />
           <div className={classes.memberTextInfo}>
             <div>

@@ -23,11 +23,9 @@
 }
 
 .image {
-  object-fit: contain;
-
-  :global(.dark) & {
-    filter: invert(1);
-  }
+  max-height: 350px;
+  height: 100%;
+  width: auto;
 }
 
 @media screen and (max-width: 1050px) {
@@ -42,7 +40,7 @@
   }
   .image {
     order: 1;
-    height: auto;
     max-width: 100%;
+    height: auto;
   }
 }

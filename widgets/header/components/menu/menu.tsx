@@ -68,8 +68,6 @@ const Menu: FC<Props> = ({ isAuthorized, handleSearchClick, isOpen }) => {
     setButtonsSize(isMobile ? 'l' : 's');
   }, [isMobile]);
 
-  console.log({ isMobile });
-
   const menuContent = (
     <>
       <div className={classes.group}>

@@ -2,10 +2,12 @@
 
 import { FC } from 'react';
 import Image from 'next/image';
+import classNames from 'classnames';
 
 import { Button, Icon, Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
 import { useAppContext } from '@project-management-app/hooks';
+import HeroIllustrationImg from '@project-management-app/images/home__hero-illustration.png';
 
 import classes from './hero.module.scss';
 import { heroDictionary } from './hero.dictionary';
@@ -43,11 +45,9 @@ const HeroSection: FC<Props> = ({ locale }) => {
         </div>
       </div>
       <Image
-        src="/images/home__hero-illustration.png"
+        src={HeroIllustrationImg}
         alt="home illustration"
-        height={350}
-        width={520}
-        className={classes.image}
+        className={classNames(classes.image, 'invertible')}
         priority
       />
     </section>

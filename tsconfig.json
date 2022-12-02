@@ -29,7 +29,8 @@
       "@project-management-app/types": ["common/types/types.ts"],
       "@project-management-app/config": ["common/config/config.ts"],
       "@project-management-app/services": ["common/services/services.ts"],
-      "@project-management-app/schemas": ["common/schemas/schemas.ts"]
+      "@project-management-app/schemas": ["common/schemas/schemas.ts"],
+      "@project-management-app/images/*": ["public/images/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

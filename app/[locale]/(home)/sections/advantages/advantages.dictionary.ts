@@ -12,6 +12,11 @@ const advantagesDictionary = new ContentDictionary({
       title: 'Make work visible',
       description: 'Track work through an open, collaborative platform',
     },
+    advantage3: {
+      title: 'Navigate fast',
+      description:
+        'Find what you need as quickly and easily as possible. Navigate through all tasks and boards in one widget',
+    },
   },
   [LocaleName.RU]: {
     advantage1: {
@@ -23,6 +28,11 @@ const advantagesDictionary = new ContentDictionary({
       title: 'Сделайте работу видимой',
       description:
         'Отслеживайте работу с помощью открытой платформы для совместной работы',
+    },
+    advantage3: {
+      title: 'Орентируйтесь быстро',
+      description:
+        'Находите то, что вам нужно, как можно быстрее и проще. Навигация по всем задачам и доскам в одном виджете',
     },
   },
   [LocaleName.UK]: {
@@ -36,6 +46,11 @@ const advantagesDictionary = new ContentDictionary({
       description:
         'Відстежуйте роботу за допомогою відкритої платформи для спільної роботи',
     },
+    advantage3: {
+      title: 'Орієнтуйтеся швидко',
+      description:
+        'Знаходьте те, що вам потрібно, якомога швидше і простіше. Навігація по всіх завданнях і дошках в одному віджеті',
+    },
   },
   [LocaleName.CS]: {
     advantage1: {
@@ -47,6 +62,11 @@ const advantagesDictionary = new ContentDictionary({
       title: 'Zviditelněte práci',
       description:
         'Sledujte práci prostřednictvím otevřené platformy pro spolupráci',
+    },
+    advantage3: {
+      title: 'Navigujte rychle',
+      description:
+        'Najděte, co potřebujete, co nejrychleji a nejsnadněji. Navigace ve všech úkolech a deskách v jednom widgetu',
     },
   },
 });

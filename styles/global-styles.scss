@@ -113,6 +113,10 @@
   --color-red--800: hsl(0 10% 15%);
 
   --window-shade: hsl(0deg 0% 100% / 5%) 0 15px 50px 2px;
+
+  .invertible {
+    filter: invert(1);
+  }
 }
 
 * {

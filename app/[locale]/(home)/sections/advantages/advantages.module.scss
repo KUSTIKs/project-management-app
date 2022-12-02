@@ -21,7 +21,6 @@
   grid-column: span 2;
   width: 100%;
   height: auto;
-  aspect-ratio: 1280/832;
   border-radius: 10px;
   box-shadow: var(--window-shade);
 }
@@ -34,17 +33,17 @@
 }
 
 .advantageInfoImage {
-  object-fit: contain;
-
-  :global(.dark) & {
-    filter: invert(1);
-  }
+  height: 60px;
+  width: fit-content;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1000px) {
   .advantage {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    &:nth-child(even) .advantageImage {
+      order: unset;
+    }
   }
 }

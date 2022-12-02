@@ -4,6 +4,14 @@ import classNames from 'classnames';
 
 import { AppLink, Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
+import BooksImg from '@project-management-app/images/books.png';
+import ReactLogoImg from '@project-management-app/images/react-logo.png';
+import TypescriptLogoImg from '@project-management-app/images/typescript-logo.png';
+import NextLogoImg from '@project-management-app/images/next-logo.png';
+import ReactHookFormLogoImg from '@project-management-app/images/react-hook-form-logo.png';
+import ReactQueryLogoImg from '@project-management-app/images/react-query-logo.png';
+import StorybookLogoImg from '@project-management-app/images/storybook-logo.png';
+import FramerMotionLogoImg from '@project-management-app/images/framer-motion-logo.png';
 
 import classes from './technologies.module.scss';
 import { technologiesDictionary } from './technologies.dictionary';
@@ -31,20 +39,16 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
           </Typography>
         </div>
         <Image
-          src="/images/books.png"
+          src={BooksImg}
           alt="books"
-          height={90}
-          width={150}
-          className={classes.illustration}
+          className={classNames(classes.illustration, 'invertible')}
         />
       </div>
       <div className={classes.technologiesWrapper}>
         <AppLink href="https://reactjs.org" className={classes.technologyCard}>
           <Image
-            src="/images/react-logo.png"
+            src={ReactLogoImg}
             alt="react"
-            height={50}
-            width={200}
             className={classes.technologyImage}
           />
         </AppLink>
@@ -53,20 +57,16 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
           className={classes.technologyCard}
         >
           <Image
-            src="/images/typescript-logo.png"
+            src={TypescriptLogoImg}
             alt="typescript"
             className={classes.technologyImage}
-            height={50}
-            width={200}
           />
         </AppLink>
         <AppLink href="https://nextjs.org" className={classes.technologyCard}>
           <Image
-            src="/images/next-logo.png"
+            src={NextLogoImg}
             alt="next"
-            className={classNames(classes.technologyImage, classes.invertible)}
-            height={50}
-            width={200}
+            className={classNames(classes.technologyImage, 'invertible')}
           />
         </AppLink>
         <AppLink
@@ -74,11 +74,9 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
           className={classes.technologyCard}
         >
           <Image
-            src="/images/react-hook-form-logo.png"
+            src={ReactHookFormLogoImg}
             alt="react hook form"
             className={classes.technologyImage}
-            height={50}
-            width={200}
           />
         </AppLink>
         <AppLink
@@ -87,10 +85,8 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
         >
           <Image
             className={classes.technologyImage}
-            src="/images/react-query-logo.png"
+            src={ReactQueryLogoImg}
             alt="react query"
-            height={50}
-            width={200}
           />
         </AppLink>
         <AppLink
@@ -99,10 +95,8 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
         >
           <Image
             className={classes.technologyImage}
-            src="/images/storybook-logo.png"
+            src={StorybookLogoImg}
             alt="storybook"
-            height={50}
-            width={200}
           />
         </AppLink>
         <AppLink
@@ -111,10 +105,8 @@ const TechnologiesSection: FC<Props> = ({ locale }) => {
         >
           <Image
             className={classes.technologyImage}
-            src="/images/framer-motion-logo.png"
+            src={FramerMotionLogoImg}
             alt="framer motion"
-            height={50}
-            width={200}
           />
         </AppLink>
       </div>
