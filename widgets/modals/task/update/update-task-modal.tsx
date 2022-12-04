@@ -69,7 +69,7 @@ const UpdateTaskModal: FC<Props> = ({
     ),
     defaultValues: task,
   });
-  const { data: assignedTo } = useQuery({
+  const { data: assignee } = useQuery({
     queryFn: () => usersService.getById(watch('userId')),
     queryKey: [QueryKey.USERS, watch('userId')],
   });
@@ -113,10 +113,16 @@ const UpdateTaskModal: FC<Props> = ({
       isError={isError}
       isActionDisabled={!isDirty}
     >
-      <Select
-        label={contentMap.assignedTo}
+      <TextInput
+        label={contentMap.title}
+        {...register('title')}
         variant="unfilled"
-        defaultValue={assignedTo?.id}
+        errorMessage={errors.title?.message}
+      />
+      <Select
+        label={contentMap.assignee}
+        variant="unfilled"
+        defaultValue={assignee?.id}
         {...register('userId')}
         errorMessage={errors.userId?.message}
       >
@@ -126,12 +132,7 @@ const UpdateTaskModal: FC<Props> = ({
           </option>
         ))}
       </Select>
-      <TextInput
-        label={contentMap.title}
-        {...register('title')}
-        variant="unfilled"
-        errorMessage={errors.title?.message}
-      />
+
       <TextArea
         label={contentMap.description}
         {...register('description')}

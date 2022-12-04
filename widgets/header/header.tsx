@@ -13,8 +13,7 @@ import {
 } from '@project-management-app/hooks';
 import { ThemeName } from '@project-management-app/enums';
 import { SearchModal } from '@project-management-app/widgets';
-import LogoDarkImg from '@project-management-app/images/logo_dark.png';
-import LogoImg from '@project-management-app/images/logo.png';
+import { LogoDarkImg, LogoImg } from '@project-management-app/images';
 
 import classes from './header.module.scss';
 import { Menu } from './components/components';

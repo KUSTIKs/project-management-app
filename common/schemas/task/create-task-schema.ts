@@ -12,7 +12,7 @@ const validationMessageDictionary = new ContentDictionary({
     descriptionRequired: 'Description is required',
     descriptionMin: (value: number) => `Description min length is ${value}`,
     descriptionMax: (value: number) => `Description max length is ${value}`,
-    userIdRequired: 'Assigned to is required',
+    userIdRequired: 'Assignee is required',
   },
   [LocaleName.RU]: {
     titleRequired: 'Заголовок обязателен',
@@ -23,7 +23,7 @@ const validationMessageDictionary = new ContentDictionary({
       `Описание должно иметь от ${value} символов`,
     descriptionMax: (value: number) =>
       `Описание должно иметь до ${value} символов`,
-    userIdRequired: 'Назначенно на являеться обязательным полем',
+    userIdRequired: 'Исполнитель обязателен',
   },
   [LocaleName.UK]: {
     titleRequired: "Заголовок обов'язковий",
@@ -33,7 +33,7 @@ const validationMessageDictionary = new ContentDictionary({
     descriptionMin: (value: number) =>
       `Опис повинен мати від ${value} символів`,
     descriptionMax: (value: number) => `Опис повинен мати до ${value} символів`,
-    userIdRequired: "Призначено на є обов'язковим полем",
+    userIdRequired: "Виконавець обов'язковий",
   },
   [LocaleName.CS]: {
     titleRequired: 'Titulek je vyžadován',
@@ -42,7 +42,7 @@ const validationMessageDictionary = new ContentDictionary({
     descriptionRequired: 'Popis je vyžadován',
     descriptionMin: (value: number) => `Popis musí mít od ${value} znaků`,
     descriptionMax: (value: number) => `Popis musí mít až ${value} znaků`,
-    userIdRequired: 'Přiřazeno k je povinné pole',
+    userIdRequired: 'Vykonávající je vyžadován',
   },
 });
 

@@ -1,5 +1,5 @@
-import { TokenPayload } from '../token-payload/token-payload.type';
 import { AppLocale } from './app-locale.type';
+import { TokenPayload } from './token-payload.type';
 
 type AppState = {
   locale: AppLocale;

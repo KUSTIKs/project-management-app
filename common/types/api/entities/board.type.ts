@@ -1,4 +1,4 @@
-import { FullColumn } from '../entities';
+import { FullColumn } from './column.type';
 
 type Board = {
   id: string;

@@ -98,8 +98,13 @@ const CreateTaskModal: FC<Props> = ({
       isLoading={isLoading}
       isError={isError}
     >
+      <TextInput
+        label={contentMap.title}
+        {...register('title')}
+        errorMessage={errors.title?.message}
+      />
       <Select
-        label={contentMap.assignedTo}
+        label={contentMap.assignee}
         defaultValue={payload?.userId}
         {...register('userId')}
         errorMessage={errors.userId?.message}
@@ -110,11 +115,6 @@ const CreateTaskModal: FC<Props> = ({
           </option>
         ))}
       </Select>
-      <TextInput
-        label={contentMap.title}
-        {...register('title')}
-        errorMessage={errors.title?.message}
-      />
       <TextArea
         label={contentMap.description}
         {...register('description')}

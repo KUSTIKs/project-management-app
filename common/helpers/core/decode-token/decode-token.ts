@@ -1,8 +1,7 @@
 import { decode } from 'jsonwebtoken';
 
 import { TokenPayload } from '@project-management-app/types';
-
-import { isString, isUndefined } from '../type-checks/type-checks';
+import { isString, isUndefined } from '@project-management-app/helpers';
 
 const decodeToken = (token: unknown) => {
   const payload = isString(token) ? (decode(token) as TokenPayload) : undefined;

@@ -8,15 +8,7 @@ import { Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
 import { useTheme } from '@project-management-app/hooks';
 import { ThemeName } from '@project-management-app/enums';
-import Advantage1Img from '@project-management-app/images/advantage-1.avif';
-import Advantage2Img from '@project-management-app/images/advantage-2.avif';
-import Advantage3Img from '@project-management-app/images/advantage-3.avif';
-import BoardsPageScreenshotDarkImg from '@project-management-app/images/boards-page-screenshot_dark.png';
-import BoardsPageScreenshotImg from '@project-management-app/images/boards-page-screenshot.png';
-import BoardPageScreenshotDarkImg from '@project-management-app/images/board-page-screenshot_dark.png';
-import BoardPageScreenshotImg from '@project-management-app/images/board-page-screenshot.png';
-import SearchScreenshotDarkImg from '@project-management-app/images/search-screenshot_dark.png';
-import SearchScreenshotImg from '@project-management-app/images/search-screenshot.png';
+import * as images from '@project-management-app/images';
 
 import classes from './advantages.module.scss';
 import { advantagesDictionary } from './advantages.dictionary';
@@ -32,14 +24,14 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
   const isDarkTheme = resolvedTheme === ThemeName.DARK;
 
   const boardsPageScreenshotSrc = isDarkTheme
-    ? BoardsPageScreenshotDarkImg
-    : BoardsPageScreenshotImg;
+    ? images.BoardsPageScreenshotDarkImg
+    : images.BoardsPageScreenshotImg;
   const boardPageScreenshotSrc = isDarkTheme
-    ? BoardPageScreenshotDarkImg
-    : BoardPageScreenshotImg;
+    ? images.BoardPageScreenshotDarkImg
+    : images.BoardPageScreenshotImg;
   const searchScreenshotSrc = isDarkTheme
-    ? SearchScreenshotDarkImg
-    : SearchScreenshotImg;
+    ? images.SearchScreenshotDarkImg
+    : images.SearchScreenshotImg;
 
   return (
     <section className={classes.container}>
@@ -51,7 +43,7 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
         />
         <div className={classes.advantageInfo}>
           <Image
-            src={Advantage1Img}
+            src={images.Advantage1Img}
             alt="advantage"
             className={classNames(classes.advantageInfoImage, 'invertible')}
           />
@@ -73,7 +65,7 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
         />
         <div className={classes.advantageInfo}>
           <Image
-            src={Advantage2Img}
+            src={images.Advantage2Img}
             alt="advantage"
             className={classNames(classes.advantageInfoImage, 'invertible')}
           />
@@ -95,7 +87,7 @@ const AdvantagesSection: FC<Props> = ({ locale }) => {
         />
         <div className={classes.advantageInfo}>
           <Image
-            src={Advantage3Img}
+            src={images.Advantage3Img}
             alt="advantage"
             className={classNames(classes.advantageInfoImage, 'invertible')}
           />

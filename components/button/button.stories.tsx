@@ -1,7 +1,8 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Icon } from '../icon/icon';
+import { Icon } from '@project-management-app/components';
+
 import { Button } from './button';
 
 const iconNameArgType = {

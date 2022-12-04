@@ -40,7 +40,7 @@ const InfoTaskModal: FC<Props> = ({
   const contentMap = taskModalsDictionary.getContentMap({ locale });
   const [isUpdateModalOpen, isUpdateModalOpenActions] = useBooleanState(false);
   const [isDeleteModalOpen, isDeleteModalOpenActions] = useBooleanState(false);
-  const { data: assignedTo } = useQuery({
+  const { data: assignee } = useQuery({
     queryFn: () => usersService.getById(task.userId),
     queryKey: [QueryKey.USERS, task.userId],
   });
@@ -66,10 +66,8 @@ const InfoTaskModal: FC<Props> = ({
         handleDeleteClick={isDeleteModalOpenActions.setTrue}
         copyHref={taskHref}
       >
-        <TextPreview label={contentMap.assignedTo}>
-          {assignedTo?.login}
-        </TextPreview>
         <TextPreview label={contentMap.title}>{title}</TextPreview>
+        <TextPreview label={contentMap.assignee}>{assignee?.login}</TextPreview>
         <TextPreview label={contentMap.description}>
           <ReactMarkdown
             unwrapDisallowed

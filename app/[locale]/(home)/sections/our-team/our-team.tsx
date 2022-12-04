@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { Button, Icon, Typography } from '@project-management-app/components';
 import { AppLocale } from '@project-management-app/types';
-import MyPictureImg from '@project-management-app/images/my-picture.png';
+import { MyPictureImg } from '@project-management-app/images';
 
 import classes from './our-team.module.scss';
 import { ourTeamDictionary } from './our-team.dictionary';

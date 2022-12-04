@@ -1,6 +1,6 @@
 import { isValidElement, ReactNode } from 'react';
 
-import { isArray, isNumber, isString } from '../type-checks/type-checks';
+import { isArray, isNumber, isString } from '../type-checks';
 
 const isValidChild = (value: unknown): value is ReactNode => {
   const isValueArrayOfValidChildren =

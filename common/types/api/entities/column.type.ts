@@ -1,4 +1,4 @@
-import { Task } from '../entities';
+import { Task } from './task.type';
 
 type Column = {
   id: string;

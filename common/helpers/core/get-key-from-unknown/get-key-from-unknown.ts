@@ -1,4 +1,4 @@
-import { isObject } from '../type-checks/type-checks';
+import { isObject } from '@project-management-app/helpers';
 
 const getKeyFromUnknown = (value: unknown, key: string) => {
   const isMessage = isObject(value) && 'message' in value;

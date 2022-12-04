@@ -1,8 +1,7 @@
 import Cookies from 'js-cookie';
 
 import { CookieName } from '@project-management-app/enums';
-
-import { isString } from '../type-checks/type-checks';
+import { isString } from '@project-management-app/helpers';
 
 const API_URL = 'https://kanban-fdqg.onrender.com';
 

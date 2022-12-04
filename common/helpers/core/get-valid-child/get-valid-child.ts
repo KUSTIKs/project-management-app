@@ -1,4 +1,4 @@
-import { isValidChild } from '../is-valid-child/is-valid-child';
+import { isValidChild } from '@project-management-app/helpers';
 
 const getValidChild = (...children: unknown[]) => {
   return children.find(isValidChild) ?? null;

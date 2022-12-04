@@ -1,3 +1,6 @@
+export { isAppLocale } from './is-app-locale/is-app-locale';
+export { isValidChild } from './is-valid-child/is-valid-child';
+
 const isString = (value: unknown): value is string => {
   return typeof value === 'string';
 };
