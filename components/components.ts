@@ -4,7 +4,6 @@ export { Loader } from './loader/loader';
 export { BoardCard } from './board-card/board-card';
 export { Options } from './options/options';
 export { SingleFieldForm } from './single-field-form/single-field-form';
-export { FileCard } from './file-card/file-card';
 export * from './core/core';
 export * from './inputs/inputs';
 export * from './modals/modals';

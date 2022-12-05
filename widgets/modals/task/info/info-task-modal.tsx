@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEventHandler, FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import ReactMarkdown from 'react-markdown';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -9,10 +9,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Task, UpdateTaskDto } from '@project-management-app/types';
 import {
   AppLink,
-  Button,
-  FileCard,
-  FilesPreview,
-  Icon,
   InfoEntityModal,
   Modal,
   Select,
@@ -22,11 +18,7 @@ import {
   TextPreview,
 } from '@project-management-app/components';
 import { useAppContext, useBooleanState } from '@project-management-app/hooks';
-import {
-  filesService,
-  tasksService,
-  usersService,
-} from '@project-management-app/services';
+import { tasksService, usersService } from '@project-management-app/services';
 import { QueryKey } from '@project-management-app/enums';
 import { getUpdateTaskSchema } from '@project-management-app/schemas';
 import { getKeyFromUnknown } from '@project-management-app/helpers';
@@ -85,10 +77,6 @@ const InfoTaskModal: FC<Props> = ({
       tasksService.update({ taskId: task.id, boardId, columnId }, dto),
     onSuccess: () => handleUpdated(),
   });
-  const { mutate: attachFile } = useMutation({
-    mutationFn: filesService.create,
-    onSuccess: () => handleAttached(),
-  });
   const {
     register,
     handleSubmit,
@@ -125,30 +113,11 @@ const InfoTaskModal: FC<Props> = ({
     });
   };
 
-  const handleAttached = () => {
-    queryClient.invalidateQueries({
-      queryKey: [QueryKey.TASKS, initialTask.id],
-    });
-  };
-
   const handleUpdateTaskField: SubmitHandler<Partial<UpdateTaskDto>> = (
     dto
   ) => {
     const { id, files, ...updateTaskDto } = { ...task, ...dto };
     updateTask(updateTaskDto);
-  };
-
-  const handleAttach: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const fileList = e.target.files;
-
-    if (!fileList) return;
-
-    Array.from(fileList).forEach((file) => {
-      attachFile({
-        file,
-        taskId: task.id,
-      });
-    });
   };
 
   const handleCanceled = useCallback(() => {
@@ -169,16 +138,6 @@ const InfoTaskModal: FC<Props> = ({
         copyHref={taskHref}
         errorMessage={getKeyFromUnknown(error, 'message')}
         isError={isError}
-        additionalActions={
-          <Button
-            startIcon={<Icon.AttachmentLine />}
-            variant="ghost"
-            as="label"
-          >
-            {contentMap.attach}
-            <input hidden multiple type="file" onChange={handleAttach} />
-          </Button>
-        }
       >
         <Modal.Fieldset disabled={isLoading}>
           <SingleFieldForm
@@ -220,18 +179,6 @@ const InfoTaskModal: FC<Props> = ({
               ))}
             </Select>
           </SingleFieldForm>
-          {files.length > 0 && (
-            <FilesPreview label={contentMap.attachments}>
-              {files.map(({ fileSize, filename }) => (
-                <FileCard
-                  key={filename}
-                  fileName={filename}
-                  fileSize={fileSize}
-                  taskId={initialTask.id}
-                />
-              ))}
-            </FilesPreview>
-          )}
           <SingleFieldForm
             preview={
               <TextPreview label={contentMap.description}>

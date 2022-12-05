@@ -22,7 +22,6 @@ import {
   RiArrowDownSLine,
   RiFileFill,
   RiDownloadLine,
-  RiAttachmentLine,
 } from 'react-icons/ri';
 
 import { RsSchoolLogo } from './components/components';
@@ -51,7 +50,6 @@ const Icon = {
   ArrowDownSLine: RiArrowDownSLine,
   FileFill: RiFileFill,
   DownloadLine: RiDownloadLine,
-  AttachmentLine: RiAttachmentLine,
   RsSchoolLogo,
 } as const;
 
