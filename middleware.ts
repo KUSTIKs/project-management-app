@@ -36,7 +36,9 @@ const detectLocale = ({ headers }: NextRequest) => {
 };
 
 const checkAuth = ({ nextUrl, cookies, url: fullUrl }: NextRequest) => {
-  const { appPathname } = parseAppPathname(nextUrl.pathname);
+  const { appPathname } = parseAppPathname(
+    nextUrl.pathname.replace(/\/index$/, '')
+  );
 
   const isUnauthOnlyRoute =
     appRoutesConfig.unauthOnlyRoutes.includes(appPathname);
@@ -72,7 +74,9 @@ const middleware = (request: NextRequest) => {
 
   //* /{locale}/{...pathChunks} or /{...pathChunks}
 
-  const { appPathname, pathLocale } = parseAppPathname(nextUrl.pathname);
+  const { appPathname, pathLocale } = parseAppPathname(
+    nextUrl.pathname.replace(/\/index$/, '')
+  );
   const isRootPathLocale = pathLocale === LocaleName.DEFAULT;
   const isDefaultPathLocale =
     pathLocale === appInternalizationConfig.defaultLocale;
