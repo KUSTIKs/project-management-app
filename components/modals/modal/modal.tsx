@@ -3,6 +3,7 @@
 import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import classNames from 'classnames';
 
 import { Button, Icon, Typography } from '@project-management-app/components';
 import { useOutsideClick } from '@project-management-app/hooks';
@@ -21,13 +22,14 @@ type Props = {
   isOpen?: boolean;
   handleClose?: () => void;
   isDisabled?: boolean;
+  size?: 'm' | 'l';
 };
 
 const Modal: FC<Props> & {
   Fieldset: typeof ModalFieldset;
   ButtonGroup: typeof ModalButtonGroup;
   Actions: typeof ModalActions;
-} = ({ title, children, isOpen, handleClose, isDisabled }) => {
+} = ({ title, children, isOpen, handleClose, isDisabled, size = 'm' }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [container, setContainer] = useState<HTMLElement>();
 
@@ -67,7 +69,10 @@ const Modal: FC<Props> & {
       exit="hidden"
     >
       <motion.div
-        className={classes.wrapper}
+        className={classNames(classes.wrapper, {
+          [classes.wrapper_size_l]: size === 'l',
+          [classes.wrapper_size_m]: size === 'm',
+        })}
         ref={wrapperRef}
         style={{ pointerEvents }}
         variants={dropIn}

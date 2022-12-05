@@ -8,7 +8,13 @@ type Props = {
 };
 
 const ReactQueryProvider: FC<Props> = ({ children }) => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

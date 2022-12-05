@@ -46,7 +46,13 @@ const Header: FC<Props> = ({ isAuthorized }) => {
       <header {...register} className={classes.header} ref={headerRef}>
         <div className={classes.container}>
           <AppLink href="/">
-            <Image src={logoSrc} alt="logo" priority className={classes.logo} />
+            <Image
+              src={logoSrc}
+              alt="logo"
+              priority
+              className={classes.logo}
+              draggable={false}
+            />
           </AppLink>
           <div className={classes.menuButton}>
             <Button

@@ -20,6 +20,9 @@ import {
   RiEyeLine,
   RiEyeOffLine,
   RiArrowDownSLine,
+  RiFileFill,
+  RiDownloadLine,
+  RiAttachmentLine,
 } from 'react-icons/ri';
 
 import { RsSchoolLogo } from './components/components';
@@ -46,6 +49,9 @@ const Icon = {
   EyeLine: RiEyeLine,
   EyeOffLine: RiEyeOffLine,
   ArrowDownSLine: RiArrowDownSLine,
+  FileFill: RiFileFill,
+  DownloadLine: RiDownloadLine,
+  AttachmentLine: RiAttachmentLine,
   RsSchoolLogo,
 } as const;
 

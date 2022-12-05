@@ -8,6 +8,7 @@
   border: none;
   border-radius: 5px;
   user-select: none;
+  cursor: pointer;
   &:disabled {
     cursor: default;
   }

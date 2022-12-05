@@ -22,15 +22,6 @@
   gap: 15px;
 }
 
-.rsSchoolLogo {
-  opacity: 0.8;
-  will-change: opacity;
-  transition: opacity 200ms ease;
-  &:hover {
-    opacity: 0.6;
-  }
-}
-
 @media (max-width: 800px) {
   .container {
     flex-direction: column;

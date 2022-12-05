@@ -28,8 +28,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
     ref
   ) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const textareaValue = inputAttrs.value ?? inputAttrs.defaultValue;
     const [growingBlockValue, setGrowingBlockValue] = useState(
-      inputAttrs.value
+      inputAttrs.autoFocus ? `${textareaValue}\n ` : textareaValue
     );
 
     const setGrowingBlockValueWithEndLine = (value: string) => {
@@ -55,8 +56,15 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
 
     useEffect(() => {
       if (!textareaRef.current) return;
-      setGrowingBlockValue(textareaRef.current.value);
-    }, [textareaRef]);
+
+      const { value } = textareaRef.current;
+
+      if (value && inputAttrs.autoFocus) {
+        setGrowingBlockValueWithEndLine(value);
+      } else {
+        setGrowingBlockValue(value);
+      }
+    }, [inputAttrs.autoFocus, textareaRef]);
 
     return (
       <div

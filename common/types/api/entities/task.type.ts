@@ -1,4 +1,4 @@
-type File = unknown;
+import { File } from './file.type';
 
 type Task = {
   id: string;

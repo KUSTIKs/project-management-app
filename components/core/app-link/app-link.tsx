@@ -13,7 +13,7 @@ const AppLink: FC<Props> = (linkProps) => {
   const stringHref = href.toString();
   const router = useAppRouter();
 
-  if (stringHref.startsWith('http://') || stringHref.startsWith('https://')) {
+  if (stringHref.match(/https?:\/\//)) {
     return <Link {...linkProps} />;
   }
 

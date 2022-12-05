@@ -15,9 +15,6 @@ const componentMeta: ComponentMeta<typeof InfoEntityModal> = {
     handleDeleteClick: {
       action: 'delete',
     },
-    handleUpdateClick: {
-      action: 'update',
-    },
     children: {
       table: {
         disable: true,

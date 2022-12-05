@@ -7,3 +7,4 @@ export type { CreateColumnDto } from './create-column-dto';
 export type { UpdateColumnDto } from './update-column-dto';
 export type { CreateTaskDto } from './create-task-dto';
 export type { UpdateTaskDto } from './update-task-dto';
+export type { CreateFileDto } from './create-file.dto';

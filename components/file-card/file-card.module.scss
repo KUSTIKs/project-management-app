@@ -1,0 +1,43 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  width: 150px;
+  flex-shrink: 0;
+  &:hover {
+    .backdrop {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.backdrop {
+  background-color: var(--color-contrast-100-a25);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  backdrop-filter: blur(1px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  visibility: hidden;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: var(--color-grey--100);
+  padding: 10px;
+}
+
+.size,
+.name {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -69,10 +69,6 @@ const UpdateTaskModal: FC<Props> = ({
     ),
     defaultValues: task,
   });
-  const { data: assignee } = useQuery({
-    queryFn: () => usersService.getById(watch('userId')),
-    queryKey: [QueryKey.USERS, watch('userId')],
-  });
 
   const errorMessage = getKeyFromUnknown(error, 'message');
 
@@ -122,7 +118,6 @@ const UpdateTaskModal: FC<Props> = ({
       <Select
         label={contentMap.assignee}
         variant="unfilled"
-        defaultValue={assignee?.id}
         {...register('userId')}
         errorMessage={errors.userId?.message}
       >

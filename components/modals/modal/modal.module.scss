@@ -15,7 +15,6 @@
 
 .wrapper {
   width: 100%;
-  max-width: var(--width-container-s);
   padding: 20px;
   border-radius: 10px;
   display: flex;
@@ -23,6 +22,13 @@
   gap: 20px;
   background-color: var(--color-background--100);
   overflow: auto;
+}
+
+.wrapper_size_m {
+  max-width: 600px;
+}
+.wrapper_size_l {
+  max-width: 800px;
 }
 
 .header {

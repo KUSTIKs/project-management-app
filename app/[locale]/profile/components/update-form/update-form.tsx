@@ -76,12 +76,14 @@ const UpdateForm: FC<Props> = ({ user, exitUpdatingMode }) => {
           label={contentMap.name}
           variant="unfilled"
           {...register('name')}
+          defaultValue={user.name}
           errorMessage={errors.name?.message}
           autoComplete="nickname"
         />
         <TextInput
           label={contentMap.login}
           {...register('login')}
+          defaultValue={user.login}
           variant="unfilled"
           errorMessage={errors.login?.message}
           autoComplete="username"

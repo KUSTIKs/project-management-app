@@ -2,24 +2,35 @@
 
 import { ComponentProps, FC, ReactNode, useEffect, useState } from 'react';
 
-import { Button, Icon, Modal } from '@project-management-app/components';
+import {
+  Button,
+  Icon,
+  Modal,
+  Typography,
+} from '@project-management-app/components';
 import { useAppContext } from '@project-management-app/hooks';
+import { getValidChild } from '@project-management-app/helpers';
 
 import { modalsDictionary } from '../modals.dictionary';
+import classes from './info-entity-modal.module.scss';
 
 type Props = Omit<ComponentProps<typeof Modal>, 'onSubmit' | 'isDisabled'> & {
-  handleDeleteClick: () => void;
-  handleUpdateClick: () => void;
+  handleDeleteClick?: () => void;
   handleClose: () => void;
   children: ReactNode;
   copyHref?: string;
+  errorMessage?: unknown;
+  isError?: boolean;
+  additionalActions?: ReactNode;
 };
 
 const InfoEntityModal: FC<Props> = ({
   handleDeleteClick,
-  handleUpdateClick,
   copyHref,
   children,
+  isError,
+  errorMessage,
+  additionalActions,
   ...modalProps
 }) => {
   const { locale } = useAppContext();
@@ -50,42 +61,29 @@ const InfoEntityModal: FC<Props> = ({
   }, [copyState]);
 
   return (
-    <Modal {...modalProps}>
+    <Modal {...modalProps} size={modalProps.size ?? 'l'}>
       <Modal.Actions>
-        <Button
-          size="s"
-          variant="ghost"
-          startIcon={<Icon.EditLine />}
-          onClick={() => {
-            handleUpdateClick();
-            modalProps.handleClose();
-          }}
-        >
-          {contentMap.update}
-        </Button>
-        <Button
-          size="s"
-          variant="ghost"
-          startIcon={<Icon.BinLine />}
-          onClick={() => {
-            handleDeleteClick();
-            modalProps.handleClose();
-          }}
-        >
-          {contentMap.delete}
-        </Button>
+        {additionalActions}
+        {handleDeleteClick && (
+          <Button
+            variant="ghost"
+            startIcon={<Icon.BinLine />}
+            onClick={handleDeleteClick}
+          >
+            {contentMap.delete}
+          </Button>
+        )}
         {copyHref &&
           (copyState === 'error' ? (
-            <Button size="s" variant="ghost" startIcon={<Icon.CloseLine />}>
+            <Button variant="ghost" startIcon={<Icon.CloseLine />}>
               {contentMap.notCopied}
             </Button>
           ) : copyState === 'success' ? (
-            <Button size="s" variant="ghost" startIcon={<Icon.CheckLine />}>
+            <Button variant="ghost" startIcon={<Icon.CheckLine />}>
               {contentMap.copied}
             </Button>
           ) : (
             <Button
-              size="s"
               variant="ghost"
               startIcon={<Icon.LinkLine />}
               onClick={handleCopyClick}
@@ -94,7 +92,14 @@ const InfoEntityModal: FC<Props> = ({
             </Button>
           ))}
       </Modal.Actions>
-      <Modal.Fieldset>{children}</Modal.Fieldset>
+      <div className={classes.wrapper}>
+        {children}
+        {(errorMessage || isError) && (
+          <Typography variant="text" weight={600} colorName="red/200">
+            {getValidChild(errorMessage, contentMap.somethingWentWrong)}
+          </Typography>
+        )}
+      </div>
     </Modal>
   );
 };

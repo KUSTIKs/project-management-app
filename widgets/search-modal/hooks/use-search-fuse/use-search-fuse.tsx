@@ -6,8 +6,8 @@ import Fuse from 'fuse.js';
 import { QueryKey } from '@project-management-app/enums';
 import { boardsService, tasksService } from '@project-management-app/services';
 
-import { SearchItem } from 'widgets/search-modal/components/components';
-import { SearchItemType } from 'widgets/search-modal/enums/enums';
+import { SearchItem } from '../../components/components';
+import { SearchItemType } from '../../enums/enums';
 
 type SearchItem = ComponentProps<typeof SearchItem> & {
   id: string;

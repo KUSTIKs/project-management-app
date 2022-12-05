@@ -1,4 +1,10 @@
-import { FC, ButtonHTMLAttributes, ComponentProps, ReactNode } from 'react';
+import {
+  FC,
+  ButtonHTMLAttributes,
+  ComponentProps,
+  ReactNode,
+  ElementType,
+} from 'react';
 import classNames from 'classnames';
 
 import { AppLink, Loader } from '@project-management-app/components';
@@ -17,6 +23,7 @@ type Props = (
   isDisabled?: boolean;
   href?: string;
   symmetricPadding?: boolean;
+  as?: ElementType;
 };
 
 const Button: FC<Props> = ({
@@ -29,9 +36,10 @@ const Button: FC<Props> = ({
   startIcon,
   endIcon,
   href,
+  as: AsComponent,
   ...attrs
 }) => {
-  const Component: any = href ? AppLink : 'button';
+  const Component: any = AsComponent ? AsComponent : href ? AppLink : 'button';
   const isButton = Component === 'button';
   const linkProps = {
     href,
