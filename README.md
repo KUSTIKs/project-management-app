@@ -9,7 +9,7 @@
     Simple tool for process and project management
     <br/>
     <br/>
-    <a href="https://project-management-app-kustiks.vercel.app">Live App</a>
+    <a href="https://project-management-app-omega.vercel.app/">Live App</a>
     ·
     <a href="https://github.com/KUSTIKs/project-management-app/issues">Report Bug</a>
     ·
@@ -25,7 +25,7 @@ This application uses pre-made [kanban rest](https://github.com/vitaly-sazonov/k
 
 ### Links
 
-- [Live app](https://project-management-app-kustiks.vercel.app)
+- [Live app](https://project-management-app-omega.vercel.app/)
 - [Live storybook](https://magic-project-manager-storybook.netlify.app/)
 - [Figma layout](https://www.figma.com/file/T13yeSAVHeknB4EoFQCF8I/Untitled?node-id=0%3A1&t=oAeZZOCfrdaEE0Hw-1)
 
