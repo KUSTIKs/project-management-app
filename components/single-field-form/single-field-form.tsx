@@ -9,18 +9,19 @@ import {
   useEffect,
   MouseEventHandler,
 } from 'react';
+import classNames from 'classnames';
 
 import { Button, Icon } from '@project-management-app/components';
 import {
   useBooleanState,
-  useOutsideFocus,
+  useOutsideClick,
 } from '@project-management-app/hooks';
 
 import classes from './single-field-form.module.scss';
 
 type Props = {
   preview: ReactElement<{
-    onDoubleClick: MouseEventHandler;
+    onClick: MouseEventHandler;
   }>;
   children: ReactElement<{
     autoFocus: boolean;
@@ -29,6 +30,7 @@ type Props = {
   isLoading?: boolean;
   isActionDisabled?: boolean;
   handleCanceled?: () => void;
+  direction?: 'vertical' | 'horizontal';
 };
 
 const SingleFieldForm: FC<Props> = ({
@@ -38,18 +40,17 @@ const SingleFieldForm: FC<Props> = ({
   isLoading,
   isActionDisabled,
   handleCanceled,
+  direction = 'horizontal',
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [isEditing, isEditingActions] = useBooleanState(false);
-  const register = useOutsideFocus(isEditingActions.setFalse);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     onSubmit(e);
   };
 
-  const handleDoubleClick: MouseEventHandler = (e) => {
-    window.getSelection()?.removeAllRanges?.();
-    window.getSelection()?.empty?.();
+  const handleClick: MouseEventHandler = (e) => {
+    if (!getSelection()?.isCollapsed || e.target !== e.currentTarget) return;
     isEditingActions.setTrue();
   };
 
@@ -64,39 +65,65 @@ const SingleFieldForm: FC<Props> = ({
     handleCanceled?.();
   }, [handleCanceled, isEditing]);
 
+  useOutsideClick(formRef, isEditingActions.setFalse);
+
   if (!isEditing) {
     return cloneElement(preview, {
-      onDoubleClick: handleDoubleClick,
+      onClick: handleClick,
     });
   }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className={classes.form}
+      className={classNames(classes.form, {
+        [classes.form_direction_horizontal]: direction === 'horizontal',
+        [classes.form_direction_vertical]: direction === 'vertical',
+      })}
       ref={formRef}
-      {...register}
     >
       {cloneElement(children, {
         autoFocus: true,
       })}
-      <div className={classes.actions}>
-        <Button
-          startIcon={<Icon.CloseLine />}
-          variant="ghost"
-          onClick={isEditingActions.setFalse}
-        >
-          Cancel
-        </Button>
-        <Button
-          startIcon={<Icon.EditLine />}
-          type="submit"
-          isLoading={isLoading}
-          isDisabled={isActionDisabled}
-        >
-          Update
-        </Button>
-      </div>
+      {direction === 'horizontal' ? (
+        <div className={classes.actions}>
+          <Button
+            startIcon={<Icon.CloseLine />}
+            variant="ghost"
+            onClick={isEditingActions.setFalse}
+          >
+            Cancel
+          </Button>
+          <Button
+            startIcon={<Icon.CheckLine />}
+            type="submit"
+            isLoading={isLoading}
+            isDisabled={isActionDisabled}
+          >
+            Submit
+          </Button>
+        </div>
+      ) : (
+        <div className={classes.actions}>
+          <Button
+            size="l"
+            symmetricPadding
+            variant="ghost"
+            onClick={isEditingActions.setFalse}
+          >
+            <Icon.CloseLine size="1.2em" />
+          </Button>
+          <Button
+            size="l"
+            symmetricPadding
+            type="submit"
+            isLoading={isLoading}
+            isDisabled={isActionDisabled}
+          >
+            <Icon.CheckLine size="1.2em" />
+          </Button>
+        </div>
+      )}
     </form>
   );
 };

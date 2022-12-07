@@ -118,6 +118,7 @@ const InfoColumnModal: FC<Props> = ({
             isLoading={isLoading}
             isActionDisabled={!isDirty}
             handleCanceled={handleCanceled}
+            direction="vertical"
           >
             <TextInput
               label={contentMap.title}

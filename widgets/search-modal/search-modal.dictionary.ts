@@ -28,7 +28,7 @@ const searchModalDictionary = new ContentDictionary({
     typeHere: 'Zadejte dotaz zde',
     all: 'Všechny',
     boards: 'Desky',
-    tasks: 'Úlohy',
+    tasks: 'Úkoly',
   },
 });
 

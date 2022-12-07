@@ -148,6 +148,7 @@ const InfoTaskModal: FC<Props> = ({
             isLoading={isLoading}
             isActionDisabled={!isDirty}
             handleCanceled={handleCanceled}
+            direction="vertical"
           >
             <TextInput
               label={contentMap.title}
@@ -166,6 +167,7 @@ const InfoTaskModal: FC<Props> = ({
             isLoading={isLoading}
             isActionDisabled={!isDirty}
             handleCanceled={handleCanceled}
+            direction="vertical"
           >
             <Select
               label={contentMap.assignee}

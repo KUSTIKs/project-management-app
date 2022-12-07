@@ -61,7 +61,7 @@ const getCreateTaskSchema = ({ locale }: { locale: AppLocale }) => {
       .string()
       .min(1, contentMap.descriptionRequired)
       .min(8, contentMap.descriptionMin(8))
-      .max(256, contentMap.descriptionMax(256)),
+      .max(1024, contentMap.descriptionMax(1024)),
     userId: z.string().min(1, contentMap.userIdRequired),
   });
 };

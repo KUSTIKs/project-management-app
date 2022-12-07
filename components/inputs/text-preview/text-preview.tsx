@@ -8,20 +8,21 @@ import classes from '../inputs.module.scss';
 type Props = {
   label: string;
   children: ReactNode;
-  onDoubleClick?: () => void;
+  onClick?: () => void;
 };
 
-const TextPreview: FC<Props> = ({ label, children, onDoubleClick }) => {
+const TextPreview: FC<Props> = ({ label, children, onClick }) => {
   return (
     <div
       className={classNames(
         classes.outerWrapper,
         classes.outerWrapper_variant_unfilled
       )}
-      onDoubleClick={onDoubleClick}
     >
       <div className={classes.inputWrapper}>
-        <pre className={classes.preview}>{children}</pre>
+        <pre className={classes.preview} onClick={onClick}>
+          {children}
+        </pre>
         <label className={classes.label}>{label}</label>
       </div>
     </div>

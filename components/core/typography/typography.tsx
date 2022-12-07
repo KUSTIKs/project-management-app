@@ -1,4 +1,10 @@
-import { CSSProperties, ElementType, FC, ReactNode } from 'react';
+import {
+  CSSProperties,
+  ElementType,
+  FC,
+  HTMLAttributes,
+  ReactNode,
+} from 'react';
 import classNames from 'classnames';
 
 import { AppColorName } from '@project-management-app/types';
@@ -8,7 +14,7 @@ import { getDefaultComponent } from './helpers/helpers';
 import { TypographyVariant } from './types/types';
 import classes from './typography.module.scss';
 
-type Props = {
+type Props = HTMLAttributes<HTMLElement> & {
   children: ReactNode;
   as?: ElementType;
   variant: TypographyVariant;
@@ -26,11 +32,13 @@ const Typography: FC<Props> = ({
   style,
   className,
   as: Component = getDefaultComponent(variant),
+  ...attrs
 }) => {
   const color = colorName && getAppColor(colorName);
 
   return (
     <Component
+      {...attrs}
       style={{ fontWeight: weight, color, ...style }}
       className={classNames(className, {
         [classes.typography_variant_largeTitle1]: variant === 'largeTitle1',
