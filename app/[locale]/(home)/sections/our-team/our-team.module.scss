@@ -1,0 +1,48 @@
+.container {
+  width: 100%;
+  max-width: var(--width-container-m);
+  padding: 15px 20px;
+  margin: 80px auto;
+}
+
+.member {
+  margin-top: 30px;
+  display: grid;
+  gap: 50px;
+}
+
+.memberInfo {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.memberTextInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.memberImage {
+  border-radius: 30px;
+  height: 250px;
+  width: auto;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.memberStatements {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px 30px;
+}
+
+.memberStatement {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

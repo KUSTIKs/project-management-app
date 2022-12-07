@@ -1,0 +1,4 @@
+---
+'*.ts':
+  - 'prettier --check'
+  - 'eslint'

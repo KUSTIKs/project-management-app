@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@project-management-app/components": ["components/components.ts"],
+      "@project-management-app/widgets": ["widgets/widgets.ts"],
+      "@project-management-app/hooks": ["hooks/hooks.ts"],
+      "@project-management-app/helpers": ["common/helpers/helpers.ts"],
+      "@project-management-app/enums": ["common/enums/enums.ts"],
+      "@project-management-app/types": ["common/types/types.ts"],
+      "@project-management-app/config": ["common/config/config.ts"],
+      "@project-management-app/services": ["common/services/services.ts"],
+      "@project-management-app/schemas": ["common/schemas/schemas.ts"],
+      "@project-management-app/images": ["public/images/images.ts"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

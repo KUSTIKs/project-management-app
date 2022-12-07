@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  max-width: var(--width-container-m);
+  padding: 15px 20px;
+  margin: 80px auto;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.image {
+  max-height: 350px;
+  height: 100%;
+  width: auto;
+}
+
+@media screen and (max-width: 1050px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .info {
+    order: 2;
+    text-align: center;
+    place-items: center;
+  }
+  .image {
+    order: 1;
+    max-width: 100%;
+    height: auto;
+  }
+}

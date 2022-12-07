@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  max-width: var(--width-container-s);
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 5vh;
+}
+
+.wrapper {
+  display: grid;
+  gap: 20px;
+}
+
+.topInfo {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.loadingContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: none;
+}
