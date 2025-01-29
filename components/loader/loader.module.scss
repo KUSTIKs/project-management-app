@@ -1,0 +1,20 @@
+.loader {
+  width: 1em;
+  height: 1em;
+  border: 0.15em solid var(--color-blue--500);
+  border-bottom-color: var(--color-blue--800);
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

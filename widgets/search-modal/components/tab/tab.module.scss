@@ -1,0 +1,29 @@
+.wrapper {
+  padding: 10px 15px;
+  min-width: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  position: relative;
+  color: var(--color-text--700);
+  background-color: transparent;
+  border: none;
+  transition: color 100ms ease;
+  &:not(&_active) {
+    &:hover,
+    &:focus {
+      color: var(--color-text--400);
+    }
+  }
+}
+
+.wrapper_active {
+  color: var(--color-text--100);
+}
+
+.underline {
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  inset: auto 0 0;
+  background-color: currentColor;
+}

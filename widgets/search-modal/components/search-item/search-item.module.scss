@@ -1,0 +1,34 @@
+.wrapper {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 15px 20px;
+  transition: background-color 100ms ease;
+  &:hover,
+  &:focus {
+    background-color: var(--color-grey--100);
+  }
+}
+
+.iconWrapper {
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background-color: var(--color-grey--200);
+  color: var(--color-text--700);
+  border-radius: 5px;
+}
+
+.textInfo {
+  display: grid;
+}
+
+.title,
+.subtitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

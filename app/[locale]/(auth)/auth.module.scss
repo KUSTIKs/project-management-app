@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  max-width: var(--width-container-xs);
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  margin-top: 15vh;
+  display: grid;
+  gap: 20px;
+}
+
+.form {
+  display: grid;
+  gap: 30px;
+}
+
+.fieldset {
+  display: grid;
+  gap: 10px;
+  border: none;
+}

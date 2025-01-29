@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.form_direction_horizontal {
+  flex-direction: column;
+}
+.form_direction_vertical {
+  flex-direction: row;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}

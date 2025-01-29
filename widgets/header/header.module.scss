@@ -1,0 +1,38 @@
+.header {
+  width: 100%;
+  background-color: var(--color-background--100);
+  border-bottom: 2px solid var(--color-grey--100);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  isolation: isolate;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 15px;
+  margin: 0 auto;
+  max-width: var(--width-container-m);
+  min-height: var(--height-header);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.logo {
+  display: block;
+  height: 24px;
+  width: auto;
+}
+
+.menuButton {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .menuButton {
+    display: block;
+  }
+}

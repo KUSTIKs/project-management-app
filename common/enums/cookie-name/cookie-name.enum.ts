@@ -1,0 +1,8 @@
+enum CookieName {
+  NEXT_LOCALE = 'NEXT_LOCALE',
+  NEXT_TOKEN = 'NEXT_TOKEN',
+  NEXT_THEME = 'NEXT_THEME',
+  NEXT_PREFERS_THEME = 'NEXT_PREFERS_THEME',
+}
+
+export { CookieName };
